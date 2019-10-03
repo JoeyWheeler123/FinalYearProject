@@ -35,6 +35,7 @@ public class groundCheck : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        
         if (Input.GetButtonDown("Jump"))
         {
             ms.Jumping();

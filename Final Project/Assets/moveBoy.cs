@@ -25,7 +25,7 @@ public class moveBoy : MonoBehaviour
     private Rigidbody rb;
 
     public GameObject theBox;
-
+    public magneticAttractor magScript;
     public bool thrown;
     // Start is called before the first frame update
     void Start()
@@ -68,6 +68,7 @@ public class moveBoy : MonoBehaviour
             else
             {
                 theBox.SetActive(false);
+                
                 thrown = false;
             }
         }
