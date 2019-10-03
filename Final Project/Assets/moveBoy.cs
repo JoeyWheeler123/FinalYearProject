@@ -23,6 +23,10 @@ public class moveBoy : MonoBehaviour
     public groundCheck gcScript;
 
     private Rigidbody rb;
+
+    public GameObject theBox;
+
+    public bool thrown;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,21 @@ public class moveBoy : MonoBehaviour
         }
         
         rb.velocity = new Vector3(velocity.x ,rb.velocity.y,0);
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (thrown == false)
+            {
+                theBox.SetActive(true);
+                theBox.GetComponent<throwScript>().Throw();
+                thrown = true;
+            }
+            else
+            {
+                theBox.SetActive(false);
+                thrown = false;
+            }
+        }
     }
     
     public void Jumping()
