@@ -6,6 +6,9 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class cursorMovement : MonoBehaviour
+
+
+
 {
     private Camera cam;
     Vector3 point = new Vector3();
@@ -17,8 +20,9 @@ public class cursorMovement : MonoBehaviour
     public Transform player;
 
     public float throwMarkerDistance;
+    public GameObject rightBox, leftBox, projectedBox;
 
-    
+    public bool aiming;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,14 +33,35 @@ public class cursorMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        projectedPoint = new Vector3(point.x,point.y,0);
-        closePoint = projectedPoint - player.position;
-        closePoint.Normalize();
-        closePoint*= throwMarkerDistance;
-       // transform.position = new Vector3(point.x,point.y,0);
-       closePoint = player.position + closePoint;
-       transform.position = Vector3.Lerp(transform.position, closePoint, Time.deltaTime*30f);
+        if (aiming)
+        {
+            projectedBox.SetActive(true);
+            projectedPoint = new Vector3(point.x, point.y, 0);
+            closePoint = projectedPoint - player.position;
+            closePoint.Normalize();
+            closePoint *= throwMarkerDistance;
+            float boxCheck = closePoint.x;
+            // transform.position = new Vector3(point.x,point.y,0);
+            closePoint = player.position + closePoint;
+            projectedBox.transform.position = Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 30f);
 
+            if (boxCheck < 0)
+            {
+                leftBox.SetActive(true);
+                rightBox.SetActive(false);
+            }
+            else if (boxCheck > 0)
+            {
+                rightBox.SetActive(true);
+                leftBox.SetActive(false);
+            }
+        }
+        else
+        {
+            leftBox.SetActive(false);
+            rightBox.SetActive(false);
+            projectedBox.SetActive(false);
+        }
 
     }
     

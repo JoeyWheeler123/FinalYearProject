@@ -10,7 +10,7 @@ public class throwScript : MonoBehaviour
     public Rigidbody rb;
     public Transform spawnPointLeft, spawnPointRight;
     public float force;
-    
+    public GameObject rightBox, leftBox;
     public enum ThrowPoint
     {
         left,

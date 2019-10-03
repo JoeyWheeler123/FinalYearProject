@@ -26,11 +26,13 @@ public class moveBoy : MonoBehaviour
 
     public GameObject theBox;
     public magneticAttractor magScript;
+    public cursorMovement curMov;
     public bool thrown;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        curMov.aiming = true;
     }
 
     // Update is called once per frame
@@ -63,12 +65,13 @@ public class moveBoy : MonoBehaviour
             {
                 theBox.SetActive(true);
                 theBox.GetComponent<throwScript>().Throw();
+                curMov.aiming = false;
                 thrown = true;
             }
             else
             {
                 theBox.SetActive(false);
-                
+               curMov.aiming = true;
                 thrown = false;
             }
         }
