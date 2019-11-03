@@ -79,6 +79,7 @@ public class moveBoy : MonoBehaviour
     
     public void Jumping()
     {
-        rb.AddForce (Vector2.up * jumpHeight, ForceMode.Impulse);
+       // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
+        rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
     }
 }

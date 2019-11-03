@@ -35,13 +35,15 @@ public class groundCheck : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        
-        if (Input.GetButtonDown("Jump"))
+        if (other.gameObject.CompareTag("ground"))
         {
-            ms.Jumping();
-            jumping = true;
-            jumpCoolDown = 0;
-            print("jumpboy");
+            if (Input.GetButtonDown("Jump"))
+            {
+                ms.Jumping();
+                jumping = true;
+                jumpCoolDown = 0;
+                print("jumpboy");
+            }
         }
     }
 

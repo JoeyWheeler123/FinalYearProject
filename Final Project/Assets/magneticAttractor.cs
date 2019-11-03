@@ -13,10 +13,14 @@ public class magneticAttractor : MonoBehaviour
     private bool snapped;
 
     public float snapThreshold;
+
+    public HingeJoint rb;
+
+    public Rigidbody playerRb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<HingeJoint>();
     }
 
     // Update is called once per frame
@@ -43,6 +47,12 @@ public class magneticAttractor : MonoBehaviour
         if (Input.GetKeyDown((KeyCode.R)))
         {
             ResetBox();
+        }
+        
+        if(Input.GetKeyDown((KeyCode.G))&snapped)
+        {
+            
+            rb.connectedBody = playerRb;
         }
     }
 
