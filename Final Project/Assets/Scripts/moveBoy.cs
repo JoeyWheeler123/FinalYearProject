@@ -104,6 +104,13 @@ public class moveBoy : MonoBehaviour
               LeftJump();
             }
         }
+        if (other.gameObject.CompareTag("rightwall"))
+        {
+            if (Input.GetButtonDown("Jump")&&gcScript.grounded ==false)
+            {
+                RightJump();
+            }
+        }
     }
 
     public void Jumping()
@@ -116,6 +123,13 @@ public class moveBoy : MonoBehaviour
     {
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         velocity.x = -wallKickForce;
+        rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
+    }
+    
+    public void RightJump()
+    {
+        //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
+        velocity.x = wallKickForce;
         rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
     }
 }
