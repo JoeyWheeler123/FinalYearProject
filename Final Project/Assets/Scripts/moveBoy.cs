@@ -61,7 +61,7 @@ public class moveBoy : MonoBehaviour
         {
             if (moveInput != 0)
             {
-                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, airAcceleration * Time.deltaTime);
             }
             else
             {
