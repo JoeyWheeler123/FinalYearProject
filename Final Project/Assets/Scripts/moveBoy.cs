@@ -16,6 +16,7 @@ public class moveBoy : MonoBehaviour
     [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
     float groundDeceleration = 70;
 
+    public float airDeceleration;
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     float jumpHeight = 4;
     private Vector2 velocity;
@@ -28,6 +29,10 @@ public class moveBoy : MonoBehaviour
     public magneticAttractor magScript;
     public cursorMovement curMov;
     public bool thrown;
+
+    public float recoveryTime;
+
+    public float wallKickForce;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,25 +43,38 @@ public class moveBoy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float moveInput = Input.GetAxisRaw("Horizontal");
         if (gcScript.grounded == true)
         {
-           
+            
+            if (moveInput != 0)
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+            }
+            else
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
+            }
+
+        }
+        else
+        {
+            if (moveInput != 0)
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+            }
+            else
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, 0, airDeceleration * Time.deltaTime);
+            }
         }
 
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        
         
         
      //   float acceleration = grounded ? walkAcceleration : airAcceleration;
 //        float deceleration = grounded ? groundDeceleration : 0;
-        if (moveInput != 0)
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
-        }
-        else
-        {
-            velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
-        }
-        
+       
         rb.velocity = new Vector3(velocity.x ,rb.velocity.y,0);
         
         if (Input.GetKeyDown(KeyCode.R))
@@ -76,10 +94,28 @@ public class moveBoy : MonoBehaviour
             }
         }
     }
-    
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("leftwall"))
+        {
+            if (Input.GetButtonDown("Jump")&&gcScript.grounded ==false)
+            {
+              LeftJump();
+            }
+        }
+    }
+
     public void Jumping()
     {
        // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
+        rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
+    }
+
+    public void LeftJump()
+    {
+        //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
+        velocity.x = -wallKickForce;
         rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
     }
 }

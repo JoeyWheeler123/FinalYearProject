@@ -35,8 +35,10 @@ public class groundCheck : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.gameObject.CompareTag("ground"))
         {
+            grounded = true;
             if (Input.GetButtonDown("Jump"))
             {
                 ms.Jumping();
