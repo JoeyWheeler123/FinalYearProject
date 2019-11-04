@@ -38,9 +38,13 @@ public class moveBoy : MonoBehaviour
     public float wallKickForce;
     public float recallSpeed;
     public float grabDistance;
+    private float moveInput;
+    public float wallSlideModifier;
+    public throwScript throwS;
     // Start is called before the first frame update
     void Start()
     {
+        throwS = theBox.GetComponent<throwScript>();
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
         curMov.aiming = true;
@@ -49,7 +53,7 @@ public class moveBoy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        moveInput = Input.GetAxisRaw("Horizontal");
         if (gcScript.grounded == true)
         {
             
@@ -87,10 +91,7 @@ public class moveBoy : MonoBehaviour
         {
             if (thrown == false)
             {
-                boxPrep = true;
-                theBox.SetActive(true);
-                theBox.GetComponent<throwScript>().Throw();
-                curMov.aiming = false;
+                ThrowBox();
                 //thrown = true;
             }
             else
@@ -115,18 +116,10 @@ public class moveBoy : MonoBehaviour
         {
             if (thrown)
             {
-                print("pull");
-                boxTowardPlayer = transform.position - theBox.transform.position;
-                boxTowardPlayer.Normalize();
-                rbox.AddForce(boxTowardPlayer*Time.deltaTime*recallSpeed,ForceMode.Impulse);
+                BoxRecall();
             }
 
-            if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance&&thrown)
-            {
-                theBox.SetActive(false);
-                curMov.aiming = true;
-                thrown = false;
-            }
+            
         }
         
         
@@ -136,16 +129,29 @@ public class moveBoy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("leftwall"))
         {
+            
             if (Input.GetButtonDown("Jump")&&gcScript.grounded ==false)
             {
               LeftJump();
             }
+
+            if (moveInput >= 0.1f && rb.velocity.y < 0)
+            {
+                rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
+            }
+
+            //rb.AddForce(Physics.gravity *-0.5f);
         }
         if (other.gameObject.CompareTag("rightwall"))
         {
             if (Input.GetButtonDown("Jump")&&gcScript.grounded ==false)
             {
                 RightJump();
+            }
+            //rb.useGravity = false;
+            if (moveInput <= -0.1f&&rb.velocity.y<0)
+            {
+                rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
             }
         }
     }
@@ -168,5 +174,28 @@ public class moveBoy : MonoBehaviour
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         velocity.x = wallKickForce;
         rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
+    }
+
+    public void ThrowBox()
+    {
+        boxPrep = true;
+        theBox.SetActive(true);
+        throwS.Throw();
+        curMov.aiming = false;
+    }
+
+    public void BoxRecall()
+    {
+        print("pull");
+        boxTowardPlayer = transform.position - theBox.transform.position;
+        boxTowardPlayer.Normalize();
+        rbox.AddForce(boxTowardPlayer*Time.deltaTime*recallSpeed,ForceMode.Impulse);
+                
+        if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
+        {
+            theBox.SetActive(false);
+            curMov.aiming = true;
+            thrown = false;
+        }
     }
 }
