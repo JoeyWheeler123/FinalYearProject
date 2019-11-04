@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class moveBoy : MonoBehaviour
@@ -20,23 +22,27 @@ public class moveBoy : MonoBehaviour
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     float jumpHeight = 4;
     private Vector2 velocity;
+    private Vector2 boxTowardPlayer;
 
     public groundCheck gcScript;
 
-    private Rigidbody rb;
+    private Rigidbody rb, rbox;
 
     public GameObject theBox;
     public magneticAttractor magScript;
     public cursorMovement curMov;
-    public bool thrown;
+    public bool thrown, boxPrep;
 
     public float recoveryTime;
 
     public float wallKickForce;
+    public float recallSpeed;
+    public float grabDistance;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rbox = theBox.GetComponent<Rigidbody>();
         curMov.aiming = true;
     }
 
@@ -81,18 +87,49 @@ public class moveBoy : MonoBehaviour
         {
             if (thrown == false)
             {
+                boxPrep = true;
                 theBox.SetActive(true);
                 theBox.GetComponent<throwScript>().Throw();
                 curMov.aiming = false;
-                thrown = true;
+                //thrown = true;
             }
             else
             {
-                theBox.SetActive(false);
+                /*theBox.SetActive(false);
                curMov.aiming = true;
+                thrown = false;
+                */
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            if (thrown == false&&boxPrep==true)
+            {
+                thrown = true;
+                boxPrep = false;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            if (thrown)
+            {
+                print("pull");
+                boxTowardPlayer = transform.position - theBox.transform.position;
+                boxTowardPlayer.Normalize();
+                rbox.AddForce(boxTowardPlayer*Time.deltaTime*recallSpeed,ForceMode.Impulse);
+            }
+
+            if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance&&thrown)
+            {
+                theBox.SetActive(false);
+                curMov.aiming = true;
                 thrown = false;
             }
         }
+        
+        
     }
 
     private void OnTriggerStay(Collider other)
