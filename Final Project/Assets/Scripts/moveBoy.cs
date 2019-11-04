@@ -19,8 +19,10 @@ public class moveBoy : MonoBehaviour
     float groundDeceleration = 70;
 
     public float airDeceleration;
+
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     float jumpHeight = 4;
+
     private Vector2 velocity;
     private Vector2 boxTowardPlayer;
 
@@ -40,10 +42,19 @@ public class moveBoy : MonoBehaviour
     public float grabDistance;
     private float moveInput;
     public float wallSlideModifier;
+
     public throwScript throwS;
+    private bool inControl;
+
+    private bool mantling;
+
+    private bool grabbingLedge;
+
+    private Vector3 mantlePos;
     // Start is called before the first frame update
     void Start()
     {
+        inControl = true;
         throwS = theBox.GetComponent<throwScript>();
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
@@ -54,9 +65,10 @@ public class moveBoy : MonoBehaviour
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+        if(inControl){
         if (gcScript.grounded == true)
         {
-            
+
             if (moveInput != 0)
             {
                 velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
@@ -78,15 +90,16 @@ public class moveBoy : MonoBehaviour
                 velocity.x = Mathf.MoveTowards(velocity.x, 0, airDeceleration * Time.deltaTime);
             }
         }
+        }
 
-        
-        
-        
-     //   float acceleration = grounded ? walkAcceleration : airAcceleration;
+
+
+
+        //   float acceleration = grounded ? walkAcceleration : airAcceleration;
 //        float deceleration = grounded ? groundDeceleration : 0;
-       
-        rb.velocity = new Vector3(velocity.x ,rb.velocity.y,0);
-        
+
+        rb.velocity = new Vector3(velocity.x, rb.velocity.y, 0);
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (thrown == false)
@@ -103,9 +116,15 @@ public class moveBoy : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            inControl = true;
+            rb.useGravity = true;
+            rb.isKinematic = false;
+        }
         if (Input.GetKeyUp(KeyCode.R))
         {
-            if (thrown == false&&boxPrep==true)
+            if (thrown == false && boxPrep == true)
             {
                 thrown = true;
                 boxPrep = false;
@@ -119,20 +138,49 @@ public class moveBoy : MonoBehaviour
                 BoxRecall();
             }
 
-            
+
         }
-        
-        
+
+        if (grabbingLedge)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                StartCoroutine(Mantle(mantlePos));
+            }
+        }
+
+
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ledge")&&!mantling&&!gcScript.grounded)
+        {
+            grabbingLedge = true;
+            mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
+            mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
+            //inControl = false;
+            rb.isKinematic = true;
+            //Vector3 towardLedge = other.gameObject.transform.position-transform.position;
+           // rb.MovePosition(transform.position +towardLedge);
+            //
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                mantling = true;
+                //rb.isKinematic =false;
+                StartCoroutine(Mantle(mantlePos));
+            }
+        }
+    }
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("leftwall"))
         {
-            
-            if (Input.GetButtonDown("Jump")&&gcScript.grounded ==false)
+
+            if (Input.GetButtonDown("Jump") && gcScript.grounded == false)
             {
-              LeftJump();
+                LeftJump();
             }
 
             if (moveInput >= 0.1f && rb.velocity.y < 0)
@@ -142,38 +190,43 @@ public class moveBoy : MonoBehaviour
 
             //rb.AddForce(Physics.gravity *-0.5f);
         }
+
         if (other.gameObject.CompareTag("rightwall"))
         {
-            if (Input.GetButtonDown("Jump")&&gcScript.grounded ==false)
+            if (Input.GetButtonDown("Jump") && gcScript.grounded == false)
             {
                 RightJump();
             }
+
             //rb.useGravity = false;
-            if (moveInput <= -0.1f&&rb.velocity.y<0)
+            if (moveInput <= -0.1f && rb.velocity.y < 0)
             {
                 rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
             }
         }
+
+        
     }
 
     public void Jumping()
     {
-       // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
-        rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
+        inControl = true;
+        // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
+        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
     }
 
     public void LeftJump()
     {
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         velocity.x = -wallKickForce;
-        rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
+        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
     }
-    
+
     public void RightJump()
     {
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         velocity.x = wallKickForce;
-        rb.velocity = new Vector3(velocity.x ,jumpHeight,0);
+        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
     }
 
     public void ThrowBox()
@@ -189,8 +242,8 @@ public class moveBoy : MonoBehaviour
         print("pull");
         boxTowardPlayer = transform.position - theBox.transform.position;
         boxTowardPlayer.Normalize();
-        rbox.AddForce(boxTowardPlayer*Time.deltaTime*recallSpeed,ForceMode.Impulse);
-                
+        rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Impulse);
+
         if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
         {
             theBox.SetActive(false);
@@ -198,4 +251,26 @@ public class moveBoy : MonoBehaviour
             thrown = false;
         }
     }
+
+    IEnumerator Mantle(Vector3 mantlePosition)
+    {
+        float transformY = transform.position.y;
+        float timeSpent = 0;
+        grabbingLedge = false;
+        //rb.isKinematic = false;
+        while(timeSpent<=0.5f)
+        {
+
+            rb.MovePosition(transform.position+(Vector3.up*Time.deltaTime*5f));
+            timeSpent += Time.deltaTime;
+            print("mantling");
+            yield return null;
+        }
+
+        
+        mantling = false;
+        rb.isKinematic = false;
+        yield return null;
+    }
 }
+
