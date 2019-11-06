@@ -32,7 +32,7 @@ public class magneticAttractor : MonoBehaviour
             float distanceMultiplier = dir.sqrMagnitude;
             float stronger = Mathf.Sqrt(distanceMultiplier);//electromagnetic force weakens a rate proportional to square of distance. I think. Maybe cubed but squared will do for now?
             attractedRb.AddForce(-dir*attractiveForce*Time.deltaTime/stronger);
-            if (distanceMultiplier <= snapThreshold)
+            if (distanceMultiplier <= snapThreshold&&!Input.GetKey((KeyCode.R)))
             {
                 snapped = true;
             }
@@ -42,10 +42,20 @@ public class magneticAttractor : MonoBehaviour
         if (attracted != null & snapped)
         {
             attracted.transform.position = transform.position;
+            attractedRb.isKinematic = true;
+        }
+        else
+        {
+           
         }
 
         if (Input.GetKeyDown((KeyCode.R)))
         {
+            if (attracted != null)
+            {
+                attractedRb.isKinematic = false;
+            }
+
             ResetBox();
         }
         

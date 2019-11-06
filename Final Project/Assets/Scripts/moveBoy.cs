@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class moveBoy : MonoBehaviour
 {
@@ -50,7 +53,9 @@ public class moveBoy : MonoBehaviour
 
     private bool grabbingLedge;
 
-    private Vector3 mantlePos;
+    private Vector3 mantlePos, grabPos;
+
+    private bool recalling;
     // Start is called before the first frame update
     void Start()
     {
@@ -121,6 +126,7 @@ public class moveBoy : MonoBehaviour
             inControl = true;
             rb.useGravity = true;
             rb.isKinematic = false;
+            grabbingLedge = false;
         }
         if (Input.GetKeyUp(KeyCode.R))
         {
@@ -141,8 +147,15 @@ public class moveBoy : MonoBehaviour
 
         }
 
+        if (Input.GetKey(KeyCode.R))
+        {
+            recalling = false;
+        }
+
         if (grabbingLedge)
         {
+            Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*4f);
+            rb.MovePosition(pos);
             if (Input.GetKeyDown(KeyCode.W))
             {
                 StartCoroutine(Mantle(mantlePos));
@@ -157,6 +170,7 @@ public class moveBoy : MonoBehaviour
         if (other.gameObject.CompareTag("ledge")&&!mantling&&!gcScript.grounded)
         {
             grabbingLedge = true;
+            grabPos = other.gameObject.transform.position;
             mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
             mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
             //inControl = false;
@@ -239,6 +253,7 @@ public class moveBoy : MonoBehaviour
 
     public void BoxRecall()
     {
+        recalling = true;
         print("pull");
         boxTowardPlayer = transform.position - theBox.transform.position;
         boxTowardPlayer.Normalize();
@@ -270,6 +285,9 @@ public class moveBoy : MonoBehaviour
         
         mantling = false;
         rb.isKinematic = false;
+        yield return new WaitForSeconds(0.1f);
+        rb.AddForce(Vector3.right*20,ForceMode.Impulse);
+        grabbingLedge = false;
         yield return null;
     }
 }
