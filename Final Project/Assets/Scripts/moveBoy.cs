@@ -34,7 +34,7 @@ public class moveBoy : MonoBehaviour
     private Rigidbody rb, rbox;
 
     public GameObject theBox;
-    public magneticAttractor magScript;
+    //public magneticAttractor magScript;
     public cursorMovement curMov;
     public bool thrown, boxPrep;
 
@@ -53,7 +53,8 @@ public class moveBoy : MonoBehaviour
 
     private bool grabbingLedge;
 
-    private Vector3 mantlePos, grabPos;
+    private Vector3  grabPos;
+    private int mantlePos;
 
     private bool recalling;
     // Start is called before the first frame update
@@ -160,6 +161,7 @@ public class moveBoy : MonoBehaviour
             {
                 StartCoroutine(Mantle(mantlePos));
             }
+            
         }
 
 
@@ -167,12 +169,13 @@ public class moveBoy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("ledge")&&!mantling&&!gcScript.grounded)
+        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded)
         {
             grabbingLedge = true;
             grabPos = other.gameObject.transform.position;
-            mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
-            mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
+            mantlePos = 0;
+           // mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
+           // mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
             //inControl = false;
             rb.isKinematic = true;
             //Vector3 towardLedge = other.gameObject.transform.position-transform.position;
@@ -182,7 +185,27 @@ public class moveBoy : MonoBehaviour
             {
                 mantling = true;
                 //rb.isKinematic =false;
-                StartCoroutine(Mantle(mantlePos));
+                StartCoroutine(Mantle(0));
+            }
+        }
+        
+        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded)
+        {
+            grabbingLedge = true;
+            grabPos = other.gameObject.transform.position;
+            mantlePos = 1;
+           // mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
+            //mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
+            //inControl = false;
+            rb.isKinematic = true;
+            //Vector3 towardLedge = other.gameObject.transform.position-transform.position;
+            // rb.MovePosition(transform.position +towardLedge);
+            //
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                mantling = true;
+                //rb.isKinematic =false;
+                StartCoroutine(Mantle(1));
             }
         }
     }
@@ -267,7 +290,7 @@ public class moveBoy : MonoBehaviour
         }
     }
 
-    IEnumerator Mantle(Vector3 mantlePosition)
+    IEnumerator Mantle(int mantlePosition)
     {
         float transformY = transform.position.y;
         float timeSpent = 0;
@@ -282,11 +305,24 @@ public class moveBoy : MonoBehaviour
             yield return null;
         }
 
-        
+        while (timeSpent <= 0.7f)
+        {
+            if (mantlePosition == 0) //mantleposition 0 means player is on the left side of the ledge
+            {
+                rb.MovePosition(transform.position + (Vector3.right * Time.deltaTime * 5f));
+            }
+
+            if (mantlePosition == 1) // player is on the right
+            {
+                rb.MovePosition(transform.position + (Vector3.left * Time.deltaTime * 5f));
+            }
+            timeSpent += Time.deltaTime;
+            yield return null;
+        }
         mantling = false;
         rb.isKinematic = false;
         yield return new WaitForSeconds(0.1f);
-        rb.AddForce(Vector3.right*20,ForceMode.Impulse);
+        //rb.AddForce(Vector3.right*20,ForceMode.Impulse);
         grabbingLedge = false;
         yield return null;
     }
