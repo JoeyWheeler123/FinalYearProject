@@ -122,8 +122,17 @@ public class moveBoy : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
+
+            if (gcScript.grounded)
+            {
+                Jumping();
+                //jumping = true;
+                //jumpCoolDown = 0;
+                print("jumpboy");
+            }
+
             inControl = true;
             rb.useGravity = true;
             rb.isKinematic = false;

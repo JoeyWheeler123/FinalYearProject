@@ -39,13 +39,14 @@ public class groundCheck : MonoBehaviour
         if (other.gameObject.CompareTag("ground"))
         {
             grounded = true;
-            if (Input.GetButtonDown("Jump"))
+           /* if (Input.GetButtonDown("Jump"))
             {
                 ms.Jumping();
                 jumping = true;
                 jumpCoolDown = 0;
                 print("jumpboy");
             }
+            */
         }
     }
 
