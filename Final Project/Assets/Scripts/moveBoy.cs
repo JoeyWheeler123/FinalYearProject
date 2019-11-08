@@ -106,7 +106,7 @@ public class moveBoy : MonoBehaviour
 
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, 0);
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Fire1"))
         {
             if (thrown == false)
             {
@@ -138,7 +138,7 @@ public class moveBoy : MonoBehaviour
             rb.isKinematic = false;
             grabbingLedge = false;
         }
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetButtonUp("Fire1"))
         {
             if (thrown == false && boxPrep == true)
             {
@@ -147,20 +147,17 @@ public class moveBoy : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetButton("Fire1"))
         {
             if (thrown)
             {
                 BoxRecall();
             }
 
-
-        }
-
-        if (Input.GetKey(KeyCode.R))
-        {
             recalling = false;
         }
+
+     
 
         if (grabbingLedge)
         {
