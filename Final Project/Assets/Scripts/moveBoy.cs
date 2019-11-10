@@ -174,7 +174,7 @@ public class moveBoy : MonoBehaviour
 
         if (grabbingLedge)
         {
-            Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*4f);
+            Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
             rb.MovePosition(pos);
             if (Input.GetKeyDown(KeyCode.W))
             {
