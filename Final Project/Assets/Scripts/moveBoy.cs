@@ -56,7 +56,11 @@ public class moveBoy : MonoBehaviour
     private Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling;
+    private bool recalling, canJump;
+
+    public float coyoteTime;
+
+    private float timeLeftToJump;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +102,14 @@ public class moveBoy : MonoBehaviour
         }
         }
 
-
+        if (gcScript.grounded)
+        {
+            timeLeftToJump = coyoteTime;
+        }
+        else
+        {
+            timeLeftToJump -= Time.deltaTime;
+        }
 
 
         //   float acceleration = grounded ? walkAcceleration : airAcceleration;
@@ -125,9 +136,11 @@ public class moveBoy : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
 
-            if (gcScript.grounded)
+            if (timeLeftToJump>=0&&!gcScript.jumping)
             {
                 Jumping();
+                gcScript.jumping = true;
+                timeLeftToJump = 0;
                 //jumping = true;
                 //jumpCoolDown = 0;
                 print("jumpboy");
