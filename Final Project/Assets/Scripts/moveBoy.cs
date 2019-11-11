@@ -61,6 +61,8 @@ public class moveBoy : MonoBehaviour
     public float coyoteTime;
 
     private float timeLeftToJump;
+
+    public float inverseRecallMultiplier; //how much of the force that is given to the box pulling toward the player acts on the player themselves.
     // Start is called before the first frame update
     void Start()
     {
@@ -162,7 +164,7 @@ public class moveBoy : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            if (thrown)
+            if (thrown&&!gcScript.onBox)
             {
                 BoxRecall();
             }
@@ -241,7 +243,13 @@ public class moveBoy : MonoBehaviour
 
             if (moveInput >= 0.1f && rb.velocity.y < 0)
             {
-                rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
+                //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
+                rb.useGravity = false;
+                rb.velocity = new Vector3(0,-wallSlideModifier,0);
+            }
+            else
+            {
+                rb.useGravity = true;
             }
 
             //rb.AddForce(Physics.gravity *-0.5f);
@@ -257,7 +265,13 @@ public class moveBoy : MonoBehaviour
             //rb.useGravity = false;
             if (moveInput <= -0.1f && rb.velocity.y < 0)
             {
-                rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
+                rb.useGravity = false;
+                //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
+                rb.velocity = new Vector3(0,-wallSlideModifier,0);
+            }
+            else
+            {
+                rb.useGravity = true;
             }
         }
 
@@ -269,6 +283,10 @@ public class moveBoy : MonoBehaviour
         inControl = true;
         // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        if (gcScript.onBox)
+        {
+            rbox.velocity =  new Vector3(0, -jumpHeight, 0);
+        }
     }
 
     public void LeftJump()
@@ -299,7 +317,8 @@ public class moveBoy : MonoBehaviour
         print("pull");
         boxTowardPlayer = transform.position - theBox.transform.position;
         boxTowardPlayer.Normalize();
-        rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Impulse);
+        rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Force);
+        rb.AddForce(-boxTowardPlayer*Time.deltaTime*inverseRecallMultiplier*recallSpeed,ForceMode.Force);
 
         if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
         {

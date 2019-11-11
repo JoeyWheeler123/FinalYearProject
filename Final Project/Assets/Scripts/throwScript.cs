@@ -11,12 +11,14 @@ public class throwScript : MonoBehaviour
     public Transform spawnPointLeft, spawnPointRight;
     public float force;
     public GameObject rightBox, leftBox;
+    public float maxVelocity;
     public enum ThrowPoint
     {
         left,
         right
     }
 
+    private float tempX, tempY;
     private ThrowPoint tp;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,40 @@ public class throwScript : MonoBehaviour
         
     }
 
-    public void Throw()
+
+private void FixedUpdate()
+{
+    /*if (rb.velocity.x > maxVelocity)
+    {
+        tempX = maxVelocity;
+    }
+    else if (rb.velocity.x < -maxVelocity)
+    {
+        tempX = -maxVelocity;
+    }
+    else
+    {
+        tempX = rb.velocity.x;
+    }
+    
+    if (rb.velocity.y > maxVelocity)
+    {
+        tempY = maxVelocity;
+    }
+    else if (rb.velocity.y < -maxVelocity)
+    {
+        tempY = -maxVelocity;
+    }
+    else
+    {
+        tempY = rb.velocity.y;
+    }
+
+    rb.velocity = new Vector3(tempX, tempY,0f);
+    */
+}
+
+public void Throw()
     {
         if (cursorTransform.position.x <= playerTransform.position.x)
         {

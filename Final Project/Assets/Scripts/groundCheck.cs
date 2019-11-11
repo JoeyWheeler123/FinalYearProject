@@ -13,6 +13,8 @@ public class groundCheck : MonoBehaviour
    public float jumpCoolDownInitial;
 
     public bool jumping;
+
+    public bool onBox;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,12 +53,28 @@ public class groundCheck : MonoBehaviour
              }
              */
         }
+        if (other.gameObject.CompareTag("box"))
+        {
+            grounded = true;
+
+            onBox = true;
+            /* if (Input.GetButtonDown("Jump"))
+             {
+                 ms.Jumping();
+                 jumping = true;
+                 jumpCoolDown = 0;
+                 print("jumpboy");
+             }
+             */
+        }
+        
     }
 
 
     private void OnTriggerExit(Collider other)
     {
         grounded = false;
+        onBox = false;
         //print(grounded);
     }
 }

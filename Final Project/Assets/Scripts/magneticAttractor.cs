@@ -68,7 +68,7 @@ public class magneticAttractor : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "metal")
+        if (other.gameObject.tag == "box")
         {
             attracted = other.gameObject;
             attractedRb = other.gameObject.GetComponent<Rigidbody>();
