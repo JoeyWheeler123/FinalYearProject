@@ -10,7 +10,7 @@ using Vector3 = UnityEngine.Vector3;
 public class moveBoy : MonoBehaviour
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float speed = 9;
+    public float speed = 9;
 
     [SerializeField, Tooltip("Acceleration while grounded.")]
     float walkAcceleration = 75;
@@ -24,26 +24,29 @@ public class moveBoy : MonoBehaviour
     public float airDeceleration;
 
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
-    float jumpHeight = 4;
+    public float jumpHeight = 4;
 
     private Vector2 velocity;
     private Vector2 boxTowardPlayer;
 
     public groundCheck gcScript;
 
-    private Rigidbody rb, rbox;
+    public Rigidbody rb, rbox;
 
     public GameObject theBox;
+
+    public GameObject heavyBox;
+
     //public magneticAttractor magScript;
     public cursorMovement curMov;
-    public bool thrown, boxPrep;
+    public bool thrown, boxPrep, heavy;
 
     public float recoveryTime;
 
     public float wallKickForce;
     public float recallSpeed;
     public float grabDistance;
-    private float moveInput;
+    public float moveInput;
     public float wallSlideModifier;
 
     public throwScript throwS;
@@ -67,6 +70,7 @@ public class moveBoy : MonoBehaviour
     void Start()
     {
         inControl = true;
+        heavy = false;
         throwS = theBox.GetComponent<throwScript>();
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
@@ -124,7 +128,7 @@ public class moveBoy : MonoBehaviour
             if (thrown == false)
             {
                 ThrowBox();
-                //thrown = true;
+           
             }
             else
             {
@@ -132,6 +136,7 @@ public class moveBoy : MonoBehaviour
                curMov.aiming = true;
                 thrown = false;
                 */
+               
             }
         }
 
