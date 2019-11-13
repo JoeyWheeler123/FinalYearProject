@@ -92,5 +92,6 @@ public void Throw()
         dir.Normalize();
         print("Throw");
         rb.AddForce (dir * force, ForceMode.Impulse);
+
     }
 }

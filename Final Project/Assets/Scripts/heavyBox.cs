@@ -44,17 +44,22 @@ public class heavyBox : MonoBehaviour
         {
             player.GetComponent<moveBoy>().speed = heavySpeed;
             player.GetComponent<moveBoy>().jumpHeight = heavyJump;
+            player.GetComponent<moveBoy>().heavy = true;
         }
 
         if(heavyActive && player.GetComponent<moveBoy>().thrown)
         {
             player.GetComponent<moveBoy>().speed = normalSpeed;
             player.GetComponent<moveBoy>().jumpHeight = normalJump;
+            player.GetComponent<moveBoy>().heavy = false;
         }
 
         if (Input.GetKey(KeyCode.E))
         {
             heavyActive = false;
+            player.GetComponent<moveBoy>().speed = normalSpeed;
+            player.GetComponent<moveBoy>().jumpHeight = normalJump;
+            player.GetComponent<moveBoy>().heavy = false;
         }
     }
 
