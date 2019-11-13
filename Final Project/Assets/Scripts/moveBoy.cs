@@ -66,15 +66,32 @@ public class moveBoy : MonoBehaviour
     private float timeLeftToJump;
 
     public float inverseRecallMultiplier; //how much of the force that is given to the box pulling toward the player acts on the player themselves.
+
+    public Animator anim;
+
+    private int movingHash, jumpHash, recallHash, groundedHash,throwHash;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        movingHash = Animator.StringToHash("Moving");
+        jumpHash = Animator.StringToHash("Jump");
+        recallHash = Animator.StringToHash("Recall");
+        groundedHash = Animator.StringToHash("Grounded");
+        throwHash = Animator.StringToHash("Throw");
+    }
     void Start()
     {
+        anim = GetComponent<Animator>();
         inControl = true;
         heavy = false;
         throwS = theBox.GetComponent<throwScript>();
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
         curMov.aiming = true;
+        
+        
+        
     }
 
     // Update is called once per frame
@@ -88,10 +105,12 @@ public class moveBoy : MonoBehaviour
             if (moveInput != 0)
             {
                 velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+                anim.SetBool(movingHash,true);
             }
             else
             {
                 velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
+                anim.SetBool(movingHash, false);
             }
 
         }
@@ -288,6 +307,7 @@ public class moveBoy : MonoBehaviour
         inControl = true;
         // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        anim.SetBool(jumpHash,true);
         if (gcScript.onBox)
         {
             rbox.velocity =  new Vector3(0, -jumpHeight, 0);
@@ -310,6 +330,7 @@ public class moveBoy : MonoBehaviour
 
     public void ThrowBox()
     {
+        anim.SetTrigger(throwHash);
         boxPrep = true;
         theBox.SetActive(true);
         throwS.Throw();
