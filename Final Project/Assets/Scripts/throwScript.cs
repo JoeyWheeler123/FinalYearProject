@@ -12,7 +12,9 @@ public class throwScript : MonoBehaviour
     public float force;
     public GameObject rightBox, leftBox;
     public float maxVelocity;
+    public moveBoy moveScript;
     public enum ThrowPoint
+    
     {
         left,
         right
@@ -35,6 +37,7 @@ public class throwScript : MonoBehaviour
 
 private void FixedUpdate()
 {
+    
     /*if (rb.velocity.x > maxVelocity)
     {
         tempX = maxVelocity;
@@ -95,4 +98,15 @@ public void Throw()
         rb.AddForce (dir * force, ForceMode.Impulse);
 
     }
+
+private void OnTriggerStay(Collider other)
+{
+    if (other.gameObject.CompareTag("boxgrabber"))
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            moveScript.StartCoroutine("CarryBox");
+        }
+    }
+}
 }

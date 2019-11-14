@@ -79,10 +79,15 @@ public class moveBoy : MonoBehaviour
     public Transform boxHoldPos;
 
     public float turnSpeed, aimWalkSpeed;
+
+    private Collider boxCol;
+
+    public bool autoPickup;
     // Start is called before the first frame update
 
     void Awake()
     {
+        boxCol = theBox.GetComponent<Collider>();
         movingHash = Animator.StringToHash("Moving");
         jumpHash = Animator.StringToHash("Jump");
         recallHash = Animator.StringToHash("Recall");
@@ -172,8 +177,13 @@ public class moveBoy : MonoBehaviour
 
         if (Input.GetButton("Fire2"))
         {
-            curMov.aiming = true;
-            speed = aimWalkSpeed;
+           
+            if (!thrown)
+            {
+                curMov.aiming = true;
+                speed = aimWalkSpeed;
+            }
+
             if (Input.GetButtonDown("Fire1"))
             {
                 if (thrown == false)
@@ -353,13 +363,15 @@ public class moveBoy : MonoBehaviour
         boxTowardPlayer.Normalize();
         rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Force);
         rb.AddForce(-boxTowardPlayer*Time.deltaTime*inverseRecallMultiplier*recallSpeed,ForceMode.Force);
-
-        if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
+        if (autoPickup)
         {
-            //theBox.SetActive(false);
-            //curMov.aiming = true;
-            StartCoroutine(CarryBox());
-            thrown = false;
+            if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
+            {
+                //theBox.SetActive(false);
+                //curMov.aiming = true;
+                StartCoroutine(CarryBox());
+                //thrown = false;
+            }
         }
     }
 
@@ -437,8 +449,9 @@ public class moveBoy : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator CarryBox()
-    {
+   IEnumerator CarryBox()
+   {
+       thrown = false;
         float timeSpent = 0;
         rbox.isKinematic = true;
         
@@ -446,7 +459,7 @@ public class moveBoy : MonoBehaviour
         //theBox.transform.eulerAngles = new Vector3(0, 0, 0);
         
         
-        Collider boxCol = theBox.GetComponent<Collider>();
+        
         boxCol.enabled = false;
         theBox.transform.SetParent(boxSwingParent.transform);
         while (timeSpent <0.4f)
