@@ -13,6 +13,7 @@ public class moveBoy : MonoBehaviour
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     public float speed = 9;
 
+    private float maxSpeed;
     [SerializeField, Tooltip("Acceleration while grounded.")]
     float walkAcceleration = 75;
 
@@ -90,6 +91,7 @@ public class moveBoy : MonoBehaviour
     }
     void Start()
     {
+        maxSpeed = speed;
         theBox.transform.parent = null;
         anim = GetComponent<Animator>();
         inControl = true;
@@ -149,10 +151,10 @@ public class moveBoy : MonoBehaviour
                 timeLeftToJump = 0;
                 //jumping = true;
                 //jumpCoolDown = 0;
-                print("jumpboy");
+                //print("jumpboy");
             }
 
-            inControl = true;
+            //inControl = true;
             rb.useGravity = true;
             rb.isKinematic = false;
             grabbingLedge = false;
@@ -171,6 +173,7 @@ public class moveBoy : MonoBehaviour
         if (Input.GetButton("Fire2"))
         {
             curMov.aiming = true;
+            speed = aimWalkSpeed;
             if (Input.GetButtonDown("Fire1"))
             {
                 if (thrown == false)
@@ -184,6 +187,7 @@ public class moveBoy : MonoBehaviour
         else
         {
             curMov.aiming = false;
+            speed = maxSpeed;
         }
         
         if (Input.GetButton("Fire1"))
@@ -235,7 +239,7 @@ public class moveBoy : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && gcScript.grounded == false)
             {
-                LeftJump();
+                StartCoroutine(LeftJump());
             }
 
             if (moveInput >= 0.1f && rb.velocity.y < 0)
@@ -256,7 +260,7 @@ public class moveBoy : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump") && gcScript.grounded == false)
             {
-                RightJump();
+                StartCoroutine(RightJump());
             }
 
             //rb.useGravity = false;
@@ -312,21 +316,9 @@ public class moveBoy : MonoBehaviour
         }
     }
 
-    private void LeftJump()
-    {
-        //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
-        velocity.x = -wallKickForce;
-        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
-        facingLeft = true;
-    }
+   
 
-    private void RightJump()
-    {
-        //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
-        velocity.x = wallKickForce;
-        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
-        facingLeft = false;
-    }
+   
     
     private void LedgeGrab(int direction)
     {
@@ -356,7 +348,7 @@ public class moveBoy : MonoBehaviour
     public void BoxRecall()
     {
         recalling = true;
-        print("pull");
+        //print("pull");
         boxTowardPlayer = transform.position - theBox.transform.position;
         boxTowardPlayer.Normalize();
         rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Force);
@@ -376,12 +368,12 @@ public class moveBoy : MonoBehaviour
     public void DirectionCheck()
     {
         
-        if (moveInput < 0&&!grabbingLedge&&!curMov.aiming)
+        if (moveInput < 0&&!grabbingLedge&&!curMov.aiming&&inControl)
         {
             facingLeft = true;
             
         }
-        if(moveInput>0&&!grabbingLedge&&!curMov.aiming)
+        if(moveInput>0&&!grabbingLedge&&!curMov.aiming&&inControl)
         {
             facingLeft = false;
         }        
@@ -419,7 +411,7 @@ public class moveBoy : MonoBehaviour
 
             rb.MovePosition(transform.position+(Vector3.up*Time.deltaTime*5f));
             timeSpent += Time.deltaTime;
-            print("mantling");
+            //print("mantling");
             yield return null;
         }
 
@@ -470,6 +462,41 @@ public class moveBoy : MonoBehaviour
         boxCol.enabled = true;
 
         theBox.transform.rotation = boxSwingParent.transform.rotation;
+        yield return null;
+    }
+
+    IEnumerator LeftJump()
+    {
+        
+            //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
+            inControl = false;
+            print(inControl);
+            velocity.x = -wallKickForce;
+            rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+            facingLeft = true;
+           
+            yield return new WaitForSeconds(0.3f);
+            print(inControl);
+            inControl = true;
+            print(inControl);
+        
+        yield return null;
+    }
+    
+   IEnumerator RightJump()
+    {
+        //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
+        inControl = false;
+        print(inControl);
+        velocity.x = wallKickForce;
+        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        facingLeft = false;
+           
+        yield return new WaitForSeconds(0.3f);
+        print(inControl);
+        inControl = true;
+        print(inControl);
+        
         yield return null;
     }
 }
