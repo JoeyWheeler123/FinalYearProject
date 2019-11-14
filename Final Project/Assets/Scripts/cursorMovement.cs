@@ -23,17 +23,20 @@ public class cursorMovement : MonoBehaviour
     public GameObject rightBox, leftBox, projectedBox;
 
     public bool aiming;
+
+    public moveBoy moveScript;
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
-        
+        moveScript = GetComponent<moveBoy>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (aiming)
+        if (aiming&&!moveScript.thrown)
         {
             projectedBox.SetActive(true);
             projectedPoint = new Vector3(point.x, point.y, 0);
@@ -47,19 +50,21 @@ public class cursorMovement : MonoBehaviour
 
             if (boxCheck < 0)
             {
-                leftBox.SetActive(true);
-                rightBox.SetActive(false);
+                //leftBox.SetActive(true);
+               // rightBox.SetActive(false);
+                moveScript.facingLeft = true;
             }
             else if (boxCheck > 0)
             {
-                rightBox.SetActive(true);
-                leftBox.SetActive(false);
+               // rightBox.SetActive(true);
+                //leftBox.SetActive(false);
+                moveScript.facingLeft = false;
             }
         }
         else
         {
-            leftBox.SetActive(false);
-            rightBox.SetActive(false);
+           //leftBox.SetActive(false);
+            //rightBox.SetActive(false);
             projectedBox.SetActive(false);
         }
 

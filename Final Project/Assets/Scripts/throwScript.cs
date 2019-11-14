@@ -66,7 +66,8 @@ private void FixedUpdate()
 }
 
 public void Throw()
-    {
+{
+    rb.isKinematic = false;
         if (cursorTransform.position.x <= playerTransform.position.x)
         {
             tp = ThrowPoint.left;

@@ -4,6 +4,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using UnityEditor.Build.Content;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -59,7 +60,8 @@ public class moveBoy : MonoBehaviour
     private Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling, canJump;
+    private bool recalling, canJump, hasBox;
+    public bool facingLeft;
 
     public float coyoteTime;
 
@@ -70,6 +72,12 @@ public class moveBoy : MonoBehaviour
     public Animator anim;
 
     private int movingHash, jumpHash, recallHash, groundedHash,throwHash;
+
+    public GameObject playerModel;
+    public GameObject boxSwingParent;
+    public Transform boxHoldPos;
+
+    public float turnSpeed, aimWalkSpeed;
     // Start is called before the first frame update
 
     void Awake()
@@ -82,6 +90,7 @@ public class moveBoy : MonoBehaviour
     }
     void Start()
     {
+        theBox.transform.parent = null;
         anim = GetComponent<Animator>();
         inControl = true;
         heavy = false;
@@ -98,32 +107,18 @@ public class moveBoy : MonoBehaviour
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+        DirectionCheck();
         if(inControl){
         if (gcScript.grounded == true)
         {
 
-            if (moveInput != 0)
-            {
-                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
-                anim.SetBool(movingHash,true);
-            }
-            else
-            {
-                velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
-                anim.SetBool(movingHash, false);
-            }
+           GroundMovement();
 
         }
         else
         {
-            if (moveInput != 0)
-            {
-                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, airAcceleration * Time.deltaTime);
-            }
-            else
-            {
-                velocity.x = Mathf.MoveTowards(velocity.x, 0, airDeceleration * Time.deltaTime);
-            }
+            AirMovement();
+            
         }
         }
 
@@ -142,22 +137,7 @@ public class moveBoy : MonoBehaviour
 
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, 0);
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (thrown == false)
-            {
-                ThrowBox();
-           
-            }
-            else
-            {
-                /*theBox.SetActive(false);
-               curMov.aiming = true;
-                thrown = false;
-                */
-               
-            }
-        }
+       
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -186,6 +166,26 @@ public class moveBoy : MonoBehaviour
             }
         }
 
+      
+
+        if (Input.GetButton("Fire2"))
+        {
+            curMov.aiming = true;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (thrown == false)
+                {
+                    ThrowBox();
+           
+                }
+           
+            }
+        }
+        else
+        {
+            curMov.aiming = false;
+        }
+        
         if (Input.GetButton("Fire1"))
         {
             if (thrown&&!gcScript.onBox)
@@ -195,7 +195,6 @@ public class moveBoy : MonoBehaviour
 
             recalling = false;
         }
-
      
 
         if (grabbingLedge)
@@ -216,42 +215,16 @@ public class moveBoy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded)
         {
-            grabbingLedge = true;
+            int direction = 0;
             grabPos = other.gameObject.transform.position;
-            mantlePos = 0;
-           // mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
-           // mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
-            //inControl = false;
-            rb.isKinematic = true;
-            //Vector3 towardLedge = other.gameObject.transform.position-transform.position;
-           // rb.MovePosition(transform.position +towardLedge);
-            //
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                mantling = true;
-                //rb.isKinematic =false;
-                StartCoroutine(Mantle(0));
-            }
+            LedgeGrab(direction);     
         }
         
         if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded)
         {
-            grabbingLedge = true;
+            int direction = 1;
             grabPos = other.gameObject.transform.position;
-            mantlePos = 1;
-           // mantlePos = other.gameObject.transform.position + new Vector3(0, 1, 0);
-            //mantlePos= new Vector3(transform.position.x,mantlePos.y,0);
-            //inControl = false;
-            rb.isKinematic = true;
-            //Vector3 towardLedge = other.gameObject.transform.position-transform.position;
-            // rb.MovePosition(transform.position +towardLedge);
-            //
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                mantling = true;
-                //rb.isKinematic =false;
-                StartCoroutine(Mantle(1));
-            }
+            LedgeGrab(direction);
         }
     }
     
@@ -302,7 +275,32 @@ public class moveBoy : MonoBehaviour
         
     }
 
-    public void Jumping()
+    private void GroundMovement()
+    {
+        if (moveInput != 0)
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+            anim.SetBool(movingHash,true);
+        }
+        else
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
+            anim.SetBool(movingHash, false);
+        }
+    }
+
+    private void AirMovement()
+    {
+        if (moveInput != 0)
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, airAcceleration * Time.deltaTime);
+        }
+        else
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, airDeceleration * Time.deltaTime);
+        }
+    }
+    private void Jumping()
     {
         inControl = true;
         // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
@@ -314,20 +312,38 @@ public class moveBoy : MonoBehaviour
         }
     }
 
-    public void LeftJump()
+    private void LeftJump()
     {
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         velocity.x = -wallKickForce;
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        facingLeft = true;
     }
 
-    public void RightJump()
+    private void RightJump()
     {
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         velocity.x = wallKickForce;
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        facingLeft = false;
     }
+    
+    private void LedgeGrab(int direction)
+    {
+        if (direction == 0)
+        {
+            facingLeft = false;
+        }
+        else if (direction == 1)
+        {
+            facingLeft = true;
+        }
 
+        grabbingLedge = true;
+        
+        mantlePos = direction;
+        rb.isKinematic = true;
+    }
     public void ThrowBox()
     {
         anim.SetTrigger(throwHash);
@@ -348,9 +364,47 @@ public class moveBoy : MonoBehaviour
 
         if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
         {
-            theBox.SetActive(false);
-            curMov.aiming = true;
+            //theBox.SetActive(false);
+            //curMov.aiming = true;
+            StartCoroutine(CarryBox());
             thrown = false;
+        }
+    }
+
+   
+
+    public void DirectionCheck()
+    {
+        
+        if (moveInput < 0&&!grabbingLedge&&!curMov.aiming)
+        {
+            facingLeft = true;
+            
+        }
+        if(moveInput>0&&!grabbingLedge&&!curMov.aiming)
+        {
+            facingLeft = false;
+        }        
+        
+        if (facingLeft)
+        {
+            Vector3 leftRot = new Vector3(0, -180, 0);
+            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation,
+                Quaternion.Euler(leftRot),  Time.deltaTime*turnSpeed);
+            
+            
+            boxSwingParent.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation,
+                Quaternion.Euler(leftRot),  Time.deltaTime*turnSpeed);
+        }
+
+        if (!facingLeft)
+        {
+            Vector3 rightRot = new Vector3(0, 0, 0);
+            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation,
+                Quaternion.Euler(rightRot),  Time.deltaTime*turnSpeed);
+            
+            boxSwingParent.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation,
+                Quaternion.Euler(rightRot),  Time.deltaTime*turnSpeed);
         }
     }
 
@@ -388,6 +442,34 @@ public class moveBoy : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //rb.AddForce(Vector3.right*20,ForceMode.Impulse);
         grabbingLedge = false;
+        yield return null;
+    }
+
+    IEnumerator CarryBox()
+    {
+        float timeSpent = 0;
+        rbox.isKinematic = true;
+        
+        
+        //theBox.transform.eulerAngles = new Vector3(0, 0, 0);
+        
+        
+        Collider boxCol = theBox.GetComponent<Collider>();
+        boxCol.enabled = false;
+        theBox.transform.SetParent(boxSwingParent.transform);
+        while (timeSpent <0.4f)
+        {
+            Quaternion rot = boxSwingParent.transform.rotation;
+            theBox.transform.position = Vector3.MoveTowards(theBox.transform.position,boxHoldPos.position,Time.deltaTime*10f);
+            theBox.transform.rotation =
+                Quaternion.Slerp(theBox.transform.rotation, rot,Time.deltaTime*10f);
+            timeSpent += Time.deltaTime;
+            yield return null;
+        }
+        
+        boxCol.enabled = true;
+
+        theBox.transform.rotation = boxSwingParent.transform.rotation;
         yield return null;
     }
 }
