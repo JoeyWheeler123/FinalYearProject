@@ -8,8 +8,10 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 public class moveBoy : MonoBehaviour
 {
+    private PlayerControls controls;
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     public float speed = 9;
 
@@ -29,6 +31,7 @@ public class moveBoy : MonoBehaviour
     public float jumpHeight = 4;
 
     private Vector2 velocity;
+    private Vector2 moveInput;
     private Vector2 boxTowardPlayer;
 
     public groundCheck gcScript;
@@ -48,7 +51,7 @@ public class moveBoy : MonoBehaviour
     public float wallKickForce;
     public float recallSpeed;
     public float grabDistance;
-    public float moveInput, moveInputY;
+    public float moveInputX, moveInputY;
     public float wallSlideModifier;
 
     public throwScript throwS;
@@ -89,6 +92,10 @@ public class moveBoy : MonoBehaviour
 
     void Awake()
     {
+        controls = new PlayerControls();
+        controls.Gameplay.Movement.performed += ctx => moveInput =ctx.ReadValue<Vector2>();
+        controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
+        
         boxCol = theBox.GetComponent<Collider>();
         movingHash = Animator.StringToHash("Moving");
         jumpHash = Animator.StringToHash("Jump");
@@ -96,6 +103,22 @@ public class moveBoy : MonoBehaviour
         groundedHash = Animator.StringToHash("Grounded");
         throwHash = Animator.StringToHash("Throw");
     }
+
+    private void MovementInput()
+    {
+        
+    }
+
+    void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
+    
     void Start()
     {
         maxSpeed = speed;
@@ -115,8 +138,9 @@ public class moveBoy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveInput = Input.GetAxisRaw("Horizontal");
-        moveInputY = Input.GetAxisRaw("Vertical");
+        moveInputX = moveInput.x;
+       // print(moveInput);
+        moveInputY = moveInput.y;
         DirectionCheck();
         if(inControl){
         if (gcScript.grounded == true)
@@ -287,7 +311,7 @@ public class moveBoy : MonoBehaviour
                 StartCoroutine(LeftJump());
             }
 
-            if (moveInput >= 0.1f && rb.velocity.y < 0)
+            if (moveInputX >= 0.1f && rb.velocity.y < 0)
             {
                 //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
                 rb.useGravity = false;
@@ -309,7 +333,7 @@ public class moveBoy : MonoBehaviour
             }
 
             //rb.useGravity = false;
-            if (moveInput <= -0.1f && rb.velocity.y < 0)
+            if (moveInputX <= -0.1f && rb.velocity.y < 0)
             {
                 rb.useGravity = false;
                 //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
@@ -326,9 +350,9 @@ public class moveBoy : MonoBehaviour
 
     private void GroundMovement()
     {
-        if (moveInput != 0)
+        if (moveInputX != 0)
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, walkAcceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
             anim.SetBool(movingHash,true);
         }
         else
@@ -340,9 +364,9 @@ public class moveBoy : MonoBehaviour
 
     private void AirMovement()
     {
-        if (moveInput != 0)
+        if (moveInputX != 0)
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, airAcceleration * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, airAcceleration * Time.deltaTime);
         }
         else
         {
@@ -415,12 +439,12 @@ public class moveBoy : MonoBehaviour
     public void DirectionCheck()
     {
         
-        if (moveInput < 0&&!grabbingLedge&&!curMov.aiming&&inControl)
+        if (moveInputX < 0&&!grabbingLedge&&!curMov.aiming&&inControl)
         {
             facingLeft = true;
             
         }
-        if(moveInput>0&&!grabbingLedge&&!curMov.aiming&&inControl)
+        if(moveInputX>0&&!grabbingLedge&&!curMov.aiming&&inControl)
         {
             facingLeft = false;
         }        
