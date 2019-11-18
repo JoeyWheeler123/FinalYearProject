@@ -48,7 +48,7 @@ public class moveBoy : MonoBehaviour
     public float wallKickForce;
     public float recallSpeed;
     public float grabDistance;
-    public float moveInput;
+    public float moveInput, moveInputY;
     public float wallSlideModifier;
 
     public throwScript throwS;
@@ -116,6 +116,7 @@ public class moveBoy : MonoBehaviour
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+        moveInputY = Input.GetAxisRaw("Vertical");
         DirectionCheck();
         if(inControl){
         if (gcScript.grounded == true)
@@ -164,8 +165,12 @@ public class moveBoy : MonoBehaviour
             //inControl = true;
             rb.useGravity = true;
             rb.isKinematic = false;
-            StartCoroutine(Dismantle());
-            
+            if (grabbingLedge)
+            {
+                
+                StartCoroutine(Dismantle());
+            }
+
         }
         if (Input.GetButtonUp("Fire1"))
         {
@@ -218,11 +223,17 @@ public class moveBoy : MonoBehaviour
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
             rb.MovePosition(pos);
-            if (Input.GetKeyDown(KeyCode.W))
+            if (moveInputY>0)
             {
                 StartCoroutine(Mantle(mantlePos));
             }
-            
+
+            if (moveInputY < 0)
+            {
+                print("dismantle");
+                rb.isKinematic = false;
+                StartCoroutine(Dismantle());
+            }
         }
 
 
