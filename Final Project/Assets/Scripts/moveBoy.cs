@@ -61,7 +61,7 @@ public class moveBoy : MonoBehaviour
     private Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling, canJump, hasBox;
+    private bool recalling, canJump, hasBox, dismantling;
     public bool facingLeft;
 
     public float coyoteTime;
@@ -83,6 +83,8 @@ public class moveBoy : MonoBehaviour
     private Collider boxCol;
 
     public bool autoPickup;
+
+    public float ledgeGrabGraceTime;
     // Start is called before the first frame update
 
     void Awake()
@@ -162,7 +164,8 @@ public class moveBoy : MonoBehaviour
             //inControl = true;
             rb.useGravity = true;
             rb.isKinematic = false;
-            grabbingLedge = false;
+            StartCoroutine(Dismantle());
+            
         }
         if (Input.GetButtonUp("Fire1"))
         {
@@ -207,11 +210,11 @@ public class moveBoy : MonoBehaviour
                 BoxRecall();
             }
 
-            recalling = false;
+           // recalling = false;
         }
      
 
-        if (grabbingLedge)
+        if (grabbingLedge&&!dismantling)
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
             rb.MovePosition(pos);
@@ -227,7 +230,7 @@ public class moveBoy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl)
+        /*if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl)
         {
             int direction = 0;
             grabPos = other.gameObject.transform.position;
@@ -240,6 +243,7 @@ public class moveBoy : MonoBehaviour
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);
         }
+        */
 
         if (other.gameObject.CompareTag("killplane"))
         {
@@ -250,6 +254,20 @@ public class moveBoy : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge)
+        {
+            int direction = 0;
+            grabPos = other.gameObject.transform.position;
+            LedgeGrab(direction);     
+        }
+        
+        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge)
+        {
+            int direction = 1;
+            grabPos = other.gameObject.transform.position;
+            LedgeGrab(direction);
+        }
+        
         if (other.gameObject.CompareTag("leftwall"))
         {
 
@@ -518,5 +536,14 @@ public class moveBoy : MonoBehaviour
         
         yield return null;
     }
+
+   IEnumerator Dismantle()
+   {
+       dismantling = true;
+       yield return new WaitForSeconds(ledgeGrabGraceTime);
+       grabbingLedge = false;
+       dismantling = false;
+       yield return null;
+   }
 }
 

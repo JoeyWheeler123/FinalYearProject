@@ -21,6 +21,7 @@ public class cursorMovement : MonoBehaviour
 
     public float throwMarkerDistance;
     public GameObject rightBox, leftBox, projectedBox;
+    public Renderer boxRenderer;
 
     public bool aiming;
 
@@ -36,18 +37,20 @@ public class cursorMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        projectedPoint = new Vector3(point.x, point.y, 0);
+        closePoint = projectedPoint - player.position;
+        closePoint.Normalize();
+        closePoint *= throwMarkerDistance;
+        float boxCheck = closePoint.x;
+        // transform.position = new Vector3(point.x,point.y,0);
+        closePoint = player.position + closePoint;
+        projectedBox.transform.position = Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
         if (aiming&&!moveScript.thrown)
         {
-            projectedBox.SetActive(true);
-            projectedPoint = new Vector3(point.x, point.y, 0);
-            closePoint = projectedPoint - player.position;
-            closePoint.Normalize();
-            closePoint *= throwMarkerDistance;
-            float boxCheck = closePoint.x;
-            // transform.position = new Vector3(point.x,point.y,0);
-            closePoint = player.position + closePoint;
-            projectedBox.transform.position = Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 30f);
-
+           // projectedBox.SetActive(true);
+            boxRenderer.enabled = true;
+           
+            //projectedBox.transform.position = closePoint;
             if (boxCheck < 0)
             {
                 //leftBox.SetActive(true);
@@ -65,7 +68,8 @@ public class cursorMovement : MonoBehaviour
         {
            //leftBox.SetActive(false);
             //rightBox.SetActive(false);
-            projectedBox.SetActive(false);
+            //projectedBox.SetActive(false);
+            boxRenderer.enabled = false;
         }
 
     }
