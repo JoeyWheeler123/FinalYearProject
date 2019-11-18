@@ -17,9 +17,13 @@ public class magneticAttractor : MonoBehaviour
     public HingeJoint rb;
 
     public Rigidbody playerRb;
+
+    public moveBoy moveScript;
     // Start is called before the first frame update
     void Start()
     {
+        moveScript = FindObjectOfType<moveBoy>();
+        print(moveScript);
         rb = GetComponent<HingeJoint>();
     }
 
@@ -51,7 +55,7 @@ public class magneticAttractor : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            if (attracted != null)
+            if (attracted != null&&attractedRb!=null&&moveScript.thrown)
             {
                 attractedRb.isKinematic = false;
             }
@@ -78,6 +82,7 @@ public class magneticAttractor : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         attracted = null;
+        attractedRb = null;
     }
 
     public void ResetBox()

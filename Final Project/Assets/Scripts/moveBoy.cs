@@ -7,7 +7,7 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
-
+using UnityEngine.SceneManagement;
 public class moveBoy : MonoBehaviour
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
@@ -227,18 +227,24 @@ public class moveBoy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded)
+        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl)
         {
             int direction = 0;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);     
         }
         
-        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded)
+        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl)
         {
             int direction = 1;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);
+        }
+
+        if (other.gameObject.CompareTag("killplane"))
+        {
+            Scene scene = SceneManager.GetActiveScene(); 
+            SceneManager.LoadScene(scene.name);
         }
     }
     
