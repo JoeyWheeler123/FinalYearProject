@@ -448,6 +448,16 @@ public class moveBoy : MonoBehaviour
         
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("rightwall")||other.gameObject.CompareTag("leftwall"))
+        {
+            
+                rb.useGravity = true;
+            
+        }
+    }
+
     private void GroundMovement()
     {
         if (moveInputX != 0)
