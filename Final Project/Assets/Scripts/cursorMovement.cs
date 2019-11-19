@@ -30,7 +30,8 @@ public class cursorMovement : MonoBehaviour
     private bool controllerAim;
 
     private float boxCheck;
-    
+
+    public float lowestAimPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +46,12 @@ public class cursorMovement : MonoBehaviour
     {
         if (!controllerAim)
         {
-            projectedPoint = new Vector3(point.x, point.y, 0);
+            float inputY = point.y;
+            if (inputY < lowestAimPoint)
+            {
+                inputY = lowestAimPoint;
+            }
+            projectedPoint = new Vector3(point.x, inputY, 0);
 
 
 
@@ -60,8 +66,13 @@ public class cursorMovement : MonoBehaviour
 
         }
         else
+        {
+            float inputY = moveScript.aimInput.y;
+            if (inputY < lowestAimPoint)
             {
-                projectedPoint = new Vector3(moveScript.aimInput.x,moveScript.aimInput.y,0f);
+                inputY = lowestAimPoint;
+            }
+                projectedPoint = new Vector3(moveScript.aimInput.x,inputY,0f);
                 projectedPoint.Normalize();
                 projectedPoint *= throwMarkerDistance;
                 closePoint = player.position+projectedPoint;

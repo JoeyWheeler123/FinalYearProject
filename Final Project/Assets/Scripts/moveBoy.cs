@@ -93,7 +93,7 @@ public class moveBoy : MonoBehaviour
 
     private float jumpCall;
 
-    private bool pressedJump, pressedThrow;
+    private bool pressedJump, pressedThrow, onLeftWall, onRightWall;
     // Start is called before the first frame update
 
     void Awake()
@@ -405,7 +405,7 @@ public class moveBoy : MonoBehaviour
         if (other.gameObject.CompareTag("leftwall"))
         {
 
-            if (Input.GetButtonDown("Jump") && gcScript.grounded == false)
+            if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
             {
                 StartCoroutine(LeftJump());
             }
@@ -426,7 +426,7 @@ public class moveBoy : MonoBehaviour
 
         if (other.gameObject.CompareTag("rightwall"))
         {
-            if (Input.GetButtonDown("Jump") && gcScript.grounded == false)
+            if (controls.Gameplay.Jump.triggered&& gcScript.grounded == false)
             {
                 StartCoroutine(RightJump());
             }
