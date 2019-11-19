@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 public class moveBoy : MonoBehaviour
 {
-    private PlayerControls controls;
+    public PlayerControls controls;
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     public float speed = 9;
 
@@ -107,7 +107,7 @@ public class moveBoy : MonoBehaviour
         controls.Gameplay.Jump.performed += JumpingDebug;
         
         controls.Gameplay.Jump.canceled += ctx => JumpCancelled();
-        controls.Gameplay.Throw.performed += ctx => ThrowPressed();
+        controls.Gameplay.Throw.started += ctx => ThrowPressed();
         controls.Gameplay.Throw.canceled += ctx => ThrowReleased();
         controls.Gameplay.AimMouse.performed += ctx => AimMousePressed();
         controls.Gameplay.AimMouse.canceled += ctx => AimReleased();
@@ -165,6 +165,7 @@ public class moveBoy : MonoBehaviour
         if (curMov.aiming&&!thrown)
         {
             ThrowBox();
+            ThrowReleased();
         }
     }
 
