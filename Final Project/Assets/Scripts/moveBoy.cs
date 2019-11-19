@@ -93,7 +93,7 @@ public class moveBoy : MonoBehaviour
 
     private float jumpCall;
 
-    private bool pressedJump, pressedThrow, onLeftWall, onRightWall;
+  public bool pressedJump, pressedThrow, onLeftWall, onRightWall;
     // Start is called before the first frame update
 
     void Awake()
@@ -147,14 +147,14 @@ public class moveBoy : MonoBehaviour
                 
             StartCoroutine(Dismantle());
         }
-        Debug.Log("Jumping");
+        //Debug.Log("Jumping");
         pressedJump = true;
-        Debug.Log(jumpCall);
+        //Debug.Log(jumpCall);
     }
 
     private void JumpCancelled()
     {
-        Debug.Log("JumpCancelled");
+       // Debug.Log("JumpCancelled");
         pressedJump = false;
         
     }
