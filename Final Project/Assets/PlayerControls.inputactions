@@ -17,12 +17,12 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "85a5208c-8107-4321-a650-19f4c9fc3486",
-                    "expectedControlType": "",
-                    "processors": "",
+                    "expectedControlType": "Vector2",
+                    "processors": "StickDeadzone",
                     "interactions": ""
                 },
                 {
-                    "name": "Aim",
+                    "name": "AimMouse",
                     "type": "Button",
                     "id": "fbfa21f4-f30e-4644-938e-2d0823148685",
                     "expectedControlType": "",
@@ -35,6 +35,30 @@
                     "id": "093cc85a-086e-4016-b125-055ed934a7cc",
                     "expectedControlType": "",
                     "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Keyboard check",
+                    "type": "Button",
+                    "id": "8bb911dc-7d4b-43f9-9c4a-513b2cf63a05",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AimController",
+                    "type": "Button",
+                    "id": "d1e246f6-0ca1-4646-bcd6-ad6d02ed13bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RightStick",
+                    "type": "Value",
+                    "id": "6d76134c-80af-44ba-98c8-3b589a00e617",
+                    "expectedControlType": "Vector2",
+                    "processors": "StickDeadzone(min=0.25)",
                     "interactions": ""
                 }
             ],
@@ -134,18 +158,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "61ca368c-ac41-415a-9a11-7c8879e06d7b",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
+                    "action": "AimMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -168,6 +181,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c89841c6-3daa-4f4f-9ffa-d0a7dcf9f22d",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Keyboard check",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8af393d7-5137-4d28-9717-ff14c6d84389",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AimController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f67c5fa5-7943-4ab7-a900-a9d8d40a4510",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "RightStick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

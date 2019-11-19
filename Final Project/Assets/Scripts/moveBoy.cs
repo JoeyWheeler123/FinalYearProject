@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using UnityEditor.Build.Content;
+using UnityEditorInternal;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -32,6 +33,7 @@ public class moveBoy : MonoBehaviour
 
     private Vector2 velocity;
     private Vector2 moveInput;
+    public Vector2 aimInput;
     private Vector2 boxTowardPlayer;
 
     public groundCheck gcScript;
@@ -88,6 +90,10 @@ public class moveBoy : MonoBehaviour
     public bool autoPickup;
 
     public float ledgeGrabGraceTime;
+
+    private float jumpCall;
+
+    private bool pressedJump, pressedThrow;
     // Start is called before the first frame update
 
     void Awake()
@@ -95,18 +101,108 @@ public class moveBoy : MonoBehaviour
         controls = new PlayerControls();
         controls.Gameplay.Movement.performed += ctx => moveInput =ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
+        controls.Gameplay.RightStick.performed += ctx => aimInput =ctx.ReadValue<Vector2>();
+        //controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
+        controls.Gameplay.Jump.started += ctx => StartJumpDebug();
+        controls.Gameplay.Jump.performed += JumpingDebug;
         
+        controls.Gameplay.Jump.canceled += ctx => JumpCancelled();
+        controls.Gameplay.Throw.performed += ctx => ThrowPressed();
+        controls.Gameplay.Throw.canceled += ctx => ThrowReleased();
+        controls.Gameplay.AimMouse.performed += ctx => AimMousePressed();
+        controls.Gameplay.AimMouse.canceled += ctx => AimReleased();
+        controls.Gameplay.AimController.performed += ctx => AimControllerPressed();
+        controls.Gameplay.AimController.canceled += ctx => AimReleased();
         boxCol = theBox.GetComponent<Collider>();
         movingHash = Animator.StringToHash("Moving");
         jumpHash = Animator.StringToHash("Jump");
         recallHash = Animator.StringToHash("Recall");
         groundedHash = Animator.StringToHash("Grounded");
         throwHash = Animator.StringToHash("Throw");
+        curMov.aiming = false;
     }
 
-    private void MovementInput()
+    private void StartJumpDebug()
+    {
+        Debug.Log("Start jump");
+    }
+
+    private void JumpingDebug(InputAction.CallbackContext ctx)
+    {
+        if (timeLeftToJump>=0&&!gcScript.jumping)
+        {
+            Jumping();
+            gcScript.jumping = true;
+            timeLeftToJump = 0;
+            //jumping = true;
+            //jumpCoolDown = 0;
+            //print("jumpboy");
+        }
+
+        //inControl = true;
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        if (grabbingLedge)
+        {
+                
+            StartCoroutine(Dismantle());
+        }
+        Debug.Log("Jumping");
+        pressedJump = true;
+        Debug.Log(jumpCall);
+    }
+
+    private void JumpCancelled()
+    {
+        Debug.Log("JumpCancelled");
+        pressedJump = false;
+        
+    }
+
+    private void ThrowPressed()
+    {
+        pressedThrow = true;
+        if (curMov.aiming&&!thrown)
+        {
+            ThrowBox();
+        }
+    }
+
+    private void ThrowReleased()
+    {
+        if (thrown == false && boxPrep == true)
+        {
+            thrown = true;
+            boxPrep = false;
+        }
+        pressedThrow = false;
+    }
+
+    private void AimMousePressed()
     {
         
+           curMov.MouseAim();
+            if (!thrown)
+            {
+                curMov.aiming = true;
+                speed = aimWalkSpeed;
+            }
+        
+    }
+
+    private void AimControllerPressed()
+    {
+        curMov.ControllerAim();
+        if (!thrown)
+        {
+            curMov.aiming = true;
+            speed = aimWalkSpeed;
+        }
+    }
+    private void AimReleased()
+    {
+        curMov.aiming = false;
+        speed = maxSpeed; 
     }
 
     void OnEnable()
@@ -129,7 +225,7 @@ public class moveBoy : MonoBehaviour
         throwS = theBox.GetComponent<throwScript>();
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
-        curMov.aiming = true;
+        curMov.aiming = false;
         
         
         
@@ -171,12 +267,12 @@ public class moveBoy : MonoBehaviour
 
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, 0);
 
-       
+      
 
         if (Input.GetButtonDown("Jump"))
         {
-
-            if (timeLeftToJump>=0&&!gcScript.jumping)
+         
+            /*if (timeLeftToJump>=0&&!gcScript.jumping)
             {
                 Jumping();
                 gcScript.jumping = true;
@@ -194,20 +290,22 @@ public class moveBoy : MonoBehaviour
                 
                 StartCoroutine(Dismantle());
             }
+            */
 
         }
         if (Input.GetButtonUp("Fire1"))
         {
-            if (thrown == false && boxPrep == true)
+           /* if (thrown == false && boxPrep == true)
             {
                 thrown = true;
                 boxPrep = false;
             }
+            */
         }
 
       
 
-        if (Input.GetButton("Fire2"))
+        /*if (Input.GetButton("Fire2"))
         {
            
             if (!thrown)
@@ -231,8 +329,9 @@ public class moveBoy : MonoBehaviour
             curMov.aiming = false;
             speed = maxSpeed;
         }
+        */
         
-        if (Input.GetButton("Fire1"))
+        if (pressedThrow)
         {
             if (thrown&&!gcScript.onBox)
             {
@@ -247,12 +346,12 @@ public class moveBoy : MonoBehaviour
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
             rb.MovePosition(pos);
-            if (moveInputY>0)
+            if (moveInputY>0.7)
             {
                 StartCoroutine(Mantle(mantlePos));
             }
 
-            if (moveInputY < 0)
+            if (moveInputY < -0.7)
             {
                 print("dismantle");
                 rb.isKinematic = false;

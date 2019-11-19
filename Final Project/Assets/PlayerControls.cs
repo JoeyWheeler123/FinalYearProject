@@ -30,12 +30,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""85a5208c-8107-4321-a650-19f4c9fc3486"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""StickDeadzone"",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Aim"",
+                    ""name"": ""AimMouse"",
                     ""type"": ""Button"",
                     ""id"": ""fbfa21f4-f30e-4644-938e-2d0823148685"",
                     ""expectedControlType"": """",
@@ -48,6 +48,30 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""id"": ""093cc85a-086e-4016-b125-055ed934a7cc"",
                     ""expectedControlType"": """",
                     ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Keyboard check"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bb911dc-7d4b-43f9-9c4a-513b2cf63a05"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AimController"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1e246f6-0ca1-4646-bcd6-ad6d02ed13bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightStick"",
+                    ""type"": ""Value"",
+                    ""id"": ""6d76134c-80af-44ba-98c8-3b589a00e617"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""StickDeadzone(min=0.25)"",
                     ""interactions"": """"
                 }
             ],
@@ -147,18 +171,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""61ca368c-ac41-415a-9a11-7c8879e06d7b"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Aim"",
+                    ""action"": ""AimMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -181,6 +194,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c89841c6-3daa-4f4f-9ffa-d0a7dcf9f22d"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Keyboard check"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8af393d7-5137-4d28-9717-ff14c6d84389"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f67c5fa5-7943-4ab7-a900-a9d8d40a4510"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""RightStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -216,8 +262,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
-        m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_AimMouse = m_Gameplay.FindAction("AimMouse", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_Keyboardcheck = m_Gameplay.FindAction("Keyboard check", throwIfNotFound: true);
+        m_Gameplay_AimController = m_Gameplay.FindAction("AimController", throwIfNotFound: true);
+        m_Gameplay_RightStick = m_Gameplay.FindAction("RightStick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -269,16 +318,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Throw;
     private readonly InputAction m_Gameplay_Movement;
-    private readonly InputAction m_Gameplay_Aim;
+    private readonly InputAction m_Gameplay_AimMouse;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_Keyboardcheck;
+    private readonly InputAction m_Gameplay_AimController;
+    private readonly InputAction m_Gameplay_RightStick;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
-        public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputAction @AimMouse => m_Wrapper.m_Gameplay_AimMouse;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @Keyboardcheck => m_Wrapper.m_Gameplay_Keyboardcheck;
+        public InputAction @AimController => m_Wrapper.m_Gameplay_AimController;
+        public InputAction @RightStick => m_Wrapper.m_Gameplay_RightStick;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -294,12 +349,21 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Movement.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMovement;
-                @Aim.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
-                @Aim.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
-                @Aim.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAim;
+                @AimMouse.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimMouse;
+                @AimMouse.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimMouse;
+                @AimMouse.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimMouse;
                 @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
+                @Keyboardcheck.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnKeyboardcheck;
+                @Keyboardcheck.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnKeyboardcheck;
+                @Keyboardcheck.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnKeyboardcheck;
+                @AimController.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimController;
+                @AimController.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimController;
+                @AimController.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAimController;
+                @RightStick.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightStick;
+                @RightStick.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightStick;
+                @RightStick.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightStick;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -310,12 +374,21 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @Aim.started += instance.OnAim;
-                @Aim.performed += instance.OnAim;
-                @Aim.canceled += instance.OnAim;
+                @AimMouse.started += instance.OnAimMouse;
+                @AimMouse.performed += instance.OnAimMouse;
+                @AimMouse.canceled += instance.OnAimMouse;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Keyboardcheck.started += instance.OnKeyboardcheck;
+                @Keyboardcheck.performed += instance.OnKeyboardcheck;
+                @Keyboardcheck.canceled += instance.OnKeyboardcheck;
+                @AimController.started += instance.OnAimController;
+                @AimController.performed += instance.OnAimController;
+                @AimController.canceled += instance.OnAimController;
+                @RightStick.started += instance.OnRightStick;
+                @RightStick.performed += instance.OnRightStick;
+                @RightStick.canceled += instance.OnRightStick;
             }
         }
     }
@@ -342,7 +415,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnThrow(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
+        void OnAimMouse(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnKeyboardcheck(InputAction.CallbackContext context);
+        void OnAimController(InputAction.CallbackContext context);
+        void OnRightStick(InputAction.CallbackContext context);
     }
 }

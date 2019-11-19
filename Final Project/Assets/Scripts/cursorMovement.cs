@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
-
+using UnityEngine.InputSystem;
 public class cursorMovement : MonoBehaviour
 
 
@@ -26,25 +26,53 @@ public class cursorMovement : MonoBehaviour
     public bool aiming;
 
     public moveBoy moveScript;
+
+    private bool controllerAim;
+
+    private float boxCheck;
+    
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         moveScript = GetComponent<moveBoy>();
+        aiming = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        projectedPoint = new Vector3(point.x, point.y, 0);
-        closePoint = projectedPoint - player.position;
-        closePoint.Normalize();
-        closePoint *= throwMarkerDistance;
-        float boxCheck = closePoint.x;
-        // transform.position = new Vector3(point.x,point.y,0);
-        closePoint = player.position + closePoint;
-        projectedBox.transform.position = Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
+        if (!controllerAim)
+        {
+            projectedPoint = new Vector3(point.x, point.y, 0);
+
+
+
+            closePoint = projectedPoint - player.position;
+            closePoint.Normalize();
+            closePoint *= throwMarkerDistance;
+            boxCheck = closePoint.x;
+            // transform.position = new Vector3(point.x,point.y,0);
+            closePoint = player.position + closePoint;
+            projectedBox.transform.position =
+                Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
+
+        }
+        else
+            {
+                projectedPoint = new Vector3(moveScript.aimInput.x,moveScript.aimInput.y,0f);
+                projectedPoint.Normalize();
+                projectedPoint *= throwMarkerDistance;
+                closePoint = player.position+projectedPoint;
+                
+               
+                boxCheck = moveScript.aimInput.x;
+                //closePoint = player.position + closePoint;
+                projectedBox.transform.position =
+                    Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
+            }
+
         if (aiming&&!moveScript.thrown)
         {
            // projectedBox.SetActive(true);
@@ -73,7 +101,16 @@ public class cursorMovement : MonoBehaviour
         }
 
     }
-    
+
+    public void ControllerAim()
+    {
+        controllerAim = true;
+    }
+
+    public void MouseAim()
+    {
+        controllerAim = false;
+    }
     void OnGUI()
     {
         
