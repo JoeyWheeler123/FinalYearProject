@@ -140,12 +140,22 @@ public class moveBoy : MonoBehaviour
         }
 
         //inControl = true;
-        rb.useGravity = true;
-        rb.isKinematic = false;
+        //rb.useGravity = true;
+        //rb.isKinematic = false;
         if (grabbingLedge)
         {
                 
-            StartCoroutine(Dismantle());
+           // StartCoroutine(Dismantle());
+        }
+
+        if (onRightWall&&!gcScript.grounded)
+        {
+            StartCoroutine(RightJump());
+        }
+
+        if (onLeftWall&&!gcScript.grounded)
+        {
+            StartCoroutine(LeftJump());
         }
         //Debug.Log("Jumping");
         pressedJump = true;
@@ -233,7 +243,8 @@ public class moveBoy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    
     {
         moveInputX = moveInput.x;
        // print(moveInput);
@@ -358,7 +369,7 @@ public class moveBoy : MonoBehaviour
             }
             
             rb.MovePosition(pos);
-            if (moveInputY>0.7&&withinRange)
+            if (controls.Gameplay.Jump.triggered&&withinRange)
             {
                 
                 StartCoroutine(Mantle(mantlePos));
@@ -398,6 +409,18 @@ public class moveBoy : MonoBehaviour
             Scene scene = SceneManager.GetActiveScene(); 
             SceneManager.LoadScene(scene.name);
         }
+        
+        if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
+        {
+            onLeftWall = true;
+         
+        }
+
+        if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling)
+        {
+            onRightWall = true;
+           
+        }
     }
     
     private void OnTriggerStay(Collider other)
@@ -416,13 +439,14 @@ public class moveBoy : MonoBehaviour
             LedgeGrab(direction);
         }
         
-        if (other.gameObject.CompareTag("leftwall"))
+        if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
         {
-
-            if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
+            onLeftWall = true;
+            /*if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
             {
                 StartCoroutine(LeftJump());
             }
+            */
 
             if (moveInputX >= 0.1f && rb.velocity.y < 0)
             {
@@ -438,12 +462,14 @@ public class moveBoy : MonoBehaviour
             //rb.AddForce(Physics.gravity *-0.5f);
         }
 
-        if (other.gameObject.CompareTag("rightwall"))
+        if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling)
         {
-            if (controls.Gameplay.Jump.triggered&& gcScript.grounded == false)
+            onRightWall = true;
+            /*if (controls.Gameplay.Jump.triggered&& gcScript.grounded == false)
             {
                 StartCoroutine(RightJump());
             }
+            */
 
             //rb.useGravity = false;
             if (moveInputX <= -0.1f && rb.velocity.y < 0)
@@ -463,10 +489,16 @@ public class moveBoy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("rightwall")||other.gameObject.CompareTag("leftwall"))
+        if (other.gameObject.CompareTag("rightwall"))
         {
-            
+            onRightWall = false;
                 rb.useGravity = true;
+            
+        }
+        if (other.gameObject.CompareTag("leftwall"))
+        {
+            onLeftWall = false;
+            rb.useGravity = true;
             
         }
     }
