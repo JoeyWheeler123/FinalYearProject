@@ -346,15 +346,28 @@ public class moveBoy : MonoBehaviour
         if (grabbingLedge&&!dismantling)
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
-            rb.MovePosition(pos);
-            if (moveInputY>0.7)
+            float ledgeDistance = Vector3.Distance(transform.position, grabPos);
+            bool withinRange;
+            if (ledgeDistance <= 0.1f)
             {
+                withinRange = true;
+            }
+            else
+            {
+                withinRange = false;
+            }
+            
+            rb.MovePosition(pos);
+            if (moveInputY>0.7&&withinRange)
+            {
+                
                 StartCoroutine(Mantle(mantlePos));
             }
 
             if (moveInputY < -0.7)
             {
-                print("dismantle");
+                
+               // print("dismantle");
                 rb.isKinematic = false;
                 StartCoroutine(Dismantle());
             }
@@ -652,15 +665,15 @@ public class moveBoy : MonoBehaviour
         
             //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
             inControl = false;
-            print(inControl);
+            //print(inControl);
             velocity.x = -wallKickForce;
             rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             facingLeft = true;
            
             yield return new WaitForSeconds(0.3f);
-            print(inControl);
+           // print(inControl);
             inControl = true;
-            print(inControl);
+           // print(inControl);
         
         yield return null;
     }
@@ -669,15 +682,15 @@ public class moveBoy : MonoBehaviour
     {
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         inControl = false;
-        print(inControl);
+        //print(inControl);
         velocity.x = wallKickForce;
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
         facingLeft = false;
            
         yield return new WaitForSeconds(0.3f);
-        print(inControl);
+       // print(inControl);
         inControl = true;
-        print(inControl);
+        //print(inControl);
         
         yield return null;
     }
