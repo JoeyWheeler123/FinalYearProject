@@ -99,6 +99,20 @@ public void Throw()
 
     }
 
+public void DropBox()
+{
+    rb.isKinematic = false;
+    if (moveScript.facingLeft)
+    {
+        transform.position = spawnPointLeft.position;
+    }
+    else
+    {
+        transform.position = spawnPointRight.position;
+      
+    }
+    transform.parent = null;
+}
 private void OnTriggerStay(Collider other)
 {
     if (other.gameObject.CompareTag("boxgrabber"))

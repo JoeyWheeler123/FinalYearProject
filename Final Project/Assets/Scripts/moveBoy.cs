@@ -177,6 +177,13 @@ public class moveBoy : MonoBehaviour
             ThrowBox();
             ThrowReleased();
         }
+
+        if (!curMov.aiming && !thrown)
+        {
+            throwS.DropBox();
+            ThrowReleased();
+            thrown = true;
+        }
     }
 
     private void ThrowReleased()
@@ -564,7 +571,7 @@ public class moveBoy : MonoBehaviour
     {
         anim.SetTrigger(throwHash);
         boxPrep = true;
-        theBox.SetActive(true);
+       // theBox.SetActive(true);
         throwS.Throw();
         curMov.aiming = false;
     }
