@@ -94,10 +94,15 @@ public class moveBoy : MonoBehaviour
     private float jumpCall;
 
   public bool pressedJump, pressedThrow, onLeftWall, onRightWall;
+
+  private Collider theBoxCollider;
+
+  private float boxFrictionInitial;
     // Start is called before the first frame update
 
     void Awake()
     {
+        
         controls = new PlayerControls();
         controls.Gameplay.Movement.performed += ctx => moveInput =ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
@@ -120,11 +125,13 @@ public class moveBoy : MonoBehaviour
         groundedHash = Animator.StringToHash("Grounded");
         throwHash = Animator.StringToHash("Throw");
         curMov.aiming = false;
+        theBoxCollider = theBox.GetComponent<Collider>();
+        boxFrictionInitial = theBoxCollider.material.dynamicFriction;
     }
 
     private void StartJumpDebug()
     {
-        Debug.Log("Start jump");
+        //Debug.Log("Start jump");
     }
 
     private void JumpingDebug(InputAction.CallbackContext ctx)
@@ -262,6 +269,8 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
+
+        //print(recalling);
         if (aimInput.magnitude >= 0.3f)
         {
             curMov.ControllerAim();
@@ -382,11 +391,31 @@ public class moveBoy : MonoBehaviour
             {
                 BoxRecall();
             }
-
+            else
+            {
+                recalling = false;
+            }
            // recalling = false;
         }
-     
 
+        else
+        {
+            recalling = false;
+        }
+
+        if (recalling)
+        {
+            if (theBoxCollider.material.dynamicFriction > 0f)
+            {
+                theBoxCollider.material.dynamicFriction -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            theBoxCollider.material.dynamicFriction = boxFrictionInitial;
+        }
+        
+        print(theBoxCollider.material.dynamicFriction);
         if (grabbingLedge&&!dismantling)
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
@@ -622,7 +651,13 @@ public class moveBoy : MonoBehaviour
         }
     }
 
-   
+    public void BoxFriction()
+    {
+        if (recalling)
+        {
+            
+        }
+    }
 
     public void DirectionCheck()
     {
