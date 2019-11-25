@@ -699,6 +699,7 @@ public class moveBoy : MonoBehaviour
         float transformY = transform.position.y;
         float timeSpent = 0;
         grabbingLedge = false;
+        mantling = true;
         //rb.isKinematic = false;
         while(timeSpent<=0.5f)
         {
@@ -711,6 +712,7 @@ public class moveBoy : MonoBehaviour
 
         while (timeSpent <= 0.7f)
         {
+            
             if (mantlePosition == 0) //mantleposition 0 means player is on the left side of the ledge
             {
                 rb.MovePosition(transform.position + (Vector3.right * Time.deltaTime * 5f));
