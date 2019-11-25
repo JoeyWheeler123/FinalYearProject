@@ -16,6 +16,7 @@ public class moveBoy : MonoBehaviour
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     public float speed = 9;
 
+    public float maxAirborneSpeed;
     private float maxSpeed;
     [SerializeField, Tooltip("Acceleration while grounded.")]
     float walkAcceleration = 75;
@@ -270,8 +271,14 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
-
-        print(heavy);
+        if (rb.velocity.magnitude > maxAirborneSpeed)
+        {
+            Vector3 playerMov = rb.velocity;
+            playerMov.Normalize();
+            rb.velocity = playerMov * maxAirborneSpeed;
+            print("tOO FAST");
+        }
+        //print(heavy);
         if (aimInput.magnitude >= 0.3f)
         {
             curMov.ControllerAim();
@@ -406,7 +413,7 @@ public class moveBoy : MonoBehaviour
 
         if (recalling)
         {
-            if (theBoxCollider.material.dynamicFriction > 0f)
+            if (theBoxCollider.material.dynamicFriction > 0.1f)
             {
                 theBoxCollider.material.dynamicFriction -= Time.deltaTime;
             }
@@ -416,7 +423,7 @@ public class moveBoy : MonoBehaviour
             theBoxCollider.material.dynamicFriction = boxFrictionInitial;
         }
         
-        print(theBoxCollider.material.dynamicFriction);
+        //print(theBoxCollider.material.dynamicFriction);
         if (grabbingLedge&&!dismantling)
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
