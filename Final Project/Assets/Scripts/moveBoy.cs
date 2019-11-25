@@ -271,13 +271,7 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
-        if (rb.velocity.magnitude > maxAirborneSpeed)
-        {
-            Vector3 playerMov = rb.velocity;
-            playerMov.Normalize();
-            rb.velocity = playerMov * maxAirborneSpeed;
-            print("tOO FAST");
-        }
+       
         //print(heavy);
         if (aimInput.magnitude >= 0.3f)
         {
@@ -592,6 +586,13 @@ public class moveBoy : MonoBehaviour
         if (recalling && heavyPull)
         {
             velocity.x = rb.velocity.x;
+            if (rb.velocity.magnitude > maxAirborneSpeed)
+            {
+                Vector3 playerMov = rb.velocity;
+                playerMov.Normalize();
+                rb.velocity = playerMov * maxAirborneSpeed;
+                print("tOO FAST");
+            }
             
         }
        else if (moveInputX != 0)
