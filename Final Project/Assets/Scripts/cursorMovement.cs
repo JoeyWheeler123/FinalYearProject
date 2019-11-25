@@ -27,7 +27,7 @@ public class cursorMovement : MonoBehaviour
 
     public moveBoy moveScript;
 
-    private bool controllerAim;
+    public bool controllerAim;
 
     private float boxCheck;
 

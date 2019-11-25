@@ -193,6 +193,8 @@ public class moveBoy : MonoBehaviour
             thrown = true;
             boxPrep = false;
         }
+        
+        
         pressedThrow = false;
     }
 
@@ -219,8 +221,15 @@ public class moveBoy : MonoBehaviour
     }
     private void AimReleased()
     {
+        if (curMov.aiming&&!thrown)
+        {
+            ThrowBox();
+            ThrowReleased();
+        }
         curMov.aiming = false;
         speed = maxSpeed; 
+        //release to throw box code below
+       
     }
 
     void OnEnable()
@@ -251,8 +260,25 @@ public class moveBoy : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    
+
     {
+        if (aimInput.magnitude >= 0.3f)
+        {
+            curMov.ControllerAim();
+            if (!thrown)
+            {
+                curMov.aiming = true;
+                speed = aimWalkSpeed;
+            }
+        }
+
+        else if(aimInput.magnitude <=0.3f &&curMov.controllerAim)
+        {
+            {
+               curMov.aiming = false;
+               speed = maxSpeed; 
+            }
+        }
         moveInputX = moveInput.x;
        // print(moveInput);
         moveInputY = moveInput.y;
