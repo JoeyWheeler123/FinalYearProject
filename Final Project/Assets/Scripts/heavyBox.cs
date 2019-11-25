@@ -25,10 +25,14 @@ public class heavyBox : MonoBehaviour
 
     public bool heavyActive;
 
+    private moveBoy moveScript;
 
+    private Rigidbody rBox;
     // Start is called before the first frame update
     void Start()
     {
+        moveScript = player.GetComponent<moveBoy>();
+        rBox = box.GetComponent<Rigidbody>();
         heavyActive = false;
 
         normalForce = player.GetComponent<moveBoy>().inverseRecallMultiplier;
@@ -47,18 +51,18 @@ public class heavyBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (heavyActive && !player.GetComponent<moveBoy>().thrown)
+        if (heavyActive && !moveScript.thrown)
         {
-            player.GetComponent<moveBoy>().speed = heavySpeed;
-            player.GetComponent<moveBoy>().jumpHeight = heavyJump;
-            player.GetComponent<moveBoy>().heavy = true;
+            moveScript.speed = heavySpeed;
+            moveScript.jumpHeight = heavyJump;
+            moveScript.heavy = true;
         }
 
-        if(heavyActive && player.GetComponent<moveBoy>().thrown)
+        if(heavyActive && moveScript.thrown)
         {
-            player.GetComponent<moveBoy>().speed = normalSpeed;
-            player.GetComponent<moveBoy>().jumpHeight = normalJump;
-            player.GetComponent<moveBoy>().heavy = false;
+            moveScript.speed = normalSpeed;
+            moveScript.jumpHeight = normalJump;
+            moveScript.heavy = false;
         }
 
         if (Input.GetKey(KeyCode.E))
@@ -69,7 +73,7 @@ public class heavyBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        if(coll.gameObject.tag == "Player")
+        if(coll.gameObject.CompareTag("Player"))
         {
             Debug.Log("HIT");
             Heavy();
@@ -94,10 +98,10 @@ public class heavyBox : MonoBehaviour
     public void Normal()
     {
         heavyActive = false;
-        player.GetComponent<moveBoy>().speed = normalSpeed;
-        player.GetComponent<moveBoy>().jumpHeight = normalJump;
-        player.GetComponent<moveBoy>().inverseRecallMultiplier = normalForce;
-        player.GetComponent<moveBoy>().heavy = false;
-        box.GetComponent<Rigidbody>().mass = boxMass;
+        moveScript.speed = normalSpeed;
+        moveScript.jumpHeight = normalJump;
+        moveScript.inverseRecallMultiplier = normalForce;
+        moveScript.heavy = false;
+        rBox.mass = boxMass;
     }
 }

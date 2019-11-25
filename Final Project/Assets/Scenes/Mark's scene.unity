@@ -2278,6 +2278,16 @@ PrefabInstance:
       propertyPath: box
       value: 
       objectReference: {fileID: 937212133}
+    - target: {fileID: 2277070793679346644, guid: 375489827f5fb4ff3803fa53d5e4ad9e,
+        type: 3}
+      propertyPath: inverseForce
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277070793679346644, guid: 375489827f5fb4ff3803fa53d5e4ad9e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 375489827f5fb4ff3803fa53d5e4ad9e, type: 3}
 --- !u!1 &735667164
@@ -4058,6 +4068,7 @@ MonoBehaviour:
   boxRenderer: {fileID: 0}
   aiming: 0
   moveScript: {fileID: 0}
+  controllerAim: 0
   lowestAimPoint: 0
 --- !u!114 &1408043674
 MonoBehaviour:
@@ -6033,5 +6044,21 @@ PrefabInstance:
       propertyPath: cursorTransform
       value: 
       objectReference: {fileID: 1310603077}
+    - target: {fileID: 7961182329395594917, guid: 4fb133b42b0cf42e7b42c495c08f232f,
+        type: 3}
+      propertyPath: aimWalkSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961182329395594917, guid: 4fb133b42b0cf42e7b42c495c08f232f,
+        type: 3}
+      propertyPath: inverseRecallMultiplier
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961182327740468405, guid: 4fb133b42b0cf42e7b42c495c08f232f,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: eaa1be5ace3b07043afab6c506417ce1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fb133b42b0cf42e7b42c495c08f232f, type: 3}
