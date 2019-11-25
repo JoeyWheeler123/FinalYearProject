@@ -12,6 +12,8 @@ public class heavyBox : MonoBehaviour
 
     public float boxMass;
 
+    public float fat = 5f;
+
     private float normalSpeed; 
     public float heavySpeed = 6f;
 
@@ -60,6 +62,7 @@ public class heavyBox : MonoBehaviour
             player.GetComponent<moveBoy>().speed = normalSpeed;
             player.GetComponent<moveBoy>().jumpHeight = normalJump;
             player.GetComponent<moveBoy>().heavy = false;
+            box.GetComponent<Rigidbody>().mass = boxMass;
         }
     }
 
@@ -70,7 +73,8 @@ public class heavyBox : MonoBehaviour
             Debug.Log("HIT");
             heavyActive = true;
             player.GetComponent<moveBoy>().heavy = true;
-            boxMass = 5f;
+            //boxMass = 5f;
+            box.GetComponent<Rigidbody>().mass = fat;
         }
 
         /*if(coll.gameObject.tag == "Player" && Input.GetKey(KeyCode.E))
