@@ -46,7 +46,7 @@ public class moveBoy : MonoBehaviour
 
     //public magneticAttractor magScript;
     public cursorMovement curMov;
-    public bool thrown, boxPrep, heavy;
+    public bool thrown, boxPrep, heavy, heavyPull;
 
     public float recoveryTime;
 
@@ -98,6 +98,7 @@ public class moveBoy : MonoBehaviour
   private Collider theBoxCollider;
 
   private float boxFrictionInitial;
+  
     // Start is called before the first frame update
 
     void Awake()
@@ -270,7 +271,7 @@ public class moveBoy : MonoBehaviour
 
     {
 
-        //print(recalling);
+        print(heavy);
         if (aimInput.magnitude >= 0.3f)
         {
             curMov.ControllerAim();
@@ -487,14 +488,14 @@ public class moveBoy : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge)
+        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x>0f)
         {
             int direction = 0;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);     
         }
         
-        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge)
+        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x<0f)
         {
             int direction = 1;
             grabPos = other.gameObject.transform.position;
@@ -581,14 +582,23 @@ public class moveBoy : MonoBehaviour
 
     private void AirMovement()
     {
-        if (moveInputX != 0)
+        if (recalling && heavyPull)
         {
+            velocity.x = rb.velocity.x;
+            
+        }
+       else if (moveInputX != 0)
+        {
+           
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, airAcceleration * Time.deltaTime);
         }
-        else
+        else 
         {
+            
             velocity.x = Mathf.MoveTowards(velocity.x, 0, airDeceleration * Time.deltaTime);
         }
+        
+        
     }
     private void Jumping()
     {

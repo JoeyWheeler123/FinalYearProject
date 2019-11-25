@@ -56,6 +56,7 @@ public class heavyBox : MonoBehaviour
             moveScript.speed = heavySpeed;
             moveScript.jumpHeight = heavyJump;
             moveScript.heavy = true;
+           
         }
 
         if(heavyActive && moveScript.thrown)
@@ -63,6 +64,7 @@ public class heavyBox : MonoBehaviour
             moveScript.speed = normalSpeed;
             moveScript.jumpHeight = normalJump;
             moveScript.heavy = false;
+            
         }
 
         if (Input.GetKey(KeyCode.E))
@@ -89,6 +91,7 @@ public class heavyBox : MonoBehaviour
     public void Heavy()
     {
         heavyActive = true;
+        moveScript.heavyPull = true;
         player.GetComponent<moveBoy>().heavy = true;
         player.GetComponent<moveBoy>().inverseRecallMultiplier = inverseForce;
         //boxMass = 5f;
@@ -98,6 +101,7 @@ public class heavyBox : MonoBehaviour
     public void Normal()
     {
         heavyActive = false;
+        moveScript.heavyPull = true;
         moveScript.speed = normalSpeed;
         moveScript.jumpHeight = normalJump;
         moveScript.inverseRecallMultiplier = normalForce;
