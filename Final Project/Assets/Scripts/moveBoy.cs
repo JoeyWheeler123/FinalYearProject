@@ -64,7 +64,7 @@ public class moveBoy : MonoBehaviour
 
     private bool grabbingLedge;
 
-    private Vector3  grabPos;
+    public Vector3  grabPos;
     private int mantlePos;
 
     private bool recalling, canJump, hasBox, dismantling;
@@ -624,21 +624,24 @@ public class moveBoy : MonoBehaviour
 
    
     
-    private void LedgeGrab(int direction)
+    public void LedgeGrab(int direction)
     {
-        if (direction == 0)
+        if (!mantling && !gcScript.grounded && inControl && !grabbingLedge)
         {
-            facingLeft = false;
-        }
-        else if (direction == 1)
-        {
-            facingLeft = true;
-        }
+            if (direction == 0)
+            {
+                facingLeft = false;
+            }
+            else if (direction == 1)
+            {
+                facingLeft = true;
+            }
 
-        grabbingLedge = true;
-        
-        mantlePos = direction;
-        rb.isKinematic = true;
+            grabbingLedge = true;
+
+            mantlePos = direction;
+            rb.isKinematic = true;
+        }
     }
     public void ThrowBox()
     {
