@@ -33,6 +33,7 @@ public class ConveyorScript : MonoBehaviour
     {
         if (sending)
         {
+           // returning = false;
             transform.position = Vector3.MoveTowards(transform.position, endPos.position, Time.deltaTime * speed);
             if (Vector3.Distance(transform.position, endPos.position) < 0.1f)
             {
@@ -40,13 +41,15 @@ public class ConveyorScript : MonoBehaviour
                 if (autoReturn)
                 {
                     returning = true;
+                    sending = false;
                 }
-                sending = false;
+                
             }
         }
 
         if (returning)
         {
+            //sending = false;
             //print("returning");
             transform.position = Vector3.MoveTowards(transform.position, startPos, Time.deltaTime * speed);
             if (Vector3.Distance(transform.position, startPos) < 0.1f)
@@ -54,8 +57,9 @@ public class ConveyorScript : MonoBehaviour
                 if (moveOnStart)
                 {
                     sending = true;
+                    returning = false;
                 }
-                returning = false;
+                
                 
             }
         }
