@@ -96,4 +96,16 @@ public class ConveyorScript : MonoBehaviour
         sending = false;
         returning = true;
     }
+
+    public void Activate()
+    {
+        if (!sending)
+        {
+            Send();
+        }
+        else
+        {
+            Return();
+        }
+    }
 }

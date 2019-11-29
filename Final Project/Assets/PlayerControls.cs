@@ -73,6 +73,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": ""StickDeadzone(min=0.25)"",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d1798fd-92b4-422f-89df-b6161284be3c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -229,6 +237,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""RightStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f80dea2-d4bb-4d09-976a-e5470425e9d8"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a7a7f40-5374-4b06-9c5e-d9558dc18c07"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -267,6 +297,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Keyboardcheck = m_Gameplay.FindAction("Keyboard check", throwIfNotFound: true);
         m_Gameplay_AimController = m_Gameplay.FindAction("AimController", throwIfNotFound: true);
         m_Gameplay_RightStick = m_Gameplay.FindAction("RightStick", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -323,6 +354,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Keyboardcheck;
     private readonly InputAction m_Gameplay_AimController;
     private readonly InputAction m_Gameplay_RightStick;
+    private readonly InputAction m_Gameplay_Interact;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -334,6 +366,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Keyboardcheck => m_Wrapper.m_Gameplay_Keyboardcheck;
         public InputAction @AimController => m_Wrapper.m_Gameplay_AimController;
         public InputAction @RightStick => m_Wrapper.m_Gameplay_RightStick;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,6 +397,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RightStick.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightStick;
                 @RightStick.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightStick;
                 @RightStick.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRightStick;
+                @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -389,6 +425,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RightStick.started += instance.OnRightStick;
                 @RightStick.performed += instance.OnRightStick;
                 @RightStick.canceled += instance.OnRightStick;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -420,5 +459,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnKeyboardcheck(InputAction.CallbackContext context);
         void OnAimController(InputAction.CallbackContext context);
         void OnRightStick(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

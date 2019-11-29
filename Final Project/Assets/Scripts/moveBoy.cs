@@ -99,6 +99,7 @@ public class moveBoy : MonoBehaviour
   private Collider theBoxCollider;
 
   private float boxFrictionInitial;
+  private bool interactPressed;
   
     // Start is called before the first frame update
 
@@ -120,6 +121,7 @@ public class moveBoy : MonoBehaviour
         controls.Gameplay.AimMouse.canceled += ctx => AimReleased();
         controls.Gameplay.AimController.performed += ctx => AimControllerPressed();
         controls.Gameplay.AimController.canceled += ctx => AimReleased();
+        
         boxCol = theBox.GetComponent<Collider>();
         movingHash = Animator.StringToHash("Moving");
         jumpHash = Animator.StringToHash("Jump");
@@ -271,6 +273,22 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
+        if (controls.Gameplay.Interact.triggered)
+        {
+            interactPressed = true;
+          //  print("activated");
+            //other.SendMessage("Interact");
+        }
+        else
+        {
+            interactPressed = false;
+        }
+        
+        if (controls.Gameplay.Jump.triggered)
+        {
+           //print("Mantling");
+           // StartCoroutine(Mantle(mantlePos));
+        }
        
         //print(heavy);
         if (aimInput.magnitude >= 0.3f)
@@ -325,68 +343,10 @@ public class moveBoy : MonoBehaviour
 
       
 
-        if (Input.GetButtonDown("Jump"))
-        {
-         
-            /*if (timeLeftToJump>=0&&!gcScript.jumping)
-            {
-                Jumping();
-                gcScript.jumping = true;
-                timeLeftToJump = 0;
-                //jumping = true;
-                //jumpCoolDown = 0;
-                //print("jumpboy");
-            }
-
-            //inControl = true;
-            rb.useGravity = true;
-            rb.isKinematic = false;
-            if (grabbingLedge)
-            {
-                
-                StartCoroutine(Dismantle());
-            }
-            */
-
-        }
-        if (Input.GetButtonUp("Fire1"))
-        {
-           /* if (thrown == false && boxPrep == true)
-            {
-                thrown = true;
-                boxPrep = false;
-            }
-            */
-        }
-
+     
       
 
-        /*if (Input.GetButton("Fire2"))
-        {
-           
-            if (!thrown)
-            {
-                curMov.aiming = true;
-                speed = aimWalkSpeed;
-            }
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                if (thrown == false)
-                {
-                    ThrowBox();
-           
-                }
-           
-            }
-        }
-        else
-        {
-            curMov.aiming = false;
-            speed = maxSpeed;
-        }
-        */
-        
+      
         if (pressedThrow)
         {
             if (thrown&&!gcScript.onBox)
@@ -552,6 +512,8 @@ public class moveBoy : MonoBehaviour
                 rb.useGravity = true;
             }
         }
+
+       
 
         
     }
@@ -733,7 +695,7 @@ public class moveBoy : MonoBehaviour
             //rb.MovePosition(transform.position+(Vector3.up*Time.deltaTime*5f)); doesn't work on moving ledges, revert to this later if buggy for better code
             transform.position += Vector3.up * Time.deltaTime * 5f; //messier option but works on moving platform
             timeSpent += Time.deltaTime;
-            print("mantling");
+           // print("mantling");
             yield return null;
         }
 
