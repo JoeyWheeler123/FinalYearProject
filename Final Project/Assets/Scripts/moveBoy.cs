@@ -383,7 +383,7 @@ public class moveBoy : MonoBehaviour
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
             float ledgeDistance = Vector3.Distance(transform.position, grabPos);
             bool withinRange;
-            if (ledgeDistance <= 0.1f)
+            if (ledgeDistance <= 0.05f)
             {
                 withinRange = true;
             }
