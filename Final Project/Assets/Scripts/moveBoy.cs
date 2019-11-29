@@ -400,6 +400,7 @@ public class moveBoy : MonoBehaviour
 
             if (controls.Gameplay.Jump.triggered&&withinRange)
             {
+                transform.position = grabPos;
                 print("Mantling");
                 StartCoroutine(Mantle(mantlePos));
             }
