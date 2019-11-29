@@ -60,9 +60,9 @@ public class moveBoy : MonoBehaviour
     public throwScript throwS;
     private bool inControl;
 
-    private bool mantling;
+    public bool mantling;
 
-    private bool grabbingLedge;
+    public bool grabbingLedge;
 
     public Vector3  grabPos;
     private int mantlePos;
@@ -432,16 +432,21 @@ public class moveBoy : MonoBehaviour
                 withinRange = false;
             }
             
-            rb.MovePosition(pos);
+            //rb.MovePosition(pos);
+            if (!withinRange)
+            {
+                transform.position = pos;
+            }
+
             if (controls.Gameplay.Jump.triggered&&withinRange)
             {
-                
+                print("Mantling");
                 StartCoroutine(Mantle(mantlePos));
             }
 
             if (moveInputY < -0.7)
             {
-                
+                transform.parent = null;
                // print("dismantle");
                 rb.isKinematic = false;
                 StartCoroutine(Dismantle());
@@ -722,30 +727,35 @@ public class moveBoy : MonoBehaviour
         grabbingLedge = false;
         mantling = true;
         //rb.isKinematic = false;
-        while(timeSpent<=0.5f)
+        while(timeSpent<=0.35f)
         {
 
-            rb.MovePosition(transform.position+(Vector3.up*Time.deltaTime*5f));
+            //rb.MovePosition(transform.position+(Vector3.up*Time.deltaTime*5f)); doesn't work on moving ledges, revert to this later if buggy for better code
+            transform.position += Vector3.up * Time.deltaTime * 5f; //messier option but works on moving platform
             timeSpent += Time.deltaTime;
-            //print("mantling");
+            print("mantling");
             yield return null;
         }
 
-        while (timeSpent <= 0.7f)
+        while (timeSpent <= 0.6f)
         {
             
             if (mantlePosition == 0) //mantleposition 0 means player is on the left side of the ledge
             {
-                rb.MovePosition(transform.position + (Vector3.right * Time.deltaTime * 5f));
+                //rb.MovePosition(transform.position + (Vector3.right * Time.deltaTime * 5f));
+                transform.position += (Vector3.right * Time.deltaTime * 5f);
             }
 
             if (mantlePosition == 1) // player is on the right
             {
-                rb.MovePosition(transform.position + (Vector3.left * Time.deltaTime * 5f));
+               // rb.MovePosition(transform.position + (Vector3.left * Time.deltaTime * 5f));
+                transform.position += (Vector3.left * Time.deltaTime * 5f);
             }
             timeSpent += Time.deltaTime;
             yield return null;
         }
+
+        transform.parent = null;
         mantling = false;
         rb.isKinematic = false;
         yield return new WaitForSeconds(0.1f);
@@ -824,6 +834,7 @@ public class moveBoy : MonoBehaviour
        yield return new WaitForSeconds(ledgeGrabGraceTime);
        grabbingLedge = false;
        dismantling = false;
+       transform.parent = null;
        yield return null;
    }
 }

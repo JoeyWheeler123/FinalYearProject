@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class LedgeGrabRight : MonoBehaviour
 {
+    public bool elevator;
+    public Transform elevatorTransform;
+
+    private moveBoy moveScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -20,11 +24,19 @@ public class LedgeGrabRight : MonoBehaviour
     {
         if (other.gameObject.CompareTag("hands"))
         {
-            moveBoy moveScript = other.gameObject.GetComponentInParent<moveBoy>();
+            if (moveScript == null)
+            {
+                moveScript = other.gameObject.GetComponentInParent<moveBoy>();
+            }
+
             moveScript.grabPos = new Vector3(transform.position.x+1f,transform.position.y,transform.position.z);
             if (moveScript.moveInputX < -0.1f)
             {
                 moveScript.LedgeGrab(1);
+                if (elevator)
+                {
+                    moveScript.gameObject.transform.parent = transform;
+                }
             }
         }
     }
