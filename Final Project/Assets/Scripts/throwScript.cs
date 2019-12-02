@@ -13,7 +13,7 @@ public class throwScript : MonoBehaviour
     public GameObject rightBox, leftBox;
     public float maxVelocity;
     public moveBoy moveScript;
-
+    public Vector3 velocityLastFrame;
     public enum ThrowPoint
 
     {
@@ -32,15 +32,12 @@ public class throwScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 
 
     private void FixedUpdate()
     {
-
+        velocityLastFrame = rb.velocity;
         /*if (rb.velocity.x > maxVelocity)
         {
             tempX = maxVelocity;
