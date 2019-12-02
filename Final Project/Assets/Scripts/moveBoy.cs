@@ -16,6 +16,8 @@ public class moveBoy : MonoBehaviour
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     public float speed = 9;
 
+    private float boxPushSpeed;
+    public float boxPushMultiplier = 0.5f;
     public float maxAirborneSpeed;
     private float maxSpeed;
     [SerializeField, Tooltip("Acceleration while grounded.")]
@@ -216,7 +218,7 @@ public class moveBoy : MonoBehaviour
             if (!thrown)
             {
                 curMov.aiming = true;
-                speed = aimWalkSpeed;
+               // speed = aimWalkSpeed;
             }
         
     }
@@ -227,7 +229,7 @@ public class moveBoy : MonoBehaviour
         if (!thrown)
         {
             curMov.aiming = true;
-            speed = aimWalkSpeed;
+           // speed = aimWalkSpeed;
         }
     }
     private void AimReleased()
@@ -256,6 +258,7 @@ public class moveBoy : MonoBehaviour
     void Start()
     {
         maxSpeed = speed;
+        boxPushSpeed = speed * boxPushMultiplier;
         theBox.transform.parent = null;
         anim = GetComponent<Animator>();
         inControl = true;
@@ -535,6 +538,10 @@ public class moveBoy : MonoBehaviour
         }
     }
 
+ 
+
+  
+
     private void GroundMovement()
     {
         if (moveInputX != 0)
@@ -648,6 +655,15 @@ public class moveBoy : MonoBehaviour
         }
     }
 
+    public void PushSpeed()
+    {
+        speed = boxPushSpeed;
+    }
+
+    public void NormalSpeed()
+    {
+        speed = maxSpeed;
+    }
     public void DirectionCheck()
     {
         
@@ -729,7 +745,9 @@ public class moveBoy : MonoBehaviour
 
    IEnumerator CarryBox()
    {
+     
        thrown = false;
+       NormalSpeed();
         float timeSpent = 0;
         rbox.isKinematic = true;
         
