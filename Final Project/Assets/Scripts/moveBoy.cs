@@ -276,6 +276,7 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
+        print(rb.velocity.magnitude);
         if (controls.Gameplay.Interact.triggered)
         {
             interactPressed = true;
