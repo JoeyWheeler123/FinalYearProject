@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using UnityEditor.Build.Content;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -60,6 +61,7 @@ public class moveBoy : MonoBehaviour
     public float wallSlideModifier;
 
     public throwScript throwS;
+    public Rig rigScript;
     private bool inControl;
 
     public bool mantling;
@@ -80,7 +82,7 @@ public class moveBoy : MonoBehaviour
 
     public Animator anim;
 
-    private int movingHash, jumpHash, recallHash, groundedHash,throwHash;
+    private int movingHash, jumpHash, recallHash, groundedHash, throwHash, ledgeGrabHash, fallHash, slideHash;
 
     public GameObject playerModel;
     public GameObject boxSwingParent;
@@ -130,6 +132,9 @@ public class moveBoy : MonoBehaviour
         recallHash = Animator.StringToHash("Recall");
         groundedHash = Animator.StringToHash("Grounded");
         throwHash = Animator.StringToHash("Throw");
+        ledgeGrabHash = Animator.StringToHash("LedgeGrab");
+        fallHash = Animator.StringToHash("Fall");
+        slideHash = Animator.StringToHash("Sliding");
         curMov.aiming = false;
         theBoxCollider = theBox.GetComponent<Collider>();
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
@@ -194,6 +199,8 @@ public class moveBoy : MonoBehaviour
         if (!curMov.aiming && !thrown)
         {
             throwS.DropBox();
+            boxCol.enabled = true;
+            
             ThrowReleased();
             thrown = true;
         }
@@ -260,7 +267,7 @@ public class moveBoy : MonoBehaviour
         maxSpeed = speed;
         boxPushSpeed = speed * boxPushMultiplier;
         theBox.transform.parent = null;
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         inControl = true;
         heavy = false;
         throwS = theBox.GetComponent<throwScript>();
@@ -332,10 +339,12 @@ public class moveBoy : MonoBehaviour
 
         if (gcScript.grounded)
         {
+            anim.SetBool(groundedHash,true);
             timeLeftToJump = coyoteTime;
         }
         else
         {
+            anim.SetBool(groundedHash,false);
             timeLeftToJump -= Time.deltaTime;
         }
 
@@ -418,6 +427,15 @@ public class moveBoy : MonoBehaviour
             }
         }
 
+        /// check if the player has thrown the box for ik
+        if (!thrown)
+        {
+            rigScript.weight += Time.deltaTime * 5f;
+        }
+        else
+        {
+            rigScript.weight -= Time.deltaTime * 5f;
+        }
 
     }
 
@@ -464,6 +482,7 @@ public class moveBoy : MonoBehaviour
             int direction = 0;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);     
+            anim.SetTrigger(ledgeGrabHash);
         }
         
         if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x<0f)
@@ -471,11 +490,13 @@ public class moveBoy : MonoBehaviour
             int direction = 1;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);
+            anim.SetTrigger(ledgeGrabHash);
         }
         
         if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
         {
             onLeftWall = true;
+            
             /*if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
             {
                 StartCoroutine(LeftJump());
@@ -484,6 +505,8 @@ public class moveBoy : MonoBehaviour
 
             if (moveInputX >= 0.1f && rb.velocity.y < 0)
             {
+                anim.SetBool(slideHash,true);
+                
                 //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
                 rb.useGravity = false;
                 rb.velocity = new Vector3(0,-wallSlideModifier,0);
@@ -491,6 +514,7 @@ public class moveBoy : MonoBehaviour
             else
             {
                 rb.useGravity = true;
+                anim.SetBool(slideHash, false);
             }
 
             //rb.AddForce(Physics.gravity *-0.5f);
@@ -511,10 +535,13 @@ public class moveBoy : MonoBehaviour
                 rb.useGravity = false;
                 //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
                 rb.velocity = new Vector3(0,-wallSlideModifier,0);
+                anim.SetBool(slideHash,true);
+                
             }
             else
             {
                 rb.useGravity = true;
+                anim.SetBool(slideHash, false);
             }
         }
 
@@ -529,13 +556,15 @@ public class moveBoy : MonoBehaviour
         {
             onRightWall = false;
                 rb.useGravity = true;
+                anim.SetBool(slideHash,false);
             
         }
         if (other.gameObject.CompareTag("leftwall"))
         {
             onLeftWall = false;
             rb.useGravity = true;
-            
+            anim.SetBool(slideHash, false);
+
         }
     }
 
@@ -549,6 +578,7 @@ public class moveBoy : MonoBehaviour
         {
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
             anim.SetBool(movingHash,true);
+            //anim.SetBool("Moving",true);
         }
         else
         {
@@ -589,7 +619,7 @@ public class moveBoy : MonoBehaviour
         inControl = true;
         // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
-        anim.SetBool(jumpHash,true);
+        anim.SetTrigger(jumpHash);
         if (gcScript.onBox)
         {
             rbox.velocity =  new Vector3(0, -jumpHeight, 0);
@@ -612,7 +642,8 @@ public class moveBoy : MonoBehaviour
             {
                 facingLeft = true;
             }
-
+            anim.SetTrigger(ledgeGrabHash);
+            //anim.Play("Ledge Grab");
             grabbingLedge = true;
 
             mantlePos = direction;
@@ -622,6 +653,8 @@ public class moveBoy : MonoBehaviour
     public void ThrowBox()
     {
         anim.SetTrigger(throwHash);
+        
+        boxCol.enabled = true;
         boxPrep = true;
        // theBox.SetActive(true);
         throwS.Throw();
@@ -668,12 +701,12 @@ public class moveBoy : MonoBehaviour
     public void DirectionCheck()
     {
         
-        if (moveInputX < 0&&!grabbingLedge&&!curMov.aiming&&inControl)
+        if (moveInputX < 0&&!grabbingLedge&&!curMov.aiming&&inControl&&!mantling)
         {
             facingLeft = true;
             
         }
-        if(moveInputX>0&&!grabbingLedge&&!curMov.aiming&&inControl)
+        if(moveInputX>0&&!grabbingLedge&&!curMov.aiming&&inControl&&!mantling)
         {
             facingLeft = false;
         }        
@@ -706,7 +739,8 @@ public class moveBoy : MonoBehaviour
         float timeSpent = 0;
         grabbingLedge = false;
         mantling = true;
-        inControl = false;
+        anim.SetTrigger(fallHash);
+       // inControl = false;
         //rb.isKinematic = false;
         while(timeSpent<=0.35f)
         {
@@ -742,13 +776,13 @@ public class moveBoy : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //rb.AddForce(Vector3.right*20,ForceMode.Impulse);
         grabbingLedge = false;
-        inControl = true;
+        //inControl = true;
         yield return null;
     }
 
    IEnumerator CarryBox()
    {
-     
+       
        thrown = false;
        NormalSpeed();
         float timeSpent = 0;
@@ -771,7 +805,7 @@ public class moveBoy : MonoBehaviour
             yield return null;
         }
         
-        boxCol.enabled = true;
+        //boxCol.enabled = true;
 
         theBox.transform.rotation = boxSwingParent.transform.rotation;
         yield return null;
@@ -779,7 +813,7 @@ public class moveBoy : MonoBehaviour
 
     IEnumerator LeftJump()
     {
-        
+        anim.SetTrigger(jumpHash);
             //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
             inControl = false;
             //print(inControl);
@@ -797,6 +831,7 @@ public class moveBoy : MonoBehaviour
     
    IEnumerator RightJump()
     {
+        anim.SetTrigger(jumpHash);
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         inControl = false;
         //print(inControl);
@@ -814,6 +849,7 @@ public class moveBoy : MonoBehaviour
 
    IEnumerator Dismantle()
    {
+       anim.SetTrigger(fallHash);
        dismantling = true;
        yield return new WaitForSeconds(ledgeGrabGraceTime);
        grabbingLedge = false;
@@ -821,5 +857,7 @@ public class moveBoy : MonoBehaviour
        transform.parent = null;
        yield return null;
    }
+
+   
 }
 

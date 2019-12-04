@@ -47,11 +47,12 @@ public class cursorMovement : MonoBehaviour
         if (!controllerAim)
         {
             float inputY = point.y;
-            if (inputY < lowestAimPoint)
+            /*if (inputY < lowestAimPoint)
             {
                 inputY = lowestAimPoint;
             }
-            projectedPoint = new Vector3(point.x, inputY, 0);
+            */
+            projectedPoint = new Vector3(point.x, point.y, 0);
 
 
 

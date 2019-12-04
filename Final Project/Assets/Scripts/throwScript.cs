@@ -112,7 +112,7 @@ public class throwScript : MonoBehaviour
             transform.position = spawnPointRight.position;
 
         }
-
+       
         transform.parent = null;
     }
 

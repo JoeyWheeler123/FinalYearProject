@@ -10,6 +10,10 @@ public class heavyBox : MonoBehaviour
 
     public GameObject box;
 
+    private Color normalColor;
+
+    public Color heavyColor;
+
     public float boxMass;
 
     float normalForce;
@@ -28,9 +32,12 @@ public class heavyBox : MonoBehaviour
     private moveBoy moveScript;
 
     private Rigidbody rBox;
+
+    public static bool GlobalHeavyBoxCheck;
     // Start is called before the first frame update
     void Start()
     {
+        GlobalHeavyBoxCheck = false;
         moveScript = player.GetComponent<moveBoy>();
         rBox = box.GetComponent<Rigidbody>();
         heavyActive = false;
@@ -44,6 +51,8 @@ public class heavyBox : MonoBehaviour
         normalJump = player.GetComponent<moveBoy>().jumpHeight;
 
         boxMass = box.GetComponent<Rigidbody>().mass;
+
+        normalColor = box.GetComponent<MeshRenderer>().material.color;
         
         //moveScript = player.GetComponent<moveBoy>();
     }
@@ -90,16 +99,20 @@ public class heavyBox : MonoBehaviour
 
     public void Heavy()
     {
+        GlobalHeavyBoxCheck = true;
         heavyActive = true;
         moveScript.heavyPull = true;
         player.GetComponent<moveBoy>().heavy = true;
         player.GetComponent<moveBoy>().inverseRecallMultiplier = inverseForce;
         //boxMass = 5f;
         box.GetComponent<Rigidbody>().mass = fat;
+        //box.GetComponent<Material>().color = heavyColor;
+        box.GetComponent<MeshRenderer>().material.color = heavyColor;
     }
 
     public void Normal()
     {
+        GlobalHeavyBoxCheck = false;
         heavyActive = false;
         moveScript.heavyPull = true;
         moveScript.speed = normalSpeed;
@@ -107,5 +120,6 @@ public class heavyBox : MonoBehaviour
         moveScript.inverseRecallMultiplier = normalForce;
         moveScript.heavy = false;
         rBox.mass = boxMass;
+        box.GetComponent<MeshRenderer>().material.color = normalColor;
     }
 }

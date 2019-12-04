@@ -32,6 +32,7 @@ public class LedgeGrabLeft : MonoBehaviour
             if (moveScript.moveInputX > 0.1f)
             {
                 moveScript.LedgeGrab(0);
+                
                 if (elevator)
                 {
                     moveScript.gameObject.transform.parent = transform;

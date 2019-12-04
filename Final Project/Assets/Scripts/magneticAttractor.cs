@@ -19,10 +19,12 @@ public class magneticAttractor : MonoBehaviour
     public Rigidbody playerRb;
 
     public moveBoy moveScript;
+    
     // Start is called before the first frame update
     void Start()
     {
         moveScript = FindObjectOfType<moveBoy>();
+        
         print(moveScript);
         rb = GetComponent<HingeJoint>();
     }
@@ -58,9 +60,10 @@ public class magneticAttractor : MonoBehaviour
             if (attracted != null&&attractedRb!=null&&moveScript.thrown)
             {
                 attractedRb.isKinematic = false;
+                ResetBox();
             }
 
-            ResetBox();
+           
         }
         
         if(Input.GetKeyDown((KeyCode.G))&snapped)
