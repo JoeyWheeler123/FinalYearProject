@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using UnityEditor.Build.Content;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -60,6 +61,7 @@ public class moveBoy : MonoBehaviour
     public float wallSlideModifier;
 
     public throwScript throwS;
+    public Rig rigScript;
     private bool inControl;
 
     public bool mantling;
@@ -198,6 +200,7 @@ public class moveBoy : MonoBehaviour
         {
             throwS.DropBox();
             boxCol.enabled = true;
+            
             ThrowReleased();
             thrown = true;
         }
@@ -424,6 +427,15 @@ public class moveBoy : MonoBehaviour
             }
         }
 
+        /// check if the player has thrown the box for ik
+        if (!thrown)
+        {
+            rigScript.weight += Time.deltaTime * 5f;
+        }
+        else
+        {
+            rigScript.weight -= Time.deltaTime * 5f;
+        }
 
     }
 
@@ -641,6 +653,7 @@ public class moveBoy : MonoBehaviour
     public void ThrowBox()
     {
         anim.SetTrigger(throwHash);
+        
         boxCol.enabled = true;
         boxPrep = true;
        // theBox.SetActive(true);
@@ -769,7 +782,7 @@ public class moveBoy : MonoBehaviour
 
    IEnumerator CarryBox()
    {
-     
+       
        thrown = false;
        NormalSpeed();
         float timeSpent = 0;
@@ -844,5 +857,7 @@ public class moveBoy : MonoBehaviour
        transform.parent = null;
        yield return null;
    }
+
+   
 }
 
