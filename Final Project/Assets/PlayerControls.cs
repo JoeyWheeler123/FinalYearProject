@@ -229,17 +229,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8af393d7-5137-4d28-9717-ff14c6d84389"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AimController"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f67c5fa5-7943-4ab7-a900-a9d8d40a4510"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
