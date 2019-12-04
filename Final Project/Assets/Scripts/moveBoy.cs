@@ -80,7 +80,7 @@ public class moveBoy : MonoBehaviour
 
     public Animator anim;
 
-    private int movingHash, jumpHash, recallHash, groundedHash, throwHash, ledgeGrabHash;
+    private int movingHash, jumpHash, recallHash, groundedHash, throwHash, ledgeGrabHash, fallHash, slideHash;
 
     public GameObject playerModel;
     public GameObject boxSwingParent;
@@ -131,6 +131,8 @@ public class moveBoy : MonoBehaviour
         groundedHash = Animator.StringToHash("Grounded");
         throwHash = Animator.StringToHash("Throw");
         ledgeGrabHash = Animator.StringToHash("LedgeGrab");
+        fallHash = Animator.StringToHash("Fall");
+        slideHash = Animator.StringToHash("Sliding");
         curMov.aiming = false;
         theBoxCollider = theBox.GetComponent<Collider>();
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
@@ -481,6 +483,7 @@ public class moveBoy : MonoBehaviour
         if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
         {
             onLeftWall = true;
+            
             /*if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
             {
                 StartCoroutine(LeftJump());
@@ -489,6 +492,8 @@ public class moveBoy : MonoBehaviour
 
             if (moveInputX >= 0.1f && rb.velocity.y < 0)
             {
+                anim.SetBool(slideHash,true);
+                
                 //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
                 rb.useGravity = false;
                 rb.velocity = new Vector3(0,-wallSlideModifier,0);
@@ -496,6 +501,7 @@ public class moveBoy : MonoBehaviour
             else
             {
                 rb.useGravity = true;
+                anim.SetBool(slideHash, false);
             }
 
             //rb.AddForce(Physics.gravity *-0.5f);
@@ -516,10 +522,13 @@ public class moveBoy : MonoBehaviour
                 rb.useGravity = false;
                 //rb.AddForce(Physics.gravity * -wallSlideModifier, ForceMode.Acceleration);
                 rb.velocity = new Vector3(0,-wallSlideModifier,0);
+                anim.SetBool(slideHash,true);
+                
             }
             else
             {
                 rb.useGravity = true;
+                anim.SetBool(slideHash, false);
             }
         }
 
@@ -534,13 +543,15 @@ public class moveBoy : MonoBehaviour
         {
             onRightWall = false;
                 rb.useGravity = true;
+                anim.SetBool(slideHash,false);
             
         }
         if (other.gameObject.CompareTag("leftwall"))
         {
             onLeftWall = false;
             rb.useGravity = true;
-            
+            anim.SetBool(slideHash, false);
+
         }
     }
 
@@ -618,7 +629,8 @@ public class moveBoy : MonoBehaviour
             {
                 facingLeft = true;
             }
-
+            anim.SetTrigger(ledgeGrabHash);
+            //anim.Play("Ledge Grab");
             grabbingLedge = true;
 
             mantlePos = direction;
@@ -712,6 +724,7 @@ public class moveBoy : MonoBehaviour
         float timeSpent = 0;
         grabbingLedge = false;
         mantling = true;
+        anim.SetTrigger(fallHash);
        // inControl = false;
         //rb.isKinematic = false;
         while(timeSpent<=0.35f)
@@ -785,7 +798,7 @@ public class moveBoy : MonoBehaviour
 
     IEnumerator LeftJump()
     {
-        
+        anim.SetTrigger(jumpHash);
             //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
             inControl = false;
             //print(inControl);
@@ -803,6 +816,7 @@ public class moveBoy : MonoBehaviour
     
    IEnumerator RightJump()
     {
+        anim.SetTrigger(jumpHash);
         //rb.AddForce (Vector2.left * jumpHeight, ForceMode.Impulse);
         inControl = false;
         //print(inControl);
@@ -820,6 +834,7 @@ public class moveBoy : MonoBehaviour
 
    IEnumerator Dismantle()
    {
+       anim.SetTrigger(fallHash);
        dismantling = true;
        yield return new WaitForSeconds(ledgeGrabGraceTime);
        grabbingLedge = false;
