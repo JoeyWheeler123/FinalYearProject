@@ -80,7 +80,7 @@ public class moveBoy : MonoBehaviour
 
     public Animator anim;
 
-    private int movingHash, jumpHash, recallHash, groundedHash,throwHash;
+    private int movingHash, jumpHash, recallHash, groundedHash, throwHash, ledgeGrabHash;
 
     public GameObject playerModel;
     public GameObject boxSwingParent;
@@ -130,6 +130,7 @@ public class moveBoy : MonoBehaviour
         recallHash = Animator.StringToHash("Recall");
         groundedHash = Animator.StringToHash("Grounded");
         throwHash = Animator.StringToHash("Throw");
+        ledgeGrabHash = Animator.StringToHash("LedgeGrab");
         curMov.aiming = false;
         theBoxCollider = theBox.GetComponent<Collider>();
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
@@ -466,6 +467,7 @@ public class moveBoy : MonoBehaviour
             int direction = 0;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);     
+            anim.SetTrigger(ledgeGrabHash);
         }
         
         if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x<0f)
@@ -473,6 +475,7 @@ public class moveBoy : MonoBehaviour
             int direction = 1;
             grabPos = other.gameObject.transform.position;
             LedgeGrab(direction);
+            anim.SetTrigger(ledgeGrabHash);
         }
         
         if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
