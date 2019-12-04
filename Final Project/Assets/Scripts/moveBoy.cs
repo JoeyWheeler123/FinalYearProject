@@ -197,6 +197,7 @@ public class moveBoy : MonoBehaviour
         if (!curMov.aiming && !thrown)
         {
             throwS.DropBox();
+            boxCol.enabled = true;
             ThrowReleased();
             thrown = true;
         }
@@ -640,6 +641,7 @@ public class moveBoy : MonoBehaviour
     public void ThrowBox()
     {
         anim.SetTrigger(throwHash);
+        boxCol.enabled = true;
         boxPrep = true;
        // theBox.SetActive(true);
         throwS.Throw();
@@ -790,7 +792,7 @@ public class moveBoy : MonoBehaviour
             yield return null;
         }
         
-        boxCol.enabled = true;
+        //boxCol.enabled = true;
 
         theBox.transform.rotation = boxSwingParent.transform.rotation;
         yield return null;
