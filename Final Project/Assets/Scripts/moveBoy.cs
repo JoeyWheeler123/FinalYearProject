@@ -706,6 +706,7 @@ public class moveBoy : MonoBehaviour
         float timeSpent = 0;
         grabbingLedge = false;
         mantling = true;
+        inControl = false;
         //rb.isKinematic = false;
         while(timeSpent<=0.35f)
         {
@@ -741,6 +742,7 @@ public class moveBoy : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //rb.AddForce(Vector3.right*20,ForceMode.Impulse);
         grabbingLedge = false;
+        inControl = true;
         yield return null;
     }
 
