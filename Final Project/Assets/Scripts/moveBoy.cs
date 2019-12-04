@@ -668,12 +668,12 @@ public class moveBoy : MonoBehaviour
     public void DirectionCheck()
     {
         
-        if (moveInputX < 0&&!grabbingLedge&&!curMov.aiming&&inControl)
+        if (moveInputX < 0&&!grabbingLedge&&!curMov.aiming&&inControl&&!mantling)
         {
             facingLeft = true;
             
         }
-        if(moveInputX>0&&!grabbingLedge&&!curMov.aiming&&inControl)
+        if(moveInputX>0&&!grabbingLedge&&!curMov.aiming&&inControl&&!mantling)
         {
             facingLeft = false;
         }        
@@ -706,7 +706,7 @@ public class moveBoy : MonoBehaviour
         float timeSpent = 0;
         grabbingLedge = false;
         mantling = true;
-        inControl = false;
+       // inControl = false;
         //rb.isKinematic = false;
         while(timeSpent<=0.35f)
         {
@@ -742,7 +742,7 @@ public class moveBoy : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //rb.AddForce(Vector3.right*20,ForceMode.Impulse);
         grabbingLedge = false;
-        inControl = true;
+        //inControl = true;
         yield return null;
     }
 

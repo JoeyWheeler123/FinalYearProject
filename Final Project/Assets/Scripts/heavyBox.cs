@@ -32,9 +32,12 @@ public class heavyBox : MonoBehaviour
     private moveBoy moveScript;
 
     private Rigidbody rBox;
+
+    public static bool GlobalHeavyBoxCheck;
     // Start is called before the first frame update
     void Start()
     {
+        GlobalHeavyBoxCheck = false;
         moveScript = player.GetComponent<moveBoy>();
         rBox = box.GetComponent<Rigidbody>();
         heavyActive = false;
@@ -96,6 +99,7 @@ public class heavyBox : MonoBehaviour
 
     public void Heavy()
     {
+        GlobalHeavyBoxCheck = true;
         heavyActive = true;
         moveScript.heavyPull = true;
         player.GetComponent<moveBoy>().heavy = true;
@@ -108,6 +112,7 @@ public class heavyBox : MonoBehaviour
 
     public void Normal()
     {
+        GlobalHeavyBoxCheck = false;
         heavyActive = false;
         moveScript.heavyPull = true;
         moveScript.speed = normalSpeed;
