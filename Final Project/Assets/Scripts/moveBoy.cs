@@ -260,7 +260,7 @@ public class moveBoy : MonoBehaviour
         maxSpeed = speed;
         boxPushSpeed = speed * boxPushMultiplier;
         theBox.transform.parent = null;
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         inControl = true;
         heavy = false;
         throwS = theBox.GetComponent<throwScript>();
@@ -332,10 +332,12 @@ public class moveBoy : MonoBehaviour
 
         if (gcScript.grounded)
         {
+            anim.SetBool(groundedHash,true);
             timeLeftToJump = coyoteTime;
         }
         else
         {
+            anim.SetBool(groundedHash,false);
             timeLeftToJump -= Time.deltaTime;
         }
 
@@ -549,6 +551,7 @@ public class moveBoy : MonoBehaviour
         {
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
             anim.SetBool(movingHash,true);
+            //anim.SetBool("Moving",true);
         }
         else
         {
@@ -589,7 +592,7 @@ public class moveBoy : MonoBehaviour
         inControl = true;
         // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
-        anim.SetBool(jumpHash,true);
+        anim.SetTrigger(jumpHash);
         if (gcScript.onBox)
         {
             rbox.velocity =  new Vector3(0, -jumpHeight, 0);
