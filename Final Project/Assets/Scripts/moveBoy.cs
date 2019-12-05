@@ -746,7 +746,7 @@ public class moveBoy : MonoBehaviour
         {
 
             //rb.MovePosition(transform.position+(Vector3.up*Time.deltaTime*5f)); doesn't work on moving ledges, revert to this later if buggy for better code
-            transform.position += Vector3.up * Time.deltaTime * 5f; //messier option but works on moving platform
+            transform.position += Vector3.up * Time.deltaTime * 7f; //messier option but works on moving platform
             timeSpent += Time.deltaTime;
            // print("mantling");
             yield return null;

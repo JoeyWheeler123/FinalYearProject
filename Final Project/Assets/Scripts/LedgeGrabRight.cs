@@ -29,7 +29,7 @@ public class LedgeGrabRight : MonoBehaviour
                 moveScript = other.gameObject.GetComponentInParent<moveBoy>();
             }
 
-            moveScript.grabPos = new Vector3(transform.position.x+1f,transform.position.y,transform.position.z);
+            moveScript.grabPos = new Vector3(transform.position.x+1.3f,transform.position.y-0.65f,transform.position.z);
             if (moveScript.moveInputX < -0.1f)
             {
                 moveScript.LedgeGrab(1);
