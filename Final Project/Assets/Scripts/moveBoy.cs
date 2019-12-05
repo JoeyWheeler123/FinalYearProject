@@ -96,7 +96,7 @@ public class moveBoy : MonoBehaviour
 
     public float ledgeGrabGraceTime;
 
-    private float jumpCall;
+    private float jumpCall, recallCoolDown;
 
   public bool pressedJump, pressedThrow, onLeftWall, onRightWall;
 
@@ -138,6 +138,8 @@ public class moveBoy : MonoBehaviour
         curMov.aiming = false;
         theBoxCollider = theBox.GetComponent<Collider>();
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
+
+        recallCoolDown = 1f;
     }
 
     private void StartJumpDebug()
@@ -283,6 +285,7 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
+        recallCoolDown += Time.deltaTime;
         //print(rb.velocity.magnitude);
         if (controls.Gameplay.Interact.triggered)
         {
@@ -617,12 +620,33 @@ public class moveBoy : MonoBehaviour
     private void Jumping()
     {
         inControl = true;
-        // rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
-        rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        //rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
+        if (gcScript.onBox)
+        {
+            //recallCoolDown = 0f;
+            if (rbox.velocity.magnitude >= 5f)
+            {
+                print("fastbox");
+                rb.velocity = new Vector3(velocity.x, jumpHeight/1.5f, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+            }
+            
+           
+            rbox.velocity =  new Vector3(0, -jumpHeight, 0);
+            
+        }
+        else
+        {
+            rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+        }
+
         anim.SetTrigger(jumpHash);
         if (gcScript.onBox)
         {
-            rbox.velocity =  new Vector3(0, -jumpHeight, 0);
+           // rbox.velocity =  new Vector3(0, -jumpHeight*2f, 0);
         }
     }
 
@@ -652,7 +676,7 @@ public class moveBoy : MonoBehaviour
     }
     public void ThrowBox()
     {
-        anim.SetTrigger(throwHash);
+//        anim.SetTrigger(throwHash);
         
         boxCol.enabled = true;
         boxPrep = true;
@@ -663,22 +687,24 @@ public class moveBoy : MonoBehaviour
 
     public void BoxRecall()
     {
-        recalling = true;
-        //print("pull");
-        boxTowardPlayer = transform.position - theBox.transform.position;
-        boxTowardPlayer.Normalize();
-        rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Force);
-        rb.AddForce(-boxTowardPlayer*Time.deltaTime*inverseRecallMultiplier*recallSpeed,ForceMode.Force);
-        if (autoPickup)
-        {
-            if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
+        
+            recalling = true;
+            //print("pull");
+            boxTowardPlayer = transform.position - theBox.transform.position;
+            boxTowardPlayer.Normalize();
+            rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Force);
+            rb.AddForce(-boxTowardPlayer * Time.deltaTime * inverseRecallMultiplier * recallSpeed, ForceMode.Force);
+            if (autoPickup)
             {
-                //theBox.SetActive(false);
-                //curMov.aiming = true;
-                StartCoroutine(CarryBox());
-                //thrown = false;
+                if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
+                {
+                    //theBox.SetActive(false);
+                    //curMov.aiming = true;
+                    StartCoroutine(CarryBox());
+                    //thrown = false;
+                }
             }
-        }
+        
     }
 
     public void BoxFriction()
