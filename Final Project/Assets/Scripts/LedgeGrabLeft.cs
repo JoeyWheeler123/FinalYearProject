@@ -35,6 +35,7 @@ public class LedgeGrabLeft : MonoBehaviour
                 
                 if (elevator)
                 {
+                    print("Elevator");
                     moveScript.gameObject.transform.parent = transform;
                 }
             }
