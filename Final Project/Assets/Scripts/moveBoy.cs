@@ -82,7 +82,15 @@ public class moveBoy : MonoBehaviour
 
     public Animator anim;
 
-    private int movingHash, jumpHash, recallHash, groundedHash, throwHash, ledgeGrabHash, fallHash, slideHash;
+    private int movingHash,
+        jumpHash,
+        recallHash,
+        groundedHash,
+        throwHash,
+        ledgeGrabHash,
+        fallHash,
+        slideHash,
+        walkMultiplierHash;
 
     public GameObject playerModel;
     public GameObject boxSwingParent;
@@ -135,6 +143,7 @@ public class moveBoy : MonoBehaviour
         ledgeGrabHash = Animator.StringToHash("LedgeGrab");
         fallHash = Animator.StringToHash("Fall");
         slideHash = Animator.StringToHash("Sliding");
+        walkMultiplierHash = Animator.StringToHash("WalkMultiplier");
         curMov.aiming = false;
         theBoxCollider = theBox.GetComponent<Collider>();
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
@@ -581,6 +590,7 @@ public class moveBoy : MonoBehaviour
         {
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
             anim.SetBool(movingHash,true);
+            anim.SetFloat(walkMultiplierHash,(Mathf.Abs(moveInputX)*speed/maxSpeed));
             //anim.SetBool("Moving",true);
         }
         else

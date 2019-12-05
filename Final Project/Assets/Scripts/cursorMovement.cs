@@ -12,7 +12,7 @@ public class cursorMovement : MonoBehaviour
 {
     private Camera cam;
     Vector3 point = new Vector3();
-
+    public float minY;
     private Vector3 closePoint;
 
     private Vector3 projectedPoint;
@@ -66,15 +66,16 @@ public class cursorMovement : MonoBehaviour
             closePoint = player.position + closePoint;
             projectedBox.transform.position =
                 Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
-            if (aiming)
+            /*if (aiming)
             {
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position,new Vector3(projectedBox.transform.position.x,
-                    projectedBox.transform.position.y, cameraDefaultPosition.position.z),Time.deltaTime*10f);
+                    projectedBox.transform.position.y+cameraDefaultPosition.localPosition.y, cameraDefaultPosition.position.z),Time.deltaTime*10f);
             }
             else
             {
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*10f);
             }
+            */
         }
         else
         {
@@ -93,15 +94,7 @@ public class cursorMovement : MonoBehaviour
                 //closePoint = player.position + closePoint;
                 projectedBox.transform.position =
                     Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
-                if (aiming)
-                {
-                    cam.transform.position = Vector3.MoveTowards(cam.transform.position,new Vector3(projectedBox.transform.position.x,
-                            projectedBox.transform.position.y, cameraDefaultPosition.position.z),Time.deltaTime*10f);
-                }
-                else
-                {
-                    cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*10f);
-                }
+                
             }
 
         if (aiming&&!moveScript.thrown)
@@ -122,12 +115,24 @@ public class cursorMovement : MonoBehaviour
                 //leftBox.SetActive(false);
                 moveScript.facingLeft = false;
             }
+
+          
+                cam.transform.position = Vector3.MoveTowards(cam.transform.position, new Vector3(
+                        projectedBox.transform.position.x,
+                        projectedBox.transform.position.y + cameraDefaultPosition.localPosition.y,
+                        cameraDefaultPosition.position.z), Time.deltaTime * 10f);
+               // Vector3 camPosClamped = new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
+
+               // cam.transform.position = Vector3.Lerp(cam.transform.position, camPosClamped, Time.deltaTime * 10f);
+               
+               cam.transform.position= new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
         }
         else
         {
            //leftBox.SetActive(false);
             //rightBox.SetActive(false);
             //projectedBox.SetActive(false);
+            cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*10f);
             boxRenderer.enabled = false;
         }
 
