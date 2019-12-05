@@ -61,7 +61,7 @@ public class moveBoy : MonoBehaviour
     public float wallSlideModifier;
 
     public throwScript throwS;
-    public Rig rigScript;
+    public Rig rigScript, pushIk;
     private bool inControl;
 
     public bool mantling;
@@ -106,7 +106,7 @@ public class moveBoy : MonoBehaviour
 
     private float jumpCall, recallCoolDown;
 
-  public bool pressedJump, pressedThrow, onLeftWall, onRightWall;
+    public bool pressedJump, pressedThrow, onLeftWall, onRightWall, pushing;
 
   private Collider theBoxCollider;
 
@@ -149,6 +149,7 @@ public class moveBoy : MonoBehaviour
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
 
         recallCoolDown = 1f;
+        pushing = false;
     }
 
     private void StartJumpDebug()
@@ -449,6 +450,14 @@ public class moveBoy : MonoBehaviour
             rigScript.weight -= Time.deltaTime * 5f;
         }
 
+        if (pushing&&Mathf.Abs(moveInputX)>0.1f)
+        {
+            pushIk.weight += Time.deltaTime * 5f;
+        }
+        else
+        {
+            pushIk.weight -= Time.deltaTime * 5f;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -727,11 +736,13 @@ public class moveBoy : MonoBehaviour
 
     public void PushSpeed()
     {
+        pushing = true;
         speed = boxPushSpeed;
     }
 
     public void NormalSpeed()
     {
+        pushing = false;
         speed = maxSpeed;
     }
     public void DirectionCheck()
