@@ -37,7 +37,7 @@ public class ConveyorScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, endPos.position, Time.deltaTime * speed);
             if (Vector3.Distance(transform.position, endPos.position) < 0.1f)
             {
-                print("arrived");
+//                print("arrived");
                 if (autoReturn)
                 {
                     returning = true;
