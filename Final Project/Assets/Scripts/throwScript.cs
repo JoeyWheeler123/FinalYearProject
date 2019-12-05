@@ -128,14 +128,10 @@ public class throwScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("hands"))
         {
-            if (moveScript.thrown)
-            {
+            
                 moveScript.PushSpeed();
-            }
-            else
-            {
-                moveScript.NormalSpeed();
-            }
+           
+           
         }
     }
 

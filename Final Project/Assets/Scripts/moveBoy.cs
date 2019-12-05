@@ -321,7 +321,7 @@ public class moveBoy : MonoBehaviour
             if (!thrown)
             {
                 curMov.aiming = true;
-                speed = aimWalkSpeed;
+                //speed = aimWalkSpeed;
             }
         }
 
@@ -329,7 +329,7 @@ public class moveBoy : MonoBehaviour
         {
             {
                curMov.aiming = false;
-               speed = maxSpeed; 
+               //speed = maxSpeed; 
             }
         }
         moveInputX = moveInput.x;
@@ -453,10 +453,12 @@ public class moveBoy : MonoBehaviour
         if (pushing&&Mathf.Abs(moveInputX)>0.1f)
         {
             pushIk.weight += Time.deltaTime * 5f;
+            speed = boxPushSpeed;
         }
         else
         {
             pushIk.weight -= Time.deltaTime * 5f;
+            speed = maxSpeed;
         }
     }
 
@@ -738,12 +740,14 @@ public class moveBoy : MonoBehaviour
     {
         pushing = true;
         speed = boxPushSpeed;
+        print("pushing");
     }
 
     public void NormalSpeed()
     {
         pushing = false;
         speed = maxSpeed;
+        print("notpushing");
     }
     public void DirectionCheck()
     {
