@@ -32,13 +32,15 @@ public class cursorMovement : MonoBehaviour
     private float boxCheck;
 
     public float lowestAimPoint;
+
+    public Transform cameraDefaultPosition;
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         moveScript = GetComponent<moveBoy>();
         aiming = false;
-
+        cameraDefaultPosition.position = cam.transform.position;
     }
 
     // Update is called once per frame
@@ -64,7 +66,15 @@ public class cursorMovement : MonoBehaviour
             closePoint = player.position + closePoint;
             projectedBox.transform.position =
                 Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
-
+            if (aiming)
+            {
+                cam.transform.position = Vector3.MoveTowards(cam.transform.position,new Vector3(projectedBox.transform.position.x,
+                    projectedBox.transform.position.y, cameraDefaultPosition.position.z),Time.deltaTime*10f);
+            }
+            else
+            {
+                cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*10f);
+            }
         }
         else
         {
@@ -73,7 +83,7 @@ public class cursorMovement : MonoBehaviour
             {
                 inputY = lowestAimPoint;
             }
-                projectedPoint = new Vector3(moveScript.aimInput.x,inputY,0f);
+                projectedPoint = new Vector3(moveScript.aimInput.x,moveScript.aimInput.y,0f);
                 projectedPoint.Normalize();
                 projectedPoint *= throwMarkerDistance;
                 closePoint = player.position+projectedPoint;
@@ -83,6 +93,15 @@ public class cursorMovement : MonoBehaviour
                 //closePoint = player.position + closePoint;
                 projectedBox.transform.position =
                     Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
+                if (aiming)
+                {
+                    cam.transform.position = Vector3.MoveTowards(cam.transform.position,new Vector3(projectedBox.transform.position.x,
+                            projectedBox.transform.position.y, cameraDefaultPosition.position.z),Time.deltaTime*10f);
+                }
+                else
+                {
+                    cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*10f);
+                }
             }
 
         if (aiming&&!moveScript.thrown)
