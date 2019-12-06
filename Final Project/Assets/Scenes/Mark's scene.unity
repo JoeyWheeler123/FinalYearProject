@@ -2497,6 +2497,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2277070793679346644, guid: 375489827f5fb4ff3803fa53d5e4ad9e,
+        type: 3}
+      propertyPath: disenchant
+      value: 
+      objectReference: {fileID: 1417815357}
+    - target: {fileID: 2277070793679346644, guid: 375489827f5fb4ff3803fa53d5e4ad9e,
+        type: 3}
+      propertyPath: enchant
+      value: 
+      objectReference: {fileID: 930433150}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 375489827f5fb4ff3803fa53d5e4ad9e, type: 3}
 --- !u!1 &735667164
@@ -2850,6 +2860,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.26804447, y: 0.016352396, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!198 &930433150 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 640746241, guid: d046c0db52f440946903c36c4f45ba79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1534028735}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &984414137
 GameObject:
   m_ObjectHideFlags: 0
@@ -4109,6 +4125,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408043671}
   m_CullTransparentMesh: 0
+--- !u!198 &1417815357 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 972923042, guid: d046c0db52f440946903c36c4f45ba79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1534028735}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1436202921
 GameObject:
   m_ObjectHideFlags: 0
