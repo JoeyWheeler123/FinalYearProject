@@ -14,6 +14,10 @@ public class heavyBox : MonoBehaviour
 
     public Color heavyColor;
 
+    public ParticleSystem disenchant;
+
+    public ParticleSystem enchant;
+
     public float boxMass;
 
     float normalForce;
@@ -76,7 +80,7 @@ public class heavyBox : MonoBehaviour
             
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && heavyActive == true)
         {
             Normal();
         }
@@ -84,7 +88,7 @@ public class heavyBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        if(coll.gameObject.CompareTag("Player"))
+        if(coll.gameObject.CompareTag("Player") && heavyActive != true)
         {
             Debug.Log("HIT");
             Heavy();
@@ -107,6 +111,7 @@ public class heavyBox : MonoBehaviour
         //boxMass = 5f;
         box.GetComponent<Rigidbody>().mass = fat;
         //box.GetComponent<Material>().color = heavyColor;
+        enchant.Play();
         box.GetComponent<MeshRenderer>().material.color = heavyColor;
     }
 
@@ -120,6 +125,7 @@ public class heavyBox : MonoBehaviour
         moveScript.inverseRecallMultiplier = normalForce;
         moveScript.heavy = false;
         rBox.mass = boxMass;
+        disenchant.Play();
         box.GetComponent<MeshRenderer>().material.color = normalColor;
     }
 }
