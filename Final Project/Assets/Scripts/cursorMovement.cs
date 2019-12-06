@@ -119,13 +119,13 @@ public class cursorMovement : MonoBehaviour
           
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position, new Vector3(
                         projectedBox.transform.position.x,
-                        projectedBox.transform.position.y + cameraDefaultPosition.localPosition.y,
+                        Mathf.Clamp(projectedBox.transform.position.y,minY,Mathf.Infinity),
                         cameraDefaultPosition.position.z), Time.deltaTime * 10f);
                // Vector3 camPosClamped = new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
 
                // cam.transform.position = Vector3.Lerp(cam.transform.position, camPosClamped, Time.deltaTime * 10f);
                
-               cam.transform.position= new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
+               //cam.transform.position= new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
         }
         else
         {

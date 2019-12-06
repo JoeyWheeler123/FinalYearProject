@@ -122,4 +122,16 @@ public class heavyBox : MonoBehaviour
         rBox.mass = boxMass;
         box.GetComponent<MeshRenderer>().material.color = normalColor;
     }
+
+    public void Activate()
+    {
+        if (heavyActive)
+        {
+            Normal();
+        }
+        else
+        {
+            Heavy();
+        }
+    }
 }
