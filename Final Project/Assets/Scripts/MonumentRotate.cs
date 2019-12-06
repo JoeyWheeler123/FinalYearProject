@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonumentRotate : MonoBehaviour
 {
+    public float rotX, rotY, rotZ;
+    public float rotationSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class MonumentRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3 (500, 0f, 0f) *Time.deltaTime);  
+        transform.Rotate(new Vector3 (rotX, rotY, rotZ) *Time.deltaTime*rotationSpeed);  
     }
 }
