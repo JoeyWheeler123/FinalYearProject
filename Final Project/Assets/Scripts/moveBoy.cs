@@ -742,11 +742,11 @@ public class moveBoy : MonoBehaviour
         if (facingLeft && !thrown)
         {
             leftCollider.enabled = true;
-            rightCollider.enabled = false;
+            rightCollider.enabled = true;
         }
         else if(!facingLeft&&!thrown)
         {
-            leftCollider.enabled = false;
+            leftCollider.enabled = true;
             rightCollider.enabled = true;
         }
 
