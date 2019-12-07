@@ -392,11 +392,17 @@ public class moveBoy : MonoBehaviour
             recalling = false;
         }
 
-        if (recalling&&!global::heavyBox.GlobalHeavyBoxCheck)
+        if (recalling)
         {
-            if (theBoxCollider.material.dynamicFriction > 0.1f)
+            if (theBoxCollider.material.dynamicFriction > 0.1f&&!global::heavyBox.GlobalHeavyBoxCheck)
             {
                 theBoxCollider.material.dynamicFriction -= Time.deltaTime;
+            }
+            
+            if (theBoxCollider.material.dynamicFriction < 4f&&global::heavyBox.GlobalHeavyBoxCheck)
+            {
+                theBoxCollider.material.dynamicFriction += Time.deltaTime;
+                print("Grinding");
             }
         }
         else
@@ -598,7 +604,11 @@ public class moveBoy : MonoBehaviour
 
     private void GroundMovement()
     {
-        if (moveInputX != 0)
+        if (recalling && heavyPull)
+        {
+            velocity.x = rb.velocity.x;
+        }
+        else if (moveInputX != 0)
         {
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
             anim.SetBool(movingHash,true);
