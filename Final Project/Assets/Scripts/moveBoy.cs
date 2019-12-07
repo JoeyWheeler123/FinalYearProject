@@ -109,7 +109,7 @@ public class moveBoy : MonoBehaviour
     public bool pressedJump, pressedThrow, onLeftWall, onRightWall, pushing;
 
   private Collider theBoxCollider;
-
+  public Collider leftCollider, rightCollider;
   private float boxFrictionInitial;
   private bool interactPressed;
   
@@ -336,6 +336,7 @@ public class moveBoy : MonoBehaviour
        // print(moveInput);
         moveInputY = moveInput.y;
         DirectionCheck();
+        CheckColliders();
         if(inControl){
         if (gcScript.grounded == true)
         {
@@ -736,6 +737,25 @@ public class moveBoy : MonoBehaviour
         }
     }
 
+    public void CheckColliders()
+    {
+        if (facingLeft && !thrown)
+        {
+            leftCollider.enabled = true;
+            rightCollider.enabled = false;
+        }
+        else if(!facingLeft&&!thrown)
+        {
+            leftCollider.enabled = false;
+            rightCollider.enabled = true;
+        }
+
+        else
+        {
+            leftCollider.enabled = false;
+            rightCollider.enabled = false;
+        }
+    }
     public void PushSpeed()
     {
         pushing = true;
