@@ -392,7 +392,7 @@ public class moveBoy : MonoBehaviour
             recalling = false;
         }
 
-        if (recalling)
+        if (recalling&&!global::heavyBox.GlobalHeavyBoxCheck)
         {
             if (theBoxCollider.material.dynamicFriction > 0.1f)
             {

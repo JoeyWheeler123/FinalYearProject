@@ -82,7 +82,7 @@ public class heavyBox : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E) && heavyActive == true)
         {
-            Normal();
+           // Normal();
         }
     }
 
