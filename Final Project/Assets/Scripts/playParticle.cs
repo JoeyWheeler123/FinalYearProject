@@ -8,6 +8,8 @@ public class playParticle : MonoBehaviour
 
     public ParticleSystem ledge;
 
+    public ParticleSystem walk;
+
     public void JumpParticle()
     {
         jump.Play();
@@ -21,5 +23,10 @@ public class playParticle : MonoBehaviour
     public void LedgeParticle()
     {
         ledge.Play();
+    }
+
+    public void WalkParticle()
+    {
+        walk.Play();
     }
 }
