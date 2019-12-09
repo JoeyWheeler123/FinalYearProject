@@ -27,6 +27,6 @@ public class playParticle : MonoBehaviour
 
     public void WalkParticle()
     {
-        walk.Play();
+       walk.Play();
     }
 }

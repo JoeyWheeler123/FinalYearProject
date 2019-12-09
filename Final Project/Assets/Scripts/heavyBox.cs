@@ -10,7 +10,7 @@ public class heavyBox : MonoBehaviour
 
     public GameObject box;
 
-    private Color normalColor;
+    public GameObject rendererBox;
 
     public Color heavyColor;
 
@@ -56,8 +56,8 @@ public class heavyBox : MonoBehaviour
 
         boxMass = box.GetComponent<Rigidbody>().mass;
 
-        normalColor = box.GetComponent<MeshRenderer>().material.color;
-        
+        //rendererBox = box.GetComponent<Renderer>();
+
         //moveScript = player.GetComponent<moveBoy>();
     }
 
@@ -110,9 +110,12 @@ public class heavyBox : MonoBehaviour
         player.GetComponent<moveBoy>().inverseRecallMultiplier = inverseForce;
         //boxMass = 5f;
         box.GetComponent<Rigidbody>().mass = fat;
-        //box.GetComponent<Material>().color = heavyColor;
+        box.GetComponent<Material>().color = heavyColor;
         enchant.Play();
-        box.GetComponent<MeshRenderer>().material.color = heavyColor;
+        //box.GetComponent<MeshRenderer>().material.color = heavyColor;
+        //box.GetComponent<MeshRenderer>().material.SetColor("_EB8DB5F9",Color.red); 
+        //rendererBox.material.SetColor("Color_EB8DB5F9", heavyColor);
+        rendererBox.GetComponent<Renderer>().material.color = heavyColor;
     }
 
     public void Normal()
@@ -126,7 +129,7 @@ public class heavyBox : MonoBehaviour
         moveScript.heavy = false;
         rBox.mass = boxMass;
         disenchant.Play();
-        box.GetComponent<MeshRenderer>().material.color = normalColor;
+        //box.GetComponent<MeshRenderer>().material.color = normalColor;
     }
 
     public void Activate()
