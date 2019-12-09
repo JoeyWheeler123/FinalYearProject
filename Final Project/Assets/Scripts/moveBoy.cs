@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
+/*
 using UnityEditor.Build.Content;
+
 using UnityEditorInternal;
+*/
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using Quaternion = UnityEngine.Quaternion;
@@ -111,7 +114,7 @@ public class moveBoy : MonoBehaviour
   private Collider theBoxCollider;
   public Collider leftCollider, rightCollider;
   private float boxFrictionInitial;
-  private bool interactPressed;
+  //private bool interactPressed;
   
     // Start is called before the first frame update
 
@@ -295,17 +298,28 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
+        float boxDistance = Vector3.Distance(transform.position,theBox.transform.position);
+        if (recalling && boxDistance <= 2)
+        {
+            rbox.useGravity = false;
+           // print("Gravityoff");
+        }
+        else
+        {
+            rbox.useGravity = true;
+        }
         recallCoolDown += Time.deltaTime;
+        if(recalling)
         //print(rb.velocity.magnitude);
         if (controls.Gameplay.Interact.triggered)
         {
-            interactPressed = true;
+           // interactPressed = true;
           //  print("activated");
             //other.SendMessage("Interact");
         }
         else
         {
-            interactPressed = false;
+//            interactPressed = false;
         }
         
         if (controls.Gameplay.Jump.triggered)
@@ -655,8 +669,9 @@ public class moveBoy : MonoBehaviour
         //rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
         if (gcScript.onBox)
         {
+            //this was to reduce jump box spam but feels clunky needs revision.
             //recallCoolDown = 0f;
-            if (rbox.velocity.magnitude >= 5f)
+           /* if (rbox.velocity.magnitude >= 5f)
             {
                 print("fastbox");
                 rb.velocity = new Vector3(velocity.x, jumpHeight/1.5f, 0);
@@ -665,8 +680,8 @@ public class moveBoy : MonoBehaviour
             {
                 rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             }
-            
-           
+            */
+            rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             rbox.velocity =  new Vector3(0, -jumpHeight, 0);
             
         }

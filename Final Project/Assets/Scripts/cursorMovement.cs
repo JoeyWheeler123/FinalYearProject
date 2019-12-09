@@ -46,6 +46,7 @@ public class cursorMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
         if (!controllerAim)
         {
             float inputY = point.y;
