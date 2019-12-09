@@ -17,7 +17,7 @@ public class cursorMovement : MonoBehaviour
 
     private Vector3 projectedPoint;
 
-    public Transform player;
+    public Transform player, box;
 
     public float throwMarkerDistance;
     public GameObject rightBox, leftBox, projectedBox;
@@ -34,9 +34,12 @@ public class cursorMovement : MonoBehaviour
     public float lowestAimPoint;
 
     public Transform cameraDefaultPosition;
+
+    public LineRenderer rend;
     // Start is called before the first frame update
     void Start()
     {
+        rend = GetComponent<LineRenderer>();
         cam = Camera.main;
         moveScript = GetComponent<moveBoy>();
         aiming = false;
@@ -46,7 +49,16 @@ public class cursorMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        if (aiming)
+        {
+            rend.enabled = true;
+        }
+        else
+        {
+            rend.enabled = false;
+        }
+      rend.SetPosition(0,box.transform.position);
+      rend.SetPosition(1,projectedBox.transform.position);
         if (!controllerAim)
         {
             float inputY = point.y;
