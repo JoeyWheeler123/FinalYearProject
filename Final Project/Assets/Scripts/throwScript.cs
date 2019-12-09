@@ -37,7 +37,7 @@ public class throwScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.z != 0)
+        if (transform.position.z != 0&&moveScript.thrown)
         {
             Vector3 movPos = new Vector3(transform.position.x,transform.position.y,0);
             rb.MovePosition(movPos);
