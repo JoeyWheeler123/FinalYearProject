@@ -103,7 +103,7 @@ public class moveBoy : MonoBehaviour
 
     private Collider boxCol;
 
-    public bool autoPickup;
+    public bool autoPickup, grounded;
 
     public float ledgeGrabGraceTime;
 
@@ -298,7 +298,14 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
-       
+        if (gcScript.grounded)
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
         float boxDistance = Vector3.Distance(transform.position,theBox.transform.position);
         if (recalling && boxDistance <= 2)
         {

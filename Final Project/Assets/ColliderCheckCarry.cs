@@ -21,7 +21,7 @@ public class ColliderCheckCarry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Bit shift the index of the layer (8) to get a bit mask
+       // Bit shift the index of the layer (8) to get a bit mask
         int layerMask = 1 << 8;
 
         // This would cast rays only against colliders in layer 8.
@@ -44,7 +44,10 @@ public class ColliderCheckCarry : MonoBehaviour
             Debug.DrawRay(rayPos.position, transform.TransformDirection(Vector3.down) * distanceCheck, Color.white);
           // Debug.Log("Did not Hit");
         }
+        
     }
+    
+   
 
    
 }
