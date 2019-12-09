@@ -14,6 +14,8 @@ public class heavyBox : MonoBehaviour
 
     public Color heavyColor;
 
+    public Color normalColor;
+
     public ParticleSystem disenchant;
 
     public ParticleSystem enchant;
@@ -110,12 +112,8 @@ public class heavyBox : MonoBehaviour
         player.GetComponent<moveBoy>().inverseRecallMultiplier = inverseForce;
         //boxMass = 5f;
         box.GetComponent<Rigidbody>().mass = fat;
-        box.GetComponent<Material>().color = heavyColor;
         enchant.Play();
-        //box.GetComponent<MeshRenderer>().material.color = heavyColor;
-        //box.GetComponent<MeshRenderer>().material.SetColor("_EB8DB5F9",Color.red); 
-        //rendererBox.material.SetColor("Color_EB8DB5F9", heavyColor);
-        rendererBox.GetComponent<Renderer>().material.color = heavyColor;
+        rendererBox.GetComponent<Renderer>().material.SetColor("Color_EB8DB5F9", heavyColor);
     }
 
     public void Normal()
@@ -129,7 +127,7 @@ public class heavyBox : MonoBehaviour
         moveScript.heavy = false;
         rBox.mass = boxMass;
         disenchant.Play();
-        //box.GetComponent<MeshRenderer>().material.color = normalColor;
+        rendererBox.GetComponent<Renderer>().material.SetColor("Color_EB8DB5F9", normalColor);
     }
 
     public void Activate()
