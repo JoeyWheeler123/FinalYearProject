@@ -19,10 +19,12 @@ public class magneticAttractor : MonoBehaviour
     public Rigidbody playerRb;
 
     public moveBoy moveScript;
-    
+
+    private bool firstTimeSnap;
     // Start is called before the first frame update
     void Start()
     {
+        firstTimeSnap = true;
         moveScript = FindObjectOfType<moveBoy>();
         
         print(moveScript);
@@ -38,7 +40,12 @@ public class magneticAttractor : MonoBehaviour
             float distanceMultiplier = dir.sqrMagnitude;
             float stronger = Mathf.Sqrt(distanceMultiplier);//electromagnetic force weakens a rate proportional to square of distance. I think. Maybe cubed but squared will do for now?
             attractedRb.AddForce(-dir*attractiveForce*Time.deltaTime/stronger);
-            if (distanceMultiplier <= snapThreshold&&!moveScript.pressedThrow)
+            if (distanceMultiplier <= snapThreshold&&firstTimeSnap)
+            {
+                snapped = true;
+                
+            }
+            else if (distanceMultiplier <= snapThreshold&&!moveScript.pressedThrow&&!firstTimeSnap)
             {
                 snapped = true;
             }
@@ -49,13 +56,17 @@ public class magneticAttractor : MonoBehaviour
         {
             attracted.transform.position = transform.position;
             attractedRb.isKinematic = true;
+            if (!moveScript.pressedThrow)
+            {
+                firstTimeSnap = false;
+            }
         }
         else
         {
            
         }
 
-        if (moveScript.pressedThrow)
+        if (moveScript.pressedThrow&&!firstTimeSnap)
         {
             if (attracted != null&&attractedRb!=null&&moveScript.thrown)
             {
@@ -86,6 +97,8 @@ public class magneticAttractor : MonoBehaviour
     {
         attracted = null;
         attractedRb = null;
+        firstTimeSnap = true;
+        print("reset");
     }
 
     public void ResetBox()
