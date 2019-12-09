@@ -298,6 +298,7 @@ public class moveBoy : MonoBehaviour
     private void Update()
 
     {
+       
         float boxDistance = Vector3.Distance(transform.position,theBox.transform.position);
         if (recalling && boxDistance <= 2)
         {
@@ -506,22 +507,23 @@ public class moveBoy : MonoBehaviour
             SceneManager.LoadScene(scene.name);
         }
         
-        if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
+        /*if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)
         {
             onLeftWall = true;
          
         }
 
-        if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling)
+        if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling&&thrown)
         {
             onRightWall = true;
            
         }
+        */
     }
     
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x>0f)
+        if (other.gameObject.CompareTag("ledgeleft")&&thrown&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x>0f)
         {
             int direction = 0;
             grabPos = other.gameObject.transform.position;
@@ -529,7 +531,7 @@ public class moveBoy : MonoBehaviour
             anim.SetTrigger(ledgeGrabHash);
         }
         
-        if (other.gameObject.CompareTag("ledgeright")&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x<0f)
+        if (other.gameObject.CompareTag("ledgeright")&&thrown&&!mantling&&!gcScript.grounded&&inControl&&!grabbingLedge&&moveInput.x<0f)
         {
             int direction = 1;
             grabPos = other.gameObject.transform.position;
@@ -537,8 +539,9 @@ public class moveBoy : MonoBehaviour
             anim.SetTrigger(ledgeGrabHash);
         }
         
-        if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling)
+        if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)
         {
+            print("onleftwall");
             onLeftWall = true;
             
             /*if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
@@ -564,8 +567,9 @@ public class moveBoy : MonoBehaviour
             //rb.AddForce(Physics.gravity *-0.5f);
         }
 
-        if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling)
+        if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling&&thrown)
         {
+            print("Onrightwall");
             onRightWall = true;
             /*if (controls.Gameplay.Jump.triggered&& gcScript.grounded == false)
             {
@@ -766,19 +770,19 @@ public class moveBoy : MonoBehaviour
     {
         if (facingLeft && !thrown)
         {
-            leftCollider.enabled = true;
-            rightCollider.enabled = true;
+            leftCollider.gameObject.SetActive(true);
+            rightCollider.gameObject.SetActive(false);
         }
         else if(!facingLeft&&!thrown)
         {
-            leftCollider.enabled = true;
-            rightCollider.enabled = true;
+            leftCollider.gameObject.SetActive(false);
+            rightCollider.gameObject.SetActive(true);
         }
 
         else
         {
-            leftCollider.enabled = false;
-            rightCollider.enabled = false;
+            leftCollider.gameObject.SetActive(false);
+            rightCollider.gameObject.SetActive(false);
         }
     }
     public void PushSpeed()
@@ -793,6 +797,15 @@ public class moveBoy : MonoBehaviour
         pushing = false;
         speed = maxSpeed;
         
+    }
+
+    public void DropBox()
+    {
+        throwS.DropBox();
+        boxCol.enabled = true;
+            
+        ThrowReleased();
+        thrown = true;
     }
     public void DirectionCheck()
     {

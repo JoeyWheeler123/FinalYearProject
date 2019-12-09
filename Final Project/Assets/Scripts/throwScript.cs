@@ -37,6 +37,11 @@ public class throwScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (transform.position.z != 0)
+        {
+            Vector3 movPos = new Vector3(transform.position.x,transform.position.y,0);
+            rb.MovePosition(movPos);
+        }
         velocityLastFrame = rb.velocity;
         /*if (rb.velocity.x > maxVelocity)
         {
@@ -105,11 +110,11 @@ public class throwScript : MonoBehaviour
         rb.isKinematic = false;
         if (moveScript.facingLeft)
         {
-            transform.position = spawnPointLeft.position;
+            //transform.position = spawnPointLeft.position;
         }
         else
         {
-            transform.position = spawnPointRight.position;
+            //transform.position = spawnPointRight.position;
 
         }
        
