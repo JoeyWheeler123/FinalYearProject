@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using UnityEditor;
 /*
 using UnityEditor.Build.Content;
 
@@ -74,7 +75,7 @@ public class moveBoy : MonoBehaviour
     public Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling, canJump, hasBox, dismantling;
+    private bool recalling, canJump, hasBox, dismantling, gamePaused;
     public bool facingLeft;
 
     public float coyoteTime;
@@ -136,6 +137,7 @@ public class moveBoy : MonoBehaviour
         controls.Gameplay.AimMouse.canceled += ctx => AimReleased();
         controls.Gameplay.AimController.performed += ctx => AimControllerPressed();
         controls.Gameplay.AimController.canceled += ctx => AimReleased();
+        controls.Gameplay.Pause.performed += ctx => PauseTime();
         
         boxCol = theBox.GetComponent<Collider>();
         movingHash = Animator.StringToHash("Moving");
@@ -153,6 +155,7 @@ public class moveBoy : MonoBehaviour
 
         recallCoolDown = 1f;
         pushing = false;
+        gamePaused = false;
     }
 
     private void StartJumpDebug()
@@ -850,6 +853,19 @@ public class moveBoy : MonoBehaviour
         }
     }
 
+    private void PauseTime()
+    {
+        if (!gamePaused)
+        {
+            Time.timeScale = 0;
+            gamePaused = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            gamePaused = false;
+        }
+    }
     IEnumerator Mantle(int mantlePosition)
     {
         float transformY = transform.position.y;
