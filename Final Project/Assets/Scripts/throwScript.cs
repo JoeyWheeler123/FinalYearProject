@@ -14,6 +14,7 @@ public class throwScript : MonoBehaviour
     public float maxVelocity;
     public moveBoy moveScript;
     public Vector3 velocityLastFrame;
+    public GameObject respawn;
     public enum ThrowPoint
 
     {
@@ -145,6 +146,15 @@ public class throwScript : MonoBehaviour
         if (other.gameObject.CompareTag("hands"))
         {
             moveScript.NormalSpeed();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       if( other.gameObject.CompareTag("killplane"))
+        {
+            gameObject.transform.position = respawn.transform.position;
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         }
     }
 }

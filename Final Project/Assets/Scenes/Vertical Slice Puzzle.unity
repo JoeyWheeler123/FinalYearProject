@@ -774,11 +774,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1875346516}
     m_Modifications:
-    - target: {fileID: 4458211732334230468, guid: 03b9d7ee70cf34a37ac7d001103831dc,
-        type: 3}
-      propertyPath: m_Name
-      value: Switch Setup
-      objectReference: {fileID: 0}
     - target: {fileID: 4458211732334230469, guid: 03b9d7ee70cf34a37ac7d001103831dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -853,6 +848,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458211732334230468, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: m_Name
+      value: Switch Setup
       objectReference: {fileID: 0}
     - target: {fileID: 4458211732774513101, guid: 03b9d7ee70cf34a37ac7d001103831dc,
         type: 3}
@@ -3630,11 +3630,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1575361166}
     m_Modifications:
-    - target: {fileID: 4543439848590631935, guid: 290a67b12cc785249aed08dfc75a97fc,
-        type: 3}
-      propertyPath: m_Name
-      value: MagnetPoint
-      objectReference: {fileID: 0}
     - target: {fileID: 4543439848590631924, guid: 290a67b12cc785249aed08dfc75a97fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3689,6 +3684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543439848590631935, guid: 290a67b12cc785249aed08dfc75a97fc,
+        type: 3}
+      propertyPath: m_Name
+      value: MagnetPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4543439848590631926, guid: 290a67b12cc785249aed08dfc75a97fc,
         type: 3}
@@ -4199,11 +4199,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1575361166}
     m_Modifications:
-    - target: {fileID: 4458211732334230468, guid: 03b9d7ee70cf34a37ac7d001103831dc,
-        type: 3}
-      propertyPath: m_Name
-      value: Switch Setup
-      objectReference: {fileID: 0}
     - target: {fileID: 4458211732334230469, guid: 03b9d7ee70cf34a37ac7d001103831dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4278,6 +4273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458211732334230468, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: m_Name
+      value: Switch Setup
       objectReference: {fileID: 0}
     - target: {fileID: 4458211732774513101, guid: 03b9d7ee70cf34a37ac7d001103831dc,
         type: 3}
@@ -4585,6 +4585,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594135634}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1610524160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610524161}
+  m_Layer: 0
+  m_Name: respawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1610524161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610524160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 107, y: 6.245267, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1612632993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8132306865316939962, guid: 575a6dd0947a67a49ad92767c0339f55,
@@ -4606,7 +4636,7 @@ PrefabInstance:
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 71.1
+      value: 111.4
       objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
@@ -4658,6 +4688,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954962, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: respawn
+      value: 
+      objectReference: {fileID: 1610524160}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
 --- !u!1 &1641675610

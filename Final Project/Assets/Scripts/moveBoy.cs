@@ -99,6 +99,7 @@ public class moveBoy : MonoBehaviour
     public GameObject playerModel;
     public GameObject boxSwingParent;
     public Transform boxHoldPos;
+    public GameObject respawn;
 
     public float turnSpeed, aimWalkSpeed;
 
@@ -113,6 +114,7 @@ public class moveBoy : MonoBehaviour
     public bool pressedJump, pressedThrow, onLeftWall, onRightWall, pushing;
 
   private Collider theBoxCollider;
+
   public Collider leftCollider, rightCollider;
   private float boxFrictionInitial;
 
@@ -519,8 +521,10 @@ public class moveBoy : MonoBehaviour
 
         if (other.gameObject.CompareTag("killplane"))
         {
-            Scene scene = SceneManager.GetActiveScene(); 
-            SceneManager.LoadScene(scene.name);
+            //Scene scene = SceneManager.GetActiveScene(); 
+            //SceneManager.LoadScene(scene.name);
+            gameObject.transform.position = respawn.transform.position;
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
         
         /*if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)
