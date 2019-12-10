@@ -115,6 +115,8 @@ public class moveBoy : MonoBehaviour
   private Collider theBoxCollider;
   public Collider leftCollider, rightCollider;
   private float boxFrictionInitial;
+
+  public GameObject pauseCanvas;
   //private bool interactPressed;
   
     // Start is called before the first frame update
@@ -156,6 +158,7 @@ public class moveBoy : MonoBehaviour
         recallCoolDown = 1f;
         pushing = false;
         gamePaused = false;
+        
     }
 
     private void StartJumpDebug()
@@ -859,11 +862,13 @@ public class moveBoy : MonoBehaviour
         {
             Time.timeScale = 0;
             gamePaused = true;
+            pauseCanvas.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
             gamePaused = false;
+            pauseCanvas.SetActive(false);
         }
     }
     IEnumerator Mantle(int mantlePosition)
