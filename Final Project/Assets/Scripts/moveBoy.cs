@@ -550,7 +550,7 @@ public class moveBoy : MonoBehaviour
         {
             print("onleftwall");
             onLeftWall = true;
-            
+            onRightWall = false;
             /*if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
             {
                 StartCoroutine(LeftJump());
@@ -578,6 +578,7 @@ public class moveBoy : MonoBehaviour
         {
             print("Onrightwall");
             onRightWall = true;
+            onLeftWall = false;
             /*if (controls.Gameplay.Jump.triggered&& gcScript.grounded == false)
             {
                 StartCoroutine(RightJump());
