@@ -21,7 +21,7 @@ public class ButtonSwitch : MonoBehaviour
     void Start()
     {
         switchInitialPos = button.transform.position;
-        switchPressedPos = new Vector3(switchInitialPos.x, switchInitialPos.y - pressDistance, 0);
+        switchPressedPos = new Vector3(switchInitialPos.x, switchInitialPos.y - pressDistance, switchInitialPos.z);
         doorInitialPos = door.transform.position;
         
     }
