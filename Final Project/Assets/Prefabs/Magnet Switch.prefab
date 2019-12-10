@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &9089396324539490802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938412122792137532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb00051edbc0afc47b904155f5fe6dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotX: 450
+  rotY: 0
+  rotZ: 0
+  rotationSpeed: 1
+--- !u!114 &9089396324757928811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938412123509590624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb00051edbc0afc47b904155f5fe6dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotX: 500
+  rotY: 0
+  rotZ: 0
+  rotationSpeed: 1
 --- !u!1 &938412124115670853
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +41,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4278051319023101270}
+  - component: {fileID: 3987111845609806604}
+  - component: {fileID: 5820793873247042001}
   m_Layer: 0
   m_Name: Magnet Switch
   m_TagString: Untagged
@@ -24,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938412124115670853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.57, y: 0.083333, z: 14.97}
+  m_LocalPosition: {x: 6.57, y: 0.53, z: 14.97}
   m_LocalScale: {x: 1.6499071, y: 1.6499071, z: 1.6499071}
   m_Children:
   - {fileID: 8108669227750096378}
@@ -38,6 +72,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3987111845609806604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938412124115670853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 2.015184}
+  m_Center: {x: 0, y: 0.83, z: -0.5075928}
+--- !u!114 &5820793873247042001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938412124115670853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c7ea2ddae563f4ab4823ffa3313328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToActivate: {fileID: 0}
 --- !u!1 &2505252161376857576
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,38 +346,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &9089396324539490802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 938412122792137532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb00051edbc0afc47b904155f5fe6dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotX: 450
-  rotY: 0
-  rotZ: 0
-  rotationSpeed: 1
---- !u!114 &9089396324757928811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 938412123509590624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb00051edbc0afc47b904155f5fe6dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotX: 500
-  rotY: 0
-  rotZ: 0
-  rotationSpeed: 1
 --- !u!1 &9089396324807531013
 GameObject:
   m_ObjectHideFlags: 0

@@ -557,7 +557,7 @@ public class moveBoy : MonoBehaviour
         
         if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)
         {
-            print("onleftwall");
+            
             onLeftWall = true;
             onRightWall = false;
             /*if (controls.Gameplay.Jump.triggered && gcScript.grounded == false)
@@ -585,7 +585,7 @@ public class moveBoy : MonoBehaviour
 
         if (other.gameObject.CompareTag("rightwall")&&!grabbingLedge&&!mantling&&thrown)
         {
-            print("Onrightwall");
+           
             onRightWall = true;
             onLeftWall = false;
             /*if (controls.Gameplay.Jump.triggered&& gcScript.grounded == false)
