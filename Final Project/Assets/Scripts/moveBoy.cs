@@ -982,7 +982,7 @@ public class moveBoy : MonoBehaviour
             rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             facingLeft = true;
            
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.35f);
            // print(inControl);
             inControl = true;
            // print(inControl);
@@ -1000,7 +1000,7 @@ public class moveBoy : MonoBehaviour
         rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
         facingLeft = false;
            
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.35f);
        // print(inControl);
         inControl = true;
         //print(inControl);
