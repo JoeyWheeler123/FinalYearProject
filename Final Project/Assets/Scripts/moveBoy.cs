@@ -140,6 +140,8 @@ public class moveBoy : MonoBehaviour
         controls.Gameplay.AimController.performed += ctx => AimControllerPressed();
         controls.Gameplay.AimController.canceled += ctx => AimReleased();
         controls.Gameplay.Pause.performed += ctx => PauseTime();
+        controls.Gameplay.Restart.performed += ctx => RestartCurrentLevel();
+        controls.Gameplay.Quit.performed += ctx => QuitGame();
         
         boxCol = theBox.GetComponent<Collider>();
         movingHash = Animator.StringToHash("Moving");
@@ -285,6 +287,7 @@ public class moveBoy : MonoBehaviour
     
     void Start()
     {
+        Time.timeScale = 1f;
         maxSpeed = speed;
         boxPushSpeed = speed * boxPushMultiplier;
         theBox.transform.parent = null;
@@ -869,6 +872,22 @@ public class moveBoy : MonoBehaviour
             Time.timeScale = 1;
             gamePaused = false;
             pauseCanvas.SetActive(false);
+        }
+    }
+
+    private void QuitGame()
+    {
+        if (gamePaused)
+        {
+            Application.Quit();
+        }
+    }
+
+    private void RestartCurrentLevel()
+    {
+        if (gamePaused)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
     IEnumerator Mantle(int mantlePosition)
