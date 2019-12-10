@@ -120,7 +120,7 @@ public class heavyBox : MonoBehaviour
     {
         GlobalHeavyBoxCheck = false;
         heavyActive = false;
-        moveScript.heavyPull = true;
+        moveScript.heavyPull = false;
         moveScript.speed = normalSpeed;
         moveScript.jumpHeight = normalJump;
         moveScript.inverseRecallMultiplier = normalForce;
