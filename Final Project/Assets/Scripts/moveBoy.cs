@@ -121,9 +121,6 @@ public class moveBoy : MonoBehaviour
   public GameObject pauseCanvas;
 
     public GameObject boxSpawn;
-    public GameObject elevator;
-
-    private ConveyorScript conveyor;
 
   //private bool interactPressed;
   
@@ -168,8 +165,6 @@ public class moveBoy : MonoBehaviour
         recallCoolDown = 1f;
         pushing = false;
         gamePaused = false;
-
-        conveyor = elevator.GetComponent<ConveyorScript>();
         
     }
 
@@ -534,15 +529,6 @@ public class moveBoy : MonoBehaviour
             gameObject.transform.position = respawn.transform.position;
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             theBox.transform.position = boxSpawn.transform.position;
-
-            if(conveyor.sending == true)
-            {
-                elevator.SendMessage("Activate");
-            }
-            else
-            {
-                return;
-            }
         }
         
         /*if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)
