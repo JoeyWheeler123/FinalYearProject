@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public Object sceneToSwitch;
+    public string sceneToSwitch;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(sceneToSwitch.name);
+            SceneManager.LoadScene(sceneToSwitch);
         }
     }
 }
