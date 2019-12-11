@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5887,7 +5887,7 @@ Transform:
   - {fileID: 1239827674}
   - {fileID: 1984568198}
   m_Father: {fileID: 1526306212}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &1200997544
 PrefabInstance:
@@ -7262,13 +7262,13 @@ Transform:
   - {fileID: 947342830}
   - {fileID: 1395605239}
   - {fileID: 2111708324}
-  - {fileID: 311953304}
   - {fileID: 1527390808}
+  - {fileID: 311953304}
   - {fileID: 987078612}
-  - {fileID: 528263348}
   - {fileID: 1726209493}
-  - {fileID: 1854476226}
+  - {fileID: 528263348}
   - {fileID: 1200440577}
+  - {fileID: 1854476226}
   - {fileID: 1077766907}
   - {fileID: 743594262}
   - {fileID: 1451114601}
@@ -7310,7 +7310,7 @@ Transform:
   - {fileID: 2050590819}
   - {fileID: 1072261375}
   m_Father: {fileID: 1526306212}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1531759249
 PrefabInstance:
@@ -8685,7 +8685,7 @@ Transform:
   - {fileID: 1016499550}
   - {fileID: 1280578639}
   m_Father: {fileID: 1526306212}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1730222674
 GameObject:
@@ -10853,17 +10853,17 @@ PrefabInstance:
     - target: {fileID: 8295868989199464555, guid: 6268dc1c8f467f343b0c6a8f17de464f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8295868989199464555, guid: 6268dc1c8f467f343b0c6a8f17de464f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8295868989199464555, guid: 6268dc1c8f467f343b0c6a8f17de464f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.9
+      value: 2.82
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6268dc1c8f467f343b0c6a8f17de464f, type: 3}
@@ -11111,29 +11111,14 @@ PrefabInstance:
       objectReference: {fileID: 907547661}
     - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
-      propertyPath: platformPos
-      value: 
-      objectReference: {fileID: 281022579}
-    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
-        type: 3}
       propertyPath: boxSpawn
       value: 
       objectReference: {fileID: 2296326}
-    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
-        type: 3}
-      propertyPath: elevator
-      value: 
-      objectReference: {fileID: 281022579}
     - target: {fileID: 6452249445732954962, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: respawn
       value: 
       objectReference: {fileID: 907547661}
-    - target: {fileID: 6452249443830519854, guid: d046c0db52f440946903c36c4f45ba79,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
 --- !u!1 &2120513661
