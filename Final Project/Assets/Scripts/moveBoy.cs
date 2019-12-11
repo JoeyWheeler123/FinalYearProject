@@ -119,6 +119,12 @@ public class moveBoy : MonoBehaviour
   private float boxFrictionInitial;
 
   public GameObject pauseCanvas;
+
+    public GameObject boxSpawn;
+    public GameObject elevator;
+
+    private ConveyorScript conveyor;
+
   //private bool interactPressed;
   
     // Start is called before the first frame update
@@ -162,6 +168,8 @@ public class moveBoy : MonoBehaviour
         recallCoolDown = 1f;
         pushing = false;
         gamePaused = false;
+
+        conveyor = elevator.GetComponent<ConveyorScript>();
         
     }
 
@@ -525,6 +533,16 @@ public class moveBoy : MonoBehaviour
             //SceneManager.LoadScene(scene.name);
             gameObject.transform.position = respawn.transform.position;
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            theBox.transform.position = boxSpawn.transform.position;
+
+            if(conveyor.sending == true)
+            {
+                elevator.SendMessage("Activate");
+            }
+            else
+            {
+                return;
+            }
         }
         
         /*if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)

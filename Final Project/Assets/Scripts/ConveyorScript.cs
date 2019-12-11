@@ -14,7 +14,7 @@ public class ConveyorScript : MonoBehaviour
     public bool moveOnStart;
     public bool autoReturn;
 
-    private bool sending, returning;
+    public bool sending, returning;
     
     // Start is called before the first frame update
     void Start()
