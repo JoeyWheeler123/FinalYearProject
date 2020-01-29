@@ -710,9 +710,16 @@ public class moveBoy : MonoBehaviour
                 rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             }
             */
-            rb.velocity = new Vector3(velocity.x, boxJumpMultiplier*jumpHeight, 0);
-            rbox.velocity =  new Vector3(0, -jumpHeight, 0);
-            StartCoroutine(BoxCoolDown());
+           if (energyFull)
+           {
+               rb.velocity = new Vector3(velocity.x, boxJumpMultiplier * jumpHeight, 0);
+               rbox.velocity = new Vector3(0, -jumpHeight, 0);
+               StartCoroutine(BoxCoolDown());
+           }
+           else
+           {
+               rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+           }
 
         }
         else
