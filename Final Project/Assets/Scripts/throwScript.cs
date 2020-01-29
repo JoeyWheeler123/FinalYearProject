@@ -15,6 +15,7 @@ public class throwScript : MonoBehaviour
     public moveBoy moveScript;
     public Vector3 velocityLastFrame;
     public GameObject respawn;
+    public bool grounded;
     public enum ThrowPoint
 
     {
@@ -155,6 +156,22 @@ public class throwScript : MonoBehaviour
         {
             gameObject.transform.position = respawn.transform.position;
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+        }
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("ground"))
+        {
+            grounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("ground"))
+        {
+            grounded = false;
         }
     }
 }

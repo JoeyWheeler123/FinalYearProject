@@ -35459,9 +35459,11 @@ MonoBehaviour:
   pushIk: {fileID: 988137946}
   mantling: 0
   grabbingLedge: 0
+  boxJumpMultiplier: 1.3
   grabPos: {x: 0, y: 0, z: 0}
   facingLeft: 0
   coyoteTime: 0.15
+  energyRechargeTime: 1.5
   inverseRecallMultiplier: 0.15
   anim: {fileID: 1941346839164490261}
   playerModel: {fileID: 6452249444621444949}
@@ -36373,6 +36375,7 @@ MonoBehaviour:
   moveScript: {fileID: 6452249444098570574}
   velocityLastFrame: {x: 0, y: 0, z: 0}
   respawn: {fileID: 0}
+  grounded: 0
 --- !u!54 &6452249445732954973
 Rigidbody:
   m_ObjectHideFlags: 0

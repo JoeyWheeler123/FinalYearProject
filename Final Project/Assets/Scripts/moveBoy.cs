@@ -67,18 +67,18 @@ public class moveBoy : MonoBehaviour
     public throwScript throwS;
     public Rig rigScript, pushIk;
     private bool inControl;
-
+    
     public bool mantling;
 
     public bool grabbingLedge;
-
+    public float boxJumpMultiplier;
     public Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling, canJump, hasBox, dismantling, gamePaused;
+    private bool recalling, canJump, hasBox, dismantling, gamePaused, energyFull;
     public bool facingLeft;
 
-    public float coyoteTime;
+    public float coyoteTime, energyRechargeTime;
 
     private float timeLeftToJump;
 
@@ -162,7 +162,7 @@ public class moveBoy : MonoBehaviour
         theBoxCollider = theBox.GetComponent<Collider>();
         boxFrictionInitial = theBoxCollider.material.dynamicFriction;
 
-        recallCoolDown = 1f;
+        energyFull = true;
         pushing = false;
         gamePaused = false;
         
@@ -696,7 +696,7 @@ public class moveBoy : MonoBehaviour
     {
         inControl = true;
         //rb.AddForce (Vector2.up * jumpHeight, ForceMode.VelocityChange);
-        if (gcScript.onBox)
+        if (gcScript.onBox&&!throwS.grounded)
         {
             //this was to reduce jump box spam but feels clunky needs revision.
             //recallCoolDown = 0f;
@@ -710,9 +710,10 @@ public class moveBoy : MonoBehaviour
                 rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             }
             */
-            rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
+            rb.velocity = new Vector3(velocity.x, boxJumpMultiplier*jumpHeight, 0);
             rbox.velocity =  new Vector3(0, -jumpHeight, 0);
-            
+            StartCoroutine(BoxCoolDown());
+
         }
         else
         {
@@ -763,7 +764,8 @@ public class moveBoy : MonoBehaviour
 
     public void BoxRecall()
     {
-        
+        if (energyFull)
+        {
             recalling = true;
             //print("pull");
             boxTowardPlayer = transform.position - theBox.transform.position;
@@ -780,7 +782,8 @@ public class moveBoy : MonoBehaviour
                     //thrown = false;
                 }
             }
-        
+        }
+
     }
 
     public void BoxFriction()
@@ -1023,6 +1026,21 @@ public class moveBoy : MonoBehaviour
        yield return null;
    }
 
-   
+   IEnumerator BoxCoolDown()
+   {
+       energyFull = false;
+       float coolDownTimer = 0;
+       while (coolDownTimer < energyRechargeTime)
+       {
+           coolDownTimer += Time.deltaTime;
+           yield return null;
+       }
+
+       if (coolDownTimer >= energyRechargeTime)
+       {
+           energyFull = true;
+       }
+       yield return null;
+   }
 }
 
