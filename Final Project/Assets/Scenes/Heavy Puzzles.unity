@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -8729,6 +8729,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Post-process Volume
       objectReference: {fileID: 0}
+    - target: {fileID: 3153270743516772289, guid: d6c3980a8cd85df4a9b1b658ccd89497,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3153270743516772290, guid: d6c3980a8cd85df4a9b1b658ccd89497,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10865,6 +10870,56 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.14
       objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Range
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 2.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.17174721
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561757741916177, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561757741916177, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Range
+      value: 2.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561757741916177, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.09343529
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561757741916177, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561757741916177, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6268dc1c8f467f343b0c6a8f17de464f, type: 3}
 --- !u!4 &2087232580 stripped
@@ -11104,21 +11159,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
-        type: 3}
-      propertyPath: respawn
-      value: 
-      objectReference: {fileID: 907547661}
-    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
-        type: 3}
-      propertyPath: boxSpawn
-      value: 
-      objectReference: {fileID: 2296326}
-    - target: {fileID: 6452249445732954962, guid: d046c0db52f440946903c36c4f45ba79,
-        type: 3}
-      propertyPath: respawn
-      value: 
-      objectReference: {fileID: 907547661}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
 --- !u!1 &2120513661
