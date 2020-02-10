@@ -23,7 +23,9 @@ public class Bouncer : MonoBehaviour
             print("BOUNCY BOX");
             Rigidbody boxRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collisionDir = other.contacts[0].normal;
-            boxRb.AddForce(-collisionDir*70f*other.relativeVelocity.magnitude);
+            boxRb.isKinematic = true;
+            boxRb.isKinematic = false;
+            boxRb.AddForce(Vector3.up*70f*other.relativeVelocity.magnitude);
         }
     }
 }
