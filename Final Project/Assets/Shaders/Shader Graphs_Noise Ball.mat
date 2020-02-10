@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_The_Box_HDRP
-  m_Shader: {fileID: -6465566751694194690, guid: f4bf0f5092b38cd47a6d4e498fccafda,
+  m_Name: Shader Graphs_Noise Ball
+  m_Shader: {fileID: -6465566751694194690, guid: 1069ba6071faa9641b0ef3ea41a29407,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -22,24 +22,10 @@ Material:
   - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - Texture2D_7A396FE8:
-        m_Texture: {fileID: 2800000, guid: 58df64467d38e4b4aa87d160901bda64, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_7C93CF1E:
-        m_Texture: {fileID: 2800000, guid: c2d13fde602191942bb9174ae23dae1a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_BDA198E4:
-        m_Texture: {fileID: 2800000, guid: c2d13fde602191942bb9174ae23dae1a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_BF52D055:
-        m_Texture: {fileID: 2800000, guid: 58df64467d38e4b4aa87d160901bda64, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Floats:
+    - Vector1_464C95C: 0.3
+    - Vector1_BA15DA7C: 1
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -74,11 +60,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_949EE3D3: {r: 0.9593928, g: 1, b: 0, a: 0}
-    - Color_B582F734: {r: 0, g: 1, b: 0.96084565, a: 0}
-    - Vector2_7A82FBA9: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_A6ABDCCE: {r: 0, g: 0.1, b: 0, a: 0}
-    - Vector2_F324B01B: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_F5EC0D2C: {r: 0, g: 0.1, b: 0, a: 0}
+    - Color_55D2FB1B: {r: 0.9384004, g: 1, b: 0, a: 0}
+    - Vector2_609C60F1: {r: 2, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
