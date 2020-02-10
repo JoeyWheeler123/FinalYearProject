@@ -21,6 +21,7 @@ public class moveBoy : MonoBehaviour
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     public float speed = 9;
 
+    private bool onIce;
     private float boxPushSpeed;
     public float boxPushMultiplier = 0.5f;
     public float maxAirborneSpeed;
@@ -63,7 +64,7 @@ public class moveBoy : MonoBehaviour
     public float grabDistance;
     public float moveInputX, moveInputY;
     public float wallSlideModifier;
-
+    public float iceDeceleration;
     public throwScript throwS;
     public Rig rigScript, pushIk;
     private bool inControl;
@@ -658,9 +659,14 @@ public class moveBoy : MonoBehaviour
             anim.SetFloat(walkMultiplierHash,(Mathf.Abs(moveInputX)*speed/maxSpeed));
             //anim.SetBool("Moving",true);
         }
-        else
+        else if(!onIce)
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
+            anim.SetBool(movingHash, false);
+        }
+        else
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, 0, iceDeceleration * Time.deltaTime);
             anim.SetBool(movingHash, false);
         }
     }
@@ -907,6 +913,16 @@ public class moveBoy : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    public void IceOn()
+    {
+        onIce = true;
+    }
+
+    public void IceOff()
+    {
+        onIce = false;
     }
     IEnumerator Mantle(int mantlePosition)
     {
