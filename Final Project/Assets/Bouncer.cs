@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bouncer : MonoBehaviour
 {
+    public float defaultBounceStrength =25f;
+
+    public float overallModifier = 35f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +23,13 @@ public class Bouncer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("box"))
         {
-            print("BOUNCY BOX");
+            //print("BOUNCY BOX");
             Rigidbody boxRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collisionDir = other.contacts[0].normal;
             boxRb.isKinematic = true;
             boxRb.isKinematic = false;
-            boxRb.AddForce(Vector3.up*70f*other.relativeVelocity.magnitude);
+            print(other.relativeVelocity.magnitude);
+            boxRb.AddForce((Vector3.up*overallModifier*defaultBounceStrength)+(Vector3.up*overallModifier*other.relativeVelocity.magnitude));
         }
     }
 }
