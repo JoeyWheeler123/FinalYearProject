@@ -32,7 +32,10 @@ public class Bouncer : MonoBehaviour
             boxRb.isKinematic = false;
             box = other.gameObject;
             print(other.relativeVelocity.magnitude);
-            boxRb.AddForce((Vector3.up*overallModifier*defaultBounceStrength)+(Vector3.up*overallModifier*other.relativeVelocity.magnitude));
+            float bounceHeight = defaultBounceStrength + (other.relativeVelocity.magnitude * overallModifier);
+            boxRb.velocity = new Vector3(boxRb.velocity.x,bounceHeight,boxRb.velocity.z);
+           // boxRb.AddForce((Vector3.up*overallModifier*other.relativeVelocity.magnitude));
+            //(Vector3.up*overallModifier*defaultBounceStrength)
             StartCoroutine(RotateBox());
         }
     }

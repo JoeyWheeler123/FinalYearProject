@@ -18,10 +18,7 @@ public class IceScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.SendMessage("IceOn");
-        }
+      
     }
 
     private void OnTriggerStay(Collider other)
@@ -29,6 +26,11 @@ public class IceScript : MonoBehaviour
         if (other.gameObject.CompareTag("box"))
         {
             other.material.dynamicFriction = 0;
+        }
+        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.SendMessage("IceOn");
         }
         
     }

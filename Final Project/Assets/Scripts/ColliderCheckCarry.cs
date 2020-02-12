@@ -32,7 +32,7 @@ public class ColliderCheckCarry : MonoBehaviour
         if (Physics.Raycast(rayPos.position, transform.TransformDirection(Vector3.down), out hit, distanceCheck, layerMask))
         {
             Debug.DrawRay(rayPos.position, transform.TransformDirection(Vector3.down) * distanceCheck, Color.yellow);
-            Debug.Log("Did Hit");
+//            Debug.Log("Did Hit");
             if (playerRb.velocity.y < 0)
             {
                 print("falltime");

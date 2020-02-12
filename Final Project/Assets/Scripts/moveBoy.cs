@@ -34,9 +34,11 @@ public class moveBoy : MonoBehaviour
 
     [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
     float groundDeceleration = 70;
-
+    
     public float airDeceleration;
-
+    public float iceAcceleration;
+    public float iceDeceleration;
+    
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     public float jumpHeight = 4;
 
@@ -64,7 +66,7 @@ public class moveBoy : MonoBehaviour
     public float grabDistance;
     public float moveInputX, moveInputY;
     public float wallSlideModifier;
-    public float iceDeceleration;
+    
     public throwScript throwS;
     public Rig rigScript, pushIk;
     private bool inControl;
@@ -654,7 +656,39 @@ public class moveBoy : MonoBehaviour
         }
         else if (moveInputX != 0)
         {
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
+            if (onIce)
+            {
+                if (moveInputX < 0)
+                {
+                    if (velocity.x >= -speed)
+                    {
+                        velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, iceAcceleration * Time.deltaTime);
+                        anim.SetBool(movingHash, false);
+                    }
+                    else
+                    {
+                        velocity.x = Mathf.MoveTowards(velocity.x, 0, iceDeceleration * Time.deltaTime);
+                    }
+                }
+                
+                if (moveInputX > 0)
+                {
+                    if (velocity.x <= speed)
+                    {
+                        velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, iceAcceleration * Time.deltaTime);
+                        anim.SetBool(movingHash, false);
+                    }
+                    else
+                    {
+                        velocity.x = Mathf.MoveTowards(velocity.x, 0, iceDeceleration * Time.deltaTime);
+                    }
+                }
+            }
+            else
+            {
+                velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
+            }
+
             anim.SetBool(movingHash,true);
             anim.SetFloat(walkMultiplierHash,(Mathf.Abs(moveInputX)*speed/maxSpeed));
             //anim.SetBool("Moving",true);
