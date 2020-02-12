@@ -34,3 +34,21 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+
+#fmod stuff
+Assets/FMODStudioCache.asset
+Assets/StreamingAssets/*.bank
+fmod.log
+fmod_editor.log
+
+# Make sure to change the project name
+FinalProject/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
+FinalProject/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset.meta
+
+#If your putting the fmod project in the git repo 
+#ZephAudio is the name of the fmod project folder
+!NamnokhAudio/*
+!NamnokhAudio/
+!NamnokhAudio/Build/
+!NamnokhAudio/Build/*
