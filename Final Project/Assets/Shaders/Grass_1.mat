@@ -7,48 +7,45 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Grass 1
-  m_Shader: {fileID: -6465566751694194690, guid: 2264e43a9167b724982662ef4043fcea,
+  m_Name: Grass_1
+  m_Shader: {fileID: -6465566751694194690, guid: 1069ba6071faa9641b0ef3ea41a29407,
     type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _DOUBLESIDED_ON _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
-  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_1AC19AD1:
-        m_Texture: {fileID: 2800000, guid: cc780895711c8e144908d95a42f3b8bc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_576068F4:
-        m_Texture: {fileID: 2800000, guid: 9b1aaaa3ae813d54c99c4f1bb3f81e95, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_7878ED06:
+    - Texture2D_5EDA56ED:
         m_Texture: {fileID: 2800000, guid: fe9d9c173152c3745a6b6ae6a2b25d20, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_A26B53EA:
+        m_Texture: {fileID: 2800000, guid: cc780895711c8e144908d95a42f3b8bc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_DE74057E:
+        m_Texture: {fileID: 2800000, guid: 9b1aaaa3ae813d54c99c4f1bb3f81e95, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_1C93F088: 100
-    - Vector1_87A4B9C3: 100
-    - _AlphaCutoff: 0.5
+    - Vector1_464C95C: 0.3
+    - Vector1_BA15DA7C: 0.3
     - _AlphaCutoffEnable: 1
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
-    - _DoubleSidedEnable: 1
-    - _DoubleSidedNormalMode: 0
-    - _DstBlend: 10
+    - _CullMode: 2
+    - _CullModeForward: 2
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedNormalMode: 2
+    - _DstBlend: 0
     - _ReceivesSSR: 1
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
@@ -69,14 +66,15 @@ Material:
     - _TransparentSortPriority: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 3
+    - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Vector2_E4064DED: {r: 100, g: 100, b: 100, a: 100}
-    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
+    - Color_55D2FB1B: {r: 0.21888566, g: 1, b: 0, a: 0}
+    - Vector2_609C60F1: {r: 2, g: 0, b: 0, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &6448334191637024115
+--- !u!114 &4179410486258970732
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
