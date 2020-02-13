@@ -43,11 +43,13 @@ public class magneticAttractor : MonoBehaviour
             if (distanceMultiplier <= snapThreshold&&firstTimeSnap)
             {
                 snapped = true;
-                
+               
+
             }
             else if (distanceMultiplier <= snapThreshold&&!moveScript.pressedThrow&&!firstTimeSnap)
             {
                 snapped = true;
+                
             }
             
         }
@@ -70,6 +72,8 @@ public class magneticAttractor : MonoBehaviour
         {
             if (attracted != null&&attractedRb!=null&&moveScript.thrown)
             {
+                print("pulloff");
+                Debug.Log(firstTimeSnap);
                 attractedRb.isKinematic = false;
                 ResetBox();
             }
@@ -81,6 +85,17 @@ public class magneticAttractor : MonoBehaviour
         {
             
             rb.connectedBody = playerRb;
+        }
+
+        if (attracted != null)
+        {
+            if (Vector3.Distance(attracted.transform.position, this.transform.position)>=snapThreshold)
+            {
+                attracted = null;
+                attractedRb = null;
+                firstTimeSnap = true;
+                print("reset");
+            }
         }
     }
 
@@ -95,10 +110,13 @@ public class magneticAttractor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        attracted = null;
-        attractedRb = null;
-        firstTimeSnap = true;
-        print("reset");
+        if (other.gameObject.CompareTag("box"))
+        {
+           // attracted = null;
+          //  attractedRb = null;
+            //firstTimeSnap = true;
+           // print("reset");
+        }
     }
 
     public void ResetBox()
