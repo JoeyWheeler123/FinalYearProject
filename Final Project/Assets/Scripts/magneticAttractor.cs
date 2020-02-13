@@ -75,7 +75,7 @@ public class magneticAttractor : MonoBehaviour
                 print("pulloff");
                 Debug.Log(firstTimeSnap);
                 attractedRb.isKinematic = false;
-                ResetBox();
+                snapped = false;
             }
 
            
@@ -89,8 +89,9 @@ public class magneticAttractor : MonoBehaviour
 
         if (attracted != null)
         {
-            if (Vector3.Distance(attracted.transform.position, this.transform.position)>=snapThreshold)
+            if (Vector3.Distance(attracted.transform.position, this.transform.position)>=snapThreshold*2)
             {
+                ResetBox();
                 attracted = null;
                 attractedRb = null;
                 firstTimeSnap = true;
