@@ -15,13 +15,18 @@ public class ConveyorScript : MonoBehaviour
     public bool autoReturn;
 
     public bool sending, returning;
-    
+
+    public bool nestedSwitch;
+
+    public GameObject nestedLayer;
     // Start is called before the first frame update
     void Start()
     {
+       
         sending = false;
         returning = false;
         startPos = transform.position;
+        
         if (moveOnStart)
         {
             sending = true;
@@ -51,17 +56,35 @@ public class ConveyorScript : MonoBehaviour
         {
             //sending = false;
             //print("returning");
-            transform.position = Vector3.MoveTowards(transform.position, startPos, Time.deltaTime * speed);
-            if (Vector3.Distance(transform.position, startPos) < 0.1f)
+            if (!nestedLayer)
             {
-                if (moveOnStart)
+                transform.position = Vector3.MoveTowards(transform.position, startPos, Time.deltaTime * speed);
+                if (Vector3.Distance(transform.position, startPos) < 0.1f)
                 {
-                    sending = true;
-                    returning = false;
+                    if (moveOnStart)
+                    {
+                        sending = true;
+                        returning = false;
+                    }
+                
+                
                 }
-                
-                
             }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, nestedLayer.transform.position, Time.deltaTime * speed);
+                if (Vector3.Distance(transform.position, nestedLayer.transform.position) < 0.1f)
+                {
+                    if (moveOnStart)
+                    {
+                        sending = true;
+                        returning = false;
+                    }
+                
+                
+                }
+            }
+            
         }
         
         
