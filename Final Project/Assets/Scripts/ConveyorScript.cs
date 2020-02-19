@@ -19,6 +19,8 @@ public class ConveyorScript : MonoBehaviour
     public bool nestedSwitch;
 
     public GameObject nestedLayer;
+
+    public bool launcher = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -93,7 +95,10 @@ public class ConveyorScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        other.transform.parent = (this.transform);
+        if (!launcher)
+        {
+            other.transform.parent = (this.transform);
+        }
     }
     
     private void OnCollisionExit(Collision other)
