@@ -98,9 +98,9 @@ MonoBehaviour:
   baseHeight:
     m_OverrideState: 1
     m_Value: -18.3
-  meanHeight:
+  maximumHeight:
     m_OverrideState: 0
-    m_Value: 42.6
+    m_Value: 10
   anisotropy:
     m_OverrideState: 0
     m_Value: 0
@@ -132,6 +132,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 500
     min: 0
+  directionalTransmissionMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
   cascadeShadowSplitCount:
     m_OverrideState: 1
     m_Value: 4
@@ -191,6 +196,9 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
     min: 0
+  upperHemisphereLuxColor:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
   desiredLuxValue:
     m_OverrideState: 0
     m_Value: 20000
@@ -206,13 +214,13 @@ MonoBehaviour:
     m_Value: 0
   top:
     m_OverrideState: 1
-    m_Value: {r: 0.068605356, g: 0.047566377, b: 0.10793909, a: 1}
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   middle:
     m_OverrideState: 1
-    m_Value: {r: 0.57758063, g: 0.7156938, b: 0.92158204, a: 1}
+    m_Value: {r: 0.24959949, g: 0.38193718, b: 0.6698113, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
