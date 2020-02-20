@@ -68,6 +68,7 @@ public class moveBoy : MonoBehaviour
     public float wallSlideModifier;
     
     public throwScript throwS;
+    private BoxProperties boxPropertiesScript;
     public Rig rigScript, pushIk;
     private bool inControl;
     
@@ -306,9 +307,9 @@ public class moveBoy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
         curMov.aiming = false;
-        
-        
-        
+
+        boxPropertiesScript = FindObjectOfType<BoxProperties>();
+
     }
 
     // Update is called once per frame
@@ -1086,6 +1087,7 @@ public class moveBoy : MonoBehaviour
    IEnumerator BoxCoolDown()
    {
        energyFull = false;
+       boxPropertiesScript.StartCoroutine("Recharge");
        float coolDownTimer = 0;
        while (coolDownTimer < energyRechargeTime)
        {
