@@ -7,9 +7,9 @@ public class PanelSwitch : MonoBehaviour
 {
     private PlayerControls controls;
     public GameObject objectToActivate;
-
+    public bool tutorialObject;
     private bool playerInRange;
-
+    public TutorialPopUp tutorialScript;
     private float backUpTime;
     // Start is called before the first frame update
 
@@ -51,6 +51,11 @@ public class PanelSwitch : MonoBehaviour
     {
        // print("Interact");
         objectToActivate.SendMessage("Activate");
+        
+        if (tutorialObject)
+        {
+            tutorialScript.actionCompleted = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
