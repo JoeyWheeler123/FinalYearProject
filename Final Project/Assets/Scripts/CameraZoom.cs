@@ -10,7 +10,7 @@ public class CameraZoom : MonoBehaviour
     private float originalZoom;
     private Vector3 originalPos, newPos;
 
-    public bool inArea;
+    //public bool inArea;
 
     public float cameraSpeed;
     // Start is called before the first frame update
