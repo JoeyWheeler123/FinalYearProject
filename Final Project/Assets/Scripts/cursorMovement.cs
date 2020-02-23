@@ -36,6 +36,8 @@ public class cursorMovement : MonoBehaviour
     public Transform cameraDefaultPosition;
 
     public LineRenderer rend;
+
+    public float cameraMovementSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -133,7 +135,7 @@ public class cursorMovement : MonoBehaviour
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position, new Vector3(
                         projectedBox.transform.position.x,
                         Mathf.Clamp(projectedBox.transform.position.y,minY,Mathf.Infinity),
-                        cameraDefaultPosition.position.z), Time.deltaTime * 10f);
+                        cameraDefaultPosition.position.z), Time.deltaTime *cameraMovementSpeed);
                // Vector3 camPosClamped = new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
 
                // cam.transform.position = Vector3.Lerp(cam.transform.position, camPosClamped, Time.deltaTime * 10f);
@@ -145,7 +147,7 @@ public class cursorMovement : MonoBehaviour
            //leftBox.SetActive(false);
             //rightBox.SetActive(false);
             //projectedBox.SetActive(false);
-            cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*10f);
+            cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*cameraMovementSpeed);
             boxRenderer.enabled = false;
         }
 
