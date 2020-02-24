@@ -43,6 +43,7 @@ public class heavyBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        normalColor = rendererBox.GetComponent<Renderer>().material.GetColor("Color_C5A9FA1D");
         GlobalHeavyBoxCheck = false;
         moveScript = player.GetComponent<moveBoy>();
         rBox = box.GetComponent<Rigidbody>();
@@ -113,7 +114,7 @@ public class heavyBox : MonoBehaviour
         //boxMass = 5f;
         box.GetComponent<Rigidbody>().mass = fat;
         enchant.Play();
-        rendererBox.GetComponent<Renderer>().material.SetColor("Color_EB8DB5F9", heavyColor);
+        rendererBox.GetComponent<Renderer>().material.SetColor("Color_C5A9FA1D", heavyColor);
     }
 
     public void Normal()
@@ -127,7 +128,7 @@ public class heavyBox : MonoBehaviour
         moveScript.heavy = false;
         rBox.mass = boxMass;
         disenchant.Play();
-        rendererBox.GetComponent<Renderer>().material.SetColor("Color_EB8DB5F9", normalColor);
+        rendererBox.GetComponent<Renderer>().material.SetColor("Color_C5A9FA1D", normalColor);
     }
 
     public void Activate()
