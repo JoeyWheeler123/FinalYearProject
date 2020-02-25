@@ -29,7 +29,7 @@ public class BoxProperties : MonoBehaviour
         
     }
 
-    void Apparate(float xPos,float yPos)
+    public void Apparate(float xPos,float yPos)
     {
         rb.isKinematic = true;
         rb.isKinematic = false;
