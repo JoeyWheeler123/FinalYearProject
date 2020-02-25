@@ -13,9 +13,12 @@ public class BoxProperties : MonoBehaviour
     private moveBoy moveScript;
 
     public ParticleSystem enchant, disenchant;
+
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         moveScript = FindObjectOfType<moveBoy>();
         //StartCoroutine(Recharge());
     }
@@ -26,6 +29,12 @@ public class BoxProperties : MonoBehaviour
         
     }
 
+    void Apparate(float xPos,float yPos)
+    {
+        rb.isKinematic = true;
+        rb.isKinematic = false;
+        transform.position = new Vector3(xPos, yPos, 0);
+    }
     IEnumerator Recharge()
     {
         enchant.Play();
