@@ -20,11 +20,13 @@ public class FirstSceneBoxEnable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         moveScript = FindObjectOfType<moveBoy>();
         camScript = FindObjectOfType<cursorMovement>();
         if (SavePoint.currentCheckpoint == 0)
         {
-           StartCoroutine(OpeningScene()) ;
+            theBox.SetActive(false);
+          // StartCoroutine(OpeningScene()) ;
         }
     }
 
