@@ -18,8 +18,14 @@ public class SavePoint : MonoBehaviour
     public static int currentCheckpoint=0;
     public int checkPointNumber;
     public float originalBrightness, activationBrightness, finalBrightness, decayRate;
+    public bool customStart;
+    
     void Start()
     {
+        if (customStart)
+        {
+            currentCheckpoint = checkPointNumber;
+        }
         rend = GetComponent<Renderer>();
         Color tempColour;
         
