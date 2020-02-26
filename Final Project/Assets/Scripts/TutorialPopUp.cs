@@ -8,7 +8,7 @@ public class TutorialPopUp : MonoBehaviour
     public GameObject imageToDisplay;
     private GameObject player;
     public Transform canvasPosition;
-    public bool magnetInteract, recall, jump, wallClimb;
+    public bool magnetInteract, recall, jump, wallJump,throwBox;
     public bool actionCompleted = false;
 
     private bool withinRange;
@@ -18,6 +18,8 @@ public class TutorialPopUp : MonoBehaviour
     public float distanceToActivate;
 
     private moveBoy moveScript;
+
+    public ButtonSwitch buttonScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,12 +64,35 @@ public class TutorialPopUp : MonoBehaviour
                     actionCompleted = true;
                 }
             }
+
+            if (wallJump)
+            {
+                if (!moveScript.inControl)
+                {
+                    actionCompleted = true;
+                }
+            }
+
+            if (throwBox)
+            {
+                if (buttonScript.opening)
+                {
+                    actionCompleted=true;
+                }
+            }
         }
         else
         {
            
             imageToDisplay.SetActive(false);
         }
+    }
+    
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = new Color(255,255,255,0.2f);
+        Gizmos.DrawSphere(transform.position, distanceToActivate);
     }
     
 }

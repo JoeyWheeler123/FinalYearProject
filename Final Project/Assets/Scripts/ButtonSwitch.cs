@@ -16,7 +16,7 @@ public class ButtonSwitch : MonoBehaviour
 
     private Vector3 doorInitialPos, switchInitialPos, switchPressedPos;
 
-    private bool opening, closing;
+    public bool opening, closing;
     // Start is called before the first frame update
     void Start()
     {

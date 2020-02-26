@@ -17,9 +17,14 @@ public class BoxProperties : MonoBehaviour
     private Rigidbody rb;
 
     public float colourChangeRate;
+
+    public float energy;
+
+    public float energyPullMultiplier;
     // Start is called before the first frame update
     void Start()
     {
+        energy = 100;
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
         moveScript = FindObjectOfType<moveBoy>();
@@ -30,7 +35,15 @@ public class BoxProperties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (energy <= 0)
+        {
+            moveScript.StartCoroutine("BoxCoolDown");
+        }
+
+        if (energy >= 100)
+        {
+            energy = 100;
+        }
     }
 
     public void Apparate(float xPos,float yPos)
@@ -61,6 +74,7 @@ public class BoxProperties : MonoBehaviour
             
         }
         
+        energy = 100;
         v = 10f;
         rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
         yield return new WaitForSeconds(0.5f);

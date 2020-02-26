@@ -70,7 +70,7 @@ public class moveBoy : MonoBehaviour
     public throwScript throwS;
     private BoxProperties boxPropertiesScript;
     public Rig rigScript, pushIk;
-    private bool inControl;
+    public bool inControl;
     
     public bool mantling;
 
@@ -959,6 +959,11 @@ public class moveBoy : MonoBehaviour
     {
         onIce = false;
     }
+
+    public void SuperPull()
+    {
+        rb.AddForce(-boxTowardPlayer * Time.deltaTime * inverseRecallMultiplier * recallSpeed*boxPropertiesScript.energyPullMultiplier, ForceMode.Force);
+    }
     IEnumerator Mantle(int mantlePosition)
     {
         float transformY = transform.position.y;
@@ -1101,5 +1106,7 @@ public class moveBoy : MonoBehaviour
        }
        yield return null;
    }
+   
+   
 }
 

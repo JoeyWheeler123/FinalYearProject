@@ -40,9 +40,18 @@ public class heavyBox : MonoBehaviour
     private Rigidbody rBox;
 
     public static bool GlobalHeavyBoxCheck;
+
+    public bool experimentalRecharge;
+
+    public float energyDrainRate;
+
+    
+
+    private BoxProperties boxProperties;
     // Start is called before the first frame update
     void Start()
     {
+        boxProperties = FindObjectOfType<BoxProperties>();
         normalColor = rendererBox.GetComponent<Renderer>().material.GetColor("Color_C5A9FA1D");
         GlobalHeavyBoxCheck = false;
         moveScript = FindObjectOfType<moveBoy>();
@@ -86,6 +95,19 @@ public class heavyBox : MonoBehaviour
         if (Input.GetKey(KeyCode.E) && heavyActive == true)
         {
            // Normal();
+        }
+
+        if (moveScript.pressedThrow&&heavyActive&&experimentalRecharge)
+        {
+            boxProperties.energy -= energyDrainRate*Time.deltaTime;
+            if (boxProperties.energy <= 0)
+            {
+                moveScript.SuperPull();
+            }
+        }
+        else
+        {
+           // boxProperties.energy += energyDrainRate*Time.deltaTime;
         }
     }
 
