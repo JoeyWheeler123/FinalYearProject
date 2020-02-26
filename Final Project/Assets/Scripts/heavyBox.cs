@@ -45,7 +45,7 @@ public class heavyBox : MonoBehaviour
     {
         normalColor = rendererBox.GetComponent<Renderer>().material.GetColor("Color_C5A9FA1D");
         GlobalHeavyBoxCheck = false;
-        moveScript = player.GetComponent<moveBoy>();
+        moveScript = FindObjectOfType<moveBoy>();
         rBox = box.GetComponent<Rigidbody>();
         heavyActive = false;
 
