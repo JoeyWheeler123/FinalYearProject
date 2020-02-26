@@ -5,7 +5,8 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour
 {
     
-    Vector3 spawnPoint;
+    Vector3 spawnPointBox;
+    private Vector3 spawnPointPlayer;
     private BoxProperties boxProperties;
 
     private moveBoy moveBoyScript;
@@ -14,7 +15,7 @@ public class SavePoint : MonoBehaviour
     private float h, s, v;
     // Start is called before the first frame update
     private Renderer rend;
-    public static int currentCheckpoint;
+    public static int currentCheckpoint=0;
     public int checkPointNumber;
     public float originalBrightness, activationBrightness, finalBrightness, decayRate;
     void Start()
@@ -30,7 +31,13 @@ public class SavePoint : MonoBehaviour
         moveBoyScript = FindObjectOfType<moveBoy>();
         boxProperties = FindObjectOfType<BoxProperties>();
         
-        spawnPoint = new Vector3(transform.position.x,transform.position.y+3f,0);
+        spawnPointBox = new Vector3(transform.position.x,transform.position.y+3f,0);
+        spawnPointPlayer = new Vector3(transform.position.x - 1f, transform.position.y, 0);
+        if (checkPointNumber == currentCheckpoint)
+        {
+            SpawnPlayer(spawnPointPlayer);
+            
+        }
     }
 
     // Update is called once per frame
@@ -44,16 +51,26 @@ public class SavePoint : MonoBehaviour
     {
         if (moveBoyScript.thrown)
         {
-            boxProperties.Apparate(spawnPoint.x, spawnPoint.y);
+            boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
         }
 
+    }
+
+    void SpawnPlayer(Vector3 spawnPosition)
+    {
+        moveBoyScript.gameObject.transform.position = spawnPosition;
+        Activate();
+        StartCoroutine(Initiate());
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Initiate());
+            if (checkPointNumber != currentCheckpoint)
+            {
+                StartCoroutine(Initiate());
+            }
         }
     }
 
