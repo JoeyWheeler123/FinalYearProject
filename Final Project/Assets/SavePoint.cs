@@ -76,6 +76,7 @@ public class SavePoint : MonoBehaviour
 
     IEnumerator Initiate()
     {
+       // boxProperties.gameObject.SetActive(false);
         currentCheckpoint = checkPointNumber;
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         Color tempColour;
