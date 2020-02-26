@@ -9,10 +9,18 @@ public class Bouncer : MonoBehaviour
     public float overallModifier = 35f;
 
     public GameObject box;
+
+    public Renderer emissiveRenderer;
+
+    public Color bounceColour;
+
+    private BoxProperties boxProperties;
     // Start is called before the first frame update
     void Start()
     {
-
+        boxProperties = FindObjectOfType<BoxProperties>();
+        //rend = GetComponent<Renderer>();
+        bounceColour = emissiveRenderer.material.GetColor("_EmissiveColor");
     }
 
     // Update is called once per frame
@@ -28,6 +36,9 @@ public class Bouncer : MonoBehaviour
             //print("BOUNCY BOX");
             Rigidbody boxRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collisionDir = other.contacts[0].normal;
+            boxProperties.StopCoroutine("SwitchBoxColour");
+            boxProperties.StopCoroutine("Recharge");
+            boxProperties.StartCoroutine("SwitchBoxColour",bounceColour);
             boxRb.isKinematic = true;
             boxRb.isKinematic = false;
             box = other.gameObject;
