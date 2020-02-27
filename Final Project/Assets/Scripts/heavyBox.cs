@@ -137,6 +137,7 @@ public class heavyBox : MonoBehaviour
         box.GetComponent<Rigidbody>().mass = fat;
         enchant.Play();
         rendererBox.GetComponent<Renderer>().material.SetColor("Color_C5A9FA1D", heavyColor);
+        boxProperties.SetOriginalColour(heavyColor);
     }
 
     public void Normal()
@@ -151,6 +152,7 @@ public class heavyBox : MonoBehaviour
         rBox.mass = boxMass;
         disenchant.Play();
         rendererBox.GetComponent<Renderer>().material.SetColor("Color_C5A9FA1D", normalColor);
+        boxProperties.SetOriginalColour(normalColor);
     }
 
     public void Activate()

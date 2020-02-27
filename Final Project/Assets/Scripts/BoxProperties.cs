@@ -52,6 +52,11 @@ public class BoxProperties : MonoBehaviour
         rb.isKinematic = false;
         transform.position = new Vector3(xPos, yPos, 0);
     }
+
+    public void SetOriginalColour(Color newColour)
+    {
+        originalColor = newColour;
+    }
     IEnumerator Recharge()
     {
         enchant.Play();

@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 338158293}
   - component: {fileID: 338158295}
   - component: {fileID: 338158294}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Box Enchantment Particle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5332,7 +5332,7 @@ GameObject:
   - component: {fileID: 640746242}
   - component: {fileID: 640746241}
   - component: {fileID: 640746240}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Box Enchantment Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15188,7 +15188,7 @@ GameObject:
   - component: {fileID: 972923043}
   - component: {fileID: 972923042}
   - component: {fileID: 972923041}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Box Disenchantment Particle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30743,7 +30743,7 @@ GameObject:
   - component: {fileID: 1836253575}
   - component: {fileID: 1836253577}
   - component: {fileID: 1836253576}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Disenchantment Radial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40927,7 +40927,7 @@ GameObject:
   - component: {fileID: 6452249443966249906}
   - component: {fileID: 6452249443966249907}
   - component: {fileID: 6452249443966249904}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41189,7 +41189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cc6fb11d038ea42883a4473597abfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minY: 0
+  minY: -1000
   player: {fileID: 6452249444098570573}
   box: {fileID: 6452249445732954969}
   throwMarkerDistance: 4
@@ -41203,7 +41203,7 @@ MonoBehaviour:
   lowestAimPoint: -0.07
   cameraDefaultPosition: {fileID: 241295445215464537}
   rend: {fileID: 0}
-  cameraMovementSpeed: 0
+  cameraMovementSpeed: 15
 --- !u!65 &476365339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41953,7 +41953,7 @@ GameObject:
   - component: {fileID: 6452249445732954962}
   - component: {fileID: 6452249445732954973}
   - component: {fileID: 191196801}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: The Box
   m_TagString: box
   m_Icon: {fileID: 0}
@@ -42094,10 +42094,10 @@ MonoBehaviour:
   rend: {fileID: 3628371555370165903}
   enchant: {fileID: 640746241}
   disenchant: {fileID: 972923042}
-  newColour: {r: 0, g: 0, b: 0, a: 0}
-  colourChangeRate: 0
+  newColour: {r: 1, g: 0.8873908, b: 0, a: 0}
+  colourChangeRate: 1.5
   energy: 0
-  energyPullMultiplier: 0
+  energyPullMultiplier: 100
 --- !u!1 &7731397621272064126
 GameObject:
   m_ObjectHideFlags: 0
