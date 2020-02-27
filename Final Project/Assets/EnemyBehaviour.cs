@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rend.material.SetColor("Color_C5A9FA1D",Color.red);
         rend = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody>();
         box=GameObject.FindWithTag("box");
@@ -57,23 +59,39 @@ public class EnemyBehaviour : MonoBehaviour
 
         else
         {
-            aggressionLevel = 0;
+            
             
         }
 
-        if (aggressionLevel == 1)
+        if (aggressionLevel >= 1&&!charging)
         {
             towardsBox = box.transform.position - transform.position;
             towardsBox.Normalize();
             
             newDirection  = Vector3.MoveTowards(transform.position, box.transform.position, Time.deltaTime);
             rb.MovePosition(newDirection);
+            
+            if (charging)
+            {
+                rb.isKinematic = false;
+                rend.material.SetColor("Color_C5A9FA1D",Color.white);
+                charging = false;
+                StopCoroutine(GrabBox());
+            }
         }
-        else if (aggressionLevel == 2)
+        else if (aggressionLevel == 2&&!charging)
         {
-            StartCoroutine(GrabBox());
+            //StartCoroutine("GrabBox");
         }
 
+        if (aggressionLevel < 2&&charging)
+        {
+            rb.isKinematic = false;
+           
+            rend.material.SetColor("Color_C5A9FA1D",Color.red);
+            charging = false;
+            StopCoroutine("GrabBox");
+        }
         
         
     }
@@ -96,6 +114,10 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 StartCoroutine(Recovery());
             }
+            else if(!charging)
+            {
+                StartCoroutine("GrabBox");
+            }
         }
         else if(!stunned)
         {
@@ -103,10 +125,16 @@ public class EnemyBehaviour : MonoBehaviour
             rb.isKinematic = false;
         }
     }
+    
+    private void OnCollisionExit(Collision other)
+    {
+        
+    }
 
     IEnumerator Recovery()
     {
         rotating = false;
+        rend.material.SetColor("Color_C5A9FA1D",Color.white);
         originalRotation = Quaternion.identity;
         stunned = true;
         aggressionLevel = 0;
@@ -122,10 +150,11 @@ public class EnemyBehaviour : MonoBehaviour
            Destroy(this.gameObject);
        }
        rb.isKinematic = true;
-       rb.isKinematic = false;
+       //rb.isKinematic = false;
        
        while (Vector3.Distance(heart.transform.position, transform.position) >= 0.5f)
        {
+           
            Vector3 towardsHeart = heart.transform.position - transform.position;
            rotating = true;
            towardsHeart.Normalize();
@@ -137,33 +166,32 @@ public class EnemyBehaviour : MonoBehaviour
            yield return null;
        }
 
-       
+       yield return null;
+       rend.material.color = Color.white;
+       rb.isKinematic = false;
        stunned = false;
       heart.SetActive(false);
+      rend.material.SetColor("Color_C5A9FA1D",Color.red);
      yield return new WaitForSeconds(1f);
      
-       rb.isKinematic = false;
+       //rb.isKinematic = false;
        
         yield return null;
     }
 
     IEnumerator GrabBox()
     {
-        rend.material.color = Color.blue;
-        float timeElapsed=0;
-        while (timeElapsed <= 2f)
-        {
-            timeElapsed += Time.deltaTime;
-            if (aggressionLevel != 2)
-            {
-                rend.material.color = Color.white;
-                StopCoroutine(GrabBox());
-                
-            }
-            yield return null;
-        }
+        rb.isKinematic = true;
+        charging = true;
+        rend.material.SetColor("Color_C5A9FA1D",Color.blue);
+        yield return new WaitForSeconds(2f);
+
        
+        rb.isKinematic = false;
         box.SetActive(false);
+       yield return new WaitForSeconds(2f);
+       Scene scene = SceneManager.GetActiveScene(); 
+       SceneManager.LoadScene(scene.name);
         yield return null;
     }
 
