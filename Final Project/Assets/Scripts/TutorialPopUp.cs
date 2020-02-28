@@ -8,7 +8,7 @@ public class TutorialPopUp : MonoBehaviour
     public GameObject imageToDisplay;
     private GameObject player;
     public Transform canvasPosition;
-    public bool magnetInteract, recall, jump, wallJump,throwBox;
+    public bool magnetInteract, recall, jump, wallJump, throwBox, boxJump;
     public bool actionCompleted = false;
 
     private bool withinRange;
@@ -78,6 +78,14 @@ public class TutorialPopUp : MonoBehaviour
                 if (buttonScript.opening)
                 {
                     actionCompleted=true;
+                }
+            }
+
+            if (boxJump)
+            {
+                if (!moveScript.energyFull)
+                {
+                    actionCompleted = true;
                 }
             }
         }

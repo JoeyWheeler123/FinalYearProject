@@ -38,8 +38,14 @@ public class Bouncer : MonoBehaviour
             //print("BOUNCY BOX");
             Rigidbody boxRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collisionDir = other.contacts[0].normal;
-           if(changeColour !=null) boxProperties.StopCoroutine("SwitchBoxColour");
-            boxProperties.StopCoroutine("Recharge");
+            if (changeColour != null)
+            {
+                boxProperties.StopCoroutine("SwitchBoxColour");
+            }
+           if (boxProperties.rechargeCoroutine != null)
+           {
+               boxProperties.StopCoroutine("Recharge");
+           }
             if (!global::heavyBox.GlobalHeavyBoxCheck)
             {
                 changeColour= boxProperties.StartCoroutine("SwitchBoxColour", bounceColour);

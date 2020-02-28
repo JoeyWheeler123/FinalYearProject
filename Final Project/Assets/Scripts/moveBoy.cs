@@ -79,9 +79,9 @@ public class moveBoy : MonoBehaviour
     public Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling, canJump, hasBox, dismantling, gamePaused, energyFull;
+    private bool recalling, canJump, hasBox, dismantling, gamePaused;
     public bool facingLeft;
-
+    public bool energyFull;
     public float coyoteTime, energyRechargeTime;
 
     private float timeLeftToJump;
@@ -1092,7 +1092,7 @@ public class moveBoy : MonoBehaviour
    IEnumerator BoxCoolDown()
    {
        energyFull = false;
-       boxPropertiesScript.StartCoroutine("Recharge");
+      boxPropertiesScript.rechargeCoroutine= boxPropertiesScript.StartCoroutine("Recharge");
        float coolDownTimer = 0;
        while (coolDownTimer < energyRechargeTime)
        {

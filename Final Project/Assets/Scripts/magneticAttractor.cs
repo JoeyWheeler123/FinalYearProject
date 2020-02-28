@@ -21,6 +21,9 @@ public class magneticAttractor : MonoBehaviour
     public moveBoy moveScript;
 
     private bool firstTimeSnap;
+    
+
+    public static bool resetBoxBool;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,24 +37,37 @@ public class magneticAttractor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (attracted != null&!snapped)
+        /*if (attracted!=null&&resetBoxBool ==true)
+        {
+            ResetBox();
+            attracted = null;
+            attractedRb = null;
+            firstTimeSnap = true;
+            print("reset");
+            resetBoxBool = false;
+        }
+        */
+        
+        if (attracted != null & !snapped)
         {
             Vector3 dir = attracted.transform.position - transform.position;
             float distanceMultiplier = dir.sqrMagnitude;
-            float stronger = Mathf.Sqrt(distanceMultiplier);//electromagnetic force weakens a rate proportional to square of distance. I think. Maybe cubed but squared will do for now?
-            attractedRb.AddForce(-dir*attractiveForce*Time.deltaTime/stronger);
-            if (distanceMultiplier <= snapThreshold&&firstTimeSnap)
+            float
+                stronger = Mathf.Sqrt(
+                    distanceMultiplier); //electromagnetic force weakens a rate proportional to square of distance. I think. Maybe cubed but squared will do for now?
+            attractedRb.AddForce(-dir * attractiveForce * Time.deltaTime / stronger);
+            if (distanceMultiplier <= snapThreshold && firstTimeSnap)
             {
                 snapped = true;
-               
+
 
             }
-            else if (distanceMultiplier <= snapThreshold&&!moveScript.pressedThrow&&!firstTimeSnap)
+            else if (distanceMultiplier <= snapThreshold && !moveScript.pressedThrow && !firstTimeSnap)
             {
                 snapped = true;
-                
+
             }
-            
+
         }
 
         if (attracted != null & snapped)
@@ -65,12 +81,12 @@ public class magneticAttractor : MonoBehaviour
         }
         else
         {
-           
+
         }
 
-        if (moveScript.pressedThrow&&!firstTimeSnap)
+        if (moveScript.pressedThrow && !firstTimeSnap)
         {
-            if (attracted != null&&attractedRb!=null&&moveScript.thrown)
+            if (attracted != null && attractedRb != null && moveScript.thrown)
             {
                 print("pulloff");
                 Debug.Log(firstTimeSnap);
@@ -78,18 +94,18 @@ public class magneticAttractor : MonoBehaviour
                 snapped = false;
             }
 
-           
+
         }
-        
-        if(Input.GetKeyDown((KeyCode.G))&snapped)
+
+        if (Input.GetKeyDown((KeyCode.G)) & snapped)
         {
-            
+
             rb.connectedBody = playerRb;
         }
 
         if (attracted != null)
         {
-            if (Vector3.Distance(attracted.transform.position, this.transform.position)>=snapThreshold*2)
+            if (Vector3.Distance(attracted.transform.position, this.transform.position) >= snapThreshold * 2)
             {
                 ResetBox();
                 attracted = null;
@@ -98,6 +114,8 @@ public class magneticAttractor : MonoBehaviour
                 print("reset");
             }
         }
+
+       
     }
 
     private void OnTriggerStay(Collider other)

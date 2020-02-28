@@ -19,7 +19,7 @@ public class SavePoint : MonoBehaviour
     public int checkPointNumber;
     public float originalBrightness, activationBrightness, finalBrightness, decayRate;
     public bool customStart;
-
+    //public bool resetStuckBox;
     void Awake()
     {
         if (customStart)
@@ -63,7 +63,10 @@ public class SavePoint : MonoBehaviour
     {
         if (moveBoyScript.thrown)
         {
+           // global::magneticAttractor.resetBoxBool = true;
             boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+            
+
         }
 
     }

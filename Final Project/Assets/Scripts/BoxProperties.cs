@@ -21,6 +21,9 @@ public class BoxProperties : MonoBehaviour
     public float energy;
 
     public float energyPullMultiplier;
+
+    public Coroutine rechargeCoroutine;
+
     
     // Start is called before the first frame update
     void Start()
