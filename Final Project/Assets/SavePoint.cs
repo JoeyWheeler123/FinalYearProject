@@ -25,6 +25,7 @@ public class SavePoint : MonoBehaviour
         if (customStart)
         {
             currentCheckpoint = checkPointNumber;
+            
         }
     }
     void Start()
@@ -46,8 +47,6 @@ public class SavePoint : MonoBehaviour
         if (checkPointNumber == currentCheckpoint)
         {
             SpawnPlayer(spawnPointPlayer);
-            boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
-            StartCoroutine(Initiate());
 
 
         }
@@ -87,6 +86,7 @@ public class SavePoint : MonoBehaviour
         }
     }
 
+    
     IEnumerator Initiate()
     {
        // boxProperties.gameObject.SetActive(false);

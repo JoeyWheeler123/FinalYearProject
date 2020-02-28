@@ -97,7 +97,7 @@ public class heavyBox : MonoBehaviour
            // Normal();
         }
 
-        if (moveScript.pressedThrow&&heavyActive&&experimentalRecharge)
+/*        if (moveScript.pressedThrow&&heavyActive&&experimentalRecharge)
         {
             boxProperties.energy -= energyDrainRate*Time.deltaTime;
             if (boxProperties.energy <= 0)
@@ -109,6 +109,7 @@ public class heavyBox : MonoBehaviour
         {
            // boxProperties.energy += energyDrainRate*Time.deltaTime;
         }
+        */
     }
 
     private void OnTriggerEnter(Collider coll)

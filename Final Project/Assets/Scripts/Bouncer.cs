@@ -15,6 +15,8 @@ public class Bouncer : MonoBehaviour
     public Color bounceColour;
 
     private BoxProperties boxProperties;
+
+    private Coroutine changeColour;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +38,13 @@ public class Bouncer : MonoBehaviour
             //print("BOUNCY BOX");
             Rigidbody boxRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collisionDir = other.contacts[0].normal;
-            boxProperties.StopCoroutine("SwitchBoxColour");
+           if(changeColour !=null) boxProperties.StopCoroutine("SwitchBoxColour");
             boxProperties.StopCoroutine("Recharge");
-            boxProperties.StartCoroutine("SwitchBoxColour",bounceColour);
+            if (!global::heavyBox.GlobalHeavyBoxCheck)
+            {
+                changeColour= boxProperties.StartCoroutine("SwitchBoxColour", bounceColour);
+            }
+
             boxRb.isKinematic = true;
             boxRb.isKinematic = false;
             box = other.gameObject;
