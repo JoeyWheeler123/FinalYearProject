@@ -162,6 +162,12 @@ public class cursorMovement : MonoBehaviour
     {
         controllerAim = false;
     }
+
+    public void NewZoomLevel(float zoomLevel)
+    {
+        cameraDefaultPosition.position = new Vector3(cameraDefaultPosition.transform.position.x,
+            cameraDefaultPosition.transform.position.y, zoomLevel);
+    }
     void OnGUI()
     {
         

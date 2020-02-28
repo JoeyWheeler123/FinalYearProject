@@ -15,18 +15,26 @@ public class CameraZoom : MonoBehaviour
     public float cameraSpeed;
 
     private bool inZone;
+
+    public cursorMovement cmScript;
     // Start is called before the first frame update
     void Start()
     {
+        cmScript = FindObjectOfType<cursorMovement>();
+        if (cameraPosition == null)
+        {
+            cameraPosition = Camera.main.gameObject;
+        }
         originalZoom = cameraPosition.transform.position.z;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (inZone)
         {
-            Vector3 cameraZoomPosition = new Vector3(cameraPosition.transform.position.x, cameraPosition.transform.position.y, newPos.z);
+            Vector3 cameraZoomPosition = new Vector3(cameraPosition.transform.position.x, cameraPosition.transform.position.y, zoomLevel);
             cameraPosition.transform.position = Vector3.Lerp(cameraPosition.transform.position,cameraZoomPosition,Time.deltaTime*cameraSpeed);
         }
         else
@@ -35,14 +43,17 @@ public class CameraZoom : MonoBehaviour
             cameraPosition.transform.position = Vector3.Lerp(cameraPosition.transform.position, cameraZoomPosition,
                 Time.deltaTime * cameraSpeed);
         }
+        */
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            originalPos = cameraPosition.transform.position;
-            newPos = new Vector3(originalPos.x,originalPos.y,originalPos.z-zoomLevel);
-            inZone = true;
+            //originalPos = cameraPosition.transform.position;
+            
+            //newPos = new Vector3(originalPos.x,originalPos.y,zoomLevel);
+           // inZone = true;
+            cmScript.NewZoomLevel(zoomLevel);
 
         }
        
@@ -57,10 +68,11 @@ public class CameraZoom : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            originalPos = cameraPosition.transform.position;
-            newPos = new Vector3(originalPos.x,originalPos.y,originalZoom);
+           // originalPos = cameraPosition.transform.position;
+           // newPos = new Vector3(originalPos.x,originalPos.y,originalZoom);
             
-            inZone = false;
+            //inZone = false;
+            cmScript.NewZoomLevel(originalZoom);
         }
        
     }

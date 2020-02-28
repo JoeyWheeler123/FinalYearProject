@@ -19,13 +19,17 @@ public class SavePoint : MonoBehaviour
     public int checkPointNumber;
     public float originalBrightness, activationBrightness, finalBrightness, decayRate;
     public bool customStart;
-    
-    void Start()
+
+    void Awake()
     {
         if (customStart)
         {
             currentCheckpoint = checkPointNumber;
         }
+    }
+    void Start()
+    {
+        
         rend = GetComponent<Renderer>();
         Color tempColour;
         
@@ -42,7 +46,10 @@ public class SavePoint : MonoBehaviour
         if (checkPointNumber == currentCheckpoint)
         {
             SpawnPlayer(spawnPointPlayer);
-            
+            boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+            StartCoroutine(Initiate());
+
+
         }
     }
 
