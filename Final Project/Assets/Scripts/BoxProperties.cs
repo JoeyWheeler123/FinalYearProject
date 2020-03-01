@@ -80,8 +80,8 @@ public class BoxProperties : MonoBehaviour
         magTransform = newTransform;
         stuck = true;
         rb.isKinematic = true;
-      
-      
+
+        StartCoroutine(RotateBox());
        
     }
 
@@ -149,5 +149,17 @@ public class BoxProperties : MonoBehaviour
         yield return null;
     }
 
-    
+    IEnumerator RotateBox()
+    {
+        float timeElapsed = 0;
+        Quaternion rot = Quaternion.identity;
+        while (timeElapsed <= 4f)
+        {
+           transform.rotation =
+                Quaternion.Slerp(transform.rotation, rot, Time.deltaTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        yield return null;
+    }
 }

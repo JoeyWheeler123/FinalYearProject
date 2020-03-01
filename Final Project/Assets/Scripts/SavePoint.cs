@@ -47,8 +47,8 @@ public class SavePoint : MonoBehaviour
         if (checkPointNumber == currentCheckpoint)
         {
             SpawnPlayer(spawnPointPlayer);
-
-
+            boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+            
         }
     }
 
@@ -82,9 +82,10 @@ public class SavePoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (checkPointNumber != currentCheckpoint)
+            if (checkPointNumber != currentCheckpoint || customStart)
             {
                 StartCoroutine(Initiate());
+                customStart = false;
             }
         }
     }
@@ -92,7 +93,8 @@ public class SavePoint : MonoBehaviour
     
     IEnumerator Initiate()
     {
-       // boxProperties.gameObject.SetActive(false);
+        // boxProperties.gameObject.SetActive(false);
+      
         currentCheckpoint = checkPointNumber;
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         Color tempColour;
@@ -114,6 +116,6 @@ public class SavePoint : MonoBehaviour
         }
        
         yield return null;
-        yield return null;
+       
     }
 }
