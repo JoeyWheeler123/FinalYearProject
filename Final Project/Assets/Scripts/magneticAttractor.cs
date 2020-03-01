@@ -14,7 +14,7 @@ public class magneticAttractor : MonoBehaviour
 
     public float snapThreshold;
 
-    public HingeJoint rb;
+   /// public HingeJoint rb;
 
     public Rigidbody playerRb;
 
@@ -24,14 +24,17 @@ public class magneticAttractor : MonoBehaviour
     
 
     public static bool resetBoxBool;
+    private BoxProperties boxProperties;
+    
     // Start is called before the first frame update
     void Start()
     {
+        boxProperties = FindObjectOfType<BoxProperties>();
         firstTimeSnap = true;
         moveScript = FindObjectOfType<moveBoy>();
         
         print(moveScript);
-        rb = GetComponent<HingeJoint>();
+        //rb = GetComponent<HingeJoint>();
     }
 
     // Update is called once per frame
@@ -72,8 +75,13 @@ public class magneticAttractor : MonoBehaviour
 
         if (attracted != null & snapped)
         {
-            attracted.transform.position = transform.position;
-            attractedRb.isKinematic = true;
+
+            boxProperties.MagnetStuck(transform);
+                // attracted = other.gameObject;
+                //  attractedRb = other.gameObject.GetComponent<Rigidbody>();
+            
+           // attracted.transform.position = transform.position;
+            //attractedRb.isKinematic = true;
             if (!moveScript.pressedThrow)
             {
                 firstTimeSnap = false;
@@ -88,8 +96,9 @@ public class magneticAttractor : MonoBehaviour
         {
             if (attracted != null && attractedRb != null && moveScript.thrown)
             {
-                print("pulloff");
-                Debug.Log(firstTimeSnap);
+                boxProperties.stuck = false;
+                //print("pulloff");
+                //Debug.Log(firstTimeSnap);
                 attractedRb.isKinematic = false;
                 snapped = false;
             }
@@ -100,7 +109,7 @@ public class magneticAttractor : MonoBehaviour
         if (Input.GetKeyDown((KeyCode.G)) & snapped)
         {
 
-            rb.connectedBody = playerRb;
+            //rb.connectedBody = playerRb;
         }
 
         if (attracted != null)
@@ -111,7 +120,7 @@ public class magneticAttractor : MonoBehaviour
                 attracted = null;
                 attractedRb = null;
                 firstTimeSnap = true;
-                print("reset");
+                //print("reset");
             }
         }
 
@@ -122,11 +131,21 @@ public class magneticAttractor : MonoBehaviour
     {
         if (other.gameObject.tag == "box"&&moveScript.thrown)
         {
+            //other.gameObject.SendMessage("MagnetStuck");
             attracted = other.gameObject;
-            attractedRb = other.gameObject.GetComponent<Rigidbody>();
+           attractedRb = other.gameObject.GetComponent<Rigidbody>();
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "box" && moveScript.thrown)
+        {
+           // Vector3 magPos = transform.position;
+           // other.gameObject.SendMessage("MagnetStuck",magPos);
+            // attracted = other.gameObject;
+            //  attractedRb = other.gameObject.GetComponent<Rigidbody>();
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("box"))

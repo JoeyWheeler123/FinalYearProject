@@ -23,8 +23,10 @@ public class BoxProperties : MonoBehaviour
     public float energyPullMultiplier;
 
     public Coroutine rechargeCoroutine;
-
-    
+    public bool stuck;
+    public float snapRate;
+    public Vector3 magnetPos;
+    public Transform magTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,17 @@ public class BoxProperties : MonoBehaviour
         {
             energy = 100;
         }
+        if(stuck == true)
+        {
+            
+             Vector3 newPos = Vector3.Lerp(transform.position, magTransform.position, Time.deltaTime * snapRate);
+             //rb.MovePosition(newPos);
+            transform.position = newPos;
+
+
+          
+        }
+        print(stuck);
     }
 
     public void Apparate(float xPos,float yPos)
@@ -61,6 +74,18 @@ public class BoxProperties : MonoBehaviour
     {
         originalColor = newColour;
     }
+
+    public void MagnetStuck(Transform newTransform)
+    {
+        magTransform = newTransform;
+        stuck = true;
+        rb.isKinematic = true;
+      
+      
+       
+    }
+
+    
     IEnumerator Recharge()
     {
         enchant.Play();
@@ -123,4 +148,6 @@ public class BoxProperties : MonoBehaviour
         print("completed");
         yield return null;
     }
+
+    
 }

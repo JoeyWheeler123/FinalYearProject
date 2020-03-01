@@ -53917,13 +53917,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639be4b5892f242d6bc573a0760a335b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  box: {fileID: 0}
-  rendererBox: {fileID: 0}
+  player: {fileID: 47753658}
+  box: {fileID: 2074777980}
+  rendererBox: {fileID: 2074777980}
   heavyColor: {r: 0, g: 0, b: 0, a: 0}
   normalColor: {r: 0, g: 0, b: 0, a: 0}
-  disenchant: {fileID: 0}
-  enchant: {fileID: 0}
+  disenchant: {fileID: 2074777982}
+  enchant: {fileID: 2074777981}
   boxMass: 0
   inverseForce: 3
   fat: 5
@@ -65387,6 +65387,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 191196801, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
+      propertyPath: snapRate
+      value: 42
+      objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570571, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_Name
@@ -67094,7 +67098,7 @@ PrefabInstance:
     - target: {fileID: 2322454545487079531, guid: 247521611cdf0c94fa876532ec70400f,
         type: 3}
       propertyPath: customStart
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2322454545487079540, guid: 247521611cdf0c94fa876532ec70400f,
         type: 3}
