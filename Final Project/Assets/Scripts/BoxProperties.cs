@@ -63,14 +63,14 @@ public class BoxProperties : MonoBehaviour
         if(stuck == true)
         {
             
-             Vector3 newPos = Vector3.Lerp(transform.position, magTransform.position, Time.deltaTime * snapRate);
+             Vector3 newPos = Vector3.MoveTowards(transform.position, magTransform.position, Time.deltaTime * snapRate);
              //rb.MovePosition(newPos);
             transform.position = newPos;
 
 
           
         }
-        
+        print(stuck);
     }
 
     public void Apparate(float xPos,float yPos)
