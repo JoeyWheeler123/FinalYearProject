@@ -19,6 +19,8 @@ public class SavePoint : MonoBehaviour
     public int checkPointNumber;
     public float originalBrightness, activationBrightness, finalBrightness, decayRate;
     public bool customStart;
+
+    public magneticAttractor[] magnetScripts;
     //public bool resetStuckBox;
     void Awake()
     {
@@ -30,7 +32,7 @@ public class SavePoint : MonoBehaviour
     }
     void Start()
     {
-        
+        magnetScripts = FindObjectsOfType<magneticAttractor>();
         rend = GetComponent<Renderer>();
         Color tempColour;
         
@@ -64,7 +66,18 @@ public class SavePoint : MonoBehaviour
         if (moveBoyScript.thrown)
         {
            // global::magneticAttractor.resetBoxBool = true;
+          // boxProperties.gameObject.SetActive(false);
+        
+          boxProperties.magTransform = null;
+           boxProperties.stuck = false;
             boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+            boxProperties.magTransform = null;
+            boxProperties.stuck = false;
+            for (int i = 0; i <= magnetScripts.Length; i++)
+            {
+                magnetScripts[i].gameObject.SendMessage("ResetBox");
+            }
+            
             
 
         }

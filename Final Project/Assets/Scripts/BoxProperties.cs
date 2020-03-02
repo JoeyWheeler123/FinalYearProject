@@ -60,7 +60,7 @@ public class BoxProperties : MonoBehaviour
         {
             energy = 100;
         }
-        if(stuck == true)
+        if(stuck == true&&magTransform!=null)
         {
             
              Vector3 newPos = Vector3.MoveTowards(transform.position, magTransform.position, Time.deltaTime * snapRate);
