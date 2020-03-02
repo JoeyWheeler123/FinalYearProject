@@ -23,17 +23,27 @@ public class BoxProperties : MonoBehaviour
     public float energyPullMultiplier;
 
     public Coroutine rechargeCoroutine;
+    public Coroutine bounceCoroutine;
     public bool stuck;
     public float snapRate;
     public Vector3 magnetPos;
     public Transform magTransform;
+    public bool recharging;
     // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
-        energy = 100;
+        rb = GetComponent<Rigidbody>();
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
         moveScript = FindObjectOfType<moveBoy>();
+    }
+    void Start()
+    {
+        energy = 100;
+        
+        
+       
         //StartCoroutine(SwitchBoxColour(newColour));
         //StartCoroutine(Recharge());
     }
@@ -60,7 +70,7 @@ public class BoxProperties : MonoBehaviour
 
           
         }
-        print(stuck);
+        
     }
 
     public void Apparate(float xPos,float yPos)
@@ -80,16 +90,40 @@ public class BoxProperties : MonoBehaviour
         magTransform = newTransform;
         stuck = true;
         rb.isKinematic = true;
-
+        
         StartCoroutine(RotateBox());
        
     }
 
+    public Color GetOriginalColour(Color outgoingColour)
+    {
+        outgoingColour = originalColor;
+        return outgoingColour;
+    }
+    public void ResetRecharge()
+    {
+       if (rechargeCoroutine != null)
+        {
+            //StopCoroutine(rechargeCoroutine);
+        }
+        
+    }
+    public void ResetBounce(Color newColour)
+    {
+        if (bounceCoroutine != null)
+        {
+            StopCoroutine(bounceCoroutine);
+        }
+        if (!global::heavyBox.GlobalHeavyBoxCheck)
+        {
+            bounceCoroutine = StartCoroutine("SwitchBoxColour", newColour);
+        }
+    }
     
     IEnumerator Recharge()
     {
         enchant.Play();
-
+        
         Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
 
         Color.RGBToHSV(tempColour, out h, out s, out v);

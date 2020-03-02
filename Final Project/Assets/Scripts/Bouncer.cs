@@ -21,6 +21,7 @@ public class Bouncer : MonoBehaviour
     void Start()
     {
         boxProperties = FindObjectOfType<BoxProperties>();
+        box = GameObject.FindGameObjectWithTag("box");
         //rend = GetComponent<Renderer>();
         bounceColour = emissiveRenderer.material.GetColor("_EmissiveColor");
     }
@@ -36,16 +37,17 @@ public class Bouncer : MonoBehaviour
         if (other.gameObject.CompareTag("box"))
         {
             //print("BOUNCY BOX");
+           // box = other.gameObject;
             Rigidbody boxRb = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collisionDir = other.contacts[0].normal;
             if (changeColour != null)
             {
-                boxProperties.StopCoroutine("SwitchBoxColour");
+                box.gameObject.SendMessage("ResetBounce", bounceColour);
+                boxProperties.StopCoroutine(changeColour);
+               // boxProperties.StopCoroutine("SwitchBoxColour");
             }
-           if (boxProperties.rechargeCoroutine != null)
-           {
-               boxProperties.StopCoroutine("Recharge");
-           }
+            box.gameObject.SendMessage("ResetRecharge");
+           
             if (!global::heavyBox.GlobalHeavyBoxCheck)
             {
                 changeColour= boxProperties.StartCoroutine("SwitchBoxColour", bounceColour);
@@ -53,7 +55,7 @@ public class Bouncer : MonoBehaviour
 
             boxRb.isKinematic = true;
             boxRb.isKinematic = false;
-            box = other.gameObject;
+            
             print(other.relativeVelocity.magnitude);
             float bounceHeight = defaultBounceStrength + (other.relativeVelocity.magnitude * overallModifier);
             boxRb.velocity = new Vector3(boxRb.velocity.x,bounceHeight,boxRb.velocity.z);

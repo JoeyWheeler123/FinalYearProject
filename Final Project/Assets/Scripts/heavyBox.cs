@@ -52,7 +52,7 @@ public class heavyBox : MonoBehaviour
     void Start()
     {
         boxProperties = FindObjectOfType<BoxProperties>();
-        normalColor = rendererBox.GetComponent<Renderer>().material.GetColor("Color_C5A9FA1D");
+        normalColor = boxProperties.GetOriginalColour(normalColor);
         GlobalHeavyBoxCheck = false;
         moveScript = FindObjectOfType<moveBoy>();
         rBox = box.GetComponent<Rigidbody>();
