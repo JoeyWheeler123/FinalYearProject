@@ -109,11 +109,13 @@ public class ConveyorScript : MonoBehaviour
             if (!moveScript.mantling && !moveScript.grabbingLedge)
             {
                 other.transform.SetParent(null);
+                //other.transform.localScale = new Vector3(1f,1f,1f);
             }
         }
-        else
+        else if(other.gameObject.CompareTag("box"))
         {
             other.transform.SetParent(null);
+           // other.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
         }
     }
 
