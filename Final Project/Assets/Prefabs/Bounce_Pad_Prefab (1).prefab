@@ -169,7 +169,6 @@ GameObject:
   - component: {fileID: 851604312536950579}
   - component: {fileID: 7034831260224313347}
   - component: {fileID: 3896380772670298790}
-  - component: {fileID: 5437311506017401562}
   m_Layer: 0
   m_Name: Bounce_Pad_Prefab (1)
   m_TagString: ground
@@ -231,23 +230,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20.613024, y: 5.21, z: 21.339039}
   m_Center: {x: -6.181513, y: 0, z: 3.5432796}
---- !u!114 &5437311506017401562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4434594573265818912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 637b11ee081db0d4194c22807c0ba04f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultBounceStrength: 25
-  overallModifier: 0
-  box: {fileID: 0}
-  emissiveRenderer: {fileID: 3732908017404082888}
-  bounceColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &5517856002939903195
 GameObject:
   m_ObjectHideFlags: 0

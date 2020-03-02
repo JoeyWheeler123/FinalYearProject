@@ -42,11 +42,17 @@ public class ButtonSwitch : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("box")||other.gameObject.CompareTag("Player"))
         {
             opening = true;
+            
         }
     }
 
@@ -84,7 +90,7 @@ public class ButtonSwitch : MonoBehaviour
         closing = true;
         float closeTime=0;
         opening = false;
-        while (closeTime<1f&&closing)
+        while (closeTime<3f&&closing)
         {
             door.transform.position = Vector3.MoveTowards(door.transform.position, doorInitialPos,
                 Time.deltaTime * doorOpenSpeed);
