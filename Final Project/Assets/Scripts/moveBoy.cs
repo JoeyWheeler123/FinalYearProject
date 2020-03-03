@@ -978,6 +978,13 @@ public class moveBoy : MonoBehaviour
     {
         rb.AddForce(-boxTowardPlayer * Time.deltaTime * inverseRecallMultiplier * recallSpeed*boxPropertiesScript.energyPullMultiplier, ForceMode.Force);
     }
+
+    public void ResetVelocity()
+    {
+        velocity = Vector2.zero;
+        moveInput = Vector2.zero;
+        anim.SetBool(movingHash,false);
+    }
     IEnumerator Mantle(int mantlePosition)
     {
         float transformY = transform.position.y;

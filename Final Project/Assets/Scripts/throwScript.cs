@@ -16,6 +16,7 @@ public class throwScript : MonoBehaviour
     public Vector3 velocityLastFrame;
     public GameObject respawn;
     public bool grounded;
+    public bool freeMove;
     public enum ThrowPoint
 
     {
@@ -30,6 +31,7 @@ public class throwScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        freeMove = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -39,7 +41,7 @@ public class throwScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.z != 0&&moveScript.thrown)
+        if (transform.position.z != 0&&moveScript.thrown&&!freeMove)
         {
             Vector3 movPos = new Vector3(transform.position.x,transform.position.y,0);
             rb.MovePosition(movPos);
