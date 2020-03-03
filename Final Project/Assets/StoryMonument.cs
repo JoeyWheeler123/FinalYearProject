@@ -59,7 +59,7 @@ public class StoryMonument : MonoBehaviour
 
     IEnumerator StoryActive()
     {
-        moveScript.inControl = false;
+        //moveScript.inControl = false;
         moveScript.energyFull = false;
         line.SetPosition(1, imageToDisplay.transform.position);
         storyOn = true;
@@ -81,6 +81,11 @@ public class StoryMonument : MonoBehaviour
             {
                 imageToDisplay.SetActive(true);
                 line.enabled = true;
+            }
+
+            if (moveScript.pressedThrow)
+            {
+                Activate();
             }
                yield return null;
         }
