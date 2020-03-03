@@ -42,6 +42,7 @@ public class cursorMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         rend = GetComponent<LineRenderer>();
         cam = Camera.main;
         moveScript = GetComponent<moveBoy>();
