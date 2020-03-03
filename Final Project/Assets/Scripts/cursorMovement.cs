@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.InputSystem;
@@ -39,9 +40,14 @@ public class cursorMovement : MonoBehaviour
 
     public float cameraMovementSpeed;
     public bool staticCam;
+
+    private Vector3 originalRelativePos;
+
+    private Vector3 tempCameraPos;
     // Start is called before the first frame update
     void Start()
     {
+        
         Cursor.visible = false;
         rend = GetComponent<LineRenderer>();
         cam = Camera.main;
@@ -74,7 +80,9 @@ public class cursorMovement : MonoBehaviour
             projectedPoint = new Vector3(point.x, point.y, 0);
 
 
-            Vector3 camDistance = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, 0);
+           Vector3 camDistance = new Vector3(cam.transform.position.x, cam.transform.position.y, 0);
+           camDistance -= player.transform.position;
+            
             closePoint = projectedPoint - player.position-camDistance;
             closePoint.Normalize();
             closePoint *= throwMarkerDistance;
@@ -101,11 +109,12 @@ public class cursorMovement : MonoBehaviour
         }
         else
         {
-            float inputY = moveScript.aimInput.y;
+            /*float inputY = moveScript.aimInput.y;
             if (inputY < lowestAimPoint)
             {
                 inputY = lowestAimPoint;
             }
+            */
                 projectedPoint = new Vector3(moveScript.aimInput.x,moveScript.aimInput.y,0f);
                 projectedPoint.Normalize();
                 projectedPoint *= throwMarkerDistance;
@@ -142,8 +151,13 @@ public class cursorMovement : MonoBehaviour
             {
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position, new Vector3(
                         projectedBox.transform.position.x,
-                        Mathf.Clamp(projectedBox.transform.position.y, minY, Mathf.Infinity),
+                        projectedBox.transform.position.y,
                         cameraDefaultPosition.position.z), Time.deltaTime * cameraMovementSpeed);
+            }
+            else
+            {
+                cam.transform.position = Vector3.MoveTowards(cam.transform.position, tempCameraPos,
+                    Time.deltaTime * cameraMovementSpeed);
             }
                // Vector3 camPosClamped = new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
 
@@ -159,6 +173,11 @@ public class cursorMovement : MonoBehaviour
             if (!staticCam)
             {
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position, cameraDefaultPosition.position, Time.deltaTime * cameraMovementSpeed);
+            }
+            else
+            {
+                cam.transform.position = Vector3.MoveTowards(cam.transform.position, tempCameraPos,
+                    Time.deltaTime * cameraMovementSpeed);
             }
             boxRenderer.enabled = false;
         }
@@ -179,6 +198,21 @@ public class cursorMovement : MonoBehaviour
     {
         cameraDefaultPosition.position = new Vector3(cameraDefaultPosition.transform.position.x,
             cameraDefaultPosition.transform.position.y, zoomLevel);
+    }
+    
+    public void tempCamPos(Vector3 newPos)
+    {
+        staticCam = true;
+        tempCameraPos = newPos;
+        cam.transform.parent = null;
+
+    }
+
+    public void resetCampPos()
+    {
+        staticCam = false;
+        cam.transform.parent = player;
+
     }
     void OnGUI()
     {

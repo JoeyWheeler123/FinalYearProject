@@ -8,24 +8,32 @@ public class CameraZoom : MonoBehaviour
 
     public float zoomLevel;
     private float originalZoom;
-    private Vector3 originalPos, newPos;
+    private Vector3 posToSend, newPos;
 
     //public bool inArea;
 
     public float cameraSpeed;
 
     private bool inZone;
-
+    public bool staticCam;
+   
     public cursorMovement cmScript;
+
+    public Transform overviewPosition;
     // Start is called before the first frame update
     void Start()
     {
+        
         cmScript = FindObjectOfType<cursorMovement>();
         if (cameraPosition == null)
         {
             cameraPosition = Camera.main.gameObject;
         }
+
+        
         originalZoom = cameraPosition.transform.position.z;
+        posToSend = new Vector3(overviewPosition.transform.position.x, overviewPosition.transform.position.y, zoomLevel);
+       
     }
 
     // Update is called once per frame
@@ -54,8 +62,14 @@ public class CameraZoom : MonoBehaviour
             //newPos = new Vector3(originalPos.x,originalPos.y,zoomLevel);
            // inZone = true;
             cmScript.NewZoomLevel(zoomLevel);
+            if (staticCam)
+            {
+                cmScript.tempCamPos(posToSend);
+            }
 
         }
+
+       
        
     }
     private void OnTriggerStay(Collider other)
@@ -73,7 +87,11 @@ public class CameraZoom : MonoBehaviour
             
             //inZone = false;
             cmScript.NewZoomLevel(originalZoom);
+            cmScript.resetCampPos();
+            
         }
        
     }
+
+   
 }
