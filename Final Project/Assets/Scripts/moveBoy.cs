@@ -508,7 +508,16 @@ public class moveBoy : MonoBehaviour
            
         }
     }
-
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("box")&&recalling)
+        {
+            if (!gcScript.onBox)
+            {
+                StartCoroutine(CarryBox());
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         /*if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl)
@@ -534,6 +543,7 @@ public class moveBoy : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             theBox.transform.position = boxSpawn.transform.position;
         }
+
         
         /*if (other.gameObject.CompareTag("leftwall")&&!grabbingLedge&&!mantling&&thrown)
         {
@@ -826,7 +836,7 @@ public class moveBoy : MonoBehaviour
                 {
                     //theBox.SetActive(false);
                     //curMov.aiming = true;
-                    StartCoroutine(CarryBox());
+                   // StartCoroutine(CarryBox());
                     //thrown = false;
                 }
             }
