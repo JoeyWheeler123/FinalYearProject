@@ -514,10 +514,14 @@ public class moveBoy : MonoBehaviour
         {
             if (!gcScript.onBox)
             {
-                StartCoroutine(CarryBox());
+                //StartCoroutine(CarryBox());
             }
+            
         }
+        
     }
+
+   
     private void OnTriggerEnter(Collider other)
     {
         /*if (other.gameObject.CompareTag("ledgeleft")&&!mantling&&!gcScript.grounded&&inControl)
@@ -832,11 +836,11 @@ public class moveBoy : MonoBehaviour
             rb.AddForce(-boxTowardPlayer * Time.deltaTime * inverseRecallMultiplier * recallSpeed, ForceMode.Force);
             if (autoPickup)
             {
-                if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance)
+                if (Vector2.Distance(transform.position, theBox.transform.position) <= grabDistance&&!gcScript.onBox)
                 {
                     //theBox.SetActive(false);
                     //curMov.aiming = true;
-                   // StartCoroutine(CarryBox());
+                   StartCoroutine(CarryBox());
                     //thrown = false;
                 }
             }
