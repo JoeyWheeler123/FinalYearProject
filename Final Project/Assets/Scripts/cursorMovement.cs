@@ -38,6 +38,7 @@ public class cursorMovement : MonoBehaviour
     public LineRenderer rend;
 
     public float cameraMovementSpeed;
+    public bool staticCam;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,13 +73,18 @@ public class cursorMovement : MonoBehaviour
             projectedPoint = new Vector3(point.x, point.y, 0);
 
 
-
-            closePoint = projectedPoint - player.position;
+            Vector3 camDistance = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, 0);
+            closePoint = projectedPoint - player.position-camDistance;
             closePoint.Normalize();
             closePoint *= throwMarkerDistance;
             boxCheck = closePoint.x;
             // transform.position = new Vector3(point.x,point.y,0);
+           
+            
+            // closePoint -= camDistance;
             closePoint = player.position + closePoint;
+
+
             projectedBox.transform.position =
                 Vector3.Lerp(projectedBox.transform.position, closePoint, Time.deltaTime * 10f);
             /*if (aiming)
@@ -131,11 +137,13 @@ public class cursorMovement : MonoBehaviour
                 moveScript.facingLeft = false;
             }
 
-          
+            if (!staticCam)
+            {
                 cam.transform.position = Vector3.MoveTowards(cam.transform.position, new Vector3(
                         projectedBox.transform.position.x,
-                        Mathf.Clamp(projectedBox.transform.position.y,minY,Mathf.Infinity),
-                        cameraDefaultPosition.position.z), Time.deltaTime *cameraMovementSpeed);
+                        Mathf.Clamp(projectedBox.transform.position.y, minY, Mathf.Infinity),
+                        cameraDefaultPosition.position.z), Time.deltaTime * cameraMovementSpeed);
+            }
                // Vector3 camPosClamped = new Vector3(cam.transform.position.x,Mathf.Clamp(cam.transform.position.y,minY,Mathf.Infinity),cam.transform.position.z);
 
                // cam.transform.position = Vector3.Lerp(cam.transform.position, camPosClamped, Time.deltaTime * 10f);
@@ -144,10 +152,13 @@ public class cursorMovement : MonoBehaviour
         }
         else
         {
-           //leftBox.SetActive(false);
+            //leftBox.SetActive(false);
             //rightBox.SetActive(false);
             //projectedBox.SetActive(false);
-            cam.transform.position = Vector3.MoveTowards(cam.transform.position,cameraDefaultPosition.position,Time.deltaTime*cameraMovementSpeed);
+            if (!staticCam)
+            {
+                cam.transform.position = Vector3.MoveTowards(cam.transform.position, cameraDefaultPosition.position, Time.deltaTime * cameraMovementSpeed);
+            }
             boxRenderer.enabled = false;
         }
 
