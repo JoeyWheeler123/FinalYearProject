@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class gameManager : MonoBehaviour
 {
     private Scene scene;
@@ -12,9 +13,11 @@ public class gameManager : MonoBehaviour
     private String sceneName;
     public String defaultSceneName;
     public bool loadOnStart, resetProgress;
+    public Text loadingText;
     // Start is called before the first frame update
     void Start()
     {
+        loadingText.gameObject.SetActive(false);
         if (loadOnStart)
         {
             LoadProgress();
@@ -36,6 +39,12 @@ public class gameManager : MonoBehaviour
             //Scene scene = SceneManager.GetActiveScene(); 
             SceneManager.LoadScene(scene.name);
         }
+
+        if (loadingText != null)
+        {
+            //loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b,
+                //Mathf.PingPong(Time.time, 1));
+        }
     }
 
     public void StoreProgress()
@@ -49,17 +58,43 @@ public class gameManager : MonoBehaviour
         if(PlayerPrefs.HasKey("currentLevel")){
             SavePoint.currentCheckpoint = PlayerPrefs.GetInt("checkPointNumber");
             sceneName =PlayerPrefs.GetString("currentLevel");
-            SceneManager.LoadScene(sceneName);
+           
+            StartCoroutine(AsyncLoad());
         }
 
         else
         {
-            SceneManager.LoadScene(defaultSceneName);
+            sceneName = defaultSceneName;
+            StartCoroutine(AsyncLoad());
         }
     }
 
     public void ResetProgress()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    IEnumerator AsyncLoad()
+    {
+        yield return new WaitForSeconds(1f);
+        if (loadingText != null)
+        {
+            loadingText.gameObject.SetActive(true);
+        }
+
+        AsyncOperation async = Application.LoadLevelAsync(sceneName);
+        async.allowSceneActivation = false;
+
+        // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
+        while (!async.isDone)
+        {
+            loadingText.text = "loading: " + async.progress * 100f;
+            if (async.progress >= 0.9f)
+            {
+                async.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+        yield return null;
     }
 }
