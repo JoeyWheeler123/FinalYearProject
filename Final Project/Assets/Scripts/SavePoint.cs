@@ -21,6 +21,8 @@ public class SavePoint : MonoBehaviour
     public bool customStart;
 
     public magneticAttractor[] magnetScripts;
+
+    public gameManager gmScript;
     //public bool resetStuckBox;
     void Awake()
     {
@@ -29,6 +31,8 @@ public class SavePoint : MonoBehaviour
             currentCheckpoint = checkPointNumber;
             
         }
+
+        gmScript = FindObjectOfType<gameManager>();
     }
     void Start()
     {
@@ -99,6 +103,7 @@ public class SavePoint : MonoBehaviour
             {
                 StartCoroutine(Initiate());
                 customStart = false;
+                gmScript.StoreProgress();
             }
         }
     }
