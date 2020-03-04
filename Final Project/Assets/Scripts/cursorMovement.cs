@@ -6,11 +6,16 @@ using UnityEngine.Assertions.Must;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.InputSystem;
+using System.Runtime.InteropServices;
+
+
 public class cursorMovement : MonoBehaviour
 
 
 
 {
+    [DllImport("user32.dll")]
+    static extern bool SetCursorPos(int X, int Y);
     private Camera cam;
     Vector3 point = new Vector3();
     public float minY;
@@ -44,6 +49,11 @@ public class cursorMovement : MonoBehaviour
     private Vector3 originalRelativePos;
 
     private Vector3 tempCameraPos;
+    private bool mouseSnapTriggered;
+    Vector3 camDistance;
+    int newX;
+    float offSetX;
+    float offSetY;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,10 +72,43 @@ public class cursorMovement : MonoBehaviour
         if (aiming)
         {
             rend.enabled = true;
+            if (!mouseSnapTriggered)
+            {
+                offSetX = cam.transform.position.x - player.transform.position.x;
+                offSetY = cam.transform.position.y - player.transform.position.y;
+                if (moveScript.facingLeft)
+                {
+                    newX = Screen.width / 2 - (int)offSetX - 3;
+
+                }
+                else if (!moveScript.facingLeft)
+                {
+                    newX = Screen.height / 2 - (int)offSetY + 3;
+                    // newY = (int)player.transform.position.y;
+                }
+
+                int newY = Screen.height / 2 + (int)camDistance.y;
+                if (!moveScript.facingLeft)
+                {
+                    SetCursorPos(1000, 540);
+                }
+                else
+                {
+                    SetCursorPos(920, 540);
+                }
+                mouseSnapTriggered = true;
+               
+            }
         }
         else
         {
             rend.enabled = false;
+            if (mouseSnapTriggered)
+            {
+
+                
+                mouseSnapTriggered = false;
+            }
         }
       rend.SetPosition(0,box.transform.position);
       rend.SetPosition(1,projectedBox.transform.position);
@@ -80,9 +123,9 @@ public class cursorMovement : MonoBehaviour
             projectedPoint = new Vector3(point.x, point.y, 0);
 
 
-           Vector3 camDistance = new Vector3(cam.transform.position.x, cam.transform.position.y, 0);
+           camDistance = new Vector3(cam.transform.position.x, cam.transform.position.y, 0);
            camDistance -= player.transform.position;
-            
+           
             closePoint = projectedPoint - player.position-camDistance;
             closePoint.Normalize();
             closePoint *= throwMarkerDistance;
