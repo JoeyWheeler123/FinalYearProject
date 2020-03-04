@@ -54,6 +54,7 @@ public class cursorMovement : MonoBehaviour
     int newX;
     float offSetX;
     float offSetY;
+    public bool fullScreenAdjust;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +80,8 @@ public class cursorMovement : MonoBehaviour
                 if (moveScript.facingLeft)
                 {
                     newX = Screen.width / 2 - (int)offSetX - 3;
+                   
+                   
 
                 }
                 else if (!moveScript.facingLeft)
@@ -88,13 +91,16 @@ public class cursorMovement : MonoBehaviour
                 }
 
                 int newY = Screen.height / 2 + (int)camDistance.y;
-                if (!moveScript.facingLeft)
+                if (fullScreenAdjust)
                 {
-                    SetCursorPos(1000, 540);
-                }
-                else
-                {
-                    SetCursorPos(920, 540);
+                    if (!moveScript.facingLeft)
+                    {
+                        SetCursorPos(1000, 540);
+                    }
+                    else
+                    {
+                        SetCursorPos(920, 540);
+                    }
                 }
                 mouseSnapTriggered = true;
                
