@@ -39,8 +39,27 @@ public class TowardsPlayerParticle : MonoBehaviour
             pSys.Stop();
             particleTriggered = false;
         }
+        else if (!farEnough)
+        {
+            pSys.Stop();
+            particleTriggered = false;
+        }
+        if (Vector3.Distance(player.transform.position, transform.position) <= minDistance)
+        {
+            farEnough = false;
+        }
+        else
+        {
+            farEnough = true;
+        }
         Vector3 towardsPos = player.transform.position - transform.position;
         Vector3 newDirection= Vector3.RotateTowards(transform.forward, towardsPos, Time.deltaTime * 50f, 0);
         transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, minDistance);
     }
 }
