@@ -32,7 +32,10 @@ public class CameraZoom : MonoBehaviour
 
         
         originalZoom = cameraPosition.transform.position.z;
+        if(overviewPosition!=null)
+        {
         posToSend = new Vector3(overviewPosition.transform.position.x, overviewPosition.transform.position.y, zoomLevel);
+        }
        
     }
 

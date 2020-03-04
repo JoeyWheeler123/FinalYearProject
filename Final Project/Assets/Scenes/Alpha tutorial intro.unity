@@ -53973,33 +53973,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5060444177187149915, guid: d77f464d35d534340b484d751ca9bacc, type: 3}
---- !u!114 &1481060049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481060047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639be4b5892f242d6bc573a0760a335b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 47753658}
-  box: {fileID: 2074777980}
-  rendererBox: {fileID: 2074777980}
-  heavyColor: {r: 0, g: 0, b: 0, a: 0}
-  normalColor: {r: 0, g: 0, b: 0, a: 0}
-  disenchant: {fileID: 2074777982}
-  enchant: {fileID: 2074777981}
-  boxMass: 0
-  inverseForce: 3
-  fat: 5
-  heavySpeed: 6
-  heavyJump: 2
-  heavyActive: 0
-  experimentalRecharge: 0
-  energyDrainRate: 0
 --- !u!1 &1483246535
 GameObject:
   m_ObjectHideFlags: 0
@@ -65459,10 +65432,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 484687171, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
-      propertyPath: minDistance
-      value: 3.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4663516568227145764, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.z

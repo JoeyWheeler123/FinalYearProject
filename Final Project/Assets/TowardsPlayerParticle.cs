@@ -21,6 +21,8 @@ public class TowardsPlayerParticle : MonoBehaviour
         pSys.Stop();
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {

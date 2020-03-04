@@ -23,11 +23,7 @@ public class FirstSceneBoxEnable : MonoBehaviour
         
         moveScript = FindObjectOfType<moveBoy>();
         camScript = FindObjectOfType<cursorMovement>();
-        if (SavePoint.currentCheckpoint == 0)
-        {
-            theBox.SetActive(false);
-          // StartCoroutine(OpeningScene()) ;
-        }
+        StartCoroutine(DelayBoxDisable());
     }
 
     // Update is called once per frame
@@ -47,6 +43,17 @@ public class FirstSceneBoxEnable : MonoBehaviour
         }
     }
 
+    IEnumerator DelayBoxDisable()
+    {
+        yield return new WaitForSeconds(2f);
+        if (SavePoint.currentCheckpoint == 0)
+        {
+            theBox.SetActive(false);
+            // StartCoroutine(OpeningScene()) ;
+        }
+
+        yield return null;
+    }
     IEnumerator OpeningScene()
     {
         moveScript.enabled = false;
