@@ -3835,7 +3835,9 @@ MonoBehaviour:
   cameraPosition: {fileID: 1967865123}
   zoomLevel: -15
   cameraSpeed: 0
+  staticCam: 0
   cmScript: {fileID: 0}
+  overviewPosition: {fileID: 0}
 --- !u!4 &186994592
 Transform:
   m_ObjectHideFlags: 0
@@ -7903,7 +7905,9 @@ MonoBehaviour:
   cameraPosition: {fileID: 427420652}
   zoomLevel: -5
   cameraSpeed: 5
+  staticCam: 0
   cmScript: {fileID: 0}
+  overviewPosition: {fileID: 0}
 --- !u!65 &389960955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8224,7 +8228,9 @@ MonoBehaviour:
   cameraPosition: {fileID: 0}
   zoomLevel: -37
   cameraSpeed: 0
+  staticCam: 0
   cmScript: {fileID: 0}
+  overviewPosition: {fileID: 0}
 --- !u!1 &418073140
 GameObject:
   m_ObjectHideFlags: 0
@@ -12636,7 +12642,9 @@ MonoBehaviour:
   cameraPosition: {fileID: 427420652}
   zoomLevel: -50
   cameraSpeed: 5
+  staticCam: 0
   cmScript: {fileID: 0}
+  overviewPosition: {fileID: 0}
 --- !u!65 &632957405
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45073,6 +45081,8 @@ MonoBehaviour:
   finalBrightness: 1.2
   decayRate: 3
   customStart: 0
+  magnetScripts: []
+  gmScript: {fileID: 0}
 --- !u!65 &1298145269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64681,7 +64691,9 @@ MonoBehaviour:
   cameraPosition: {fileID: 0}
   zoomLevel: -37
   cameraSpeed: 0
+  staticCam: 0
   cmScript: {fileID: 0}
+  overviewPosition: {fileID: 0}
 --- !u!1 &2033879331
 GameObject:
   m_ObjectHideFlags: 0
@@ -64729,7 +64741,9 @@ MonoBehaviour:
   cameraPosition: {fileID: 427420652}
   zoomLevel: -15
   cameraSpeed: 5
+  staticCam: 0
   cmScript: {fileID: 0}
+  overviewPosition: {fileID: 0}
 --- !u!65 &2033879334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65445,10 +65459,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 191196801, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
-      propertyPath: snapRate
-      value: 42
-      objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570571, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_Name

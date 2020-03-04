@@ -14,10 +14,12 @@ public class gameManager : MonoBehaviour
     public String defaultSceneName;
     public bool loadOnStart, resetProgress;
     public Text loadingText;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         loadingText.gameObject.SetActive(false);
+        loadingText.text = "loading";
         if (loadOnStart)
         {
             LoadProgress();
@@ -76,22 +78,31 @@ public class gameManager : MonoBehaviour
 
     IEnumerator AsyncLoad()
     {
-        yield return new WaitForSeconds(1f);
         if (loadingText != null)
         {
             loadingText.gameObject.SetActive(true);
         }
+        anim.SetTrigger("Start");
+        loadingText.text = "loading";
+        yield return new WaitForSeconds(1f);
+       
 
         AsyncOperation async = Application.LoadLevelAsync(sceneName);
         async.allowSceneActivation = false;
+        
 
         // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
+        float transitionTime = 0;
+        loadingText.text = "loading..";
         while (!async.isDone)
         {
-            loadingText.text = "loading: " + async.progress * 100f;
-            if (async.progress >= 0.9f)
+            transitionTime += Time.deltaTime;
+            
+            if (async.progress >= 0.9f&&transitionTime>=0.5f)
             {
+              
                 async.allowSceneActivation = true;
+                loadingText.text = "loading...";
             }
             yield return null;
         }
