@@ -70,7 +70,7 @@ public class BoxProperties : MonoBehaviour
 
           
         }
-        print(stuck);
+        //print(stuck);
     }
 
     public void Apparate(float xPos,float yPos)

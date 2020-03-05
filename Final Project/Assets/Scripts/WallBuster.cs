@@ -21,7 +21,7 @@ public class WallBuster : MonoBehaviour
     {
         
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody orb = other.gameObject.GetComponent<Rigidbody>();
@@ -30,12 +30,21 @@ public class WallBuster : MonoBehaviour
             if (orb.velocity.magnitude > speedToDestroy)
 
             {
-                StartCoroutine(Destruction());
+               StartCoroutine(Destruction());
                 desctructionVector = other.gameObject.GetComponent<Rigidbody>().velocity;
             }
         }
     }
-
+    */
+    private void OnCollisionEnter(Collision collision)
+    {
+        print(collision.relativeVelocity.magnitude);
+        if (collision.relativeVelocity.magnitude >= speedToDestroy)
+        {
+            StartCoroutine(Destruction());
+           
+        }
+    }
     IEnumerator Destruction()
     {
         thisCollider.enabled = false;
