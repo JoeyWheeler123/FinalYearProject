@@ -34,6 +34,8 @@ public class magneticAttractor : MonoBehaviour
     private bool withinRange;
 
     public float attractRange =4.2f;
+
+    private Vector3 forceToAdd;
     // Start is called before the first frame update
     void Awake()
     {
@@ -73,7 +75,15 @@ public class magneticAttractor : MonoBehaviour
             float
                 stronger = Mathf.Sqrt(
                     distanceMultiplier); //electromagnetic force weakens a rate proportional to square of distance. I think. Maybe cubed but squared will do for now?
-            Vector3 forceToAdd = -dir * attractiveForce * Time.deltaTime / stronger;
+            if (stronger > 0)
+            {
+                 forceToAdd = -dir * attractiveForce * Time.deltaTime / stronger;
+            }
+            else
+            {
+                forceToAdd = -dir * attractiveForce * Time.deltaTime / 0.01f;
+            }
+
             boxRb.AddForce(forceToAdd);
             if (dir.magnitude <= snapThreshold && firstTimeSnap)
             {
