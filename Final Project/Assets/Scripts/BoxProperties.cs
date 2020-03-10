@@ -137,7 +137,7 @@ public class BoxProperties : MonoBehaviour
             rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
             v += ( Time.deltaTime*0.85f)/moveScript.energyRechargeTime;
             timeElapsed += Time.deltaTime;
-            print(v);
+//            print(v);
             yield return null;
             
         }
