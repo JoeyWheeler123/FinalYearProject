@@ -8,7 +8,7 @@ public class FirstSceneBoxEnable : MonoBehaviour
 
     public Transform boxSpawnPos;
 
-    public moveBoy moveScript;
+   
 
     public Transform openingCameraTransform;
 
@@ -16,13 +16,13 @@ public class FirstSceneBoxEnable : MonoBehaviour
 
     public float transitionTime, cameraMoveSpeed;
 
-    public cursorMovement camScript;
+    
     // Start is called before the first frame update
     void Start()
     {
         
-        moveScript = FindObjectOfType<moveBoy>();
-        camScript = FindObjectOfType<cursorMovement>();
+        //moveScript = FindObjectOfType<moveBoy>();
+        //camScript = FindObjectOfType<cursorMovement>();
         StartCoroutine(DelayBoxDisable());
     }
 
@@ -75,8 +75,8 @@ public class FirstSceneBoxEnable : MonoBehaviour
 
         camera.position = originalCameraPos;
         camera.rotation = originalCameraRotation;
-        moveScript.enabled = true;
-        camScript.enabled = true;
+       // moveScript.enabled = true;
+        //camScript.enabled = true;
         yield return null;
     }
 }

@@ -10,7 +10,7 @@ public class BoxProperties : MonoBehaviour
 
     private float h, s, v;
 
-    private moveBoy moveScript;
+    public moveBoy moveScript;
 
     public ParticleSystem enchant, disenchant;
     public Color newColour;
@@ -36,7 +36,7 @@ public class BoxProperties : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
-        moveScript = FindObjectOfType<moveBoy>();
+        
     }
     void Start()
     {

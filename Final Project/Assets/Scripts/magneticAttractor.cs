@@ -39,7 +39,7 @@ public class magneticAttractor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        box = GameObject.FindWithTag("box");
+        box = GameObject.FindGameObjectWithTag("box");
     }
     void Start()
     {

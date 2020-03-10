@@ -32,7 +32,10 @@ public class SavePoint : MonoBehaviour
             
         }
 
-        gmScript = FindObjectOfType<gameManager>();
+        if (gmScript == null)
+        {
+            gmScript = FindObjectOfType<gameManager>();
+        }
     }
     void Start()
     {
