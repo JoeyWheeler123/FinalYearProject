@@ -7,9 +7,9 @@ public class SavePoint : MonoBehaviour
     
     Vector3 spawnPointBox;
     private Vector3 spawnPointPlayer;
-    private BoxProperties boxProperties;
+    public BoxProperties boxProperties;
 
-    private moveBoy moveBoyScript;
+    public moveBoy moveBoyScript;
     private Color originalColor;
 
     private float h, s, v;
@@ -48,8 +48,9 @@ public class SavePoint : MonoBehaviour
         rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
         
         
-        moveBoyScript = FindObjectOfType<moveBoy>();
-        boxProperties = FindObjectOfType<BoxProperties>();
+       // moveBoyScript = FindObjectOfType<moveBoy>();
+       // boxProperties = FindObjectOfType<BoxProperties>(); //find object of type is buggy set everything in inspector instead
+     
         
         spawnPointBox = new Vector3(transform.position.x,transform.position.y+3f,0);
         spawnPointPlayer = new Vector3(transform.position.x - 1f, transform.position.y, 0);
