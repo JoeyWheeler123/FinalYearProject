@@ -16,7 +16,7 @@ public class TowardsPlayerParticle : MonoBehaviour
        // pSys = GetComponent<ParticleSystem>();
        // pSys.Pause();
        
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         moveScript = player.GetComponent<moveBoy>();
         pSys.Stop();
     }

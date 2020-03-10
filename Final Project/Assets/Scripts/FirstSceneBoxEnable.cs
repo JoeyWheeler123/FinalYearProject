@@ -45,9 +45,10 @@ public class FirstSceneBoxEnable : MonoBehaviour
 
     IEnumerator DelayBoxDisable()
     {
-        yield return new WaitForSeconds(2f);
+       
         if (SavePoint.currentCheckpoint == 0)
         {
+            theBox.transform.position = boxSpawnPos.position;
             theBox.SetActive(false);
             // StartCoroutine(OpeningScene()) ;
         }
@@ -56,8 +57,8 @@ public class FirstSceneBoxEnable : MonoBehaviour
     }
     IEnumerator OpeningScene()
     {
-        moveScript.enabled = false;
-        camScript.enabled = false;
+       // moveScript.enabled = false;
+        //camScript.enabled = false;
         Vector3 originalCameraPos = camera.position;
         Quaternion originalCameraRotation = camera.transform.rotation;
         camera.position = openingCameraTransform.position;

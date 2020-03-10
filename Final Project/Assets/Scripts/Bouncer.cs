@@ -20,8 +20,13 @@ public class Bouncer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boxProperties = FindObjectOfType<BoxProperties>();
-        box = GameObject.FindGameObjectWithTag("box");
+        if (box == null)
+        {
+            box = GameObject.FindGameObjectWithTag("box");
+        }
+        boxProperties = box.GetComponent<BoxProperties>();
+        
+       
         //rend = GetComponent<Renderer>();
         bounceColour = emissiveRenderer.material.GetColor("_EmissiveColor");
     }

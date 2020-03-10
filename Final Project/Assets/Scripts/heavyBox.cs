@@ -51,7 +51,7 @@ public class heavyBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boxProperties = FindObjectOfType<BoxProperties>();
+        boxProperties = box.GetComponent<BoxProperties>();
         normalColor = boxProperties.GetOriginalColour(normalColor);
         GlobalHeavyBoxCheck = false;
         moveScript = FindObjectOfType<moveBoy>();

@@ -68,7 +68,7 @@ public class moveBoy : MonoBehaviour
     public float wallSlideModifier;
     
     public throwScript throwS;
-    private BoxProperties boxPropertiesScript;
+    public BoxProperties boxPropertiesScript;
     public Rig rigScript, pushIk;
     public bool inControl;
     
@@ -308,7 +308,7 @@ public class moveBoy : MonoBehaviour
         rbox = theBox.GetComponent<Rigidbody>();
         curMov.aiming = false;
 
-        boxPropertiesScript = FindObjectOfType<BoxProperties>();
+       // boxPropertiesScript = FindObjectOfType<BoxProperties>();
 
     }
 
