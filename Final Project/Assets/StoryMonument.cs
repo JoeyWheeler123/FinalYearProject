@@ -19,6 +19,8 @@ public class StoryMonument : MonoBehaviour
     public throwScript throwS;
 
     public float boxMoveSpeed;
+
+    public Transform rotatePosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,10 +76,10 @@ public class StoryMonument : MonoBehaviour
         throwS.gameObject.GetComponent<Collider>().enabled = false;
         while (storyOn)
         {
-            box.transform.position = Vector3.MoveTowards(box.transform.position,transform.position,Time.deltaTime*boxMoveSpeed);
+            box.transform.position = Vector3.MoveTowards(box.transform.position,rotatePosition.position,Time.deltaTime*boxMoveSpeed);
             Vector3 rotateAxis = new Vector3(1,1,1);
                 box.transform.Rotate(Vector3.up*Time.deltaTime*boxMoveSpeed*10f);
-            if (Vector3.Distance(box.transform.position, transform.position) <= 0.1f)
+            if (Vector3.Distance(box.transform.position, rotatePosition.position) <= 0.1f)
             {
                 imageToDisplay.SetActive(true);
                 line.enabled = true;
