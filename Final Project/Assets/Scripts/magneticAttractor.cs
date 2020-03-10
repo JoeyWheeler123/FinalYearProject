@@ -46,8 +46,11 @@ public class magneticAttractor : MonoBehaviour
         
         boxProperties = box.GetComponent<BoxProperties>();
         firstTimeSnap = true;
-        moveScript = FindObjectOfType<moveBoy>();
-        
+        if (moveScript == null)
+        {
+            moveScript = FindObjectOfType<moveBoy>();
+        }
+
         print(moveScript);
         boxRb = box.GetComponent<Rigidbody>();
         //rb = GetComponent<HingeJoint>();
