@@ -77,7 +77,7 @@ public class SavePoint : MonoBehaviour
             boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
             boxProperties.magTransform = null;
             boxProperties.stuck = false;
-            for (int i = 0; i <= magnetScripts.Length; i++)
+            for (int i = 0; i < magnetScripts.Length; i++)
             {
                 magnetScripts[i].gameObject.SendMessage("ResetBox");
             }
