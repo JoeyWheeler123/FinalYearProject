@@ -39,12 +39,13 @@ public class throwScript : MonoBehaviour
   
 
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (transform.position.z != 0&&moveScript.thrown&&!freeMove)
+        if (Mathf.Abs(transform.position.z) >=0.1f&&moveScript.thrown)
         {
             Vector3 movPos = new Vector3(transform.position.x,transform.position.y,0);
-            rb.MovePosition(movPos);
+           // rb.MovePosition(movPos);
+           transform.position = Vector3.Lerp(transform.position, movPos, Time.deltaTime * 10f);
         }
         velocityLastFrame = rb.velocity;
         /*if (rb.velocity.x > maxVelocity)
@@ -75,6 +76,7 @@ public class throwScript : MonoBehaviour
     
         rb.velocity = new Vector3(tempX, tempY,0f);
         */
+       
     }
 
     public void Throw()
