@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class StoryMonument : MonoBehaviour
 {
@@ -21,14 +22,17 @@ public class StoryMonument : MonoBehaviour
     public float boxMoveSpeed;
 
     public Transform rotatePosition;
+
+    public VisualEffect vfx;
     // Start is called before the first frame update
     void Start()
     {
+        vfx.Stop();
         box = GameObject.FindWithTag("box");
         throwS = FindObjectOfType<throwScript>();
         line.enabled = false;
         line.positionCount = 2;
-        line.SetPosition(0, transform.position);
+        line.SetPosition(0, rotatePosition.position);
         storyOn = false;
         moveScript = FindObjectOfType<moveBoy>();
     }
@@ -36,7 +40,10 @@ public class StoryMonument : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Vector3.Distance(box.transform.position, rotatePosition.position) <= 0.3f&&moveScript.thrown)
+        {
+            //StartCoroutine(StoryActive());
+        }
     }
 
     public void Activate()
@@ -59,6 +66,8 @@ public class StoryMonument : MonoBehaviour
         
     }
 
+   
+
     IEnumerator StoryActive()
     {
         //moveScript.inControl = false;
@@ -74,15 +83,17 @@ public class StoryMonument : MonoBehaviour
         throwS.freeMove = true;
         throwS.rb.isKinematic = true;
         throwS.gameObject.GetComponent<Collider>().enabled = false;
+        vfx.Play();
         while (storyOn)
         {
             box.transform.position = Vector3.MoveTowards(box.transform.position,rotatePosition.position,Time.deltaTime*boxMoveSpeed);
             Vector3 rotateAxis = new Vector3(1,1,1);
-                box.transform.Rotate(Vector3.up*Time.deltaTime*boxMoveSpeed*10f);
+                
             if (Vector3.Distance(box.transform.position, rotatePosition.position) <= 0.1f)
             {
                 imageToDisplay.SetActive(true);
                 line.enabled = true;
+                box.transform.Rotate(Vector3.up*Time.deltaTime*boxMoveSpeed*10f);
             }
 
             if (moveScript.pressedThrow)
@@ -91,7 +102,7 @@ public class StoryMonument : MonoBehaviour
             }
                yield return null;
         }
-
+        vfx.Stop();
         float timeElapsed=0;
         Vector3 returnPos = new Vector3(box.transform.position.x,box.transform.position.y,0);
         while(timeElapsed <=0.5f)
