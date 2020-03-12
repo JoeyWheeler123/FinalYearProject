@@ -41,7 +41,7 @@ public class throwScript : MonoBehaviour
 
     private void Update()
     {
-        if (Mathf.Abs(transform.position.z) >=0.1f&&moveScript.thrown)
+        if (Mathf.Abs(transform.position.z) >=0.1f&&moveScript.thrown&&!freeMove)
         {
             Vector3 movPos = new Vector3(transform.position.x,transform.position.y,0);
            // rb.MovePosition(movPos);

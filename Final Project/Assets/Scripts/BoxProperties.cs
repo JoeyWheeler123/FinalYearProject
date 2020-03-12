@@ -29,6 +29,8 @@ public class BoxProperties : MonoBehaviour
     public Vector3 magnetPos;
     public Transform magTransform;
     public bool recharging;
+
+    public GameObject ledgeLeft, ledgeRight;
     // Start is called before the first frame update
 
     void Awake()
@@ -70,6 +72,11 @@ public class BoxProperties : MonoBehaviour
 
           
         }
+        else
+        {
+            ledgeLeft.SetActive(false);
+            ledgeRight.SetActive(false);
+        }
         //print(stuck);
     }
 
@@ -92,6 +99,8 @@ public class BoxProperties : MonoBehaviour
         rb.isKinematic = true;
         
         StartCoroutine(RotateBox());
+        ledgeLeft.SetActive(true);
+        ledgeRight.SetActive(true);
        
     }
 
@@ -119,7 +128,25 @@ public class BoxProperties : MonoBehaviour
             bounceCoroutine = StartCoroutine("SwitchBoxColour", newColour);
         }
     }
-    
+   
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player") && stuck&&moveScript.grounded)
+        {
+            other.gameObject.transform.SetParent(this.transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.transform.SetParent(null);
+            other.gameObject.transform.localScale= new Vector3(1,1,1);
+        }
+    }
+
     IEnumerator Recharge()
     {
         enchant.Play();
