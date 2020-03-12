@@ -307,8 +307,8 @@ public class moveBoy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rbox = theBox.GetComponent<Rigidbody>();
         curMov.aiming = false;
-
-       // boxPropertiesScript = FindObjectOfType<BoxProperties>();
+        global::heavyBox.GlobalHeavyBoxCheck = false;
+        // boxPropertiesScript = FindObjectOfType<BoxProperties>();
 
     }
 
