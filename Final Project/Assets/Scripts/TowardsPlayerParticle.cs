@@ -10,6 +10,8 @@ public class TowardsPlayerParticle : MonoBehaviour
     private bool farEnough;
     private moveBoy moveScript;
     private bool particleTriggered = false;
+    public BoxProperties boxPropertiesScript;
+    Color newColour;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +28,14 @@ public class TowardsPlayerParticle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var main = pSys.main;
+        newColour = boxPropertiesScript.GetCurrentColour(newColour);
+        main.startColor = newColour;
         if (moveScript.pressedThrow&&!particleTriggered)
         {
+           
             pSys.Play();
+
             particleTriggered = true;
         }
         if (!moveScript.pressedThrow && particleTriggered)

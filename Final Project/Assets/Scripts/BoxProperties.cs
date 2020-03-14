@@ -131,6 +131,12 @@ public class BoxProperties : MonoBehaviour
         outgoingColour = originalColor;
         return outgoingColour;
     }
+
+    public Color GetCurrentColour(Color outgoingColour)
+    {
+        outgoingColour = rend.material.GetColor("Color_C5A9FA1D");
+        return outgoingColour;
+    }
     public void ResetRecharge()
     {
        if (rechargeCoroutine != null)
