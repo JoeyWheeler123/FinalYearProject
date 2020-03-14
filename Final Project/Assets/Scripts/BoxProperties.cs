@@ -53,7 +53,7 @@ public class BoxProperties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (energy <= 0)
+        if (energy <= 0&&moveScript.energyFull)
         {
             moveScript.StartCoroutine("BoxCoolDown");
         }
@@ -63,7 +63,7 @@ public class BoxProperties : MonoBehaviour
         }
         if (energy >= 100)
         {
-            energy = 100;
+            energy -= Time.deltaTime*rechargeRate;
         }
 
         
@@ -172,8 +172,8 @@ public class BoxProperties : MonoBehaviour
     IEnumerator Recharge()
     {
         enchant.Play();
-        
-        Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
+
+        /*Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
 
         Color.RGBToHSV(tempColour, out h, out s, out v);
         print(v);
@@ -196,6 +196,21 @@ public class BoxProperties : MonoBehaviour
         rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
         yield return new WaitForSeconds(0.5f);
         rend.material.SetColor("Color_C5A9FA1D", originalColor);
+        yield return null;
+        */
+        float timeElapsed = 0;
+        while (timeElapsed <= moveScript.energyRechargeTime)
+        {
+
+            energy = timeElapsed*100f / moveScript.energyRechargeTime;
+            timeElapsed += Time.deltaTime;
+            //            print(v);
+            yield return null;
+
+        }
+        rend.material.SetColor("Color_C5A9FA1D", originalColor);
+        energy = 200f;
+       
         yield return null;
     }
 
