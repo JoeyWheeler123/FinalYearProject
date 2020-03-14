@@ -67,6 +67,7 @@ public class Bouncer : MonoBehaviour
            bounceDir= bounceDir* bounceHeight;
             //boxRb.velocity = new Vector3(boxRb.velocity.x,bounceHeight,boxRb.velocity.z);
             boxRb.velocity = bounceDir;
+            boxProperties.energy = 150;
            // boxRb.AddForce((Vector3.up*overallModifier*other.relativeVelocity.magnitude));
             //(Vector3.up*overallModifier*defaultBounceStrength)
             StartCoroutine(RotateBox());
