@@ -81,8 +81,8 @@ public class moveBoy : MonoBehaviour
 
     private bool recalling, canJump, hasBox, dismantling, gamePaused;
     public bool facingLeft;
-    public bool energyFull;
-    public float coyoteTime, energyRechargeTime;
+    public bool energyFull,energyAffectsRecallSpeed;
+    public float coyoteTime, energyRechargeTime,energyDrainRate;
 
     private float timeLeftToJump;
 
@@ -829,9 +829,14 @@ public class moveBoy : MonoBehaviour
         if (energyFull)
         {
             recalling = true;
+            boxPropertiesScript.energy -= Time.deltaTime * energyDrainRate;
             //print("pull");
             boxTowardPlayer = transform.position - theBox.transform.position;
             boxTowardPlayer.Normalize();
+            if (energyAffectsRecallSpeed)
+            {
+                boxTowardPlayer = boxTowardPlayer * boxPropertiesScript.energy / 100f;
+            }
             rbox.AddForce(boxTowardPlayer * Time.deltaTime * recallSpeed, ForceMode.Force);
             rb.AddForce(-boxTowardPlayer * Time.deltaTime * inverseRecallMultiplier * recallSpeed, ForceMode.Force);
             if (autoPickup)

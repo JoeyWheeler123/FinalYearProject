@@ -45865,7 +45865,7 @@ MonoBehaviour:
   heavyPull: 0
   recoveryTime: 0
   wallKickForce: 10
-  recallSpeed: 4500
+  recallSpeed: 6000
   grabDistance: 1.7
   moveInputX: 0
   moveInputY: 0
@@ -45881,8 +45881,10 @@ MonoBehaviour:
   grabPos: {x: 0, y: 0, z: 0}
   facingLeft: 0
   energyFull: 0
+  energyAffectsRecallSpeed: 1
   coyoteTime: 0.15
   energyRechargeTime: 1.5
+  energyDrainRate: 35
   inverseRecallMultiplier: 0.15
   anim: {fileID: 1941346839164490261}
   playerModel: {fileID: 6452249444621444949}
@@ -46849,6 +46851,7 @@ MonoBehaviour:
   energyPullMultiplier: 100
   stuck: 0
   snapRate: 42
+  rechargeRate: 100
   magnetPos: {x: 0, y: 0, z: 0}
   magTransform: {fileID: 0}
   recharging: 0

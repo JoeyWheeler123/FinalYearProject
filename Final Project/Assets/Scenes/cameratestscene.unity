@@ -208,8 +208,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218310234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.52, y: 0, z: 1.376}
-  m_LocalScale: {x: 50, y: 1, z: 11.8864}
+  m_LocalPosition: {x: 8.15, y: 0, z: 1.376}
+  m_LocalScale: {x: 91.5, y: 1, z: 11.8864}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -421,6 +421,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 191196801, guid: d046c0db52f440946903c36c4f45ba79, type: 3}
+      propertyPath: rechargeRate
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570571, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_Name
@@ -480,6 +484,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: energyDrainRate
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: energyAffectsRecallSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249444098570574, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: recallSpeed
+      value: 6000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d046c0db52f440946903c36c4f45ba79, type: 3}

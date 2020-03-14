@@ -25,7 +25,7 @@ public class BoxProperties : MonoBehaviour
     public Coroutine rechargeCoroutine;
     public Coroutine bounceCoroutine;
     public bool stuck;
-    public float snapRate;
+    public float snapRate,rechargeRate;
     public Vector3 magnetPos;
     public Transform magTransform;
     public bool recharging;
@@ -57,11 +57,33 @@ public class BoxProperties : MonoBehaviour
         {
             moveScript.StartCoroutine("BoxCoolDown");
         }
-
+        if (energy <= 100&&!moveScript.pressedThrow)
+        {
+            energy += Time.deltaTime * rechargeRate;
+        }
         if (energy >= 100)
         {
             energy = 100;
         }
+
+        
+            Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
+
+            Color.RGBToHSV(tempColour, out h, out s, out v);
+            print(v);
+            v = energy / 100;
+            
+          
+           
+
+                rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
+                
+               
+             
+               
+
+           
+        
         if(stuck == true&&magTransform!=null)
         {
             
