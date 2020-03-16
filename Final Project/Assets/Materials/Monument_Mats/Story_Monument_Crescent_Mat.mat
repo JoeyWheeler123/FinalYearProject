@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5144592818784451388
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Story_Monument_Shimmer_Mat
+  m_Name: Story_Monument_Crescent_Mat
   m_Shader: {fileID: -6465566751694194690, guid: fe78ba003344bfa4aa88d232cecdf9b6,
     type: 3}
   m_ShaderKeywords: 
@@ -19,6 +32,7 @@ Material:
     MotionVector: User
   disabledShaderPasses:
   - MOTIONVECTORS
+  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -27,15 +41,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Base_Monument_Shimmer:
-        m_Texture: {fileID: 2800000, guid: 465d868ef77e0fe4db329bde57135520, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1a1dd07e277295a4b9dbd23148f0b197, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Mask_Monument_Shimmer:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fba2766f335013c4082fd518a0d53f0e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Normal_Monument_Shimmer:
-        m_Texture: {fileID: 2800000, guid: 411c4dd56e1e4364bb34814c2125f91f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2360ca4b22ef1c342b3dec3e21c6a7e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -67,12 +81,12 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentSortPriority: 0
     - _UseShadowThreshold: 0
-    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - Color_2B92A2F: {r: 1, g: 0, b: 0.07778119, a: 0}
+    - Color_2B92A2F: {r: 0.6650944, g: 1, b: 0.9768417, a: 0}
     - Vector2_8C515BCD: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
