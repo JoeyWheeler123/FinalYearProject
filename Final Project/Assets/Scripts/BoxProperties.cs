@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoxProperties : MonoBehaviour
 {
     public Renderer rend;
-
+    private Renderer rendWrist;
     private Color originalColor;
 
     private float h, s, v;
@@ -29,7 +29,7 @@ public class BoxProperties : MonoBehaviour
     public Vector3 magnetPos;
     public Transform magTransform;
     public bool recharging;
-
+    public GameObject WandererWristBand;
     public GameObject ledgeLeft, ledgeRight;
     // Start is called before the first frame update
 
@@ -38,6 +38,10 @@ public class BoxProperties : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
+        if (WandererWristBand != null)
+        {
+            rendWrist = WandererWristBand.GetComponent<Renderer>();
+        }
         
     }
     void Start()
@@ -77,7 +81,11 @@ public class BoxProperties : MonoBehaviour
            
 
                 rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
-                
+                if (rendWrist != null)
+                {
+                    rendWrist.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
+                    print("updating");
+                }
                
              
                
