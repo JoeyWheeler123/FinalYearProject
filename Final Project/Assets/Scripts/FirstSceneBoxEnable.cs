@@ -16,7 +16,7 @@ public class FirstSceneBoxEnable : MonoBehaviour
 
     public float transitionTime, cameraMoveSpeed;
 
-    
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +39,7 @@ public class FirstSceneBoxEnable : MonoBehaviour
             
             theBox.SetActive(true);
             theBox.transform.position = boxSpawnPos.position;
+            anim.Play("Box Catch Transition");
 
         }
     }

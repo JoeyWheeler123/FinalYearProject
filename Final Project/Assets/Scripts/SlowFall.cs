@@ -5,6 +5,8 @@ using UnityEngine;
 public class SlowFall : MonoBehaviour
 {
     private Rigidbody rb;
+
+    private moveBoy moveScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class SlowFall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            moveScript = other.gameObject.GetComponent<moveBoy>();
             rb = other.gameObject.GetComponent<Rigidbody>();
             StartCoroutine(SlowDescent());
             print("sloooow");
@@ -27,15 +30,22 @@ public class SlowFall : MonoBehaviour
     }
     IEnumerator SlowDescent()
     {
+        
         float slowRate = 4;
-        float timeElapsed = 0;   
-        while (timeElapsed <=4f)
+        float timeElapsed = 0;
+       
+        moveScript.enabled = false;
+        rb.velocity = Vector3.zero;
+        while (timeElapsed <=6f)
         {
+            
             float newY = Mathf.Lerp(rb.velocity.y, 0, slowRate*Time.deltaTime);
             rb.velocity = new Vector3(rb.velocity.x, newY, 0);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
+        moveScript.enabled = true;
         yield return null;
         Destroy(this.gameObject);
     }
