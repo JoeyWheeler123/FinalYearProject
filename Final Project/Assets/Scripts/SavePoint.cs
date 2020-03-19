@@ -103,7 +103,7 @@ public class SavePoint : MonoBehaviour
     void SpawnPlayer(Vector3 spawnPosition)
     {
         moveBoyScript.gameObject.transform.position = spawnPosition;
-        Activate();
+       // Activate();
         StartCoroutine(Initiate());
     }
 
@@ -174,10 +174,10 @@ public class SavePoint : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
+        
         boxProperties.energy = 150f;
         
-        boxPositionTeleport.SetActive(false);
+       // boxPositionTeleport.SetActive(false);
         boxProperties.magTransform = null;
         boxProperties.stuck = false;
         boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
@@ -186,12 +186,14 @@ public class SavePoint : MonoBehaviour
         box.GetComponent<Rigidbody>().isKinematic = true;
         while (timeElapsed <= 0.5f)
         {
+            boxPositionTeleport.transform.localScale = Vector3.MoveTowards(boxPositionTeleport.transform.localScale,
+                Vector3.zero, Time.deltaTime*100f);
             box.transform.localScale =
                 Vector3.MoveTowards(box.transform.localScale, boxScale, Time.deltaTime * 5f);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
+        boxPositionTeleport.SetActive(false);
         box.GetComponent<Rigidbody>().isKinematic = false;
         boxProperties.transform.localScale = boxScale;
         boxProperties.magTransform = null;
