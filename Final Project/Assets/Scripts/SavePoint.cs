@@ -29,6 +29,8 @@ public class SavePoint : MonoBehaviour
     private Vector3 teleportScale;
     private Vector3 boxScale;
     public Vector3 boxOffSet;
+
+    private bool currentlyRespawning;
     //public bool resetStuckBox;
     void Awake()
     {
@@ -45,6 +47,7 @@ public class SavePoint : MonoBehaviour
     }
     void Start()
     {
+        currentlyRespawning = false;
         teleportScale = boxPositionTeleport.transform.localScale;
         boxScale = Vector3.one * 1.5f;
         magnetScripts = FindObjectsOfType<magneticAttractor>();
@@ -79,7 +82,7 @@ public class SavePoint : MonoBehaviour
     
     void Activate()
     {
-        if (moveBoyScript.thrown)
+        if (moveBoyScript.thrown&&!currentlyRespawning)
         {
            // global::magneticAttractor.resetBoxBool = true;
           // boxProperties.gameObject.SetActive(false);
@@ -151,6 +154,7 @@ public class SavePoint : MonoBehaviour
 
     IEnumerator RespawnBox()
     {
+        currentlyRespawning = true;
         GameObject box = boxProperties.gameObject;
         boxPositionTeleport.transform.localScale = Vector3.zero;
         Vector3 boxPos = box.transform.position;
@@ -161,16 +165,16 @@ public class SavePoint : MonoBehaviour
         {
             boxProperties.energy += 300f*Time.deltaTime;
             boxPositionTeleport.transform.localScale = Vector3.MoveTowards(boxPositionTeleport.transform.localScale,
-                teleportScale, Time.deltaTime*50f);
+                teleportScale, Time.deltaTime*100f);
             yield return null;
         }
 
         boxProperties.energy = 1000f;
         float timeElapsed = 0;
-        while (timeElapsed <= 0.5f)
+        while (timeElapsed <= 0.3f)
         {
             box.transform.localScale =
-                Vector3.MoveTowards(box.transform.localScale, new Vector3(0.1f,0.1f,0.1f), Time.deltaTime * 5f);
+                Vector3.MoveTowards(box.transform.localScale, new Vector3(0.1f,0.1f,0.1f), Time.deltaTime * 10f);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -187,7 +191,7 @@ public class SavePoint : MonoBehaviour
         while (timeElapsed <= 0.5f)
         {
             boxPositionTeleport.transform.localScale = Vector3.MoveTowards(boxPositionTeleport.transform.localScale,
-                Vector3.zero, Time.deltaTime*100f);
+                Vector3.zero, Time.deltaTime*50f);
             box.transform.localScale =
                 Vector3.MoveTowards(box.transform.localScale, boxScale, Time.deltaTime * 5f);
             timeElapsed += Time.deltaTime;
@@ -203,6 +207,7 @@ public class SavePoint : MonoBehaviour
             magnetScripts[i].gameObject.SendMessage("ResetBox");
         }
 
+        currentlyRespawning = false;
         print("Teleport complete");
         yield return null;
     }
