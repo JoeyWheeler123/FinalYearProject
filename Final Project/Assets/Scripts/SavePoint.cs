@@ -27,7 +27,7 @@ public class SavePoint : MonoBehaviour
     public GameObject boxPositionTeleport;
 
     private Vector3 teleportScale;
-
+    private Vector3 boxScale;
     public Vector3 boxOffSet;
     //public bool resetStuckBox;
     void Awake()
@@ -46,6 +46,7 @@ public class SavePoint : MonoBehaviour
     void Start()
     {
         teleportScale = boxPositionTeleport.transform.localScale;
+        boxScale = Vector3.one * 1.5f;
         magnetScripts = FindObjectsOfType<magneticAttractor>();
         rend = GetComponent<Renderer>();
         Color tempColour;
@@ -165,12 +166,34 @@ public class SavePoint : MonoBehaviour
         }
 
         boxProperties.energy = 1000f;
+        float timeElapsed = 0;
+        while (timeElapsed <= 0.5f)
+        {
+            box.transform.localScale =
+                Vector3.MoveTowards(box.transform.localScale, new Vector3(0.1f,0.1f,0.1f), Time.deltaTime * 5f);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
         yield return new WaitForSeconds(0.5f);
         boxProperties.energy = 150f;
+        
         boxPositionTeleport.SetActive(false);
         boxProperties.magTransform = null;
         boxProperties.stuck = false;
         boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+        box.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+        timeElapsed = 0;
+        box.GetComponent<Rigidbody>().isKinematic = true;
+        while (timeElapsed <= 0.5f)
+        {
+            box.transform.localScale =
+                Vector3.MoveTowards(box.transform.localScale, boxScale, Time.deltaTime * 5f);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        box.GetComponent<Rigidbody>().isKinematic = false;
+        boxProperties.transform.localScale = boxScale;
         boxProperties.magTransform = null;
         boxProperties.stuck = false;
         for (int i = 0; i < magnetScripts.Length; i++)
