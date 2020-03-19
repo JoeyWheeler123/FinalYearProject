@@ -23,6 +23,12 @@ public class SavePoint : MonoBehaviour
     public magneticAttractor[] magnetScripts;
 
     public gameManager gmScript;
+
+    public GameObject boxPositionTeleport;
+
+    private Vector3 teleportScale;
+
+    public Vector3 boxOffSet;
     //public bool resetStuckBox;
     void Awake()
     {
@@ -39,6 +45,7 @@ public class SavePoint : MonoBehaviour
     }
     void Start()
     {
+        teleportScale = boxPositionTeleport.transform.localScale;
         magnetScripts = FindObjectsOfType<magneticAttractor>();
         rend = GetComponent<Renderer>();
         Color tempColour;
@@ -52,7 +59,7 @@ public class SavePoint : MonoBehaviour
        // boxProperties = FindObjectOfType<BoxProperties>(); //find object of type is buggy set everything in inspector instead
      
         
-        spawnPointBox = new Vector3(transform.position.x,transform.position.y+3f,0);
+        spawnPointBox = new Vector3(transform.position.x,transform.position.y,0);
         spawnPointPlayer = new Vector3(transform.position.x - 1f, transform.position.y, 0);
         if (checkPointNumber == currentCheckpoint)
         {
@@ -75,18 +82,18 @@ public class SavePoint : MonoBehaviour
         {
            // global::magneticAttractor.resetBoxBool = true;
           // boxProperties.gameObject.SetActive(false);
-        
-          boxProperties.magTransform = null;
-           boxProperties.stuck = false;
-            boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
-            boxProperties.magTransform = null;
+          StartCoroutine(RespawnBox());
+          /* boxProperties.magTransform = null;
             boxProperties.stuck = false;
-            for (int i = 0; i < magnetScripts.Length; i++)
-            {
-                magnetScripts[i].gameObject.SendMessage("ResetBox");
-            }
-            
-            
+             boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+             boxProperties.magTransform = null;
+             boxProperties.stuck = false;
+             for (int i = 0; i < magnetScripts.Length; i++)
+             {
+                 magnetScripts[i].gameObject.SendMessage("ResetBox");
+             }
+             
+             */
 
         }
 
@@ -139,5 +146,39 @@ public class SavePoint : MonoBehaviour
        
         yield return null;
        
+    }
+
+    IEnumerator RespawnBox()
+    {
+        GameObject box = boxProperties.gameObject;
+        boxPositionTeleport.transform.localScale = Vector3.zero;
+        Vector3 boxPos = box.transform.position;
+        box.GetComponent<Rigidbody>().isKinematic = true;
+        boxPositionTeleport.transform.position = box.transform.position + boxOffSet;
+        boxPositionTeleport.SetActive(true);
+        while (boxPositionTeleport.transform.localScale.magnitude < teleportScale.magnitude)
+        {
+            boxProperties.energy += 300f*Time.deltaTime;
+            boxPositionTeleport.transform.localScale = Vector3.MoveTowards(boxPositionTeleport.transform.localScale,
+                teleportScale, Time.deltaTime*50f);
+            yield return null;
+        }
+
+        boxProperties.energy = 1000f;
+        yield return new WaitForSeconds(0.5f);
+        boxProperties.energy = 150f;
+        boxPositionTeleport.SetActive(false);
+        boxProperties.magTransform = null;
+        boxProperties.stuck = false;
+        boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+        boxProperties.magTransform = null;
+        boxProperties.stuck = false;
+        for (int i = 0; i < magnetScripts.Length; i++)
+        {
+            magnetScripts[i].gameObject.SendMessage("ResetBox");
+        }
+
+        print("Teleport complete");
+        yield return null;
     }
 }
