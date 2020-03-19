@@ -21,7 +21,7 @@ MonoBehaviour:
     x: -621
     y: -133
     width: 1957
-    height: 1897
+    height: 1899
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,7 +410,7 @@ VisualEffectResource:
       attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t   
       SetAttribute_3278B22F( /*inout */attributes.size, (float)0.0199999996);\n\t\t\t\t}\n\t\t\t\tOrient_4(
       /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ);\n\t\t\t\t{\n\t\t\t\t   
-      SetAttribute_FA15ADAA( /*inout */attributes.color, float3(0, 0.521682739, 16));\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if
+      SetAttribute_FA15ADAA( /*inout */attributes.color, float3(0, 6.82722425, 5.31937122));\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if
       !HAS_STRIPS\n\t\t\t\tif (!attributes.alive)\n\t\t\t\t\treturn o;\n\t\t\t#endif\n\t\t\t\t\n\t\t\t#if
       VFX_PRIMITIVE_QUAD\n\t\t\t\n\t\t\t#if HAS_STRIPS\n\t\t\t#if VFX_STRIPS_UV_STRECHED\n\t\t\t\to.VFX_VARYING_UV.x
       = (float)(currentIndex) / (stripData.nextIndex - 1);\n\t\t\t#elif VFX_STRIPS_UV_PER_SEGMENT\n\t\t\t\to.VFX_VARYING_UV.x
@@ -604,7 +604,7 @@ VisualEffectResource:
       attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t   
       SetAttribute_3278B22F( /*inout */attributes.size, (float)0.0199999996);\n\t\t\t\t}\n\t\t\t\tOrient_4(
       /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ);\n\t\t\t\t{\n\t\t\t\t   
-      SetAttribute_FA15ADAA( /*inout */attributes.color, float3(0, 0.521682739, 16));\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if
+      SetAttribute_FA15ADAA( /*inout */attributes.color, float3(0, 6.82722425, 5.31937122));\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if
       !HAS_STRIPS\n\t\t\t\tif (!attributes.alive)\n\t\t\t\t\treturn o;\n\t\t\t#endif\n\t\t\t\t\n\t\t\t#if
       VFX_PRIMITIVE_QUAD\n\t\t\t\n\t\t\t#if HAS_STRIPS\n\t\t\t#if VFX_STRIPS_UV_STRECHED\n\t\t\t\to.VFX_VARYING_UV.x
       = (float)(currentIndex) / (stripData.nextIndex - 1);\n\t\t\t#elif VFX_STRIPS_UV_PER_SEGMENT\n\t\t\t\to.VFX_VARYING_UV.x
@@ -914,7 +914,7 @@ VisualEffectResource:
         - m_ExpressionIndex: 11
           m_Value: 20
         - m_ExpressionIndex: 14
-          m_Value: 500000
+          m_Value: 200000
         - m_ExpressionIndex: 15
           m_Value: 0.1300028
         - m_ExpressionIndex: 16
@@ -942,7 +942,7 @@ VisualEffectResource:
         - m_ExpressionIndex: 3
           m_Value: {x: 1, y: 0.3482613, z: 2}
         - m_ExpressionIndex: 13
-          m_Value: {x: 0, y: 0.52168274, z: 16}
+          m_Value: {x: 0, y: 6.8272243, z: 5.319371}
         - m_ExpressionIndex: 20
           m_Value: {x: 0, y: 0, z: 0}
         - m_ExpressionIndex: 23
@@ -1257,7 +1257,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 500000
+      m_SerializableObject: 200000
     m_Space: 2147483647
   m_Property:
     name: Rate
@@ -3713,7 +3713,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":0.5216827392578125,"z":16.0}'
+      m_SerializableObject: '{"x":0.0,"y":6.827224254608154,"z":5.319371223449707}'
     m_Space: 2147483647
   m_Property:
     name: Color
