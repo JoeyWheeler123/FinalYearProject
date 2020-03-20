@@ -74,7 +74,7 @@ public class BoxProperties : MonoBehaviour
             Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
 
             Color.RGBToHSV(tempColour, out h, out s, out v);
-            print(v);
+           // print(v);
             v = energy / 100;
             
           

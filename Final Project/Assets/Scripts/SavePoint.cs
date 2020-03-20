@@ -87,7 +87,7 @@ public class SavePoint : MonoBehaviour
            // global::magneticAttractor.resetBoxBool = true;
           // boxProperties.gameObject.SetActive(false);
           StartCoroutine(RespawnBox());
-          /* boxProperties.magTransform = null;
+          /*boxProperties.magTransform = null;
             boxProperties.stuck = false;
              boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
              boxProperties.magTransform = null;
@@ -97,8 +97,8 @@ public class SavePoint : MonoBehaviour
                  magnetScripts[i].gameObject.SendMessage("ResetBox");
              }
              
-             */
-
+            
+    */
         }
 
     }
@@ -109,7 +109,19 @@ public class SavePoint : MonoBehaviour
        // Activate();
         StartCoroutine(Initiate());
     }
-
+    void UnstickBox()
+    {
+        boxProperties.magTransform = null;
+        boxProperties.stuck = false;
+        boxProperties.Apparate(spawnPointBox.x, spawnPointBox.y);
+        
+        boxProperties.magTransform = null;
+        boxProperties.stuck = false;
+        for (int i = 0; i < magnetScripts.Length; i++)
+        {
+            magnetScripts[i].gameObject.SendMessage("ResetBox");
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -154,11 +166,13 @@ public class SavePoint : MonoBehaviour
 
     IEnumerator RespawnBox()
     {
+       
         currentlyRespawning = true;
         GameObject box = boxProperties.gameObject;
-        boxPositionTeleport.transform.localScale = Vector3.zero;
+        Rigidbody boxRb = box.GetComponent<Rigidbody>();
+       boxPositionTeleport.transform.localScale = Vector3.zero;
         Vector3 boxPos = box.transform.position;
-        box.GetComponent<Rigidbody>().isKinematic = true;
+        boxRb.isKinematic = true;
         boxPositionTeleport.transform.position = box.transform.position + boxOffSet;
         boxPositionTeleport.SetActive(true);
         while (boxPositionTeleport.transform.localScale.magnitude < teleportScale.magnitude)
@@ -188,6 +202,9 @@ public class SavePoint : MonoBehaviour
         box.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
         timeElapsed = 0;
         box.GetComponent<Rigidbody>().isKinematic = true;
+        UnstickBox();
+
+        boxRb.isKinematic = true;
         while (timeElapsed <= 0.5f)
         {
             boxPositionTeleport.transform.localScale = Vector3.MoveTowards(boxPositionTeleport.transform.localScale,
@@ -198,15 +215,10 @@ public class SavePoint : MonoBehaviour
             yield return null;
         }
         boxPositionTeleport.SetActive(false);
-        box.GetComponent<Rigidbody>().isKinematic = false;
+        boxRb.isKinematic = false;
         boxProperties.transform.localScale = boxScale;
-        boxProperties.magTransform = null;
-        boxProperties.stuck = false;
-        for (int i = 0; i < magnetScripts.Length; i++)
-        {
-            magnetScripts[i].gameObject.SendMessage("ResetBox");
-        }
 
+        
         currentlyRespawning = false;
         print("Teleport complete");
         yield return null;
