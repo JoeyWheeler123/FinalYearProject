@@ -79,7 +79,7 @@ public class moveBoy : MonoBehaviour
     public Vector3  grabPos;
     private int mantlePos;
 
-    private bool recalling, canJump, hasBox, dismantling, gamePaused;
+    public bool recalling, canJump, hasBox, dismantling, gamePaused;
     public bool facingLeft;
     public bool energyFull,energyAffectsRecallSpeed;
     public float coyoteTime, energyRechargeTime,energyDrainRate,heavyBoxEnergyMultiplier;

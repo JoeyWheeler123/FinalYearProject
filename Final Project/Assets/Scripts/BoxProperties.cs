@@ -31,10 +31,12 @@ public class BoxProperties : MonoBehaviour
     public bool recharging;
     public GameObject WandererWristBand;
     public GameObject ledgeLeft, ledgeRight;
+    Vector3 initialWristBandSize;
     // Start is called before the first frame update
 
     void Awake()
     {
+        initialWristBandSize = WandererWristBand.transform.localScale;
         rb = GetComponent<Rigidbody>();
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
@@ -47,8 +49,8 @@ public class BoxProperties : MonoBehaviour
     void Start()
     {
         energy = 100;
-        
-        
+
+        WandererWristBand.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
        
         //StartCoroutine(SwitchBoxColour(newColour));
         //StartCoroutine(Recharge());
@@ -70,7 +72,14 @@ public class BoxProperties : MonoBehaviour
             energy -= Time.deltaTime*rechargeRate;
         }
 
-        
+        if (moveScript.recalling)
+        {
+            WristBandGrow();
+        }
+        else
+        {
+            WristBandShrink();
+        }
             Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
 
             Color.RGBToHSV(tempColour, out h, out s, out v);
@@ -133,7 +142,14 @@ public class BoxProperties : MonoBehaviour
         ledgeRight.SetActive(true);
        
     }
-
+    public void WristBandGrow()
+    {
+        WandererWristBand.transform.localScale = Vector3.MoveTowards(WandererWristBand.transform.localScale, initialWristBandSize, Time.deltaTime);
+    }
+    public void WristBandShrink()
+    {
+        WandererWristBand.transform.localScale = Vector3.MoveTowards(WandererWristBand.transform.localScale, Vector3.zero, Time.deltaTime);
+    }
     public Color GetOriginalColour(Color outgoingColour)
     {
         outgoingColour = originalColor;
