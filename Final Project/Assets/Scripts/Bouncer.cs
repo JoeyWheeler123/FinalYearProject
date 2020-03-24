@@ -17,6 +17,8 @@ public class Bouncer : MonoBehaviour
     private BoxProperties boxProperties;
 
     private Coroutine changeColour;
+
+    private moveBoy moveScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +27,8 @@ public class Bouncer : MonoBehaviour
             box = GameObject.FindGameObjectWithTag("box");
         }
         boxProperties = box.GetComponent<BoxProperties>();
-        
-       
+
+        moveScript = boxProperties.moveScript;
         //rend = GetComponent<Renderer>();
         bounceColour = emissiveRenderer.material.GetColor("_EmissiveColor");
     }
@@ -68,6 +70,15 @@ public class Bouncer : MonoBehaviour
             //boxRb.velocity = new Vector3(boxRb.velocity.x,bounceHeight,boxRb.velocity.z);
             boxRb.velocity = bounceDir;
             boxProperties.energy = 150;
+            if (moveScript != null)
+            {
+                moveScript.energyFull = true;
+            }
+            else
+            {
+                moveScript = boxProperties.moveScript;
+            }
+            
            // boxRb.AddForce((Vector3.up*overallModifier*other.relativeVelocity.magnitude));
             //(Vector3.up*overallModifier*defaultBounceStrength)
             StartCoroutine(RotateBox());
