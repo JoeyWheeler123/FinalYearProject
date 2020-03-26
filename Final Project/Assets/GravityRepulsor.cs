@@ -15,6 +15,7 @@ public class GravityRepulsor : MonoBehaviour
     void Start()
     {
         rb = player.gameObject.GetComponent<Rigidbody>();
+        moveScript = player.gameObject.GetComponent<moveBoy>();
         gc = player.gameObject.GetComponentInChildren<groundCheck>();
         gravity = Physics.gravity;
     }
@@ -33,15 +34,18 @@ public class GravityRepulsor : MonoBehaviour
         if (distance <= maxDistance)
         {
             /* float forceToAdd = konoPowa / (distance*distance);
-             rb.AddForce(konoPowa*Vector3.up*Time.deltaTime);
+             rb.AddForce(konoPowa*towardsPlayer*Time.deltaTime);
              print(forceToAdd);
              */
-            Physics.gravity = gravity / 2f;
+        
+           
+           Physics.gravity = gravity / 2f;
             
         }
         else
         {
             Physics.gravity = gravity;
+           
         }
     }
 
