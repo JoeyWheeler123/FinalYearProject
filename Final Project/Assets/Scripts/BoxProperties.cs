@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BoxProperties : MonoBehaviour
 {
@@ -29,29 +30,28 @@ public class BoxProperties : MonoBehaviour
     public Vector3 magnetPos;
     public Transform magTransform;
     public bool recharging;
-    public GameObject WandererWristBand;
+    public GameObject wandererWrist1,wandererWrist2;
     public GameObject ledgeLeft, ledgeRight;
     Vector3 initialWristBandSize;
+    private bool particleSwitch;
     // Start is called before the first frame update
 
     void Awake()
     {
-        initialWristBandSize = WandererWristBand.transform.localScale;
+       
         rb = GetComponent<Rigidbody>();
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
-        if (WandererWristBand != null)
-        {
-            rendWrist = WandererWristBand.GetComponent<Renderer>();
-        }
+       
         
     }
     void Start()
     {
         energy = 100;
 
-        WandererWristBand.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-       
+        wandererWrist1.gameObject.GetComponent<VisualEffect>().Stop();
+        wandererWrist2.gameObject.GetComponent<VisualEffect>().Stop();
+
         //StartCoroutine(SwitchBoxColour(newColour));
         //StartCoroutine(Recharge());
     }
@@ -72,13 +72,19 @@ public class BoxProperties : MonoBehaviour
             energy -= Time.deltaTime*rechargeRate;
         }
 
-        if (moveScript.recalling)
+        if (moveScript.recalling&&!particleSwitch)
         {
-            WristBandGrow();
+            particleSwitch = true;
+            
+            wandererWrist1.gameObject.GetComponent<VisualEffect>().Play();
+            wandererWrist2.gameObject.GetComponent<VisualEffect>().Play();
+            // WristBandGrow();
         }
-        else
+        if(!moveScript.recalling && particleSwitch)
         {
-            WristBandShrink();
+            particleSwitch = false;
+            wandererWrist1.gameObject.GetComponent<VisualEffect>().Stop();
+            wandererWrist2.gameObject.GetComponent<VisualEffect>().Stop();
         }
             Color tempColour = rend.material.GetColor("Color_C5A9FA1D");
 
@@ -142,14 +148,7 @@ public class BoxProperties : MonoBehaviour
         ledgeRight.SetActive(true);
        
     }
-    public void WristBandGrow()
-    {
-        WandererWristBand.transform.localScale = Vector3.MoveTowards(WandererWristBand.transform.localScale, initialWristBandSize, Time.deltaTime);
-    }
-    public void WristBandShrink()
-    {
-        WandererWristBand.transform.localScale = Vector3.MoveTowards(WandererWristBand.transform.localScale, Vector3.zero, Time.deltaTime);
-    }
+ 
     public Color GetOriginalColour(Color outgoingColour)
     {
         outgoingColour = originalColor;
