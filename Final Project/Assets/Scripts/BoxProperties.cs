@@ -93,7 +93,7 @@ public class BoxProperties : MonoBehaviour
                 if (rendWrist != null)
                 {
                     rendWrist.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
-                    print("updating");
+                    //print("updating");
                 }
                
              
