@@ -11,6 +11,7 @@ public class PanelSwitch : MonoBehaviour
     private bool playerInRange;
     public TutorialPopUp tutorialScript;
     private float backUpTime;
+  
     // Start is called before the first frame update
 
     void Awake()

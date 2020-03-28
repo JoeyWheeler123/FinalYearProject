@@ -627,25 +627,6 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
---- !u!95 &1832501807
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8743941178328187120}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7008c895fc205d54ca6fc737f1603ea6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1441341768647757471
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,13 +933,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveScript: {fileID: 0}
-  line: {fileID: 337862685}
   imageToDisplay: {fileID: 0}
   box: {fileID: 0}
   throwS: {fileID: 0}
   boxMoveSpeed: 5
   rotatePosition: {fileID: 785280516}
   vfx: {fileID: 1441341768647757441}
+  anim: {fileID: 1832501807}
 --- !u!114 &337862688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,6 +955,25 @@ MonoBehaviour:
   objectToActivate: {fileID: 7431293040939729529}
   tutorialObject: 0
   tutorialScript: {fileID: 0}
+--- !u!95 &1832501807
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743941178328187120}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7008c895fc205d54ca6fc737f1603ea6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &1880639120
 Animator:
   serializedVersion: 3

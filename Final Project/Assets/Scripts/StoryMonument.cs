@@ -11,7 +11,7 @@ public class StoryMonument : MonoBehaviour
 
     private bool storyOn;
 
-    public LineRenderer line;
+    //public LineRenderer line;
 
     public GameObject imageToDisplay;
 
@@ -24,15 +24,19 @@ public class StoryMonument : MonoBehaviour
     public Transform rotatePosition;
 
     public VisualEffect vfx;
+    
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
+        imageToDisplay.SetActive(false);
         vfx.Stop();
         box = GameObject.FindWithTag("box");
         throwS = FindObjectOfType<throwScript>();
-        line.enabled = false;
-        line.positionCount = 2;
-        line.SetPosition(0, rotatePosition.position);
+        //line.enabled = false;
+        //line.positionCount = 2;
+       // line.SetPosition(0, rotatePosition.position);
         storyOn = false;
         moveScript = FindObjectOfType<moveBoy>();
     }
@@ -58,7 +62,7 @@ public class StoryMonument : MonoBehaviour
         else
         {
             moveScript.inControl = true;
-            line.enabled = false;
+            //line.enabled = false;
             storyOn = false;
             imageToDisplay.SetActive(false);
         }
@@ -72,7 +76,7 @@ public class StoryMonument : MonoBehaviour
     {
         //moveScript.inControl = false;
         moveScript.energyFull = false;
-        line.SetPosition(1, imageToDisplay.transform.position);
+        //line.SetPosition(1, imageToDisplay.transform.position);
         storyOn = true;
            
         moveScript.ResetVelocity();
@@ -84,26 +88,32 @@ public class StoryMonument : MonoBehaviour
         throwS.rb.isKinematic = true;
         throwS.gameObject.GetComponent<Collider>().enabled = false;
         vfx.Play();
+        anim.SetTrigger("activate");
+        float timeElapsed = 0;
         while (storyOn)
         {
             box.transform.position = Vector3.MoveTowards(box.transform.position,rotatePosition.position,Time.deltaTime*boxMoveSpeed);
             Vector3 rotateAxis = new Vector3(1,1,1);
                 
-            if (Vector3.Distance(box.transform.position, rotatePosition.position) <= 0.1f)
+            if (Vector3.Distance(box.transform.position, rotatePosition.position) <= 0.1f&&timeElapsed>=5f)
             {
                 imageToDisplay.SetActive(true);
-                line.enabled = true;
+                //line.enabled = true;
                 box.transform.Rotate(Vector3.up*Time.deltaTime*boxMoveSpeed*10f);
+               
             }
 
             if (moveScript.pressedThrow)
             {
                 Activate();
+                anim.SetTrigger("deactivate");
+               
             }
+            timeElapsed += Time.deltaTime;
                yield return null;
         }
         vfx.Stop();
-        float timeElapsed=0;
+        timeElapsed=0;
         Vector3 returnPos = new Vector3(box.transform.position.x,box.transform.position.y,0);
         while(timeElapsed <=0.5f)
         {
@@ -111,7 +121,8 @@ public class StoryMonument : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
+        anim.SetTrigger("deactivate");
+        
         moveScript.energyFull = true;
         throwS.gameObject.GetComponent<Collider>().enabled = true;
         throwS.freeMove = false;
