@@ -765,7 +765,7 @@ public class moveBoy : MonoBehaviour
                 rb.velocity = new Vector3(velocity.x, jumpHeight, 0);
             }
             */
-           if (energyFull)
+           if (energyFull&&!boxPropertiesScript.stuck)
            {
                rb.velocity = new Vector3(velocity.x, boxJumpMultiplier * jumpHeight, 0);
                rbox.velocity = new Vector3(0, -jumpHeight, 0);
