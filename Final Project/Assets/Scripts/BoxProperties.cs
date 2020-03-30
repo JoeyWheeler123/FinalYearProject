@@ -34,11 +34,12 @@ public class BoxProperties : MonoBehaviour
     public GameObject ledgeLeft, ledgeRight;
     Vector3 initialWristBandSize;
     private bool particleSwitch;
+    public GameObject collectibleIcon1, collectibleIcon2, collectibleIcon3;
     // Start is called before the first frame update
-
+    public static int orbsCollected;
     void Awake()
     {
-       
+        orbsCollected = 0;
         rb = GetComponent<Rigidbody>();
         originalColor = rend.material.GetColor("Color_C5A9FA1D");
         rb = GetComponent<Rigidbody>();
@@ -59,6 +60,10 @@ public class BoxProperties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (collectibleIcon1 != null)
+        {
+            CollectibleObtained();
+        }
         if (energy <= 0&&moveScript.energyFull)
         {
             moveScript.StartCoroutine("BoxCoolDown");
@@ -180,7 +185,21 @@ public class BoxProperties : MonoBehaviour
         }
     }
    
-
+    public void CollectibleObtained()
+    {
+        if (orbsCollected == 1)
+        {
+            collectibleIcon1.SetActive(true);
+        }
+        if (orbsCollected == 2)
+        {
+            collectibleIcon2.SetActive(true);
+        }
+        if (orbsCollected == 3)
+        {
+            collectibleIcon3.SetActive(true);
+        }
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player") && stuck&&moveScript.grounded)
