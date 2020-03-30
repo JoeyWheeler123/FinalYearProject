@@ -26,7 +26,8 @@ public class StoryMonument : MonoBehaviour
     public VisualEffect vfx;
     
     public Animator anim;
-
+    private bool initialActivator;
+    public float activationDistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,13 +49,30 @@ public class StoryMonument : MonoBehaviour
         {
             //StartCoroutine(StoryActive());
         }
+        float distance = Vector3.Distance(rotatePosition.position, box.transform.position);
+        if (distance <= activationDistance&&!initialActivator)
+        {
+            initialActivator = true;
+            Activate();
+        }
+        if (distance >=8f)
+        {
+            initialActivator = false;
+        }
     }
-
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("box")&& !moveScript.pressedThrow)
+        {
+           // Activate();
+            print("activate");
+        }
+    }
     public void Activate()
     {
         if (!storyOn)
         {
-            if (!moveScript.thrown)
+            if (moveScript.thrown)
             {
                 StartCoroutine(StoryActive());
             }
@@ -88,7 +106,7 @@ public class StoryMonument : MonoBehaviour
         throwS.rb.isKinematic = true;
         throwS.gameObject.GetComponent<Collider>().enabled = false;
         vfx.Play();
-        anim.SetTrigger("activate");
+        anim.SetBool("activate",true);
         float timeElapsed = 0;
         while (storyOn)
         {
@@ -106,7 +124,7 @@ public class StoryMonument : MonoBehaviour
             if (moveScript.pressedThrow)
             {
                 Activate();
-                anim.SetTrigger("deactivate");
+                anim.SetBool("activate",false);
                
             }
             timeElapsed += Time.deltaTime;
@@ -121,8 +139,8 @@ public class StoryMonument : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        anim.SetTrigger("deactivate");
-        
+        anim.SetBool("activate", false);
+
         moveScript.energyFull = true;
         throwS.gameObject.GetComponent<Collider>().enabled = true;
         throwS.freeMove = false;
