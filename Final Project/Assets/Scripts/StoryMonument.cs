@@ -28,9 +28,15 @@ public class StoryMonument : MonoBehaviour
     public Animator anim;
     private bool initialActivator;
     public float activationDistance;
+    public GameObject holographic;
+    private Vector3 initialHolographicScale, shrunkHolographicScale;
+    private Quaternion holographicRotationTransform;
     // Start is called before the first frame update
     void Start()
     {
+        holographicRotationTransform = holographic.transform.rotation;
+        initialHolographicScale = Vector3.one;
+        shrunkHolographicScale = Vector3.zero;
         imageToDisplay.SetActive(false);
         vfx.Stop();
         box = GameObject.FindWithTag("box");
@@ -59,6 +65,16 @@ public class StoryMonument : MonoBehaviour
         {
             initialActivator = false;
         }
+        if (storyOn)
+        {
+            holographic.transform.localScale = Vector3.MoveTowards(holographic.transform.localScale,
+              Vector3.zero, Time.deltaTime *2f);
+        }
+        else
+        {
+            holographic.transform.localScale = Vector3.MoveTowards(holographic.transform.localScale,
+             Vector3.one, Time.deltaTime * 2f);
+        }
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -74,6 +90,7 @@ public class StoryMonument : MonoBehaviour
         {
             if (moveScript.thrown)
             {
+               // holographic.SetActive(false);
                 StartCoroutine(StoryActive());
             }
         }
@@ -83,6 +100,7 @@ public class StoryMonument : MonoBehaviour
             //line.enabled = false;
             storyOn = false;
             imageToDisplay.SetActive(false);
+            //holographic.SetActive(true);
         }
 
         
@@ -117,8 +135,29 @@ public class StoryMonument : MonoBehaviour
             {
                 imageToDisplay.SetActive(true);
                 //line.enabled = true;
-                box.transform.Rotate(Vector3.up*Time.deltaTime*boxMoveSpeed*10f);
-               
+                box.transform.Rotate(Vector3.up*Time.deltaTime*50f);
+                
+                //box.transform.Rotate(Vector3.forward * Time.deltaTime * boxMoveSpeed * 10f);
+               // box.transform.Rotate(Vector3.left * Time.deltaTime * boxMoveSpeed * 10f);
+
+            }
+            else
+            {
+
+                // Determine which direction to rotate towards
+                //Vector3 targetDirection = holographicRotationTransform.position - box.position;
+
+                // The step size is equal to speed times frame time.
+                //float singleStep = speed * Time.deltaTime;
+
+                // Rotate the forward vector towards the target direction by one step
+                Vector3 newDirection = Vector3.RotateTowards(box.transform.forward, holographicRotationTransform.eulerAngles, Time.deltaTime, 0.0f);
+
+                // Draw a ray pointing at our target in
+                Debug.DrawRay(transform.position, newDirection, Color.red);
+
+                // Calculate a rotation a step closer to the target and applies rotation to this object
+                box.transform.rotation = Quaternion.LookRotation(newDirection);
             }
 
             if (moveScript.pressedThrow)
