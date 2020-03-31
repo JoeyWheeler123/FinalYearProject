@@ -20,6 +20,7 @@ public class CameraZoom : MonoBehaviour
     public cursorMovement cmScript;
 
     public Transform overviewPosition;
+    public bool dontResetOnExit;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,7 +84,7 @@ public class CameraZoom : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")&&!dontResetOnExit)
         {
            // originalPos = cameraPosition.transform.position;
            // newPos = new Vector3(originalPos.x,originalPos.y,originalZoom);
