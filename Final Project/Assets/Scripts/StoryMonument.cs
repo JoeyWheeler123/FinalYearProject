@@ -146,6 +146,10 @@ public class StoryMonument : MonoBehaviour
                // box.transform.Rotate(Vector3.left * Time.deltaTime * boxMoveSpeed * 10f);
 
             }
+            else if(timeElapsed>=2f)
+            {
+                box.transform.Rotate(Vector3.up * Time.deltaTime * 50f);
+            }
             else
             {
 
