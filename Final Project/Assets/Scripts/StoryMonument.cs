@@ -156,7 +156,7 @@ public class StoryMonument : MonoBehaviour
                 //float singleStep = speed * Time.deltaTime;
 
                 // Rotate the forward vector towards the target direction by one step
-                Vector3 newDirection = Vector3.RotateTowards(box.transform.forward, holographicRotationTransform.eulerAngles, Time.deltaTime/2.5f, 0.0f);
+                Vector3 newDirection = Vector3.RotateTowards(box.transform.forward, holographicRotationTransform.eulerAngles, Time.deltaTime, 0.0f);
 
                 // Draw a ray pointing at our target in
                 Debug.DrawRay(transform.position, newDirection, Color.red);
