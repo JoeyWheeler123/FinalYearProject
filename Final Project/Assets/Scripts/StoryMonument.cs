@@ -31,9 +31,11 @@ public class StoryMonument : MonoBehaviour
     public GameObject holographic;
     private Vector3 initialHolographicScale, shrunkHolographicScale;
     private Quaternion holographicRotationTransform;
+    private BoxProperties boxPropertiesScript;
     // Start is called before the first frame update
     void Start()
     {
+        boxPropertiesScript = box.GetComponent<BoxProperties>();
         holographicRotationTransform = holographic.transform.rotation;
         initialHolographicScale = Vector3.one;
         shrunkHolographicScale = Vector3.zero;
@@ -61,7 +63,7 @@ public class StoryMonument : MonoBehaviour
             initialActivator = true;
             Activate();
         }
-        if (distance >=8f)
+        if (distance >=6f)
         {
             initialActivator = false;
         }
@@ -115,7 +117,7 @@ public class StoryMonument : MonoBehaviour
         //line.SetPosition(1, imageToDisplay.transform.position);
         storyOn = true;
            
-        moveScript.ResetVelocity();
+        //moveScript.ResetVelocity();
             
             
         
@@ -126,8 +128,11 @@ public class StoryMonument : MonoBehaviour
         vfx.Play();
         anim.SetBool("activate",true);
         float timeElapsed = 0;
+        float theta = 2.3f;
         while (storyOn)
         {
+            theta += Time.deltaTime*2f;
+            boxPropertiesScript.energy = 100f + (Mathf.Sin(theta) * 50f);
             box.transform.position = Vector3.MoveTowards(box.transform.position,rotatePosition.position,Time.deltaTime*boxMoveSpeed);
             Vector3 rotateAxis = new Vector3(1,1,1);
                 
@@ -136,7 +141,7 @@ public class StoryMonument : MonoBehaviour
                 imageToDisplay.SetActive(true);
                 //line.enabled = true;
                 box.transform.Rotate(Vector3.up*Time.deltaTime*50f);
-                
+               
                 //box.transform.Rotate(Vector3.forward * Time.deltaTime * boxMoveSpeed * 10f);
                // box.transform.Rotate(Vector3.left * Time.deltaTime * boxMoveSpeed * 10f);
 
