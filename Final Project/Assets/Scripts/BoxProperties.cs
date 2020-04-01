@@ -119,7 +119,8 @@ public class BoxProperties : MonoBehaviour
              //rb.MovePosition(newPos);
             transform.position = newPos;
 
-
+            energy = 150;
+            
           
         }
         else
