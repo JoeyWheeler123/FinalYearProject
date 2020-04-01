@@ -706,6 +706,8 @@ public class moveBoy : MonoBehaviour
             else
             {
                 velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInputX, walkAcceleration * Time.deltaTime);
+                //this function calculates velocity when the player is moving on the ground, any functions here are called every frame.
+                //put footstep check here
             }
 
             anim.SetBool(movingHash,true);
