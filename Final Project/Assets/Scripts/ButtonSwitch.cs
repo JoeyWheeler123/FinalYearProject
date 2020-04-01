@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ButtonSwitch : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class ButtonSwitch : MonoBehaviour
     private Vector3 doorInitialPos, switchInitialPos, switchPressedPos;
 
     public bool opening, closing;
+    public bool customEventOnPush;
+    public UnityEvent customEvent;
+    private bool invoked = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,12 @@ public class ButtonSwitch : MonoBehaviour
         if (other.gameObject.CompareTag("box")||other.gameObject.CompareTag("Player"))
         {
             opening = true;
+            if(customEventOnPush && !invoked)
+            {
+                print("invoked");
+                customEvent.Invoke();
+                invoked = true;
+            }
             
         }
     }
@@ -68,7 +78,10 @@ public class ButtonSwitch : MonoBehaviour
             }
         }
     }
-
+    public void ResetInvokation()
+    {
+        invoked = false;
+    }
     IEnumerator OpenDoor()
     {
         opening = true;
