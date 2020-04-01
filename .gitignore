@@ -1,3 +1,8 @@
+!FMOD/*
+!FMOD/
+!FMOD/Build/
+!FMOD/Build/*
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -42,15 +47,15 @@ fmod.log
 fmod_editor.log
 
 Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
-Assets/Plugins/FMOD/Resources/FMODStudioCache.asset.meta
-Assets/StreamingAssets/**/*.bank
-Assets/StreamingAssets/**/*.bank.meta
-fmod_editor.log
-
+*.cache
+*.restore
+*.user
 FinalProject/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
 FinalProject/Assets/Plugins/FMOD/Resources/FMODStudioCache.asset.meta
 
-!FMOD/*
-!FMOD/
-!FMOD/Build/
-!FMOD/Build/*
+Assets/FMODStudio.asset
+Assets/StreamingAssets/*.bank
+fmod.log
+fmod_editor/log
+
+
