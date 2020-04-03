@@ -44,6 +44,8 @@ public class PanelSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>()); 
+
         if (controls.Gameplay.Interact.triggered && playerInRange)
         {
             Interact();
