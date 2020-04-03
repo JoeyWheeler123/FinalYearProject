@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 4d4ad01a3b42407429dd1e291b647282
 ModelImporter:
-  serializedVersion: 19300
+  serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
@@ -30,14 +30,9 @@ ModelImporter:
   - first:
       74: -7497848331705974981
     second: Land
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: defaultMat
-    second: {fileID: 2100000, guid: dd9cc462176f4ca409436359a5bdf262, type: 2}
+  externalObjects: {}
   materials:
-    materialImportMode: 1
+    importMaterials: 1
     materialName: 1
     materialSearch: 0
     materialLocation: 0
@@ -294,13 +289,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0
-        functionName: PlaySound
-        data: event:/BreakableWallShort
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -409,6 +397,7 @@ ModelImporter:
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -426,10 +415,8 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
