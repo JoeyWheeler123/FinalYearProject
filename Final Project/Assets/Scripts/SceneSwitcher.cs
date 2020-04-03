@@ -23,6 +23,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            SavePoint.currentCheckpoint = 0;
             SceneManager.LoadScene(sceneToSwitch);
         }
     }
