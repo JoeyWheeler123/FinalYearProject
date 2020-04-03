@@ -23,6 +23,7 @@ public class PanelSwitch : MonoBehaviour
     void Awake()
     {
         controls = new PlayerControls();
+        
         sound = FMODUnity.RuntimeManager.CreateInstance(selectSound);
         playerTransform = player.transform;
     }
@@ -47,7 +48,9 @@ public class PanelSwitch : MonoBehaviour
         if (controls.Gameplay.Interact.triggered && playerInRange)
         {
             Interact();
-            Playsound();
+           
+                Playsound();
+         
         }
 
         backUpTime -= Time.deltaTime;
