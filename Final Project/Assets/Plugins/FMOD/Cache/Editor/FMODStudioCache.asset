@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9153260130590819166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD/Build/Desktop/Master Bank.bank
+  SubDir: 
+  lastModified: 637213748998625635
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-8302327719063589542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17,7 +35,7 @@ MonoBehaviour:
   lastModified: 637214540861842670
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-8233290925456815103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,8 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Box Hits
   guid: 27705c05fe3ca44daa4d033dc285ad22
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -55,8 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Interactions
   guid: 397353d3c8ff944ba4484bf97092faf5
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -78,8 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Breakable Wall Short
   guid: 929263bb1917664e9486b303bb5843eb
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -101,8 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Bounce
   guid: 15c7991dd538ec45934df34399a625cb
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -127,7 +141,7 @@ MonoBehaviour:
   lastModified: 637214540861292419
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-6137920845641224390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,11 +156,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Audio/FMOD/Build/Desktop/Master Bank.strings.bank
   SubDir: 
-  lastModified: 637214540861242442
+  lastModified: 637213749000356489
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1236
+    Value: 1256
+  Exists: 1
+--- !u!114 &-4282772016584649576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637213749000426310
+  LoadResult: 0
+  FileSizes: []
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -162,26 +194,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -6137920845641224390}
-  - {fileID: 8940738644056000596}
-  - {fileID: -6695323771571100024}
-  - {fileID: -8302327719063589542}
+  - {fileID: -9153260130590819166}
+  - {fileID: -4282772016584649576}
+  - {fileID: 7248075831886090780}
   EditorEvents:
   - {fileID: 7736786911918745295}
-  - {fileID: 4388134762410499568}
-  - {fileID: -6745770414009561460}
-  - {fileID: -8233290925456815103}
-  - {fileID: 1205680650453507638}
-  - {fileID: -7479726295629214797}
-  - {fileID: 2451949969177531305}
-  - {fileID: -7235711573851399226}
-  - {fileID: 1026285642960793723}
-  - {fileID: 114100029209558894}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 8940738644056000596}
+  - {fileID: -9153260130590819166}
   StringsBanks:
   - {fileID: -6137920845641224390}
-  stringsBankWriteTime: 637214540861242442
+  stringsBankWriteTime: 637213749000356489
   cacheVersion: 3
 --- !u!114 &114100029209558894
 MonoBehaviour:
@@ -197,8 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Teleport
   guid: f12faeac2d9cc7468e709fe46c55ac5e
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -220,8 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Box Drop
   guid: 9d3555045e1a884f8fbd1ac0585d1560
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -243,8 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Footsteps
   guid: 35b9e9dc974a724d88d1cca1887e3ca4
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -266,8 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Monument idle
   guid: 7566467bdfd625469763556601053b29
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -289,8 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Quake
   guid: 0431fc5d4bc8ba4cad4e1d49d61a83dd
-  Banks:
-  - {fileID: -8302327719063589542}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -298,6 +316,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7000
+--- !u!114 &7248075831886090780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD/Build/Desktop/SFX.bank
+  SubDir: 
+  lastModified: 637213749001046911
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7736786911918745295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +349,7 @@ MonoBehaviour:
   Path: snapshot:/Walking Reverb
   guid: ce9f571098f1254d8f511209e7df680a
   Banks:
-  - {fileID: 8940738644056000596}
+  - {fileID: -9153260130590819166}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -338,4 +374,4 @@ MonoBehaviour:
   lastModified: 637214540861142432
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
