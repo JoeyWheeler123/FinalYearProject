@@ -491,12 +491,12 @@ PrefabInstance:
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.8
+      value: 14.2
       objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.1
+      value: 52.3
       objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
@@ -600,6 +600,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2629610699293869070, guid: 3679d20f4ebcf4941a642dc5a391c287,
+        type: 3}
+      propertyPath: speedToDestroy
+      value: 8.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629610699293869070, guid: 3679d20f4ebcf4941a642dc5a391c287,
+        type: 3}
+      propertyPath: selectSound
+      value: event:/Quake
+      objectReference: {fileID: 0}
     - target: {fileID: 3590954783378081453, guid: 3679d20f4ebcf4941a642dc5a391c287,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -614,6 +624,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089600459405698675, guid: 3679d20f4ebcf4941a642dc5a391c287,
+        type: 3}
+      propertyPath: selectSound
+      value: event:/Interactions
       objectReference: {fileID: 0}
     - target: {fileID: 5205515592461061644, guid: 3679d20f4ebcf4941a642dc5a391c287,
         type: 3}
@@ -760,5 +775,6 @@ PrefabInstance:
       propertyPath: enchant
       value: 
       objectReference: {fileID: 1811893803}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5653869707676625878, guid: 3679d20f4ebcf4941a642dc5a391c287, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3679d20f4ebcf4941a642dc5a391c287, type: 3}

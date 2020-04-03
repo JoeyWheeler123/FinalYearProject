@@ -8,33 +8,30 @@ public class interactiveSound : MonoBehaviour
     public string selectSound;
     FMOD.Studio.EventInstance sound;
 
-    public KeyCode key;
+    public GameObject player;
+    Transform playerTransform;
 
-    private void Start()
+   // public KeyCode key;
+
+    private void Awake()
     {
         sound = FMODUnity.RuntimeManager.CreateInstance(selectSound);
+        playerTransform = player.transform;
     }
 
     private void Update()
     {
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>());
-        Playsound();
+       // FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>());
+       // Playsound();
     }
 
-    void Playsound ()
+    void Playsound()
     {
-        if (Input.GetKeyDown(key))
-        {
-            FMOD.Studio.PLAYBACK_STATE state;
-            sound.getPlaybackState(out state);
-            if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-                sound.start();
-            }
-        }
-        if (Input.GetKeyUp(key))
-        {
-            sound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
+        //sound.start();
+        FMODUnity.RuntimeManager.PlayOneShot(selectSound, this.gameObject.transform.position);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Playsound();
     }
 }

@@ -10,10 +10,16 @@ public class WallBuster : MonoBehaviour
     private Collider thisCollider;
 
     public float speedToDestroy;
+
+    [FMODUnity.EventRef]
+    public string selectSound;
+    FMOD.Studio.EventInstance sound;
+
     // Start is called before the first frame update
     void Start()
     {
         thisCollider = GetComponent<Collider>();
+        sound = FMODUnity.RuntimeManager.CreateInstance(selectSound);
     }
 
     // Update is called once per frame
@@ -42,7 +48,7 @@ public class WallBuster : MonoBehaviour
         if (collision.relativeVelocity.magnitude >= speedToDestroy)
         {
             StartCoroutine(Destruction());
-           
+            Playsound();
         }
     }
     IEnumerator Destruction()
@@ -60,5 +66,11 @@ public class WallBuster : MonoBehaviour
             Destroy(piece);
         }
         yield return null;
+    }
+
+    void Playsound()
+    {
+        //sound.start();
+        FMODUnity.RuntimeManager.PlayOneShot(selectSound, this.gameObject.transform.position);
     }
 }

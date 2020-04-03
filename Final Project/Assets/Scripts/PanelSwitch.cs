@@ -11,12 +11,20 @@ public class PanelSwitch : MonoBehaviour
     private bool playerInRange;
     public TutorialPopUp tutorialScript;
     private float backUpTime;
-  
+    public GameObject player;
+    Transform playerTransform;
+
+    [FMODUnity.EventRef]
+    public string selectSound;
+    FMOD.Studio.EventInstance sound;
+
     // Start is called before the first frame update
 
     void Awake()
     {
         controls = new PlayerControls();
+        sound = FMODUnity.RuntimeManager.CreateInstance(selectSound);
+        playerTransform = player.transform;
     }
     void Start()
     {
@@ -39,6 +47,7 @@ public class PanelSwitch : MonoBehaviour
         if (controls.Gameplay.Interact.triggered && playerInRange)
         {
             Interact();
+            Playsound();
         }
 
         backUpTime -= Time.deltaTime;
@@ -52,7 +61,7 @@ public class PanelSwitch : MonoBehaviour
     {
        // print("Interact");
         objectToActivate.SendMessage("Activate");
-        
+
         if (tutorialObject)
         {
             tutorialScript.actionCompleted = true;
@@ -75,5 +84,11 @@ public class PanelSwitch : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+    void Playsound()
+    {
+        //sound.start();
+        FMODUnity.RuntimeManager.PlayOneShot(selectSound, player.transform.position);
     }
 }

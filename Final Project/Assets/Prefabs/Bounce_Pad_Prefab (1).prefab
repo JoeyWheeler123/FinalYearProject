@@ -197,6 +197,7 @@ Transform:
   - {fileID: 6358616971341417415}
   - {fileID: 6358616972108151115}
   - {fileID: 6358616971411910789}
+  - {fileID: 6597337966131337274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -228,8 +229,76 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 20.613024, y: 5.21, z: 21.339039}
-  m_Center: {x: -6.181513, y: 0, z: 3.5432796}
+  m_Size: {x: 20.613024, y: 2.9708734, z: 21.339039}
+  m_Center: {x: -6.181513, y: 1.1195842, z: 3.5432804}
+--- !u!1 &5299774078999353797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6597337966131337274}
+  - component: {fileID: 1550810302948354018}
+  - component: {fileID: 1727268826900730209}
+  m_Layer: 0
+  m_Name: Audio Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6597337966131337274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299774078999353797}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.5999985, y: 11.499998, z: -0.0000009932673}
+  m_LocalScale: {x: 5.5547533, y: 5.5547533, z: 5.5547533}
+  m_Children: []
+  m_Father: {fileID: 851604312536950579}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1550810302948354018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299774078999353797}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6, y: 1.9, z: 1}
+  m_Center: {x: 0, y: -1.2, z: 0}
+--- !u!114 &1727268826900730209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299774078999353797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: box
+  Event: event:/Teleport
+  PlayEvent: 3
+  StopEvent: 0
+  AllowFadeout: 0
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3.52
+  OverrideMaxDistance: 25.14
 --- !u!1 &5517856002939903195
 GameObject:
   m_ObjectHideFlags: 0
