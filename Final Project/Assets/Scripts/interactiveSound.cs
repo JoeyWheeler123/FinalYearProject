@@ -21,11 +21,11 @@ public class interactiveSound : MonoBehaviour
 
     private void Update()
     {
-       // FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>());
+       FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>());
        // Playsound();
     }
 
-    void Playsound()
+    public void Playsound()
     {
         //sound.start();
         FMODUnity.RuntimeManager.PlayOneShot(selectSound, this.gameObject.transform.position);

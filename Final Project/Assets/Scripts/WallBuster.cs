@@ -25,7 +25,7 @@ public class WallBuster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>());
     }
     /*
     private void OnTriggerEnter(Collider other)
