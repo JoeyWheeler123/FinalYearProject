@@ -21,6 +21,7 @@ public class Collectible : MonoBehaviour
         if(other.gameObject.CompareTag("Player")|| other.gameObject.CompareTag("box"))
         {
             BoxProperties.orbsCollected++;
+            BoxProperties.displayCollectible = true;
             Destroy(this.gameObject);
         }
     }
