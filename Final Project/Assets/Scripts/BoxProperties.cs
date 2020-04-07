@@ -38,9 +38,7 @@ public class BoxProperties : MonoBehaviour
     public GameObject collectibleIcon1, collectibleIcon2, collectibleIcon3;
     // Start is called before the first frame update
     public static int orbsCollected;
-    public Text collectedText;
-    private float textOnScreenTime;
-    public static bool displayCollectible;
+  
     void Awake()
     {
         orbsCollected = 0;
@@ -64,21 +62,7 @@ public class BoxProperties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (displayCollectible)
-        {
-            textOnScreenTime = 3f;
-            displayCollectible = false;
-        }
-        if (textOnScreenTime >= 0f)
-        {
-            textOnScreenTime -= Time.deltaTime;
-            collectedText.CrossFadeAlpha(1, 0.5f, false);
-        }
-        else
-        {
-            collectedText.CrossFadeAlpha(0,1f, false);
-        }
-        collectedText.text = orbsCollected.ToString();
+      
         if (collectibleIcon1 != null)
         {
             CollectibleObtained();

@@ -15,6 +15,9 @@ public class gameManager : MonoBehaviour
     public bool loadOnStart, resetProgress;
     public Text loadingText;
     public Animator anim;
+    public Text collectedText;
+    private float textOnScreenTime;
+    public static bool displayCollectible;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,21 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (displayCollectible)
+        {
+            textOnScreenTime = 3f;
+            displayCollectible = false;
+        }
+        if (textOnScreenTime >= 0f)
+        {
+            textOnScreenTime -= Time.deltaTime;
+            collectedText.CrossFadeAlpha(1, 0, false);
+        }
+        else
+        {
+            collectedText.CrossFadeAlpha(0, 0.5f, false);
+        }
+        collectedText.text = BoxProperties.orbsCollected.ToString();
         if (Input.GetKeyDown(KeyCode.R))
         {
             //Scene scene = SceneManager.GetActiveScene(); 
