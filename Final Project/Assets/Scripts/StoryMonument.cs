@@ -41,13 +41,13 @@ public class StoryMonument : MonoBehaviour
         shrunkHolographicScale = Vector3.zero;
         imageToDisplay.SetActive(false);
         vfx.Stop();
-        box = GameObject.FindWithTag("box");
-        throwS = FindObjectOfType<throwScript>();
+       // box = GameObject.FindWithTag("box");
+       // throwS = FindObjectOfType<throwScript>();
         //line.enabled = false;
         //line.positionCount = 2;
        // line.SetPosition(0, rotatePosition.position);
         storyOn = false;
-        moveScript = FindObjectOfType<moveBoy>();
+       // moveScript = FindObjectOfType<moveBoy>();
     }
 
     // Update is called once per frame

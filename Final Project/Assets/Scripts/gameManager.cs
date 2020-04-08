@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        collectedText.CrossFadeAlpha(0, 0, false);
         loadingText.gameObject.SetActive(false);
         loadingText.text = "loading";
         if (loadOnStart)

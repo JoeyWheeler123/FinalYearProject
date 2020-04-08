@@ -214,6 +214,7 @@ public class BoxProperties : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && stuck&&moveScript.grounded)
         {
             other.gameObject.transform.SetParent(this.transform);
+
         }
     }
 
@@ -223,6 +224,7 @@ public class BoxProperties : MonoBehaviour
         {
             other.gameObject.transform.SetParent(null);
             other.gameObject.transform.localScale= new Vector3(1,1,1);
+            other.gameObject.transform.localRotation =Quaternion.Euler(0,0,0);
         }
     }
 
