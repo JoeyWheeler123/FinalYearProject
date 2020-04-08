@@ -51,7 +51,7 @@ public class magneticAttractor : MonoBehaviour
             moveScript = FindObjectOfType<moveBoy>();
         }
 
-        print(moveScript);
+       // print(moveScript);
         boxRb = box.GetComponent<Rigidbody>();
         //rb = GetComponent<HingeJoint>();
     }

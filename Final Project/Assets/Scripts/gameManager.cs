@@ -18,6 +18,8 @@ public class gameManager : MonoBehaviour
     public Text collectedText;
     private float textOnScreenTime;
     public static bool displayCollectible;
+    private GameObject[] allCollectibles;
+    private int totalCollectibles;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,9 @@ public class gameManager : MonoBehaviour
         }
        scene = SceneManager.GetActiveScene();
        PlayerPrefs.GetString(scene.name);
+        allCollectibles = GameObject.FindGameObjectsWithTag("collectible");
+        totalCollectibles = allCollectibles.Length;
+        print(totalCollectibles);
     }
 
     // Update is called once per frame
@@ -54,7 +59,7 @@ public class gameManager : MonoBehaviour
         {
             collectedText.CrossFadeAlpha(0, 0.5f, false);
         }
-        collectedText.text = BoxProperties.orbsCollected.ToString();
+        collectedText.text = BoxProperties.orbsCollected.ToString()+"/"+totalCollectibles.ToString(); 
         if (Input.GetKeyDown(KeyCode.R))
         {
             //Scene scene = SceneManager.GetActiveScene(); 

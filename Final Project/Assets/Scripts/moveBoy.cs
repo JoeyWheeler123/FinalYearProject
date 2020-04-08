@@ -454,7 +454,7 @@ public class moveBoy : MonoBehaviour
             theBoxCollider.material.dynamicFriction = 0;
         }
         
-        print(theBoxCollider.material.dynamicFriction);
+       // print(theBoxCollider.material.dynamicFriction);
         if (grabbingLedge&&!dismantling)
         {
             Vector3 pos =  Vector3.MoveTowards(transform.position,grabPos,Time.deltaTime*10f);
