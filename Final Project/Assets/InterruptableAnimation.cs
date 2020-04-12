@@ -6,11 +6,15 @@ using UnityEngine.Events;
 public class InterruptableAnimation : MonoBehaviour
 {
     private PlayerControls controls;
-    public UnityEvent playerSleeping, returnControl;
+    public UnityEvent playerSleeping, returnControl,beginPopup,destroyPopup;
     public Animator anim;
+    private bool jumpPushed=false;
+    
     // Start is called before the first frame update
     void Awake()
     {
+        Time.timeScale = 1;
+        StartCoroutine(Prompt());
         controls = new PlayerControls();
         controls.Gameplay.Jump.performed += ctx => Interrupt();
         playerSleeping.Invoke();
@@ -37,12 +41,24 @@ public class InterruptableAnimation : MonoBehaviour
         print("iNTERRUPT");
         anim.SetBool("Waking", true);
         StartCoroutine(ReturnControl());
+        jumpPushed = true;
+        destroyPopup.Invoke();
     }
 
     IEnumerator ReturnControl()
     {
         yield return new WaitForSeconds(12f);
         returnControl.Invoke();
+        Destroy(this.gameObject);
+        yield return null;
+    }
+    IEnumerator Prompt()
+    {
+        yield return new WaitForSeconds(2f);
+        if (!jumpPushed)
+        {
+            beginPopup.Invoke();
+        }
         yield return null;
     }
 }

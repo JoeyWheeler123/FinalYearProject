@@ -27,6 +27,10 @@ public class WallBuster : MonoBehaviour
     {
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, GetComponent<Transform>(), GetComponent<Rigidbody>());
     }
+    public void BeingDestruction()
+    {
+        StartCoroutine(Destruction());
+    }
     /*
     private void OnTriggerEnter(Collider other)
     {

@@ -20,9 +20,11 @@ public class gameManager : MonoBehaviour
     public static bool displayCollectible;
     private GameObject[] allCollectibles;
     private int totalCollectibles;
+    public GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {
+        canvas.SetActive(true);
         collectedText.CrossFadeAlpha(0, 0, false);
         loadingText.gameObject.SetActive(false);
         loadingText.text = "loading";

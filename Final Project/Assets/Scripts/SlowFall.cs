@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SlowFall : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SlowFall : MonoBehaviour
     public BoxProperties boxProperties;
 
     public ParticleSystem recallParticle;
+    public UnityEvent enableTutorial, disableControl;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +41,7 @@ public class SlowFall : MonoBehaviour
         
         float slowRate = 4;
         float timeElapsed = 0;
-       
+
         moveScript.enabled = false;
         slowFallParticle.SetActive(true);
        // recallParticle.Play();
@@ -57,6 +59,7 @@ public class SlowFall : MonoBehaviour
         boxProperties.energy = 0;
         moveScript.enabled = true;
         slowFallParticle.SetActive(false);
+        enableTutorial.Invoke();
         yield return null;
         Destroy(this.gameObject);
     }

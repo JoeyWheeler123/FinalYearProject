@@ -20,15 +20,34 @@ public class TutorialPopUp : MonoBehaviour
     private moveBoy moveScript;
 
     public ButtonSwitch buttonScript;
+    private PlayerControls controls;
     // Start is called before the first frame update
     void Start()
     {
-       
+        controls = new PlayerControls();
+        controls.Gameplay.Jump.performed += ctx => JumpPressed();
        player = GameObject.FindWithTag("Player");
        moveScript = FindObjectOfType<moveBoy>();
       
     }
+    void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
 
+    void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
+    void JumpPressed()
+    {
+        if (jump)
+        {
+           
+                actionCompleted = true;
+            print("jumped");
+        }
+    }
     // Update is called once per frame
     void Update()
     {
