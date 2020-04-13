@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.VFX;
 public class Bouncer : MonoBehaviour
 {
     public float defaultBounceStrength =25f;
@@ -19,6 +19,7 @@ public class Bouncer : MonoBehaviour
     private Coroutine changeColour;
 
     private moveBoy moveScript;
+    public VisualEffect bounceEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +79,7 @@ public class Bouncer : MonoBehaviour
             {
                 moveScript = boxProperties.moveScript;
             }
-            
+            bounceEffect.Play();
            // boxRb.AddForce((Vector3.up*overallModifier*other.relativeVelocity.magnitude));
             //(Vector3.up*overallModifier*defaultBounceStrength)
             StartCoroutine(RotateBox());
