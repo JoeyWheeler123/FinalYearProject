@@ -37,7 +37,7 @@ public class BoxProperties : MonoBehaviour
     private bool particleSwitch;
     public GameObject collectibleIcon1, collectibleIcon2, collectibleIcon3;
     // Start is called before the first frame update
-    public static int orbsCollected;
+    public static int orbsCollected, totalOrbs;
   
     void Awake()
     {

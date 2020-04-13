@@ -155,7 +155,7 @@ public class SavePoint : MonoBehaviour
             rend.material.SetColor("Color_C5A9FA1D", Color.HSVToRGB(h, s, v));
             v -= Time.deltaTime*decayRate;
             
-            print(v);
+           // print(v);
             yield return null;
             
         }
