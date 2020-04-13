@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.VFX;
 public class PanelSwitch : MonoBehaviour
 {
     private PlayerControls controls;
@@ -17,7 +17,7 @@ public class PanelSwitch : MonoBehaviour
     [FMODUnity.EventRef]
     public string selectSound;
     FMOD.Studio.EventInstance sound;
-
+    public VisualEffect effectToActivate;
     // Start is called before the first frame update
 
     void Awake()
@@ -66,7 +66,10 @@ public class PanelSwitch : MonoBehaviour
     {
        // print("Interact");
         objectToActivate.SendMessage("Activate");
-
+        if (effectToActivate != null)
+        {
+            effectToActivate.Play();
+        }
         if (tutorialObject)
         {
             tutorialScript.actionCompleted = true;

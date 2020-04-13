@@ -14830,6 +14830,7 @@ MonoBehaviour:
   tutorialScript: {fileID: 0}
   player: {fileID: 2277070794347788017}
   selectSound: event:/Interactions
+  effectToActivate: {fileID: 2297989243714178449}
 --- !u!1 &7726479227879228914
 GameObject:
   m_ObjectHideFlags: 0
@@ -14871,8 +14872,8 @@ VisualEffect:
   m_GameObject: {fileID: 7726479227879228914}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 0c60549302819034ea5d26d781f78cdb, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
