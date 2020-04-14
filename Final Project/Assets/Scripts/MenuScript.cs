@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 
 public class MenuScript : MonoBehaviour
 {
-    public UnityEvent newGame;
-
-    public Button newGameButton;
+    public GameObject defaultButton, optionsDefault, options;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +17,17 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            print("buttonPressed");
-            newGame.Invoke();
-        }
+       
+    }
+
+    public void OptionsSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsDefault);
+    }
+    public void OptionsDeselected()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(options);
     }
 }
