@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 475403305762396415}
   - component: {fileID: 475403305762396414}
   - component: {fileID: 475403305762396389}
+  - component: {fileID: 977293503534498258}
   m_Layer: 0
   m_Name: Collectible
   m_TagString: collectible
@@ -4845,3 +4846,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a1b067ed88b641a478ac31bf434cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectableIndex: 0
+  resetCollectable: 0
+--- !u!114 &977293503534498258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475403305762396413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: box
+  Event: event:/3D_Events/Magic Sound
+  PlayEvent: 3
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 8.4
+  OverrideMaxDistance: 55.1
