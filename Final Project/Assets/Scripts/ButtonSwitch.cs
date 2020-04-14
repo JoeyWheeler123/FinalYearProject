@@ -21,18 +21,20 @@ public class ButtonSwitch : MonoBehaviour
     public bool customEventOnPush;
     public UnityEvent customEvent;
     private bool invoked = false;
+
     // Start is called before the first frame update
     void Start()
     {
         switchInitialPos = button.transform.position;
         switchPressedPos = new Vector3(switchInitialPos.x, switchInitialPos.y - pressDistance, switchInitialPos.z);
         doorInitialPos = door.transform.position;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (opening)
         {
             closing = false;
@@ -48,7 +50,12 @@ public class ButtonSwitch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+    
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+      
     }
 
     private void OnTriggerStay(Collider other)
@@ -115,6 +122,5 @@ public class ButtonSwitch : MonoBehaviour
         closing = false;
         yield return null;
     }
-    
     
 }
