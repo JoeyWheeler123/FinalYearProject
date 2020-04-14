@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.04459803, g: 0.0510794, b: 0.05538081, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23775,6 +23775,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2521372163217870013, guid: 69e36f3a941e19a498c2d7c7d21d62e1,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 38.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521372163217870013, guid: 69e36f3a941e19a498c2d7c7d21d62e1,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 18.9
+      objectReference: {fileID: 0}
     - target: {fileID: 5147540408338958856, guid: 69e36f3a941e19a498c2d7c7d21d62e1,
         type: 3}
       propertyPath: m_TagString
@@ -28628,6 +28638,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 120.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 10.42
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1864288561247406696, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
@@ -30517,6 +30532,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4045164431726996810, guid: ed3a8b7b3e65d40408eb7afbab1f5e68,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 26.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045164431726996810, guid: ed3a8b7b3e65d40408eb7afbab1f5e68,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 41.69
+      objectReference: {fileID: 0}
     - target: {fileID: 5010440772377596066, guid: ed3a8b7b3e65d40408eb7afbab1f5e68,
         type: 3}
       propertyPath: m_Enabled
@@ -31159,6 +31184,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 0.12236596
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994401632527667514, guid: 6fc5c531c9cb8c140a2048a4df4559f0,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 25.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994401632527667514, guid: 6fc5c531c9cb8c140a2048a4df4559f0,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 48.89
       objectReference: {fileID: 0}
     - target: {fileID: 7700148837427495278, guid: 6fc5c531c9cb8c140a2048a4df4559f0,
         type: 3}
@@ -54046,6 +54081,11 @@ PrefabInstance:
       propertyPath: selectSound
       value: event:/3D_Events/Interactions
       objectReference: {fileID: 0}
+    - target: {fileID: 5820793873247042001, guid: bb6e03bb161d5294f91ac45a0d644535,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 967336419}
     - target: {fileID: 9089396325376217273, guid: bb6e03bb161d5294f91ac45a0d644535,
         type: 3}
       propertyPath: m_Intensity
@@ -54171,6 +54211,12 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+--- !u!1 &967336419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 938412124115670853, guid: bb6e03bb161d5294f91ac45a0d644535,
+    type: 3}
+  m_PrefabInstance: {fileID: 967336416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &969532917
 GameObject:
   m_ObjectHideFlags: 0
@@ -62094,7 +62140,7 @@ PrefabInstance:
     - target: {fileID: 4701957047265665022, guid: 0527cf0d98f0e8744ab1926be9b8c665,
         type: 3}
       propertyPath: sceneToSwitch
-      value: Level 2
+      value: Beta tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 4701957047265665023, guid: 0527cf0d98f0e8744ab1926be9b8c665,
         type: 3}
@@ -68813,6 +68859,11 @@ PrefabInstance:
       propertyPath: selectSound
       value: event:/3D_Events/Interactions
       objectReference: {fileID: 0}
+    - target: {fileID: 5820793873247042001, guid: bb6e03bb161d5294f91ac45a0d644535,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1333271070}
     - target: {fileID: 9089396325376217273, guid: bb6e03bb161d5294f91ac45a0d644535,
         type: 3}
       propertyPath: m_Intensity
@@ -68938,6 +68989,12 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+--- !u!1 &1333271070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 938412124115670853, guid: bb6e03bb161d5294f91ac45a0d644535,
+    type: 3}
+  m_PrefabInstance: {fileID: 1333271067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1333298609
 GameObject:
   m_ObjectHideFlags: 0
@@ -74819,6 +74876,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -17.086
       objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 10.3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1864288561247406696, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
@@ -80044,6 +80106,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.67
       objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: TriggerOnce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 4.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 31.59
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1864288561247406696, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
@@ -83408,6 +83485,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4951156457283380163, guid: 4d2dd2ac8c82cfd43bf9076c9946e870,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 22.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4951156457283380163, guid: 4d2dd2ac8c82cfd43bf9076c9946e870,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 48.33
+      objectReference: {fileID: 0}
     - target: {fileID: 5348089971137616927, guid: 4d2dd2ac8c82cfd43bf9076c9946e870,
         type: 3}
       propertyPath: m_Enabled
@@ -84580,7 +84667,7 @@ PrefabInstance:
     - target: {fileID: 1489049301271732842, guid: dfe8d77b6535a2d43b0afaafeffed6bf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.64
+      value: -21.2
       objectReference: {fileID: 0}
     - target: {fileID: 1489049301271732842, guid: dfe8d77b6535a2d43b0afaafeffed6bf,
         type: 3}
@@ -86154,6 +86241,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203380014575546596, guid: 5c76092a30004094d8959863fad6dd30,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 5.37
       objectReference: {fileID: 0}
     - target: {fileID: 7714969292322172505, guid: 5c76092a30004094d8959863fad6dd30,
         type: 3}
@@ -106078,6 +106170,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -4.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 4.82
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1864288561247406696, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
@@ -108053,6 +108150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 6362660305268388634, guid: 03b9d7ee70cf34a37ac7d001103831dc,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 7.4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1864288561247406696, guid: 03b9d7ee70cf34a37ac7d001103831dc, type: 3}
@@ -110665,6 +110767,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2d0db6d7603b9ba459c7b35eddad8e9a, type: 2}
+    - target: {fileID: 9023382861505364607, guid: bb3ef610c89bdc0419048b0be73bac3c,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 28.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023382861505364607, guid: bb3ef610c89bdc0419048b0be73bac3c,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 58.86
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 836187200, guid: bb3ef610c89bdc0419048b0be73bac3c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb3ef610c89bdc0419048b0be73bac3c, type: 3}
