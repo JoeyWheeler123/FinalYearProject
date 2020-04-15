@@ -15,6 +15,7 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 public class moveBoy : MonoBehaviour
 {
     public PlayerControls controls;
@@ -123,7 +124,7 @@ public class moveBoy : MonoBehaviour
   private float boxFrictionInitial;
 
   public GameObject pauseCanvas;
-
+    public GameObject defaultMenuSelection, defaultOptionsSelection;
     public GameObject boxSpawn;
 
   //private bool interactPressed;
@@ -950,31 +951,52 @@ public class moveBoy : MonoBehaviour
         }
     }
 
-    private void PauseTime()
+    public void PauseTime()
     {
         if (!gamePaused)
         {
             Time.timeScale = 0;
+            controls.Gameplay.Disable();
+            controls.Gameplay.Pause.Enable();
+            
             gamePaused = true;
             pauseCanvas.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(defaultMenuSelection);
+            Cursor.visible = true;
         }
         else
         {
+            controls.Gameplay.Pause.Disable();
+            controls.Gameplay.Enable();
             Time.timeScale = 1;
             gamePaused = false;
             pauseCanvas.SetActive(false);
+            Cursor.visible = false;
         }
     }
-
-    private void QuitGame()
+    public void OptionsSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(defaultOptionsSelection);
+    }
+    public void PauseMenuDefault()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(defaultMenuSelection);
+    }
+    public void QuitGame()
     {
         if (gamePaused)
         {
             Application.Quit();
         }
     }
-
-    private void RestartCurrentLevel()
+    public void ExitToMainMenu()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
+    public void RestartCurrentLevel()
     {
         if (gamePaused)
         {
