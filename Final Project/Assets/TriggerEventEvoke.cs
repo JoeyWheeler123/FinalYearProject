@@ -7,6 +7,7 @@ public class TriggerEventEvoke : MonoBehaviour
 {
     public UnityEvent eventToinvoke;
     public bool repeatableEvent;
+    public bool introEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,17 @@ public class TriggerEventEvoke : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            eventToinvoke.Invoke();
+            if (introEvent)
+            {
+                if (SavePoint.currentCheckpoint == 0)
+                {
+                    eventToinvoke.Invoke();
+                }
+            }
+            else
+            {
+                eventToinvoke.Invoke();
+            }
             if (!repeatableEvent)
             {
                 this.gameObject.SetActive(false);

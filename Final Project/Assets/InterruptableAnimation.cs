@@ -9,7 +9,7 @@ public class InterruptableAnimation : MonoBehaviour
     public UnityEvent playerSleeping, returnControl,beginPopup,destroyPopup;
     public Animator anim;
     private bool jumpPushed=false;
-    
+    public float wakingAnimationTime;
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,7 +47,7 @@ public class InterruptableAnimation : MonoBehaviour
 
     IEnumerator ReturnControl()
     {
-        yield return new WaitForSeconds(12f);
+        yield return new WaitForSeconds(wakingAnimationTime);
         returnControl.Invoke();
         Destroy(this.gameObject);
         yield return null;
