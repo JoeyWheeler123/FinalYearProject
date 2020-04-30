@@ -97,7 +97,11 @@ public class gameManager : MonoBehaviour
             StartCoroutine(AsyncLoad());
         }
     }
-
+    public void LevelSelected(String levelString)
+    {
+        sceneName = levelString;
+        StartCoroutine(AsyncLoad());
+    }
     public void ResetProgress()
     {
         PlayerPrefs.DeleteAll();

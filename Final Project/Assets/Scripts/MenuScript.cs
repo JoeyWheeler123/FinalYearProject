@@ -7,12 +7,17 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
-    public GameObject defaultButton, optionsDefault, options, pauseCanvas;
+    public GameObject defaultButton, optionsDefault, options, pauseCanvas, extras, extrasDefault;
     //public PlayerControls controls;
     public bool mainMenu;
     public bool gamePaused = false;
     public Text continueText;
+    public Text bonusLevelsText;
     public Button continueButton;
+    public Button bonusLevelsButton;
+    public int minCollectables;
+    public int totalCollectables;
+    public Text collectableText;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,15 @@ public class MenuScript : MonoBehaviour
             continueButton.interactable = false;
             continueText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
         }
+        int storedCollectables = PlayerPrefs.GetInt("collectables");
+        if (storedCollectables < totalCollectables)
+        {
+            Color newColour = bonusLevelsText.color;
+            bonusLevelsButton.interactable = false;
+            bonusLevelsText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
+        string colString = PlayerPrefs.GetInt("collectables").ToString()+"/"+totalCollectables.ToString();
+        collectableText.text = colString;
     }
     private void OnEnable()
     {
@@ -55,7 +69,16 @@ public class MenuScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(options);
     }
-
+    public void ExtrasSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(extrasDefault);
+    }
+    public void ExtrasDeselected()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(extras);
+    }
     /*public void PauseTime()
     {
         if (!gamePaused)
