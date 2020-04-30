@@ -11,13 +11,22 @@ public class MenuScript : MonoBehaviour
     //public PlayerControls controls;
     public bool mainMenu;
     public bool gamePaused = false;
+    public Text continueText;
+    public Button continueButton;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
        // controls = new PlayerControls();
         if (!mainMenu)
         {
            // controls.Gameplay.Pause.performed += ctx => PauseTime();
+        }
+        if (!PlayerPrefs.HasKey("currentLevel"))
+        {
+            print("disablingContinue");
+            Color newColour = continueText.color;
+            continueButton.interactable = false;
+            continueText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
         }
     }
     private void OnEnable()

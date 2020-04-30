@@ -93,6 +93,7 @@ public class gameManager : MonoBehaviour
         else
         {
             sceneName = defaultSceneName;
+            PlayerPrefs.SetString("currentLevel", sceneName);
             StartCoroutine(AsyncLoad());
         }
     }
