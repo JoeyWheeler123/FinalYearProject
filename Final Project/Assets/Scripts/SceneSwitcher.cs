@@ -24,6 +24,7 @@ public class SceneSwitcher : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             SavePoint.currentCheckpoint = 0;
+            PlayerPrefs.SetString("currentLevel", sceneToSwitch);
             SceneManager.LoadScene(sceneToSwitch);
         }
     }
