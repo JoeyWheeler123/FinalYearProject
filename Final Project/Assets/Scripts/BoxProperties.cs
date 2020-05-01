@@ -209,6 +209,8 @@ public class BoxProperties : MonoBehaviour
         
        
     }
+
+   
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player") && stuck&&moveScript.grounded)

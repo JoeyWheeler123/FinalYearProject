@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class throwScript : MonoBehaviour
 {
+    private float timeSpentRecalling;
     public Transform cursorTransform;
     public Transform playerTransform;
 
@@ -76,7 +77,19 @@ public class throwScript : MonoBehaviour
     
         rb.velocity = new Vector3(tempX, tempY,0f);
         */
-       
+        if (moveScript.recalling)
+        {
+            timeSpentRecalling += Time.deltaTime;
+        }
+        else
+        {
+            timeSpentRecalling = 0f;
+        }
+
+        if (timeSpentRecalling >= 1f)
+        {
+            BoxStuckCheck();
+        }
     }
 
     public void Throw()
@@ -126,7 +139,17 @@ public class throwScript : MonoBehaviour
        
         transform.parent = null;
     }
-
+    public void BoxStuckCheck()
+    {
+        float verticalAlignment = playerTransform.position.y - transform.position.y;
+        if (verticalAlignment > 0.5f && moveScript.recalling&&rb.velocity.magnitude<0.3f)
+        {
+            print("push it up");
+            rb.AddForce(Vector3.up*Time.deltaTime*50000);
+            
+        }
+       
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("boxgrabber"))
