@@ -482,6 +482,12 @@ public class moveBoy : MonoBehaviour
                 print("Mantling");
                 StartCoroutine(Mantle(mantlePos));
             }
+            else if (moveInputY > 0.8&&withinRange)
+            {
+                transform.position = grabPos;
+                print("Mantling");
+                StartCoroutine(Mantle(mantlePos));
+            }
 
             if (moveInputY < -0.7)
             {
