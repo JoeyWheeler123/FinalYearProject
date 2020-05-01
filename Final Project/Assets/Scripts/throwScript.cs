@@ -7,7 +7,7 @@ public class throwScript : MonoBehaviour
     private float timeSpentRecalling;
     public Transform cursorTransform;
     public Transform playerTransform;
-
+    public bool onWall;
     public Rigidbody rb;
     public Transform spawnPointLeft, spawnPointRight;
     public float force;
@@ -86,7 +86,7 @@ public class throwScript : MonoBehaviour
             timeSpentRecalling = 0f;
         }
 
-        if (timeSpentRecalling >= 1f)
+        if (timeSpentRecalling >= 0.3f)
         {
             BoxStuckCheck();
         }
@@ -142,12 +142,21 @@ public class throwScript : MonoBehaviour
     public void BoxStuckCheck()
     {
         float verticalAlignment = playerTransform.position.y - transform.position.y;
-        if (verticalAlignment > 0.5f && moveScript.recalling&&rb.velocity.magnitude<0.3f)
+        if (verticalAlignment > 0.5f && moveScript.recalling&&rb.velocity.magnitude<0.3f&&onWall)
         {
             print("push it up");
             rb.AddForce(Vector3.up*Time.deltaTime*50000);
             
         }
+        //pseudocode to add
+        /*check if on wall
+        ontriggerstay()
+        {
+            onWall =true;
+            
+        }
+        
+         */
        
     }
     private void OnTriggerStay(Collider other)
@@ -167,6 +176,17 @@ public class throwScript : MonoBehaviour
            
            
         }
+
+        if (other.gameObject.CompareTag("leftwall"))
+        {
+            onWall = true;
+           
+        }
+        if (other.gameObject.CompareTag("rightwall"))
+        {
+            onWall = true;
+            
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -174,6 +194,16 @@ public class throwScript : MonoBehaviour
         if (other.gameObject.CompareTag("hands"))
         {
             moveScript.NormalSpeed();
+        }
+        if (other.gameObject.CompareTag("leftwall"))
+        {
+            onWall = false;
+          
+        }
+        if (other.gameObject.CompareTag("rightwall"))
+        {
+            onWall = true;
+           
         }
     }
 
