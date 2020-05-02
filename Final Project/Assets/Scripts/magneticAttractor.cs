@@ -36,6 +36,9 @@ public class magneticAttractor : MonoBehaviour
     public float attractRange =4.2f;
 
     private Vector3 forceToAdd;
+
+    private bool trailEnabled;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -99,6 +102,12 @@ public class magneticAttractor : MonoBehaviour
                 snapped = true;
 
             }
+            boxProperties.SendMessage("TrailOn");
+            if (!trailEnabled)
+            {
+                trailEnabled = true;
+                
+            }
 
         }
 
@@ -161,6 +170,11 @@ public class magneticAttractor : MonoBehaviour
         else
         {
             withinRange = false;
+            if (trailEnabled)
+            {
+                trailEnabled = false;
+                boxProperties.SendMessage("TrailOff");
+            }
         }
     }
 

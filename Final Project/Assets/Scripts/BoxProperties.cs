@@ -13,7 +13,7 @@ public class BoxProperties : MonoBehaviour
     private float h, s, v;
 
     public moveBoy moveScript;
-
+    public GameObject trail;
     public ParticleSystem enchant, disenchant;
     public Color newColour;
     private Rigidbody rb;
@@ -38,7 +38,8 @@ public class BoxProperties : MonoBehaviour
     public GameObject collectibleIcon1, collectibleIcon2, collectibleIcon3;
     // Start is called before the first frame update
     public static int orbsCollected, totalOrbs;
-  
+    private bool inMagnetRange;
+    public TrailRenderer tRend;
     void Awake()
     {
         orbsCollected = 0;
@@ -210,7 +211,17 @@ public class BoxProperties : MonoBehaviour
        
     }
 
-   
+    public void TrailOn()
+    {
+        trail.SetActive(true);
+        inMagnetRange = true;
+    }
+
+    public void TrailOff()
+    {
+        inMagnetRange = false;
+        StartCoroutine(DelayTrailOff());
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player") && stuck&&moveScript.grounded)
@@ -230,6 +241,25 @@ public class BoxProperties : MonoBehaviour
         }
     }
 
+    IEnumerator DelayTrailOff()
+    {
+        yield return new WaitForSeconds(0.7f);
+        if (!inMagnetRange)
+        {
+            float timeElapsed = 0;
+            //float defaultTime = tRend.time;
+            while (timeElapsed <= 1f)
+                {
+                    tRend.time -= Time.deltaTime;
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+                }
+            trail.SetActive(false);
+            tRend.time = 0.7f;
+            print("finished");
+        }
+
+    }
     IEnumerator Recharge()
     {
         enchant.Play();

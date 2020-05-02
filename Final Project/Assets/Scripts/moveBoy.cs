@@ -56,6 +56,7 @@ public class moveBoy : MonoBehaviour
 
     public GameObject heavyBox;
 
+    
     //public magneticAttractor magScript;
     public cursorMovement curMov;
     public bool thrown, boxPrep, heavy, heavyPull;
@@ -1031,6 +1032,8 @@ public class moveBoy : MonoBehaviour
         moveInput = Vector2.zero;
         anim.SetBool(movingHash,false);
     }
+
+   
     IEnumerator Mantle(int mantlePosition)
     {
         float transformY = transform.position.y;
