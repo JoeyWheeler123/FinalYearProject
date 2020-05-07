@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 public class MenuScript : MonoBehaviour
 {
     public GameObject defaultButton, optionsDefault, options, pauseCanvas, extras, extrasDefault;
+
+    public GameObject newGameWarningCanvas, defaultCanvas, warningDefault, newGameDefault;
+
+    public UnityEvent beginNewGame;
     //public PlayerControls controls;
     public bool mainMenu;
     public bool gamePaused = false;
     public Text continueText;
     public Text bonusLevelsText;
+    public Text level2Text, level3Text;
     public Button continueButton;
     public Button bonusLevelsButton;
+    public Button level2Button, level3Button;
     public int minCollectables;
     public int totalCollectables;
     public Text collectableText;
@@ -42,6 +49,19 @@ public class MenuScript : MonoBehaviour
         }
         string colString = PlayerPrefs.GetInt("collectables").ToString()+"/"+totalCollectables.ToString();
         collectableText.text = colString;
+        //checking if levels have been started;
+        if (!PlayerPrefs.HasKey("Level 2"))
+        {
+            Color newColour = level2Text.color;
+            level2Button.interactable = false;
+            level2Text.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
+        if (!PlayerPrefs.HasKey("Level 3"))
+        {
+            Color newColour = level3Text.color;
+            level3Button.interactable = false;
+            level3Text.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
     }
     private void OnEnable()
     {
@@ -78,6 +98,27 @@ public class MenuScript : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(extras);
+    }
+
+    public void NewGameSelected()
+    {
+        if (PlayerPrefs.HasKey("checkPointNumber"))
+        {
+            newGameWarningCanvas.SetActive(true);
+            defaultCanvas.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(warningDefault);
+        }
+        else
+        {
+            beginNewGame.Invoke();
+        }
+    }
+
+    public void NewGameDeselected()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(newGameDefault);   
     }
     /*public void PauseTime()
     {
