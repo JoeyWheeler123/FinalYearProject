@@ -62,6 +62,7 @@ public class MenuScript : MonoBehaviour
             level3Button.interactable = false;
             level3Text.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
         }
+        StartCoroutine(MenuBeginSelection());
     }
     private void OnEnable()
     {
@@ -140,4 +141,11 @@ public class MenuScript : MonoBehaviour
         }
     }
     */
+    IEnumerator MenuBeginSelection()
+    {
+        yield return new WaitForSeconds(0.2f);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(newGameDefault);
+        yield return null;
+    }
 }
