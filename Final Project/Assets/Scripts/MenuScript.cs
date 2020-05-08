@@ -12,7 +12,7 @@ public class MenuScript : MonoBehaviour
 
     public GameObject newGameWarningCanvas, defaultCanvas, warningDefault, newGameDefault;
 
-    public UnityEvent beginNewGame;
+    public UnityEvent beginNewGame, crescentAnim;
     //public PlayerControls controls;
     public bool mainMenu;
     public bool gamePaused = false;
@@ -28,6 +28,7 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        crescentAnim.Invoke();
        // controls = new PlayerControls();
         if (!mainMenu)
         {
@@ -143,7 +144,7 @@ public class MenuScript : MonoBehaviour
     */
     IEnumerator MenuBeginSelection()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.6f);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(newGameDefault);
         yield return null;
