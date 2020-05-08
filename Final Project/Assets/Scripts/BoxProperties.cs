@@ -243,7 +243,7 @@ public class BoxProperties : MonoBehaviour
 
     IEnumerator DelayTrailOff()
     {
-        yield return new WaitForSeconds(0.7f);
+        
         if (!inMagnetRange)
         {
             float timeElapsed = 0;
