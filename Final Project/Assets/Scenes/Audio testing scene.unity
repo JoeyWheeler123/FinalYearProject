@@ -343,6 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671286268}
   - component: {fileID: 671286267}
+  - component: {fileID: 671286266}
   m_Layer: 0
   m_Name: Sound Changer
   m_TagString: Untagged
@@ -350,6 +351,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &671286266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671286265}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbc42f01019dd842a6e82f4ed734bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footsteps: event:/3D_Events/RoughFootsteps
 --- !u!65 &671286267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -361,8 +375,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.78, y: 10.61, z: 14.61}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 41.126198, y: 10.61, z: 14.61}
+  m_Center: {x: 19.6731, y: 0, z: 0}
 --- !u!4 &671286268
 Transform:
   m_ObjectHideFlags: 0

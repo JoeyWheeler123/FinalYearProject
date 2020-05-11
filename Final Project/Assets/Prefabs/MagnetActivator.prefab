@@ -16,6 +16,11 @@ MonoBehaviour:
   speed: 5
   moveOnStart: 0
   autoReturn: 0
+  sending: 0
+  returning: 0
+  nestedSwitch: 0
+  nestedLayer: {fileID: 0}
+  launcher: 0
 --- !u!1 &3279009059552495580
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,10 +91,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 742309758441452638}
     m_Modifications:
+    - target: {fileID: 644505732, guid: 6268dc1c8f467f343b0c6a8f17de464f, type: 3}
+      propertyPath: objectToActivate
+      value: 
+      objectReference: {fileID: 1336701737582789434}
+    - target: {fileID: 644505732, guid: 6268dc1c8f467f343b0c6a8f17de464f, type: 3}
+      propertyPath: selectSound
+      value: event:/3D_Events/Heavy Box Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9921569
+      objectReference: {fileID: 0}
     - target: {fileID: 5006737508218891833, guid: 6268dc1c8f467f343b0c6a8f17de464f,
         type: 3}
       propertyPath: m_Name
       value: Box Powerup Monument
+      objectReference: {fileID: 0}
+    - target: {fileID: 6721436832821730021, guid: 6268dc1c8f467f343b0c6a8f17de464f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8295868988631817258, guid: 6268dc1c8f467f343b0c6a8f17de464f,
         type: 3}
@@ -146,30 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180.00002
       objectReference: {fileID: 0}
-    - target: {fileID: 644505732, guid: 6268dc1c8f467f343b0c6a8f17de464f, type: 3}
-      propertyPath: objectToActivate
-      value: 
-      objectReference: {fileID: 1336701737582789434}
-    - target: {fileID: 6721436832821730021, guid: 6268dc1c8f467f343b0c6a8f17de464f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.2901961
-      objectReference: {fileID: 0}
-    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.9333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 3916561755966975752, guid: 6268dc1c8f467f343b0c6a8f17de464f,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.9921569
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6268dc1c8f467f343b0c6a8f17de464f, type: 3}
 --- !u!4 &6818935518721227936 stripped
@@ -185,11 +194,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 742309758441452638}
     m_Modifications:
-    - target: {fileID: 4543439848590631935, guid: 290a67b12cc785249aed08dfc75a97fc,
-        type: 3}
-      propertyPath: m_Name
-      value: MagnetPoint
-      objectReference: {fileID: 0}
     - target: {fileID: 4543439848590631924, guid: 290a67b12cc785249aed08dfc75a97fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -259,6 +263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543439848590631935, guid: 290a67b12cc785249aed08dfc75a97fc,
+        type: 3}
+      propertyPath: m_Name
+      value: MagnetPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 290a67b12cc785249aed08dfc75a97fc, type: 3}
