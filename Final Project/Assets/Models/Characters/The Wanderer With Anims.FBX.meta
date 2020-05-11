@@ -161,7 +161,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: PlaySound
+        data: event:/3D_Events/Grunts
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -297,6 +304,13 @@ ModelImporter:
       - time: 0
         functionName: PlaySound
         data: event:/3D_Events/BreakableWallShort
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: PlaySound
+        data: event:/3D_Events/Grunts
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
