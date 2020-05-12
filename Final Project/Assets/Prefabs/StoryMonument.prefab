@@ -110,11 +110,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveScript: {fileID: 0}
-  line: {fileID: 3488960114176471974}
   imageToDisplay: {fileID: 3488960115637826421}
   box: {fileID: 0}
   throwS: {fileID: 0}
   boxMoveSpeed: 5
+  rotatePosition: {fileID: 0}
+  vfx: {fileID: 0}
+  anim: {fileID: 0}
+  activationDistance: 0
+  holographic: {fileID: 0}
 --- !u!114 &3488960114176471973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +134,9 @@ MonoBehaviour:
   objectToActivate: {fileID: 3488960114176471980}
   tutorialObject: 0
   tutorialScript: {fileID: 0}
+  player: {fileID: 0}
+  selectSound: event:/3D_Events/Active Sound
+  effectToActivate: {fileID: 0}
 --- !u!120 &3488960114176471974
 LineRenderer:
   m_ObjectHideFlags: 0
