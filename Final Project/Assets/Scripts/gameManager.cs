@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     private GameObject[] allCollectibles;
     private int totalCollectibles;
     public GameObject canvas;
+    public String levelToSave;
     // Start is called before the first frame update
     void Start()
     {
@@ -106,7 +107,11 @@ public class gameManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
     }
-
+    public void SetProgress()
+    {
+        PlayerPrefs.SetString("currentLevel", levelToSave);
+        PlayerPrefs.SetInt("checkPointNumber", 0);
+    }
     IEnumerator AsyncLoad()
     {
         if (loadingText != null)
