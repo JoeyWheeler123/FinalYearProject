@@ -31,9 +31,6 @@ public class SavePoint : MonoBehaviour
     public Vector3 boxOffSet;
 
     private bool currentlyRespawning;
-    public bool warpOn;
-    public Transform newWarpPoint;
-    public GameObject particles;
     //public bool resetStuckBox;
     void Awake()
     {
@@ -103,14 +100,6 @@ public class SavePoint : MonoBehaviour
             
     */
         }
-        if (warpOn)
-        {
-            transform.position = newWarpPoint.position;
-            spawnPointBox = new Vector3(transform.position.x, transform.position.y, 0);
-            SpawnPlayer(newWarpPoint.position);
-            warpOn = false;
-           
-        }
 
     }
 
@@ -174,14 +163,7 @@ public class SavePoint : MonoBehaviour
         yield return null;
        
     }
-    void WarpEngaged()
-    {
-        warpOn=true;
-        if (particles != null)
-        {
-            particles.SetActive(true);
-        }
-    }
+
     IEnumerator RespawnBox()
     {
        
