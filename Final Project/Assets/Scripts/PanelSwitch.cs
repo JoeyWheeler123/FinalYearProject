@@ -18,6 +18,10 @@ public class PanelSwitch : MonoBehaviour
     public string selectSound;
     FMOD.Studio.EventInstance sound;
     public VisualEffect effectToActivate;
+
+    public bool customMessage;
+
+    public string messageToSend;
     // Start is called before the first frame update
 
     void Awake()
@@ -65,8 +69,16 @@ public class PanelSwitch : MonoBehaviour
     public void Interact()
     {
        // print("Interact");
-        objectToActivate.SendMessage("Activate");
-        if (effectToActivate != null)
+       if (!customMessage)
+       {
+           objectToActivate.SendMessage("Activate");
+       }
+       else
+       {
+           objectToActivate.SendMessage(messageToSend);
+       }
+
+       if (effectToActivate != null)
         {
             effectToActivate.Play();
         }

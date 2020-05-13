@@ -105,7 +105,7 @@ public class SavePoint : MonoBehaviour
         }
         if (warpOn)
         {
-            transform.position = newWarpPoint.position;
+            
             spawnPointBox = new Vector3(transform.position.x, transform.position.y, 0);
             SpawnPlayer(newWarpPoint.position);
             warpOn = false;
@@ -114,6 +114,19 @@ public class SavePoint : MonoBehaviour
 
     }
 
+    public void TurnOnWarp()
+    {
+        if (!warpOn)
+        {
+            Vector3 currentScale = transform.localScale;
+            currentScale *= 1.5f;
+            transform.localScale = currentScale;
+        }
+
+        warpOn = true;
+
+        //particles.SetActive(true);
+    }
     void SpawnPlayer(Vector3 spawnPosition)
     {
         moveBoyScript.gameObject.transform.position = spawnPosition;
