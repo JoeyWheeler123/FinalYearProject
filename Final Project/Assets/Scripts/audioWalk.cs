@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class audioWalk : MonoBehaviour
 {
-   void PlaySound(string path)
+   public void PlaySound(string path)
     {
         FMODUnity.RuntimeManager.PlayOneShot(path, GetComponent<Transform>().position);
     }
