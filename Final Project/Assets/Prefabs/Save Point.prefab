@@ -121,6 +121,9 @@ MonoBehaviour:
   gmScript: {fileID: 0}
   boxPositionTeleport: {fileID: 653578868046798620}
   boxOffSet: {x: -1, y: 0, z: 0.5}
+  warpOn: 0
+  newWarpPoint: {fileID: 0}
+  particles: {fileID: 0}
 --- !u!114 &2322454545487079540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +142,8 @@ MonoBehaviour:
   player: {fileID: 2322454545487079530}
   selectSound: event:/3D_Events/Checkpoint Sound
   effectToActivate: {fileID: 0}
+  customMessage: 0
+  messageToSend: 
 --- !u!1001 &2994843969197983772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,6 +302,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350360294854336643, guid: bc120dc5ab71cd24a89ad5c872a8b46e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350360294854336643, guid: bc120dc5ab71cd24a89ad5c872a8b46e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0024
       objectReference: {fileID: 0}
     - target: {fileID: 2350360295767398144, guid: bc120dc5ab71cd24a89ad5c872a8b46e,
         type: 3}
