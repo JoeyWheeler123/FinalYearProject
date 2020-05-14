@@ -22,6 +22,8 @@ public class gameManager : MonoBehaviour
     private int totalCollectibles;
     public GameObject canvas;
     public String levelToSave;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +45,7 @@ public class gameManager : MonoBehaviour
         allCollectibles = GameObject.FindGameObjectsWithTag("collectible");
         totalCollectibles = allCollectibles.Length;
         print(totalCollectibles);
+      
     }
 
     // Update is called once per frame
