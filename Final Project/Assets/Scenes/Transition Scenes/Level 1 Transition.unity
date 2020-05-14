@@ -1014,6 +1014,7 @@ GameObject:
   - component: {fileID: 358706802}
   - component: {fileID: 358706804}
   - component: {fileID: 358706801}
+  - component: {fileID: 358706805}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1195,6 +1196,25 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!95 &358706805
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358706800}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f0c981bd6effa84aa7d111ea9368e2a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &603012273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,6 +1876,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 475795002, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361228196, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1361228200, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1876,6 +1904,10 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2126387483, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2126387484, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1884,6 +1916,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180975155436810037, guid: 050be472799c57e4bbd5087e256cadf7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7180975155436810038, guid: 050be472799c57e4bbd5087e256cadf7,
         type: 3}
@@ -1958,6 +1995,7 @@ GameObject:
   - component: {fileID: 1430524279}
   - component: {fileID: 1430524278}
   - component: {fileID: 1430524277}
+  - component: {fileID: 1430524280}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -2015,6 +2053,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1430524280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430524276}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dabb295d2724a47a3208e3b0e6abd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changing: 0
+  gSky: {fileID: 0}
+  newColourTop: {r: 0, g: 0, b: 0, a: 0}
+  newColourMiddle: {r: 0, g: 0, b: 0, a: 0}
+  newColourBottom: {r: 0, g: 0, b: 0, a: 0}
+  changeSpeed: 0
 --- !u!1001 &1506391943
 PrefabInstance:
   m_ObjectHideFlags: 0
