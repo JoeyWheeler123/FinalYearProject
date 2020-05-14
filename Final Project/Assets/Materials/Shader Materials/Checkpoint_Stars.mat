@@ -10,11 +10,11 @@ Material:
   m_Name: Checkpoint_Stars
   m_Shader: {fileID: -6465566751694194690, guid: ad07d0abbc7f0194c92bebdf7286de51,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -36,9 +36,9 @@ Material:
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
-    - _CullMode: 2
-    - _CullModeForward: 2
-    - _DoubleSidedEnable: 0
+    - _CullMode: 0
+    - _CullModeForward: 0
+    - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
     - _ReceivesSSR: 0
@@ -65,8 +65,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_A4723067: {r: 0, g: 0, b: 0, a: 0}
-    - Color_CCFE5080: {r: 1, g: 1, b: 1, a: 0}
+    - Color_A4723067: {r: 0.32715833, g: 0.20024918, b: 0.33962262, a: 0}
+    - Color_CCFE5080: {r: 1.2842649, g: 2.25101, b: 2.4528303, a: 0}
     - Vector3_DFC2C108: {r: 0, g: 0, b: 0.6, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
