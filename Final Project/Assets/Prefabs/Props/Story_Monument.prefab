@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/3D_Events/Monument idle
+  Event: event:/3D_Events/MonumentIdle
   PlayEvent: 1
   StopEvent: 0
   AllowFadeout: 1
@@ -346,8 +346,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 3.91
-  OverrideMaxDistance: 27.8
+  OverrideMinDistance: 9.1
+  OverrideMaxDistance: 22.32
 --- !u!1 &829115563
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5841269338439414504}
   m_LocalRotation: {x: -0.0000065583736, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 4.15, z: 0}
+  m_LocalPosition: {x: 1.73, y: 4.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5871031989525377130}
@@ -1112,6 +1112,8 @@ MonoBehaviour:
   player: {fileID: 0}
   selectSound: event:/3D_Events/Active Sound
   effectToActivate: {fileID: 0}
+  customMessage: 0
+  messageToSend: 
 --- !u!114 &-8351437259166667472
 MonoBehaviour:
   m_ObjectHideFlags: 0

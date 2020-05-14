@@ -258,6 +258,14 @@ ModelImporter:
       events:
       - time: 0
         functionName: LedgeParticle
+        data: event:/2D_Events/Grunts
+        objectReferenceParameter: {fileID: 11500000, guid: 14dd57c88a3534e7599b16e835a2382d,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: PlaySound
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 14dd57c88a3534e7599b16e835a2382d,
           type: 3}
@@ -303,14 +311,14 @@ ModelImporter:
         messageOptions: 0
       - time: 0
         functionName: PlaySound
-        data: event:/3D_Events/BreakableWallShort
+        data: event:/2D_Events/Breakable Wall Short
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0
         functionName: PlaySound
-        data: event:/3D_Events/Grunts
+        data: event:/2D_Events/Grunts
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

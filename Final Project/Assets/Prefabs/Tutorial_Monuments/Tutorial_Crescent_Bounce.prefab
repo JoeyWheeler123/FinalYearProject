@@ -45,15 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: Player
-  Event: event:/Monument idle
+  Event: event:/3D_Events/MonumentIdle
   PlayEvent: 3
   StopEvent: 4
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
   Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
+  OverrideAttenuation: 1
+  OverrideMinDistance: 8.1
   OverrideMaxDistance: 20
 --- !u!135 &3517420313499187895
 SphereCollider:
@@ -77,8 +77,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2358224749701963898}
-  - component: {fileID: 2886528587041152225}
-  - component: {fileID: 4836406843108631527}
   m_Layer: 0
   m_Name: Tutorial_Crescent_Bounce
   m_TagString: Untagged
@@ -104,42 +102,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 54.155003}
---- !u!114 &2886528587041152225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071686265438689204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  Event: event:/3D_Events/Monument idle
-  PlayEvent: 3
-  StopEvent: 4
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 1
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!135 &4836406843108631527
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071686265438689204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.47
-  m_Center: {x: -27.81, y: 40.39, z: 0}
 --- !u!1 &3290080164479616325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,15 +1063,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce2281b40afee3d4ab6cc8abb6e18232, type: 3}
---- !u!4 &4736127952835781348 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ce2281b40afee3d4ab6cc8abb6e18232,
-    type: 3}
-  m_PrefabInstance: {fileID: 342466575397980670}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8638258812014678263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ce2281b40afee3d4ab6cc8abb6e18232,
+    type: 3}
+  m_PrefabInstance: {fileID: 342466575397980670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4736127952835781348 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ce2281b40afee3d4ab6cc8abb6e18232,
     type: 3}
   m_PrefabInstance: {fileID: 342466575397980670}
   m_PrefabAsset: {fileID: 0}
