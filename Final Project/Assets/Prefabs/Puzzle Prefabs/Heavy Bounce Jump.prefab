@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1592344454519815389
 MeshFilter:
@@ -156,7 +156,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5479620176681831822
 MeshFilter:
@@ -9960,7 +9960,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1649752641172651696
 Light:
@@ -10159,7 +10159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -88.21001, y: 0, z: 0}
 --- !u!198 &1649752641364224629
 ParticleSystem:
@@ -14922,6 +14922,7 @@ Transform:
   m_LocalPosition: {x: -21.349916, y: -10.664371, z: 1.684864}
   m_LocalScale: {x: 0.180026, y: 0.180026, z: 0.180026}
   m_Children:
+  - {fileID: 6899574694672332389}
   - {fileID: 6349014705403876152}
   - {fileID: 8536307368950404431}
   - {fileID: 6046733301516128053}
@@ -14952,6 +14953,7 @@ MonoBehaviour:
   box: {fileID: 0}
   emissiveRenderer: {fileID: 1401324768539668521}
   bounceColour: {r: 0, g: 0, b: 0, a: 0}
+  bounceEffect: {fileID: 0}
 --- !u!65 &1634187401586561095
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14982,6 +14984,7 @@ MonoBehaviour:
   box: {fileID: 0}
   emissiveRenderer: {fileID: 1401324768539668521}
   bounceColour: {r: 0, g: 0, b: 0, a: 0}
+  bounceEffect: {fileID: 0}
 --- !u!1 &2104778786001432850
 GameObject:
   m_ObjectHideFlags: 0
@@ -15012,7 +15015,7 @@ Transform:
   m_LocalScale: {x: 0.5543115, y: 0.5543115, z: 0.5543115}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6212137619988248887
 MeshFilter:
@@ -20440,7 +20443,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &604975585809980845
 MeshFilter:
@@ -20606,6 +20609,11 @@ MonoBehaviour:
   objectToActivate: {fileID: 4550520947165734992}
   tutorialObject: 0
   tutorialScript: {fileID: 0}
+  player: {fileID: 0}
+  selectSound: 
+  effectToActivate: {fileID: 0}
+  customMessage: 0
+  messageToSend: 
 --- !u!1 &7333254782740780249
 GameObject:
   m_ObjectHideFlags: 0
@@ -20905,12 +20913,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1162d100a5d2fe4587cf4bcd4aa773a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxProperties: {fileID: 0}
+  moveBoyScript: {fileID: 0}
   checkPointNumber: 0
   originalBrightness: 0.6
   activationBrightness: 3
   finalBrightness: 1.2
   decayRate: 3
   customStart: 0
+  magnetScripts: []
+  gmScript: {fileID: 0}
+  boxPositionTeleport: {fileID: 0}
+  boxOffSet: {x: 0, y: 0, z: 0}
+  warpOn: 0
+  newWarpPoint: {fileID: 0}
+  particles: {fileID: 0}
 --- !u!114 &4020221261422500456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20926,6 +20943,11 @@ MonoBehaviour:
   objectToActivate: {fileID: 7459730569578313288}
   tutorialObject: 0
   tutorialScript: {fileID: 0}
+  player: {fileID: 0}
+  selectSound: 
+  effectToActivate: {fileID: 0}
+  customMessage: 0
+  messageToSend: 
 --- !u!1 &7573308430004213556
 GameObject:
   m_ObjectHideFlags: 0
@@ -21155,7 +21177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2903525893487585037
 MeshFilter:
@@ -21234,7 +21256,7 @@ Transform:
   m_LocalScale: {x: 1.1113985, y: 1.1113985, z: 1.1113985}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!198 &8683271109809175142
 ParticleSystem:
@@ -25997,7 +26019,7 @@ Transform:
   m_LocalScale: {x: 1.1113985, y: 1.1113985, z: 1.1113985}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &8683271110147686695
 ParticleSystem:
@@ -30760,7 +30782,7 @@ Transform:
   m_LocalScale: {x: 1.1113985, y: 1.1113985, z: 1.1113985}
   m_Children: []
   m_Father: {fileID: 3129708169516035538}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &8683271111512044459
 ParticleSystem:
@@ -35493,3 +35515,71 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &8857009456197520074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6899574694672332389}
+  - component: {fileID: 3507544780289632801}
+  - component: {fileID: 638169056494055616}
+  m_Layer: 0
+  m_Name: Audio Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6899574694672332389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857009456197520074}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.76, y: 12.3, z: 5.110372}
+  m_LocalScale: {x: 5.5547533, y: 5.5547533, z: 5.5547533}
+  m_Children: []
+  m_Father: {fileID: 3129708169516035538}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3507544780289632801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857009456197520074}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6, y: 1.9, z: 1}
+  m_Center: {x: 0, y: -1.2, z: 0}
+--- !u!114 &638169056494055616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857009456197520074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: box
+  Event: event:/3D_Events/Teleport
+  PlayEvent: 3
+  StopEvent: 0
+  AllowFadeout: 0
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 2.2
+  OverrideMaxDistance: 63.8
