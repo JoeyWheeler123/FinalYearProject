@@ -109,6 +109,7 @@ public class gameManager : MonoBehaviour
     public void ResetProgress()
     {
         PlayerPrefs.DeleteAll();
+        StartCoroutine(BeginNewGame());
     }
     public void SetProgress()
     {
@@ -145,6 +146,17 @@ public class gameManager : MonoBehaviour
             }
             yield return null;
         }
+        yield return null;
+    }
+
+    IEnumerator BeginNewGame()
+    {
+        PlayerPrefs.DeleteAll();
+        anim.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        sceneName = defaultSceneName;
+        PlayerPrefs.SetString("currentLevel", sceneName);
+        StartCoroutine(AsyncLoad());
         yield return null;
     }
 }
