@@ -62794,6 +62794,11 @@ PrefabInstance:
       propertyPath: sceneToSwitch
       value: Level 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4701957047265665022, guid: 0527cf0d98f0e8744ab1926be9b8c665,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4701957047265665023, guid: 0527cf0d98f0e8744ab1926be9b8c665,
         type: 3}
       propertyPath: m_Size.x
@@ -62804,8 +62809,54 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: 8.52005
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4701957047265665022, guid: 0527cf0d98f0e8744ab1926be9b8c665, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0527cf0d98f0e8744ab1926be9b8c665, type: 3}
+--- !u!1 &1168588236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4701957047265665021, guid: 0527cf0d98f0e8744ab1926be9b8c665,
+    type: 3}
+  m_PrefabInstance: {fileID: 1168588235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1168588237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168588236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17711051b9eca84781fa34a78beb01f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToinvoke:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2051740275}
+        m_MethodName: SetProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2051740275}
+        m_MethodName: LevelSelected
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level 1 Transition
+          m_BoolArgument: 0
+        m_CallState: 2
+  repeatableEvent: 0
+  introEvent: 0
 --- !u!4 &1168933229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6136886316288794639, guid: a87f4c148e7722f4590eff40a1e37425,
@@ -109212,7 +109263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1361228196, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1361228200, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -109221,6 +109272,10 @@ PrefabInstance:
     - target: {fileID: 1361228202, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_Alpha
       value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463585600, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2126387484, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -109236,6 +109291,11 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 512844129}
+    - target: {fileID: 7180975155436810038, guid: 050be472799c57e4bbd5087e256cadf7,
+        type: 3}
+      propertyPath: levelToSave
+      value: Level 1 Transition
+      objectReference: {fileID: 0}
     - target: {fileID: 7180975155436810039, guid: 050be472799c57e4bbd5087e256cadf7,
         type: 3}
       propertyPath: m_LocalPosition.x

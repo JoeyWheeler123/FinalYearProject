@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25931376, g: 0.14772211, b: 0.17682469, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4718,12 +4718,12 @@ PrefabInstance:
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.9
+      value: -57.12
       objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -88.8
+      value: -89.98
       objectReference: {fileID: 0}
     - target: {fileID: 6452249444098570573, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
@@ -4773,12 +4773,42 @@ PrefabInstance:
     - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.3
+      value: -2.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452249445732954969, guid: d046c0db52f440946903c36c4f45ba79,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6516525113888173398, guid: d046c0db52f440946903c36c4f45ba79,
         type: 3}
@@ -7072,8 +7102,54 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 3.4446058
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4701957047265665022, guid: 0527cf0d98f0e8744ab1926be9b8c665, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0527cf0d98f0e8744ab1926be9b8c665, type: 3}
+--- !u!1 &283063232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4701957047265665021, guid: 0527cf0d98f0e8744ab1926be9b8c665,
+    type: 3}
+  m_PrefabInstance: {fileID: 283063231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &283063233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283063232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17711051b9eca84781fa34a78beb01f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventToinvoke:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1601861370}
+        m_MethodName: SetProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601861370}
+        m_MethodName: LevelSelected
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level 2 Transition
+          m_BoolArgument: 0
+        m_CallState: 2
+  repeatableEvent: 0
+  introEvent: 0
 --- !u!1 &299355049
 GameObject:
   m_ObjectHideFlags: 0
@@ -37038,10 +37114,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1361228196, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1361228200, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463585600, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2126387484, guid: 050be472799c57e4bbd5087e256cadf7, type: 3}
@@ -37062,6 +37142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: resetProgress
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180975155436810038, guid: 050be472799c57e4bbd5087e256cadf7,
+        type: 3}
+      propertyPath: levelToSave
+      value: Level 3
       objectReference: {fileID: 0}
     - target: {fileID: 7180975155436810039, guid: 050be472799c57e4bbd5087e256cadf7,
         type: 3}
@@ -48784,6 +48869,11 @@ PrefabInstance:
       propertyPath: gmScript
       value: 
       objectReference: {fileID: 1601861370}
+    - target: {fileID: 2656269177442541261, guid: 9587910c94e22de4f9411d614e6a0580,
+        type: 3}
+      propertyPath: customStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2710358270448187240, guid: 9587910c94e22de4f9411d614e6a0580,
         type: 3}
       propertyPath: m_Intensity

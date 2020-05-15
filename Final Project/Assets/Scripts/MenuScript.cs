@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -25,9 +26,14 @@ public class MenuScript : MonoBehaviour
     public int minCollectables;
     public int totalCollectables;
     public Text collectableText;
+    
+
+    public Text totalOrbs;
     // Start is called before the first frame update
     void Start()
     {
+        int coll = PlayerPrefs.GetInt("collectables");
+        print(coll);
         crescentAnim.Invoke();
        // controls = new PlayerControls();
         if (!mainMenu)
@@ -42,14 +48,27 @@ public class MenuScript : MonoBehaviour
             continueText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
         }
         int storedCollectables = PlayerPrefs.GetInt("collectables");
-        if (storedCollectables < totalCollectables)
+        if (storedCollectables < minCollectables)
         {
             Color newColour = bonusLevelsText.color;
             bonusLevelsButton.interactable = false;
             bonusLevelsText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
         }
-        string colString = PlayerPrefs.GetInt("collectables").ToString()+"/"+totalCollectables.ToString();
-        collectableText.text = colString;
+
+        if (PlayerPrefs.GetInt("collectables") <= minCollectables)
+        {
+
+            string colString = PlayerPrefs.GetInt("collectables").ToString() + "/" + minCollectables.ToString();
+            collectableText.text = colString;
+        }
+        else
+        {
+            string colString = minCollectables.ToString() + "/" + minCollectables.ToString();
+            collectableText.text = colString;
+        }
+
+        String totalOrbsString = PlayerPrefs.GetInt("collectables").ToString() + "/" + totalCollectables.ToString();
+        totalOrbs.text = totalOrbsString;
         //checking if levels have been started;
         if (!PlayerPrefs.HasKey("Level 2"))
         {
@@ -121,6 +140,11 @@ public class MenuScript : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(newGameDefault);   
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
     /*public void PauseTime()
     {
