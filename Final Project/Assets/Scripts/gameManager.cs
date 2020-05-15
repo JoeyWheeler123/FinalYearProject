@@ -114,6 +114,7 @@ public class gameManager : MonoBehaviour
     public void SetProgress()
     {
         PlayerPrefs.SetString("currentLevel", levelToSave);
+        PlayerPrefs.SetInt(levelToSave,1);
         PlayerPrefs.SetInt("checkPointNumber", 0);
     }
     IEnumerator AsyncLoad()
