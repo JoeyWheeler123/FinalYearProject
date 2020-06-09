@@ -168,7 +168,11 @@ public class MenuScript : MonoBehaviour
     */
     IEnumerator MenuBeginSelection()
     {
-        yield return new WaitForSeconds(0.6f);
+        newGameWarningCanvas.SetActive(false);
+        defaultCanvas.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        Cursor.visible = true;
+        defaultCanvas.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(newGameDefault);
         yield return null;
