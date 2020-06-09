@@ -2062,7 +2062,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: febdfb7f0e1136d44911ef2976b47b43, type: 2}
+  sharedProfile: {fileID: 11400000, guid: dc34adfa961a9214d95929ba5aa4b37f, type: 2}
 --- !u!4 &1430524279
 Transform:
   m_ObjectHideFlags: 0
@@ -2084,17 +2084,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430524276}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1dabb295d2724a47a3208e3b0e6abd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changing: 0
-  gSky: {fileID: 0}
-  newColourTop: {r: 0, g: 0, b: 0, a: 0}
-  newColourMiddle: {r: 0, g: 0, b: 0, a: 0}
-  newColourBottom: {r: 0, g: 0, b: 0, a: 0}
-  changeSpeed: 0
+  changing: 1
+  changeSpeed: 0.3
+  changeTime: 3
+  exposureChangeSpeed: 0.3
+  initialDelay: 2
+  changingSkyboxProfile: {fileID: 11400000, guid: dc34adfa961a9214d95929ba5aa4b37f,
+    type: 2}
+  initialSkyboxProfile: {fileID: 11400000, guid: febdfb7f0e1136d44911ef2976b47b43,
+    type: 2}
+  endSkyboxProfile: {fileID: 11400000, guid: b2eaf45ca7ef26a4b828cba39161cc59, type: 2}
 --- !u!1001 &1506391943
 PrefabInstance:
   m_ObjectHideFlags: 0

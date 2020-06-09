@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25888908, g: 0.14753054, b: 0.17656595, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -521,6 +521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 653763389}
   - component: {fileID: 653763388}
+  - component: {fileID: 653763390}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -544,7 +545,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: b2eaf45ca7ef26a4b828cba39161cc59, type: 2}
+  sharedProfile: {fileID: 11400000, guid: dc34adfa961a9214d95929ba5aa4b37f, type: 2}
 --- !u!4 &653763389
 Transform:
   m_ObjectHideFlags: 0
@@ -559,6 +560,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &653763390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653763387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dabb295d2724a47a3208e3b0e6abd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changing: 1
+  changeSpeed: 0
+  changeTime: 3
+  exposureChangeSpeed: 0
+  initialDelay: 2
+  changingSkyboxProfile: {fileID: 11400000, guid: dc34adfa961a9214d95929ba5aa4b37f,
+    type: 2}
+  initialSkyboxProfile: {fileID: 11400000, guid: b2eaf45ca7ef26a4b828cba39161cc59,
+    type: 2}
+  endSkyboxProfile: {fileID: 11400000, guid: 7311da1366542e7478ad86599bdc2892, type: 2}
 --- !u!1001 &874589708
 PrefabInstance:
   m_ObjectHideFlags: 0
