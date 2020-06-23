@@ -40,7 +40,7 @@ public class MenuScript : MonoBehaviour
         {
            // controls.Gameplay.Pause.performed += ctx => PauseTime();
         }
-        if (!PlayerPrefs.HasKey("currentLevel"))
+        /*if (!PlayerPrefs.HasKey("currentLevel"))
         {
             print("disablingContinue");
             Color newColour = continueText.color;
@@ -82,6 +82,7 @@ public class MenuScript : MonoBehaviour
             level3Button.interactable = false;
             level3Text.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
         }
+        */
         StartCoroutine(MenuBeginSelection());
     }
     private void OnEnable()
@@ -170,11 +171,55 @@ public class MenuScript : MonoBehaviour
     {
         newGameWarningCanvas.SetActive(false);
         defaultCanvas.SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Cursor.visible = true;
         defaultCanvas.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(newGameDefault);
+        print("coroutine time");
+        
+        if (!PlayerPrefs.HasKey("currentLevel"))
+        {
+            print("disablingContinue");
+            Color newColour = continueText.color;
+            continueButton.interactable = false;
+            continueText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
+        int storedCollectables = PlayerPrefs.GetInt("collectables");
+        if (storedCollectables < minCollectables)
+        {
+            Color newColour = bonusLevelsText.color;
+            bonusLevelsButton.interactable = false;
+            bonusLevelsText.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
+
+        if (PlayerPrefs.GetInt("collectables") <= minCollectables)
+        {
+
+            string colString = PlayerPrefs.GetInt("collectables").ToString() + "/" + minCollectables.ToString();
+            collectableText.text = colString;
+        }
+        else
+        {
+            string colString = minCollectables.ToString() + "/" + minCollectables.ToString();
+            collectableText.text = colString;
+        }
+
+        String totalOrbsString = PlayerPrefs.GetInt("collectables").ToString() + "/" + totalCollectables.ToString();
+        totalOrbs.text = totalOrbsString;
+        //checking if levels have been started;
+        if (!PlayerPrefs.HasKey("Level 2"))
+        {
+            Color newColour = level2Text.color;
+            level2Button.interactable = false;
+            level2Text.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
+        if (!PlayerPrefs.HasKey("Level 3"))
+        {
+            Color newColour = level3Text.color;
+            level3Button.interactable = false;
+            level3Text.color = new Color(continueText.color.r, continueText.color.g, continueText.color.b, 0.5f);
+        }
         yield return null;
     }
 }

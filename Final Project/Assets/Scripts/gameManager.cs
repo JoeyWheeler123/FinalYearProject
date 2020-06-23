@@ -109,6 +109,7 @@ public class gameManager : MonoBehaviour
     public void ResetProgress()
     {
         PlayerPrefs.DeleteAll();
+        SavePoint.currentCheckpoint = 0;
         StartCoroutine(BeginNewGame());
     }
     public void SetProgress()
