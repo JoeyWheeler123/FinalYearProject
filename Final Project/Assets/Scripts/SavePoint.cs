@@ -118,12 +118,15 @@ public class SavePoint : MonoBehaviour
     {
         if (!warpOn)
         {
-            Vector3 currentScale = transform.localScale;
+            /* Vector3 currentScale = transform.localScale;
             currentScale *= 1.5f;
             transform.localScale = currentScale;
+            */
+            StartCoroutine(GrowTime());
+            warpOn = true;
         }
 
-        warpOn = true;
+       
 
         //particles.SetActive(true);
     }
@@ -252,6 +255,20 @@ public class SavePoint : MonoBehaviour
         
         currentlyRespawning = false;
         print("Teleport complete");
+        yield return null;
+    }
+    IEnumerator GrowTime()
+    {
+        Vector3 currentScale = transform.localScale;
+        currentScale *= 1.5f;
+        
+        float timeLeft = 1;
+        while (timeLeft >= 0f)
+        {
+            transform.localScale = Vector3.MoveTowards(transform.localScale, currentScale, Time.deltaTime/timeLeft);
+            timeLeft -= Time.deltaTime;
+            yield return null;
+        }
         yield return null;
     }
 }
